@@ -1,0 +1,47 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyCharm
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build and packaging
+build/
+dist/
+*.egg-info/
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# Generated experimental outputs
+results/*
+!results/.gitkeep
+
+# Processed or externally obtained datasets
+data/processed/*
+data/external/*
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# Secrets and local environment variables
+.env
+.env.*
+*.key
+*.pem
