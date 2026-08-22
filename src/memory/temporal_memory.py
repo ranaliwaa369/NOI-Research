@@ -42,7 +42,9 @@ class TemporalAssociativeMemory:
             )
 
         if (
-            not isfinite(decay_rate_per_day)
+            isinstance(decay_rate_per_day, bool)
+            or not isinstance(decay_rate_per_day, (int, float))
+            or not isfinite(decay_rate_per_day)
             or decay_rate_per_day < 0.0
         ):
             raise AssociativeMemoryError(
@@ -55,19 +57,30 @@ class TemporalAssociativeMemory:
 
     @property
     def dimension(self) -> int:
+        """Return the required context-vector dimension."""
+
         return self._dimension
 
     @property
     def decay_rate_per_day(self) -> float:
+        """Return the prespecified exponential-decay rate."""
+
         return self._decay_rate_per_day
 
     @property
     def size(self) -> int:
+        """Return the total number of stored records."""
+
         return len(self._records)
 
     @property
     def active_size(self) -> int:
-        return sum(record.active for record in self._records.values())
+        """Return the number of active stored records."""
+
+        return sum(
+            record.active
+            for record in self._records.values()
+        )
 
     def add(self, record: AssociativeMemoryRecord) -> None:
         """Add a validated association without overwriting existing data."""
@@ -93,6 +106,39 @@ class TemporalAssociativeMemory:
             raise AssociativeMemoryError(
                 f"Unknown memory_id: {memory_id}"
             ) from error
+
+    def replace(self, record: AssociativeMemoryRecord) -> None:
+        """Replace an existing record while preserving audit invariants."""
+
+        if record.memory_id not in self._records:
+            raise AssociativeMemoryError(
+                f"Unknown memory_id: {record.memory_id}"
+            )
+
+        if len(record.context_vector) != self._dimension:
+            raise AssociativeMemoryError(
+                "The replacement dimension does not match "
+                "the memory dimension."
+            )
+
+        previous = self._records[record.memory_id]
+
+        if record.created_at_utc != previous.created_at_utc:
+            raise AssociativeMemoryError(
+                "A replacement cannot change created_at_utc."
+            )
+
+        if record.updated_at_utc < previous.updated_at_utc:
+            raise AssociativeMemoryError(
+                "A replacement cannot move updated_at_utc backward."
+            )
+
+        if record.correction_count < previous.correction_count:
+            raise AssociativeMemoryError(
+                "A replacement cannot reduce correction_count."
+            )
+
+        self._records[record.memory_id] = record
 
     def retrieve(
         self,
@@ -175,7 +221,10 @@ class TemporalAssociativeMemory:
                 )
 
             raw_similarity = float(
-                np.dot(normalized_query, context / context_norm)
+                np.dot(
+                    normalized_query,
+                    context / context_norm,
+                )
             )
 
             contextual_similarity = min(
@@ -224,7 +273,9 @@ class TemporalAssociativeMemory:
             )
         )
 
-        selected = candidates[: min(top_k, len(candidates))]
+        selected = candidates[
+            : min(top_k, len(candidates))
+        ]
 
         return tuple(
             MemoryRetrievalCandidate(
@@ -236,11 +287,16 @@ class TemporalAssociativeMemory:
                 memory_strength=candidate.memory_strength,
                 rank=rank,
             )
-            for rank, candidate in enumerate(selected, start=1)
+            for rank, candidate in enumerate(
+                selected,
+                start=1,
+            )
         )
 
     @staticmethod
     def _validate_as_of(as_of_utc: datetime) -> None:
+        """Require a timezone-aware evaluation timestamp."""
+
         if (
             as_of_utc.tzinfo is None
             or as_of_utc.utcoffset() is None
