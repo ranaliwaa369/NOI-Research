@@ -1,0 +1,99 @@
+generator:
+  name: "NOI Independent Synthetic Evaluation Generator"
+  version: "0.1.0"
+  purpose: "Implementation validation only"
+  model_independent: true
+
+limitations:
+  - "Synthetic success does not establish human perceptual validity."
+  - "Synthetic success does not establish real-world olfactory performance."
+  - "Synthetic success does not establish clinical or physical safety."
+
+dataset:
+  total_events: 10000
+  odor_targets: 200
+  odor_families: 20
+  context_templates: 100
+  modalities:
+    - text
+    - image
+    - audio
+  latent_dimension: 16
+  modality_dimension: 16
+
+randomness:
+  generator_seed: 1001
+  independent_ood_seed: 9001
+  training_seeds:
+    - 11
+    - 22
+    - 33
+    - 44
+    - 55
+
+ground_truth:
+  definition: >
+    The odor target is sampled before modality generation and is never
+    inferred from model predictions.
+  expose_target_identifier_to_features: false
+  include_item_name_in_text_features: false
+  include_family_identifier_in_metadata: false
+
+generation_process:
+  odor_family_centroids: "Independent Gaussian latent centroids"
+  odor_item_vectors: "Family centroid plus item-specific residual"
+  context_generation: >
+    Modality features are generated through fixed independently sampled
+    transformations of latent event states.
+  modality_transformations:
+    text: "Independent orthogonal transformation"
+    image: "Independent orthogonal transformation"
+    audio: "Independent orthogonal transformation"
+  normalize_vectors: true
+
+splits:
+  odor_family_held_out_fraction: 0.30
+  context_template_held_out_fraction: 0.20
+  validation_fraction: 0.10
+  final_test_fraction: 0.20
+  random_row_only_split_prohibited: true
+  odor_family_leakage_prohibited: true
+  context_template_leakage_prohibited: true
+
+evaluation_conditions:
+  noise_standard_deviations:
+    - 0.00
+    - 0.05
+    - 0.10
+    - 0.20
+    - 0.40
+  missing_modality_counts:
+    - 0
+    - 1
+    - 2
+  temporal_displacement_days:
+    - 0
+    - 1
+    - 7
+    - 30
+    - 90
+
+ood_generation:
+  use_independent_seed: true
+  resample_modality_transformations: true
+  hold_out_odor_families: true
+  hold_out_context_templates: true
+  increase_noise: true
+
+leakage_checks:
+  prohibit_target_id_in_features: true
+  prohibit_template_overlap_across_locked_splits: true
+  prohibit_family_overlap_for_odor_held_out_test: true
+  prohibit_duplicate_events_across_splits: true
+  require_split_manifest: true
+
+outputs:
+  event_table: "data/processed/events.csv"
+  odor_library: "data/processed/odor_library.csv"
+  split_manifest: "data/processed/split_manifest.csv"
+  generator_metadata: "data/processed/generator_metadata.json"
