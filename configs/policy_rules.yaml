@@ -1,0 +1,76 @@
+policy:
+  name: "NOI Deterministic Policy Gate"
+  version: "0.1.0"
+  simulation_only: true
+  default_action: "BLOCK"
+
+disclaimer: >
+  These thresholds exist only for computational policy-conformance
+  testing. They are not chemical exposure limits, medical advice,
+  emission instructions, or evidence of physical safety.
+
+required_request_fields:
+  - concentration_ppm
+  - duration_seconds
+  - environment_volume_m3
+  - ventilation_ach
+  - user_consent
+
+rules:
+  missing_information:
+    rule_id: "RULE-MISSING-001"
+    action: "REQUIRE_MISSING_INFORMATION"
+
+  consent_required:
+    rule_id: "RULE-CONSENT-001"
+    action: "BLOCK"
+
+  unknown_item:
+    rule_id: "RULE-ITEM-001"
+    action: "BLOCK"
+
+  disabled_item:
+    rule_id: "RULE-ITEM-002"
+    action: "BLOCK"
+
+  concentration_limit:
+    rule_id: "RULE-LIMIT-001"
+    action: "BLOCK"
+
+  duration_limit:
+    rule_id: "RULE-LIMIT-002"
+    action: "BLOCK"
+
+  minimum_environment_volume:
+    rule_id: "RULE-ENV-001"
+    action: "BLOCK"
+
+  minimum_ventilation:
+    rule_id: "RULE-ENV-002"
+    action: "BLOCK"
+
+  allow:
+    rule_id: "RULE-ALLOW-001"
+    action: "ALLOW"
+
+simulated_items:
+  SIM-CARTRIDGE-001:
+    enabled: true
+    maximum_concentration_ppm: 1.0
+    maximum_duration_seconds: 30.0
+    minimum_environment_volume_m3: 20.0
+    minimum_ventilation_ach: 1.0
+
+  SIM-CARTRIDGE-002:
+    enabled: true
+    maximum_concentration_ppm: 0.5
+    maximum_duration_seconds: 20.0
+    minimum_environment_volume_m3: 25.0
+    minimum_ventilation_ach: 1.5
+
+  SIM-CARTRIDGE-DISABLED:
+    enabled: false
+    maximum_concentration_ppm: 0.0
+    maximum_duration_seconds: 0.0
+    minimum_environment_volume_m3: 0.0
+    minimum_ventilation_ach: 0.0
