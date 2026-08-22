@@ -92,3 +92,14 @@ Tukwila, Washington, United States
 ## License
 
 Licensing terms will be finalized before the first public release.
+
+## Copyright and License
+
+Copyright © 2026 GUARDIANX LLC. All Rights Reserved.
+
+This project is proprietary and is not licensed as open-source software.
+No permission is granted to copy, modify, distribute, publish,
+commercialize, reverse engineer, sublicense, or create derivative works
+without prior written authorization from GUARDIANX LLC.
+
+See `COPYRIGHT.md` for the complete proprietary-rights notice.
