@@ -1,0 +1,125 @@
+schema:
+  name: "NOI Corrective Memory Evaluation"
+  version: "0.1.0"
+  status: "preimplementation"
+  owner: "GUARDIANX LLC"
+
+governance:
+  project: "Neuro-Olfactive Intelligence"
+  hypothesis: "H2_corrective_updating"
+  registration_timing: "locked before corrective-memory experiment implementation or results"
+  exploratory_status: true
+  negative_results_reported: true
+  post_result_setting_changes_prohibited: true
+
+source_dataset:
+  synthetic_configuration: "configs/synthetic_data.yaml"
+  research_protocol: "configs/research_protocol.yaml"
+  event_count: 200
+  generator_seed: 1001
+  independent_ood_seed: 9001
+
+eligibility:
+  query_split: "validation"
+  memory_source_split: "train"
+  require_query_target_represented_in_training_memory: true
+  unknown_validation_targets_excluded: true
+  deterministic_sort_key: "target_item_id then event_id"
+  use_all_eligible_targets: true
+  expected_eligible_validation_events: 15
+  expected_eligible_targets: 14
+  expected_ineligible_validation_targets: 5
+  target_selection_after_metric_inspection_prohibited: true
+
+analysis_unit:
+  primary: "target_item_id"
+  query_level_results_retained: true
+  repeated_queries_per_target_aggregated_by_mean: true
+  paired_arms: true
+
+corruption:
+  purpose: "create a controlled incorrect stored association before correction"
+  apply_to_all_training_memory_records_for_selected_target: true
+  preserve_context_vector: true
+  preserve_strength: true
+  preserve_active_state: true
+  decoy_candidate_pool: "lexicographically sorted training-represented odor target ids"
+  decoy_selection_rule: "next target id cyclically after the true target id"
+  prohibit_true_target_as_decoy: true
+  same_corruption_in_both_arms: true
+  corruption_time_offset_days: 0
+  corruption_reason: "Locked synthetic H2 controlled corruption"
+
+arms:
+  no_update:
+    action_after_corruption: "none"
+  corrected:
+    action_after_corruption: "restore every corrupted memory record to the true target id"
+    correction_time_offset_days: 1
+    correction_reason: "Locked synthetic H2 corrective restoration"
+    unique_correction_ids_required: true
+    audit_record_required: true
+    protocol_hash_required: true
+
+retrieval:
+  primary_system: "memory_only"
+  alpha: 0.0
+  apply_temporal_decay: false
+  rationale: "isolate associative correction from ridge projection and timestamp refresh"
+  top_k: 10
+  ranking_tie_break:
+    - "descending hybrid_score"
+    - "odor_item_id ascending"
+  ood_oracle_used: false
+  ood_tuning_used: false
+
+primary_outcome:
+  metric: "mean reciprocal rank"
+  contrast: "corrected minus no_update"
+  direction: "positive values favor correction"
+  success_rule:
+    minimum_absolute_mrr_improvement: 0.05
+    paired_bootstrap_confidence_interval_must_exclude_zero: true
+
+secondary_outcomes:
+  - "Recall@1"
+  - "Recall@10"
+  - "nDCG@10"
+  - "per-target reciprocal-rank difference"
+  - "correction audit completeness"
+
+old_memory_degradation:
+  definition: "baseline minus post-correction MRR on all other eligible targets"
+  comparator_state: "clean fitted memory before controlled corruption"
+  post_state: "corrected arm after restoration"
+  selected_target_queries_excluded_from_old_memory_set: true
+  maximum_allowed_mean_degradation: 0.02
+  temporal_decay_disabled: true
+
+statistics:
+  paired_unit: "target_item_id"
+  bootstrap_seed: 4242
+  bootstrap_resamples: 10000
+  confidence_level: 0.95
+  bootstrap_resample_unit: "target_item_id"
+  two_sided_interval: true
+  report_mean: true
+  report_standard_deviation: true
+  report_minimum_and_maximum: true
+  report_all_target_level_differences: true
+
+safeguards:
+  train_validation_overlap_prohibited: true
+  target_truth_hidden_from_retrieval_features: true
+  correction_truth_used_only_for_controlled_intervention: true
+  no_physical_emission: true
+  policy_gate_not_used_to_change_rankings: true
+  deterministic_replay_required: true
+  immutable_result_records_required: true
+  full_test_suite_required_before_release: true
+
+interpretation_limit: >
+  This experiment evaluates controlled correction of previously stored
+  synthetic target associations. It does not evaluate discovery of unseen
+  odor targets and does not provide human perceptual, clinical, chemical,
+  physical-device, emission-safety, or deployment-readiness evidence.
