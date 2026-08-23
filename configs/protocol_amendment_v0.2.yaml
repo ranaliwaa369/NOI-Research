@@ -318,7 +318,6 @@ locking:
 
 إي نكمل. الملف `configs/protocol_amendment_v0.2.yaml` موجود ومفتوح عندك. الصقي داخله في PyCharm الكود الكامل التالي — لا تلصقيه في Terminal:
 
-```yaml
 amendment:
   id: "NOI-PROTOCOL-AMENDMENT-0.2"
   version: "0.2.0"
