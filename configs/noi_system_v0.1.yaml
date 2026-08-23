@@ -43,6 +43,10 @@ associative_memory:
 
 hybrid_retrieval:
   library_component: "cosine similarity of ridge-predicted odor vector"
+  library_score_conversion: "clip cosine similarity to [0.0, 1.0]"
+  negative_cosine_handling: "clip_to_zero"
+  absent_memory_item_score: 0.0
+  memory_aggregation_per_odor: "maximum"
   memory_component: "maximum temporal associative-memory score per odor item"
   component_score_range:
     minimum: 0.0
