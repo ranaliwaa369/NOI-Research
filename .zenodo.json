@@ -26,5 +26,12 @@
   "access_right": "open",
   "version": "0.1.0",
   "publication_date": "2026-08-22",
-  "notes": "Copyright 2026 GuardianX LLC. All Rights Reserved. Public access permits scientific inspection and citation only and does not grant permission to copy, modify, redistribute, deploy, commercialize, or create derivative works. This exploratory framework is not a certified medical, clinical, industrial, environmental, or public-safety system."
+  "notes": "Copyright 2026 GuardianX LLC. All Rights Reserved. Public access permits scientific inspection and citation only and does not grant permission to copy, modify, redistribute, deploy, commercialize, or create derivative works. This exploratory framework is not a certified medical, clinical, industrial, environmental, or public-safety system.",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/ranaliwaa369/NOI-Research",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
 }

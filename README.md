@@ -171,3 +171,9 @@ commercialize, deploy, reverse engineer, sublicense, or create derivative
 works without prior written authorization from GuardianX LLC.
 
 See `LICENSE` and `COPYRIGHT.md`.
+
+## Repository
+
+Official source repository:
+
+https://github.com/ranaliwaa369/NOI-Research
