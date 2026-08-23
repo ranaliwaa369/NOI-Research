@@ -119,3 +119,37 @@ safety_boundary:
     The policy gate performs computational conformance testing for simulated
     requests only. The system does not emit odors and does not establish
     chemical, medical, perceptual, clinical, or physical safety.
+ablation_evaluation:
+  registration_timing: "locked after pipeline implementation and before ablation experiment implementation or results"
+  exploratory_status: true
+  same_latent_events_across_systems: true
+  same_graded_ood_views_across_systems: true
+  paired_analysis_unit: "latent_event_id"
+  temporal_displacement_days:
+    - 0
+    - 1
+    - 7
+    - 30
+    - 90
+  systems:
+    ridge_only:
+      alpha: 1.0
+      alpha_source: "fixed"
+      apply_temporal_decay: false
+    memory_only:
+      alpha: 0.0
+      alpha_source: "fixed"
+      apply_temporal_decay: true
+    hybrid_without_temporal_decay:
+      alpha: "validation_selected"
+      alpha_source: "validation_only"
+      apply_temporal_decay: false
+    full_hybrid:
+      alpha: "validation_selected"
+      alpha_source: "validation_only"
+      apply_temporal_decay: true
+  ood_alpha_tuning_prohibited: true
+  ood_model_fitting_prohibited: true
+  policy_gate_changes_ranking_prohibited: true
+  oracle_used: false
+  interpretation_limit: "Exploratory synthetic computational evidence only; not confirmatory, perceptual, clinical, chemical, emission, or physical-safety evidence."
