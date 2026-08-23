@@ -1,0 +1,381 @@
+{
+  "case_results": [
+    {
+      "description": "Enabled item 001 nominal conforming request",
+      "exact_match": true,
+      "expected_outcome": "ALLOW",
+      "explanation": "The request conforms to all prespecified computational policy rules for the simulated test environment.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "ALLOW",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "ALLOW-001",
+      "rule_ids": [
+        "RULE-ALLOW-001"
+      ]
+    },
+    {
+      "description": "Enabled item 002 nominal conforming request",
+      "exact_match": true,
+      "expected_outcome": "ALLOW",
+      "explanation": "The request conforms to all prespecified computational policy rules for the simulated test environment.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "ALLOW",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "ALLOW-002",
+      "rule_ids": [
+        "RULE-ALLOW-001"
+      ]
+    },
+    {
+      "description": "Item 001 exact maximum and minimum boundaries",
+      "exact_match": true,
+      "expected_outcome": "ALLOW",
+      "explanation": "The request conforms to all prespecified computational policy rules for the simulated test environment.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "ALLOW",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "ALLOW-003",
+      "rule_ids": [
+        "RULE-ALLOW-001"
+      ]
+    },
+    {
+      "description": "Item 002 exact maximum and minimum boundaries",
+      "exact_match": true,
+      "expected_outcome": "ALLOW",
+      "explanation": "The request conforms to all prespecified computational policy rules for the simulated test environment.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "ALLOW",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "ALLOW-004",
+      "rule_ids": [
+        "RULE-ALLOW-001"
+      ]
+    },
+    {
+      "description": "Consent explicitly false",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The simulated request was blocked because current affirmative user consent was not recorded.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-CONSENT-001",
+      "rule_ids": [
+        "RULE-CONSENT-001"
+      ]
+    },
+    {
+      "description": "Unknown simulated item",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The requested item is not present in the locked simulated item inventory.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-UNKNOWN-001",
+      "rule_ids": [
+        "RULE-ITEM-001"
+      ]
+    },
+    {
+      "description": "Disabled simulated item",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The simulated item is disabled by policy.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-DISABLED-001",
+      "rule_ids": [
+        "RULE-ITEM-002"
+      ]
+    },
+    {
+      "description": "Item 001 concentration above locked maximum",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The request exceeds the prespecified simulated concentration threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-CONCENTRATION-001",
+      "rule_ids": [
+        "RULE-LIMIT-001"
+      ]
+    },
+    {
+      "description": "Item 002 concentration above locked maximum",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The request exceeds the prespecified simulated concentration threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-CONCENTRATION-002",
+      "rule_ids": [
+        "RULE-LIMIT-001"
+      ]
+    },
+    {
+      "description": "Item 001 duration above locked maximum",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The request exceeds the prespecified simulated duration threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-DURATION-001",
+      "rule_ids": [
+        "RULE-LIMIT-002"
+      ]
+    },
+    {
+      "description": "Item 002 duration above locked maximum",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The request exceeds the prespecified simulated duration threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-DURATION-002",
+      "rule_ids": [
+        "RULE-LIMIT-002"
+      ]
+    },
+    {
+      "description": "Item 001 environment volume below locked minimum",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The simulated environment volume is below the prespecified policy threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-VOLUME-001",
+      "rule_ids": [
+        "RULE-ENV-001"
+      ]
+    },
+    {
+      "description": "Item 002 environment volume below locked minimum",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The simulated environment volume is below the prespecified policy threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-VOLUME-002",
+      "rule_ids": [
+        "RULE-ENV-001"
+      ]
+    },
+    {
+      "description": "Item 001 ventilation below locked minimum",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The simulated ventilation value is below the prespecified policy threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-VENTILATION-001",
+      "rule_ids": [
+        "RULE-ENV-002"
+      ]
+    },
+    {
+      "description": "Item 002 ventilation below locked minimum",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The simulated ventilation value is below the prespecified policy threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-VENTILATION-002",
+      "rule_ids": [
+        "RULE-ENV-002"
+      ]
+    },
+    {
+      "description": "Concentration missing",
+      "exact_match": true,
+      "expected_outcome": "REQUIRE_MISSING_INFORMATION",
+      "explanation": "Required simulated request information is missing: concentration_ppm",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "REQUIRE_MISSING_INFORMATION",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "MISSING-CONCENTRATION-001",
+      "rule_ids": [
+        "RULE-MISSING-001"
+      ]
+    },
+    {
+      "description": "Duration missing",
+      "exact_match": true,
+      "expected_outcome": "REQUIRE_MISSING_INFORMATION",
+      "explanation": "Required simulated request information is missing: duration_seconds",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "REQUIRE_MISSING_INFORMATION",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "MISSING-DURATION-001",
+      "rule_ids": [
+        "RULE-MISSING-001"
+      ]
+    },
+    {
+      "description": "Environment volume missing",
+      "exact_match": true,
+      "expected_outcome": "REQUIRE_MISSING_INFORMATION",
+      "explanation": "Required simulated request information is missing: environment_volume_m3",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "REQUIRE_MISSING_INFORMATION",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "MISSING-VOLUME-001",
+      "rule_ids": [
+        "RULE-MISSING-001"
+      ]
+    },
+    {
+      "description": "Ventilation missing",
+      "exact_match": true,
+      "expected_outcome": "REQUIRE_MISSING_INFORMATION",
+      "explanation": "Required simulated request information is missing: ventilation_ach",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "REQUIRE_MISSING_INFORMATION",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "MISSING-VENTILATION-001",
+      "rule_ids": [
+        "RULE-MISSING-001"
+      ]
+    },
+    {
+      "description": "Consent missing",
+      "exact_match": true,
+      "expected_outcome": "REQUIRE_MISSING_INFORMATION",
+      "explanation": "Required simulated request information is missing: user_consent",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "REQUIRE_MISSING_INFORMATION",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "MISSING-CONSENT-001",
+      "rule_ids": [
+        "RULE-MISSING-001"
+      ]
+    },
+    {
+      "description": "Multiple required fields missing",
+      "exact_match": true,
+      "expected_outcome": "REQUIRE_MISSING_INFORMATION",
+      "explanation": "Required simulated request information is missing: concentration_ppm, duration_seconds, environment_volume_m3, ventilation_ach, user_consent",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "REQUIRE_MISSING_INFORMATION",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "MISSING-MULTIPLE-001",
+      "rule_ids": [
+        "RULE-MISSING-001"
+      ]
+    },
+    {
+      "description": "Missing concentration takes precedence over false consent",
+      "exact_match": true,
+      "expected_outcome": "REQUIRE_MISSING_INFORMATION",
+      "explanation": "Required simulated request information is missing: concentration_ppm",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "REQUIRE_MISSING_INFORMATION",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "PRECEDENCE-MISSING-CONSENT-001",
+      "rule_ids": [
+        "RULE-MISSING-001"
+      ]
+    },
+    {
+      "description": "False consent takes precedence over unknown item",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The simulated request was blocked because current affirmative user consent was not recorded.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "PRECEDENCE-CONSENT-UNKNOWN-001",
+      "rule_ids": [
+        "RULE-CONSENT-001"
+      ]
+    },
+    {
+      "description": "Disabled item takes precedence over limit checks",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The simulated item is disabled by policy.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "PRECEDENCE-DISABLED-LIMIT-001",
+      "rule_ids": [
+        "RULE-ITEM-002"
+      ]
+    },
+    {
+      "description": "Multiple limit violations for enabled item 001",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The request exceeds the prespecified simulated concentration threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-MULTIPLE-LIMITS-001",
+      "rule_ids": [
+        "RULE-LIMIT-001"
+      ]
+    },
+    {
+      "description": "Multiple limit violations for enabled item 002",
+      "exact_match": true,
+      "expected_outcome": "BLOCK",
+      "explanation": "The request exceeds the prespecified simulated concentration threshold.",
+      "false_allow": false,
+      "false_block": false,
+      "predicted_outcome": "BLOCK",
+      "protocol_hash": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+      "request_id": "BLOCK-MULTIPLE-LIMITS-002",
+      "rule_ids": [
+        "RULE-LIMIT-001"
+      ]
+    }
+  ],
+  "expected_counts": {
+    "allow": 4,
+    "block": 15,
+    "require_missing_information": 7
+  },
+  "owner": "GUARDIANX LLC",
+  "physical_emission_performed": false,
+  "project": "Neuro-Olfactive Intelligence",
+  "release": "policy-conformance-pilot-v0.1",
+  "schema_version": "1.0.0",
+  "status": "exploratory",
+  "suite_type": "locked_simulated_computational_policy_cases",
+  "total_case_count": 26
+}

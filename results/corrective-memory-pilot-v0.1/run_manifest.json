@@ -1,0 +1,68 @@
+{
+  "configuration_hashes": {
+    "corrective_memory_evaluation_v0.1.yaml": "287693bee707b79afe730c7bdf9606d971b307d2510b4d191c8828e1c7b0f709",
+    "noi_system_v0.1.yaml": "667432be1030ddb9cc05a40f863e0bc7aa6baf961dd046fe9a62b7e70efb4cc9",
+    "policy_rules.yaml": "c30ae8b5cfa24a1e10efab06b7604e08837c528bbe285bbefcf3622604f6eaad",
+    "research_protocol.yaml": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+    "synthetic_data.yaml": "16cc1ddfb752f5f4955931fd11bb5544af919153fca5650fe805b5a1f83ad817"
+  },
+  "counts": {
+    "eligible_queries": 15,
+    "eligible_targets": 14,
+    "odor_targets": 200,
+    "original_events": 200,
+    "restoration_audits": 27,
+    "target_results": 14,
+    "training_events": 140,
+    "validation_events": 20
+  },
+  "environment": {
+    "numpy": "2.4.6",
+    "python": "3.11.14",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.9.0"
+  },
+  "output_files": {
+    "corrective_memory_results.json": {
+      "sha256": "a1b4171303042bcff95241b59feec064a3861e59c07b232a48713ce84d94b7e5",
+      "target_results": 14
+    },
+    "corrective_memory_summary.json": {
+      "sha256": "6cc0864369aac2bb7a667707d8171c151e4f635215dda5117b2d216417d21dfa"
+    }
+  },
+  "owner": "GUARDIANX LLC",
+  "project": "Neuro-Olfactive Intelligence",
+  "randomness": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 4242,
+    "generator_seed": 1001,
+    "ood_seed": 9001
+  },
+  "registration": {
+    "experiment_implemented_after_registration": true,
+    "tag": "corrective-memory-v0.1-preimplementation"
+  },
+  "release": "corrective-memory-pilot-v0.1",
+  "schema_version": "1.0.0",
+  "scope_limitations": [
+    "Exploratory synthetic computational pilot only.",
+    "Controlled corruption and restoration mechanism test.",
+    "Not automatic error-detection evidence.",
+    "Not unseen-target discovery evidence.",
+    "Not human perceptual evidence.",
+    "Not clinical or diagnostic evidence.",
+    "Not physical-device or emission-safety evidence.",
+    "Not deployment-readiness evidence."
+  ],
+  "status": "exploratory",
+  "verification": {
+    "deterministic_decoy_selection": "PASSED",
+    "ood_tuning_used": false,
+    "oracle_used": false,
+    "paired_arms": "PASSED",
+    "paired_unit": "target_item_id",
+    "restoration_audit_completeness": "PASSED",
+    "tests_required_before_release": true
+  }
+}

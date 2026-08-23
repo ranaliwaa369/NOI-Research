@@ -1,0 +1,4482 @@
+{
+  "dataset": {
+    "event_count": 200,
+    "generator_seed": 1001,
+    "generator_version": "0.1.0",
+    "leakage_audit_passed": true,
+    "odor_target_count": 200,
+    "ood_seed": 9001,
+    "type": "synthetic_implementation_evaluation"
+  },
+  "event_level_rankings": [
+    {
+      "baseline": "random",
+      "events": [
+        {
+          "event_id": "validation-000000",
+          "ranking": [
+            "odor-0191",
+            "odor-0106",
+            "odor-0023",
+            "odor-0066",
+            "odor-0036",
+            "odor-0156",
+            "odor-0178",
+            "odor-0027",
+            "odor-0083",
+            "odor-0108"
+          ],
+          "relevant_items": [
+            "odor-0159"
+          ]
+        },
+        {
+          "event_id": "validation-000001",
+          "ranking": [
+            "odor-0101",
+            "odor-0146",
+            "odor-0036",
+            "odor-0139",
+            "odor-0009",
+            "odor-0098",
+            "odor-0060",
+            "odor-0016",
+            "odor-0025",
+            "odor-0055"
+          ],
+          "relevant_items": [
+            "odor-0045"
+          ]
+        },
+        {
+          "event_id": "validation-000002",
+          "ranking": [
+            "odor-0097",
+            "odor-0175",
+            "odor-0116",
+            "odor-0130",
+            "odor-0108",
+            "odor-0145",
+            "odor-0083",
+            "odor-0131",
+            "odor-0184",
+            "odor-0135"
+          ],
+          "relevant_items": [
+            "odor-0090"
+          ]
+        },
+        {
+          "event_id": "validation-000003",
+          "ranking": [
+            "odor-0037",
+            "odor-0124",
+            "odor-0113",
+            "odor-0179",
+            "odor-0012",
+            "odor-0065",
+            "odor-0086",
+            "odor-0145",
+            "odor-0135",
+            "odor-0125"
+          ],
+          "relevant_items": [
+            "odor-0162"
+          ]
+        },
+        {
+          "event_id": "validation-000004",
+          "ranking": [
+            "odor-0040",
+            "odor-0175",
+            "odor-0083",
+            "odor-0005",
+            "odor-0143",
+            "odor-0190",
+            "odor-0006",
+            "odor-0048",
+            "odor-0188",
+            "odor-0197"
+          ],
+          "relevant_items": [
+            "odor-0072"
+          ]
+        },
+        {
+          "event_id": "validation-000005",
+          "ranking": [
+            "odor-0182",
+            "odor-0076",
+            "odor-0159",
+            "odor-0067",
+            "odor-0138",
+            "odor-0188",
+            "odor-0124",
+            "odor-0133",
+            "odor-0142",
+            "odor-0140"
+          ],
+          "relevant_items": [
+            "odor-0077"
+          ]
+        },
+        {
+          "event_id": "validation-000006",
+          "ranking": [
+            "odor-0127",
+            "odor-0027",
+            "odor-0191",
+            "odor-0098",
+            "odor-0080",
+            "odor-0010",
+            "odor-0152",
+            "odor-0013",
+            "odor-0174",
+            "odor-0011"
+          ],
+          "relevant_items": [
+            "odor-0163"
+          ]
+        },
+        {
+          "event_id": "validation-000007",
+          "ranking": [
+            "odor-0167",
+            "odor-0153",
+            "odor-0037",
+            "odor-0031",
+            "odor-0095",
+            "odor-0068",
+            "odor-0104",
+            "odor-0105",
+            "odor-0106",
+            "odor-0003"
+          ],
+          "relevant_items": [
+            "odor-0104"
+          ]
+        },
+        {
+          "event_id": "validation-000008",
+          "ranking": [
+            "odor-0116",
+            "odor-0106",
+            "odor-0009",
+            "odor-0052",
+            "odor-0010",
+            "odor-0044",
+            "odor-0133",
+            "odor-0137",
+            "odor-0141",
+            "odor-0187"
+          ],
+          "relevant_items": [
+            "odor-0040"
+          ]
+        },
+        {
+          "event_id": "validation-000009",
+          "ranking": [
+            "odor-0196",
+            "odor-0094",
+            "odor-0007",
+            "odor-0091",
+            "odor-0057",
+            "odor-0029",
+            "odor-0190",
+            "odor-0173",
+            "odor-0090",
+            "odor-0084"
+          ],
+          "relevant_items": [
+            "odor-0164"
+          ]
+        },
+        {
+          "event_id": "validation-000010",
+          "ranking": [
+            "odor-0191",
+            "odor-0131",
+            "odor-0057",
+            "odor-0161",
+            "odor-0015",
+            "odor-0152",
+            "odor-0016",
+            "odor-0061",
+            "odor-0084",
+            "odor-0030"
+          ],
+          "relevant_items": [
+            "odor-0044"
+          ]
+        },
+        {
+          "event_id": "validation-000011",
+          "ranking": [
+            "odor-0155",
+            "odor-0173",
+            "odor-0182",
+            "odor-0065",
+            "odor-0197",
+            "odor-0066",
+            "odor-0010",
+            "odor-0184",
+            "odor-0106",
+            "odor-0136"
+          ],
+          "relevant_items": [
+            "odor-0185"
+          ]
+        },
+        {
+          "event_id": "validation-000012",
+          "ranking": [
+            "odor-0177",
+            "odor-0018",
+            "odor-0060",
+            "odor-0144",
+            "odor-0038",
+            "odor-0179",
+            "odor-0122",
+            "odor-0167",
+            "odor-0181",
+            "odor-0085"
+          ],
+          "relevant_items": [
+            "odor-0128"
+          ]
+        },
+        {
+          "event_id": "validation-000013",
+          "ranking": [
+            "odor-0027",
+            "odor-0049",
+            "odor-0094",
+            "odor-0054",
+            "odor-0119",
+            "odor-0066",
+            "odor-0117",
+            "odor-0016",
+            "odor-0011",
+            "odor-0046"
+          ],
+          "relevant_items": [
+            "odor-0064"
+          ]
+        },
+        {
+          "event_id": "validation-000014",
+          "ranking": [
+            "odor-0100",
+            "odor-0084",
+            "odor-0048",
+            "odor-0055",
+            "odor-0111",
+            "odor-0047",
+            "odor-0085",
+            "odor-0165",
+            "odor-0031",
+            "odor-0187"
+          ],
+          "relevant_items": [
+            "odor-0032"
+          ]
+        },
+        {
+          "event_id": "validation-000015",
+          "ranking": [
+            "odor-0007",
+            "odor-0064",
+            "odor-0089",
+            "odor-0124",
+            "odor-0087",
+            "odor-0136",
+            "odor-0065",
+            "odor-0058",
+            "odor-0154",
+            "odor-0181"
+          ],
+          "relevant_items": [
+            "odor-0093"
+          ]
+        },
+        {
+          "event_id": "validation-000016",
+          "ranking": [
+            "odor-0005",
+            "odor-0158",
+            "odor-0071",
+            "odor-0024",
+            "odor-0107",
+            "odor-0156",
+            "odor-0126",
+            "odor-0111",
+            "odor-0101",
+            "odor-0095"
+          ],
+          "relevant_items": [
+            "odor-0019"
+          ]
+        },
+        {
+          "event_id": "validation-000017",
+          "ranking": [
+            "odor-0011",
+            "odor-0149",
+            "odor-0025",
+            "odor-0148",
+            "odor-0017",
+            "odor-0001",
+            "odor-0006",
+            "odor-0090",
+            "odor-0026",
+            "odor-0007"
+          ],
+          "relevant_items": [
+            "odor-0045"
+          ]
+        },
+        {
+          "event_id": "validation-000018",
+          "ranking": [
+            "odor-0046",
+            "odor-0146",
+            "odor-0072",
+            "odor-0130",
+            "odor-0196",
+            "odor-0081",
+            "odor-0192",
+            "odor-0193",
+            "odor-0033",
+            "odor-0184"
+          ],
+          "relevant_items": [
+            "odor-0157"
+          ]
+        },
+        {
+          "event_id": "validation-000019",
+          "ranking": [
+            "odor-0008",
+            "odor-0127",
+            "odor-0140",
+            "odor-0183",
+            "odor-0032",
+            "odor-0066",
+            "odor-0138",
+            "odor-0033",
+            "odor-0159",
+            "odor-0123"
+          ],
+          "relevant_items": [
+            "odor-0023"
+          ]
+        }
+      ],
+      "split": "validation"
+    },
+    {
+      "baseline": "text_only_cosine",
+      "events": [
+        {
+          "event_id": "validation-000000",
+          "ranking": [
+            "odor-0038",
+            "odor-0104",
+            "odor-0096",
+            "odor-0133",
+            "odor-0039",
+            "odor-0085",
+            "odor-0174",
+            "odor-0150",
+            "odor-0031",
+            "odor-0097"
+          ],
+          "relevant_items": [
+            "odor-0159"
+          ]
+        },
+        {
+          "event_id": "validation-000001",
+          "ranking": [
+            "odor-0052",
+            "odor-0029",
+            "odor-0137",
+            "odor-0100",
+            "odor-0058",
+            "odor-0172",
+            "odor-0093",
+            "odor-0147",
+            "odor-0174",
+            "odor-0176"
+          ],
+          "relevant_items": [
+            "odor-0045"
+          ]
+        },
+        {
+          "event_id": "validation-000002",
+          "ranking": [
+            "odor-0123",
+            "odor-0017",
+            "odor-0055",
+            "odor-0190",
+            "odor-0195",
+            "odor-0128",
+            "odor-0158",
+            "odor-0121",
+            "odor-0023",
+            "odor-0150"
+          ],
+          "relevant_items": [
+            "odor-0090"
+          ]
+        },
+        {
+          "event_id": "validation-000003",
+          "ranking": [
+            "odor-0051",
+            "odor-0054",
+            "odor-0053",
+            "odor-0055",
+            "odor-0059",
+            "odor-0029",
+            "odor-0178",
+            "odor-0165",
+            "odor-0161",
+            "odor-0167"
+          ],
+          "relevant_items": [
+            "odor-0162"
+          ]
+        },
+        {
+          "event_id": "validation-000004",
+          "ranking": [
+            "odor-0191",
+            "odor-0092",
+            "odor-0023",
+            "odor-0066",
+            "odor-0198",
+            "odor-0063",
+            "odor-0067",
+            "odor-0006",
+            "odor-0016",
+            "odor-0068"
+          ],
+          "relevant_items": [
+            "odor-0072"
+          ]
+        },
+        {
+          "event_id": "validation-000005",
+          "ranking": [
+            "odor-0120",
+            "odor-0150",
+            "odor-0038",
+            "odor-0066",
+            "odor-0063",
+            "odor-0065",
+            "odor-0024",
+            "odor-0015",
+            "odor-0159",
+            "odor-0152"
+          ],
+          "relevant_items": [
+            "odor-0077"
+          ]
+        },
+        {
+          "event_id": "validation-000006",
+          "ranking": [
+            "odor-0099",
+            "odor-0113",
+            "odor-0110",
+            "odor-0162",
+            "odor-0032",
+            "odor-0006",
+            "odor-0169",
+            "odor-0168",
+            "odor-0007",
+            "odor-0000"
+          ],
+          "relevant_items": [
+            "odor-0163"
+          ]
+        },
+        {
+          "event_id": "validation-000007",
+          "ranking": [
+            "odor-0088",
+            "odor-0179",
+            "odor-0190",
+            "odor-0086",
+            "odor-0171",
+            "odor-0196",
+            "odor-0178",
+            "odor-0151",
+            "odor-0053",
+            "odor-0158"
+          ],
+          "relevant_items": [
+            "odor-0104"
+          ]
+        },
+        {
+          "event_id": "validation-000008",
+          "ranking": [
+            "odor-0102",
+            "odor-0069",
+            "odor-0080",
+            "odor-0056",
+            "odor-0051",
+            "odor-0157",
+            "odor-0058",
+            "odor-0100",
+            "odor-0053",
+            "odor-0178"
+          ],
+          "relevant_items": [
+            "odor-0040"
+          ]
+        },
+        {
+          "event_id": "validation-000009",
+          "ranking": [
+            "odor-0159",
+            "odor-0124",
+            "odor-0059",
+            "odor-0155",
+            "odor-0175",
+            "odor-0172",
+            "odor-0154",
+            "odor-0035",
+            "odor-0074",
+            "odor-0054"
+          ],
+          "relevant_items": [
+            "odor-0164"
+          ]
+        },
+        {
+          "event_id": "validation-000010",
+          "ranking": [
+            "odor-0077",
+            "odor-0075",
+            "odor-0146",
+            "odor-0145",
+            "odor-0072",
+            "odor-0119",
+            "odor-0078",
+            "odor-0115",
+            "odor-0079",
+            "odor-0071"
+          ],
+          "relevant_items": [
+            "odor-0044"
+          ]
+        },
+        {
+          "event_id": "validation-000011",
+          "ranking": [
+            "odor-0147",
+            "odor-0029",
+            "odor-0052",
+            "odor-0140",
+            "odor-0134",
+            "odor-0094",
+            "odor-0087",
+            "odor-0177",
+            "odor-0100",
+            "odor-0088"
+          ],
+          "relevant_items": [
+            "odor-0185"
+          ]
+        },
+        {
+          "event_id": "validation-000012",
+          "ranking": [
+            "odor-0081",
+            "odor-0196",
+            "odor-0085",
+            "odor-0198",
+            "odor-0087",
+            "odor-0041",
+            "odor-0191",
+            "odor-0089",
+            "odor-0197",
+            "odor-0044"
+          ],
+          "relevant_items": [
+            "odor-0128"
+          ]
+        },
+        {
+          "event_id": "validation-000013",
+          "ranking": [
+            "odor-0153",
+            "odor-0069",
+            "odor-0146",
+            "odor-0067",
+            "odor-0156",
+            "odor-0161",
+            "odor-0134",
+            "odor-0060",
+            "odor-0061",
+            "odor-0137"
+          ],
+          "relevant_items": [
+            "odor-0064"
+          ]
+        },
+        {
+          "event_id": "validation-000014",
+          "ranking": [
+            "odor-0059",
+            "odor-0078",
+            "odor-0077",
+            "odor-0172",
+            "odor-0099",
+            "odor-0175",
+            "odor-0029",
+            "odor-0074",
+            "odor-0071",
+            "odor-0151"
+          ],
+          "relevant_items": [
+            "odor-0032"
+          ]
+        },
+        {
+          "event_id": "validation-000015",
+          "ranking": [
+            "odor-0124",
+            "odor-0123",
+            "odor-0179",
+            "odor-0120",
+            "odor-0178",
+            "odor-0144",
+            "odor-0121",
+            "odor-0159",
+            "odor-0017",
+            "odor-0125"
+          ],
+          "relevant_items": [
+            "odor-0093"
+          ]
+        },
+        {
+          "event_id": "validation-000016",
+          "ranking": [
+            "odor-0162",
+            "odor-0163",
+            "odor-0015",
+            "odor-0076",
+            "odor-0167",
+            "odor-0002",
+            "odor-0070",
+            "odor-0014",
+            "odor-0168",
+            "odor-0128"
+          ],
+          "relevant_items": [
+            "odor-0019"
+          ]
+        },
+        {
+          "event_id": "validation-000017",
+          "ranking": [
+            "odor-0052",
+            "odor-0147",
+            "odor-0100",
+            "odor-0140",
+            "odor-0029",
+            "odor-0146",
+            "odor-0058",
+            "odor-0172",
+            "odor-0102",
+            "odor-0137"
+          ],
+          "relevant_items": [
+            "odor-0045"
+          ]
+        },
+        {
+          "event_id": "validation-000018",
+          "ranking": [
+            "odor-0051",
+            "odor-0152",
+            "odor-0158",
+            "odor-0060",
+            "odor-0157",
+            "odor-0057",
+            "odor-0068",
+            "odor-0056",
+            "odor-0010",
+            "odor-0153"
+          ],
+          "relevant_items": [
+            "odor-0157"
+          ]
+        },
+        {
+          "event_id": "validation-000019",
+          "ranking": [
+            "odor-0061",
+            "odor-0138",
+            "odor-0113",
+            "odor-0139",
+            "odor-0137",
+            "odor-0065",
+            "odor-0135",
+            "odor-0176",
+            "odor-0111",
+            "odor-0091"
+          ],
+          "relevant_items": [
+            "odor-0023"
+          ]
+        }
+      ],
+      "split": "validation"
+    },
+    {
+      "baseline": "mean_fusion_cosine",
+      "events": [
+        {
+          "event_id": "validation-000000",
+          "ranking": [
+            "odor-0128",
+            "odor-0080",
+            "odor-0114",
+            "odor-0049",
+            "odor-0083",
+            "odor-0122",
+            "odor-0002",
+            "odor-0016",
+            "odor-0104",
+            "odor-0129"
+          ],
+          "relevant_items": [
+            "odor-0159"
+          ]
+        },
+        {
+          "event_id": "validation-000001",
+          "ranking": [
+            "odor-0174",
+            "odor-0131",
+            "odor-0147",
+            "odor-0172",
+            "odor-0074",
+            "odor-0034",
+            "odor-0029",
+            "odor-0137",
+            "odor-0177",
+            "odor-0136"
+          ],
+          "relevant_items": [
+            "odor-0045"
+          ]
+        },
+        {
+          "event_id": "validation-000002",
+          "ranking": [
+            "odor-0156",
+            "odor-0061",
+            "odor-0062",
+            "odor-0065",
+            "odor-0103",
+            "odor-0067",
+            "odor-0060",
+            "odor-0194",
+            "odor-0011",
+            "odor-0197"
+          ],
+          "relevant_items": [
+            "odor-0090"
+          ]
+        },
+        {
+          "event_id": "validation-000003",
+          "ranking": [
+            "odor-0040",
+            "odor-0082",
+            "odor-0162",
+            "odor-0165",
+            "odor-0055",
+            "odor-0167",
+            "odor-0178",
+            "odor-0051",
+            "odor-0029",
+            "odor-0159"
+          ],
+          "relevant_items": [
+            "odor-0162"
+          ]
+        },
+        {
+          "event_id": "validation-000004",
+          "ranking": [
+            "odor-0191",
+            "odor-0194",
+            "odor-0010",
+            "odor-0144",
+            "odor-0016",
+            "odor-0013",
+            "odor-0190",
+            "odor-0015",
+            "odor-0014",
+            "odor-0018"
+          ],
+          "relevant_items": [
+            "odor-0072"
+          ]
+        },
+        {
+          "event_id": "validation-000005",
+          "ranking": [
+            "odor-0015",
+            "odor-0019",
+            "odor-0002",
+            "odor-0065",
+            "odor-0011",
+            "odor-0014",
+            "odor-0070",
+            "odor-0063",
+            "odor-0163",
+            "odor-0018"
+          ],
+          "relevant_items": [
+            "odor-0077"
+          ]
+        },
+        {
+          "event_id": "validation-000006",
+          "ranking": [
+            "odor-0133",
+            "odor-0032",
+            "odor-0039",
+            "odor-0046",
+            "odor-0169",
+            "odor-0045",
+            "odor-0051",
+            "odor-0167",
+            "odor-0166",
+            "odor-0136"
+          ],
+          "relevant_items": [
+            "odor-0163"
+          ]
+        },
+        {
+          "event_id": "validation-000007",
+          "ranking": [
+            "odor-0154",
+            "odor-0078",
+            "odor-0109",
+            "odor-0108",
+            "odor-0058",
+            "odor-0151",
+            "odor-0155",
+            "odor-0106",
+            "odor-0103",
+            "odor-0020"
+          ],
+          "relevant_items": [
+            "odor-0104"
+          ]
+        },
+        {
+          "event_id": "validation-000008",
+          "ranking": [
+            "odor-0157",
+            "odor-0040",
+            "odor-0102",
+            "odor-0033",
+            "odor-0046",
+            "odor-0041",
+            "odor-0132",
+            "odor-0176",
+            "odor-0122",
+            "odor-0174"
+          ],
+          "relevant_items": [
+            "odor-0040"
+          ]
+        },
+        {
+          "event_id": "validation-000009",
+          "ranking": [
+            "odor-0154",
+            "odor-0040",
+            "odor-0174",
+            "odor-0177",
+            "odor-0172",
+            "odor-0151",
+            "odor-0099",
+            "odor-0038",
+            "odor-0152",
+            "odor-0170"
+          ],
+          "relevant_items": [
+            "odor-0164"
+          ]
+        },
+        {
+          "event_id": "validation-000010",
+          "ranking": [
+            "odor-0179",
+            "odor-0057",
+            "odor-0176",
+            "odor-0084",
+            "odor-0173",
+            "odor-0142",
+            "odor-0148",
+            "odor-0018",
+            "odor-0013",
+            "odor-0081"
+          ],
+          "relevant_items": [
+            "odor-0044"
+          ]
+        },
+        {
+          "event_id": "validation-000011",
+          "ranking": [
+            "odor-0079",
+            "odor-0078",
+            "odor-0075",
+            "odor-0147",
+            "odor-0029",
+            "odor-0059",
+            "odor-0156",
+            "odor-0071",
+            "odor-0077",
+            "odor-0142"
+          ],
+          "relevant_items": [
+            "odor-0185"
+          ]
+        },
+        {
+          "event_id": "validation-000012",
+          "ranking": [
+            "odor-0056",
+            "odor-0145",
+            "odor-0142",
+            "odor-0041",
+            "odor-0016",
+            "odor-0052",
+            "odor-0148",
+            "odor-0053",
+            "odor-0149",
+            "odor-0057"
+          ],
+          "relevant_items": [
+            "odor-0128"
+          ]
+        },
+        {
+          "event_id": "validation-000013",
+          "ranking": [
+            "odor-0156",
+            "odor-0176",
+            "odor-0137",
+            "odor-0139",
+            "odor-0067",
+            "odor-0153",
+            "odor-0105",
+            "odor-0061",
+            "odor-0064",
+            "odor-0138"
+          ],
+          "relevant_items": [
+            "odor-0064"
+          ]
+        },
+        {
+          "event_id": "validation-000014",
+          "ranking": [
+            "odor-0099",
+            "odor-0151",
+            "odor-0078",
+            "odor-0074",
+            "odor-0172",
+            "odor-0168",
+            "odor-0169",
+            "odor-0029",
+            "odor-0077",
+            "odor-0154"
+          ],
+          "relevant_items": [
+            "odor-0032"
+          ]
+        },
+        {
+          "event_id": "validation-000015",
+          "ranking": [
+            "odor-0156",
+            "odor-0154",
+            "odor-0078",
+            "odor-0151",
+            "odor-0108",
+            "odor-0090",
+            "odor-0153",
+            "odor-0060",
+            "odor-0077",
+            "odor-0057"
+          ],
+          "relevant_items": [
+            "odor-0093"
+          ]
+        },
+        {
+          "event_id": "validation-000016",
+          "ranking": [
+            "odor-0000",
+            "odor-0002",
+            "odor-0014",
+            "odor-0136",
+            "odor-0161",
+            "odor-0137",
+            "odor-0081",
+            "odor-0194",
+            "odor-0160",
+            "odor-0008"
+          ],
+          "relevant_items": [
+            "odor-0019"
+          ]
+        },
+        {
+          "event_id": "validation-000017",
+          "ranking": [
+            "odor-0147",
+            "odor-0172",
+            "odor-0174",
+            "odor-0139",
+            "odor-0074",
+            "odor-0176",
+            "odor-0029",
+            "odor-0177",
+            "odor-0131",
+            "odor-0099"
+          ],
+          "relevant_items": [
+            "odor-0045"
+          ]
+        },
+        {
+          "event_id": "validation-000018",
+          "ranking": [
+            "odor-0010",
+            "odor-0066",
+            "odor-0011",
+            "odor-0157",
+            "odor-0068",
+            "odor-0018",
+            "odor-0105",
+            "odor-0013",
+            "odor-0062",
+            "odor-0065"
+          ],
+          "relevant_items": [
+            "odor-0157"
+          ]
+        },
+        {
+          "event_id": "validation-000019",
+          "ranking": [
+            "odor-0114",
+            "odor-0111",
+            "odor-0113",
+            "odor-0032",
+            "odor-0043",
+            "odor-0049",
+            "odor-0031",
+            "odor-0037",
+            "odor-0128",
+            "odor-0100"
+          ],
+          "relevant_items": [
+            "odor-0023"
+          ]
+        }
+      ],
+      "split": "validation"
+    },
+    {
+      "baseline": "ridge_fusion",
+      "events": [
+        {
+          "event_id": "validation-000000",
+          "ranking": [
+            "odor-0159",
+            "odor-0155",
+            "odor-0151",
+            "odor-0077",
+            "odor-0078",
+            "odor-0158",
+            "odor-0011",
+            "odor-0070",
+            "odor-0074",
+            "odor-0154"
+          ],
+          "relevant_items": [
+            "odor-0159"
+          ]
+        },
+        {
+          "event_id": "validation-000001",
+          "ranking": [
+            "odor-0045",
+            "odor-0048",
+            "odor-0047",
+            "odor-0046",
+            "odor-0034",
+            "odor-0035",
+            "odor-0126",
+            "odor-0170",
+            "odor-0030",
+            "odor-0039"
+          ],
+          "relevant_items": [
+            "odor-0045"
+          ]
+        },
+        {
+          "event_id": "validation-000002",
+          "ranking": [
+            "odor-0090",
+            "odor-0106",
+            "odor-0098",
+            "odor-0095",
+            "odor-0104",
+            "odor-0096",
+            "odor-0108",
+            "odor-0093",
+            "odor-0099",
+            "odor-0115"
+          ],
+          "relevant_items": [
+            "odor-0090"
+          ]
+        },
+        {
+          "event_id": "validation-000003",
+          "ranking": [
+            "odor-0162",
+            "odor-0168",
+            "odor-0167",
+            "odor-0166",
+            "odor-0161",
+            "odor-0136",
+            "odor-0033",
+            "odor-0113",
+            "odor-0039",
+            "odor-0076"
+          ],
+          "relevant_items": [
+            "odor-0162"
+          ]
+        },
+        {
+          "event_id": "validation-000004",
+          "ranking": [
+            "odor-0072",
+            "odor-0070",
+            "odor-0011",
+            "odor-0071",
+            "odor-0075",
+            "odor-0073",
+            "odor-0117",
+            "odor-0158",
+            "odor-0146",
+            "odor-0077"
+          ],
+          "relevant_items": [
+            "odor-0072"
+          ]
+        },
+        {
+          "event_id": "validation-000005",
+          "ranking": [
+            "odor-0077",
+            "odor-0078",
+            "odor-0075",
+            "odor-0070",
+            "odor-0073",
+            "odor-0071",
+            "odor-0146",
+            "odor-0079",
+            "odor-0072",
+            "odor-0011"
+          ],
+          "relevant_items": [
+            "odor-0077"
+          ]
+        },
+        {
+          "event_id": "validation-000006",
+          "ranking": [
+            "odor-0163",
+            "odor-0166",
+            "odor-0168",
+            "odor-0162",
+            "odor-0136",
+            "odor-0161",
+            "odor-0120",
+            "odor-0015",
+            "odor-0169",
+            "odor-0152"
+          ],
+          "relevant_items": [
+            "odor-0163"
+          ]
+        },
+        {
+          "event_id": "validation-000007",
+          "ranking": [
+            "odor-0097",
+            "odor-0104",
+            "odor-0093",
+            "odor-0095",
+            "odor-0115",
+            "odor-0096",
+            "odor-0098",
+            "odor-0094",
+            "odor-0111",
+            "odor-0101"
+          ],
+          "relevant_items": [
+            "odor-0104"
+          ]
+        },
+        {
+          "event_id": "validation-000008",
+          "ranking": [
+            "odor-0040",
+            "odor-0171",
+            "odor-0178",
+            "odor-0030",
+            "odor-0174",
+            "odor-0173",
+            "odor-0175",
+            "odor-0176",
+            "odor-0170",
+            "odor-0177"
+          ],
+          "relevant_items": [
+            "odor-0040"
+          ]
+        },
+        {
+          "event_id": "validation-000009",
+          "ranking": [
+            "odor-0164",
+            "odor-0032",
+            "odor-0035",
+            "odor-0030",
+            "odor-0031",
+            "odor-0168",
+            "odor-0039",
+            "odor-0166",
+            "odor-0161",
+            "odor-0037"
+          ],
+          "relevant_items": [
+            "odor-0164"
+          ]
+        },
+        {
+          "event_id": "validation-000010",
+          "ranking": [
+            "odor-0044",
+            "odor-0047",
+            "odor-0034",
+            "odor-0043",
+            "odor-0042",
+            "odor-0049",
+            "odor-0048",
+            "odor-0046",
+            "odor-0005",
+            "odor-0041"
+          ],
+          "relevant_items": [
+            "odor-0044"
+          ]
+        },
+        {
+          "event_id": "validation-000011",
+          "ranking": [
+            "odor-0185",
+            "odor-0184",
+            "odor-0182",
+            "odor-0181",
+            "odor-0100",
+            "odor-0098",
+            "odor-0183",
+            "odor-0048",
+            "odor-0111",
+            "odor-0094"
+          ],
+          "relevant_items": [
+            "odor-0185"
+          ]
+        },
+        {
+          "event_id": "validation-000012",
+          "ranking": [
+            "odor-0128",
+            "odor-0121",
+            "odor-0123",
+            "odor-0127",
+            "odor-0129",
+            "odor-0124",
+            "odor-0126",
+            "odor-0138",
+            "odor-0122",
+            "odor-0181"
+          ],
+          "relevant_items": [
+            "odor-0128"
+          ]
+        },
+        {
+          "event_id": "validation-000013",
+          "ranking": [
+            "odor-0064",
+            "odor-0139",
+            "odor-0172",
+            "odor-0176",
+            "odor-0131",
+            "odor-0137",
+            "odor-0154",
+            "odor-0005",
+            "odor-0106",
+            "odor-0001"
+          ],
+          "relevant_items": [
+            "odor-0064"
+          ]
+        },
+        {
+          "event_id": "validation-000014",
+          "ranking": [
+            "odor-0032",
+            "odor-0169",
+            "odor-0039",
+            "odor-0164",
+            "odor-0111",
+            "odor-0160",
+            "odor-0166",
+            "odor-0035",
+            "odor-0031",
+            "odor-0168"
+          ],
+          "relevant_items": [
+            "odor-0032"
+          ]
+        },
+        {
+          "event_id": "validation-000015",
+          "ranking": [
+            "odor-0034",
+            "odor-0093",
+            "odor-0097",
+            "odor-0094",
+            "odor-0048",
+            "odor-0032",
+            "odor-0100",
+            "odor-0035",
+            "odor-0098",
+            "odor-0118"
+          ],
+          "relevant_items": [
+            "odor-0093"
+          ]
+        },
+        {
+          "event_id": "validation-000016",
+          "ranking": [
+            "odor-0019",
+            "odor-0018",
+            "odor-0066",
+            "odor-0013",
+            "odor-0010",
+            "odor-0060",
+            "odor-0014",
+            "odor-0086",
+            "odor-0068",
+            "odor-0012"
+          ],
+          "relevant_items": [
+            "odor-0019"
+          ]
+        },
+        {
+          "event_id": "validation-000017",
+          "ranking": [
+            "odor-0045",
+            "odor-0048",
+            "odor-0170",
+            "odor-0181",
+            "odor-0182",
+            "odor-0039",
+            "odor-0047",
+            "odor-0034",
+            "odor-0173",
+            "odor-0174"
+          ],
+          "relevant_items": [
+            "odor-0045"
+          ]
+        },
+        {
+          "event_id": "validation-000018",
+          "ranking": [
+            "odor-0157",
+            "odor-0154",
+            "odor-0117",
+            "odor-0062",
+            "odor-0152",
+            "odor-0153",
+            "odor-0155",
+            "odor-0069",
+            "odor-0068",
+            "odor-0119"
+          ],
+          "relevant_items": [
+            "odor-0157"
+          ]
+        },
+        {
+          "event_id": "validation-000019",
+          "ranking": [
+            "odor-0023",
+            "odor-0026",
+            "odor-0198",
+            "odor-0190",
+            "odor-0195",
+            "odor-0020",
+            "odor-0006",
+            "odor-0197",
+            "odor-0055",
+            "odor-0017"
+          ],
+          "relevant_items": [
+            "odor-0023"
+          ]
+        }
+      ],
+      "split": "validation"
+    },
+    {
+      "baseline": "random",
+      "events": [
+        {
+          "event_id": "ood_test-000000",
+          "ranking": [
+            "odor-0049",
+            "odor-0160",
+            "odor-0063",
+            "odor-0064",
+            "odor-0093",
+            "odor-0079",
+            "odor-0142",
+            "odor-0117",
+            "odor-0033",
+            "odor-0083"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000001",
+          "ranking": [
+            "odor-0098",
+            "odor-0134",
+            "odor-0016",
+            "odor-0023",
+            "odor-0004",
+            "odor-0100",
+            "odor-0084",
+            "odor-0096",
+            "odor-0167",
+            "odor-0031"
+          ],
+          "relevant_items": [
+            "odor-0004"
+          ]
+        },
+        {
+          "event_id": "ood_test-000002",
+          "ranking": [
+            "odor-0124",
+            "odor-0129",
+            "odor-0170",
+            "odor-0173",
+            "odor-0177",
+            "odor-0149",
+            "odor-0050",
+            "odor-0195",
+            "odor-0175",
+            "odor-0021"
+          ],
+          "relevant_items": [
+            "odor-0142"
+          ]
+        },
+        {
+          "event_id": "ood_test-000003",
+          "ranking": [
+            "odor-0063",
+            "odor-0137",
+            "odor-0190",
+            "odor-0049",
+            "odor-0114",
+            "odor-0013",
+            "odor-0060",
+            "odor-0103",
+            "odor-0180",
+            "odor-0170"
+          ],
+          "relevant_items": [
+            "odor-0059"
+          ]
+        },
+        {
+          "event_id": "ood_test-000004",
+          "ranking": [
+            "odor-0138",
+            "odor-0149",
+            "odor-0052",
+            "odor-0043",
+            "odor-0050",
+            "odor-0056",
+            "odor-0117",
+            "odor-0130",
+            "odor-0000",
+            "odor-0134"
+          ],
+          "relevant_items": [
+            "odor-0146"
+          ]
+        },
+        {
+          "event_id": "ood_test-000005",
+          "ranking": [
+            "odor-0182",
+            "odor-0048",
+            "odor-0092",
+            "odor-0086",
+            "odor-0054",
+            "odor-0162",
+            "odor-0192",
+            "odor-0169",
+            "odor-0121",
+            "odor-0031"
+          ],
+          "relevant_items": [
+            "odor-0056"
+          ]
+        },
+        {
+          "event_id": "ood_test-000006",
+          "ranking": [
+            "odor-0142",
+            "odor-0171",
+            "odor-0093",
+            "odor-0134",
+            "odor-0175",
+            "odor-0116",
+            "odor-0190",
+            "odor-0156",
+            "odor-0107",
+            "odor-0067"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000007",
+          "ranking": [
+            "odor-0014",
+            "odor-0071",
+            "odor-0144",
+            "odor-0154",
+            "odor-0152",
+            "odor-0199",
+            "odor-0168",
+            "odor-0008",
+            "odor-0064",
+            "odor-0126"
+          ],
+          "relevant_items": [
+            "odor-0057"
+          ]
+        },
+        {
+          "event_id": "ood_test-000008",
+          "ranking": [
+            "odor-0162",
+            "odor-0071",
+            "odor-0189",
+            "odor-0122",
+            "odor-0158",
+            "odor-0079",
+            "odor-0090",
+            "odor-0045",
+            "odor-0178",
+            "odor-0109"
+          ],
+          "relevant_items": [
+            "odor-0175"
+          ]
+        },
+        {
+          "event_id": "ood_test-000009",
+          "ranking": [
+            "odor-0011",
+            "odor-0189",
+            "odor-0039",
+            "odor-0111",
+            "odor-0124",
+            "odor-0031",
+            "odor-0056",
+            "odor-0190",
+            "odor-0092",
+            "odor-0160"
+          ],
+          "relevant_items": [
+            "odor-0134"
+          ]
+        },
+        {
+          "event_id": "ood_test-000010",
+          "ranking": [
+            "odor-0022",
+            "odor-0114",
+            "odor-0018",
+            "odor-0077",
+            "odor-0104",
+            "odor-0118",
+            "odor-0026",
+            "odor-0180",
+            "odor-0107",
+            "odor-0016"
+          ],
+          "relevant_items": [
+            "odor-0176"
+          ]
+        },
+        {
+          "event_id": "ood_test-000011",
+          "ranking": [
+            "odor-0059",
+            "odor-0185",
+            "odor-0112",
+            "odor-0134",
+            "odor-0152",
+            "odor-0076",
+            "odor-0041",
+            "odor-0079",
+            "odor-0026",
+            "odor-0191"
+          ],
+          "relevant_items": [
+            "odor-0130"
+          ]
+        },
+        {
+          "event_id": "ood_test-000012",
+          "ranking": [
+            "odor-0193",
+            "odor-0135",
+            "odor-0098",
+            "odor-0043",
+            "odor-0100",
+            "odor-0146",
+            "odor-0006",
+            "odor-0173",
+            "odor-0166",
+            "odor-0140"
+          ],
+          "relevant_items": [
+            "odor-0136"
+          ]
+        },
+        {
+          "event_id": "ood_test-000013",
+          "ranking": [
+            "odor-0150",
+            "odor-0084",
+            "odor-0187",
+            "odor-0116",
+            "odor-0156",
+            "odor-0054",
+            "odor-0029",
+            "odor-0025",
+            "odor-0096",
+            "odor-0097"
+          ],
+          "relevant_items": [
+            "odor-0130"
+          ]
+        },
+        {
+          "event_id": "ood_test-000014",
+          "ranking": [
+            "odor-0007",
+            "odor-0107",
+            "odor-0137",
+            "odor-0040",
+            "odor-0153",
+            "odor-0134",
+            "odor-0001",
+            "odor-0027",
+            "odor-0147",
+            "odor-0187"
+          ],
+          "relevant_items": [
+            "odor-0084"
+          ]
+        },
+        {
+          "event_id": "ood_test-000015",
+          "ranking": [
+            "odor-0064",
+            "odor-0124",
+            "odor-0006",
+            "odor-0127",
+            "odor-0076",
+            "odor-0018",
+            "odor-0173",
+            "odor-0077",
+            "odor-0163",
+            "odor-0026"
+          ],
+          "relevant_items": [
+            "odor-0006"
+          ]
+        },
+        {
+          "event_id": "ood_test-000016",
+          "ranking": [
+            "odor-0164",
+            "odor-0142",
+            "odor-0143",
+            "odor-0083",
+            "odor-0060",
+            "odor-0131",
+            "odor-0031",
+            "odor-0152",
+            "odor-0045",
+            "odor-0179"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000017",
+          "ranking": [
+            "odor-0159",
+            "odor-0181",
+            "odor-0133",
+            "odor-0051",
+            "odor-0191",
+            "odor-0013",
+            "odor-0155",
+            "odor-0137",
+            "odor-0042",
+            "odor-0141"
+          ],
+          "relevant_items": [
+            "odor-0134"
+          ]
+        },
+        {
+          "event_id": "ood_test-000018",
+          "ranking": [
+            "odor-0016",
+            "odor-0138",
+            "odor-0012",
+            "odor-0190",
+            "odor-0148",
+            "odor-0155",
+            "odor-0076",
+            "odor-0000",
+            "odor-0006",
+            "odor-0007"
+          ],
+          "relevant_items": [
+            "odor-0001"
+          ]
+        },
+        {
+          "event_id": "ood_test-000019",
+          "ranking": [
+            "odor-0141",
+            "odor-0142",
+            "odor-0030",
+            "odor-0082",
+            "odor-0185",
+            "odor-0028",
+            "odor-0048",
+            "odor-0056",
+            "odor-0098",
+            "odor-0007"
+          ],
+          "relevant_items": [
+            "odor-0139"
+          ]
+        },
+        {
+          "event_id": "ood_test-000020",
+          "ranking": [
+            "odor-0017",
+            "odor-0150",
+            "odor-0126",
+            "odor-0016",
+            "odor-0038",
+            "odor-0199",
+            "odor-0194",
+            "odor-0087",
+            "odor-0000",
+            "odor-0195"
+          ],
+          "relevant_items": [
+            "odor-0009"
+          ]
+        },
+        {
+          "event_id": "ood_test-000021",
+          "ranking": [
+            "odor-0078",
+            "odor-0108",
+            "odor-0190",
+            "odor-0198",
+            "odor-0105",
+            "odor-0009",
+            "odor-0182",
+            "odor-0040",
+            "odor-0093",
+            "odor-0149"
+          ],
+          "relevant_items": [
+            "odor-0057"
+          ]
+        },
+        {
+          "event_id": "ood_test-000022",
+          "ranking": [
+            "odor-0150",
+            "odor-0029",
+            "odor-0041",
+            "odor-0137",
+            "odor-0109",
+            "odor-0173",
+            "odor-0007",
+            "odor-0070",
+            "odor-0164",
+            "odor-0161"
+          ],
+          "relevant_items": [
+            "odor-0173"
+          ]
+        },
+        {
+          "event_id": "ood_test-000023",
+          "ranking": [
+            "odor-0183",
+            "odor-0142",
+            "odor-0184",
+            "odor-0148",
+            "odor-0176",
+            "odor-0054",
+            "odor-0055",
+            "odor-0185",
+            "odor-0174",
+            "odor-0147"
+          ],
+          "relevant_items": [
+            "odor-0007"
+          ]
+        },
+        {
+          "event_id": "ood_test-000024",
+          "ranking": [
+            "odor-0116",
+            "odor-0001",
+            "odor-0041",
+            "odor-0155",
+            "odor-0139",
+            "odor-0097",
+            "odor-0153",
+            "odor-0124",
+            "odor-0054",
+            "odor-0142"
+          ],
+          "relevant_items": [
+            "odor-0000"
+          ]
+        },
+        {
+          "event_id": "ood_test-000025",
+          "ranking": [
+            "odor-0047",
+            "odor-0161",
+            "odor-0096",
+            "odor-0086",
+            "odor-0030",
+            "odor-0084",
+            "odor-0185",
+            "odor-0147",
+            "odor-0123",
+            "odor-0149"
+          ],
+          "relevant_items": [
+            "odor-0146"
+          ]
+        },
+        {
+          "event_id": "ood_test-000026",
+          "ranking": [
+            "odor-0055",
+            "odor-0123",
+            "odor-0138",
+            "odor-0026",
+            "odor-0053",
+            "odor-0016",
+            "odor-0146",
+            "odor-0158",
+            "odor-0014",
+            "odor-0007"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000027",
+          "ranking": [
+            "odor-0124",
+            "odor-0099",
+            "odor-0016",
+            "odor-0178",
+            "odor-0048",
+            "odor-0167",
+            "odor-0180",
+            "odor-0004",
+            "odor-0182",
+            "odor-0024"
+          ],
+          "relevant_items": [
+            "odor-0051"
+          ]
+        },
+        {
+          "event_id": "ood_test-000028",
+          "ranking": [
+            "odor-0055",
+            "odor-0158",
+            "odor-0064",
+            "odor-0078",
+            "odor-0127",
+            "odor-0118",
+            "odor-0005",
+            "odor-0191",
+            "odor-0024",
+            "odor-0097"
+          ],
+          "relevant_items": [
+            "odor-0088"
+          ]
+        },
+        {
+          "event_id": "ood_test-000029",
+          "ranking": [
+            "odor-0002",
+            "odor-0162",
+            "odor-0049",
+            "odor-0156",
+            "odor-0130",
+            "odor-0017",
+            "odor-0188",
+            "odor-0083",
+            "odor-0119",
+            "odor-0006"
+          ],
+          "relevant_items": [
+            "odor-0007"
+          ]
+        },
+        {
+          "event_id": "ood_test-000030",
+          "ranking": [
+            "odor-0044",
+            "odor-0111",
+            "odor-0133",
+            "odor-0068",
+            "odor-0050",
+            "odor-0087",
+            "odor-0069",
+            "odor-0060",
+            "odor-0147",
+            "odor-0178"
+          ],
+          "relevant_items": [
+            "odor-0058"
+          ]
+        },
+        {
+          "event_id": "ood_test-000031",
+          "ranking": [
+            "odor-0135",
+            "odor-0112",
+            "odor-0105",
+            "odor-0125",
+            "odor-0129",
+            "odor-0056",
+            "odor-0119",
+            "odor-0001",
+            "odor-0024",
+            "odor-0046"
+          ],
+          "relevant_items": [
+            "odor-0009"
+          ]
+        },
+        {
+          "event_id": "ood_test-000032",
+          "ranking": [
+            "odor-0172",
+            "odor-0081",
+            "odor-0162",
+            "odor-0113",
+            "odor-0017",
+            "odor-0042",
+            "odor-0018",
+            "odor-0099",
+            "odor-0102",
+            "odor-0107"
+          ],
+          "relevant_items": [
+            "odor-0082"
+          ]
+        },
+        {
+          "event_id": "ood_test-000033",
+          "ranking": [
+            "odor-0043",
+            "odor-0164",
+            "odor-0067",
+            "odor-0098",
+            "odor-0106",
+            "odor-0172",
+            "odor-0072",
+            "odor-0040",
+            "odor-0046",
+            "odor-0078"
+          ],
+          "relevant_items": [
+            "odor-0137"
+          ]
+        },
+        {
+          "event_id": "ood_test-000034",
+          "ranking": [
+            "odor-0097",
+            "odor-0081",
+            "odor-0060",
+            "odor-0198",
+            "odor-0034",
+            "odor-0137",
+            "odor-0016",
+            "odor-0017",
+            "odor-0015",
+            "odor-0084"
+          ],
+          "relevant_items": [
+            "odor-0139"
+          ]
+        },
+        {
+          "event_id": "ood_test-000035",
+          "ranking": [
+            "odor-0096",
+            "odor-0049",
+            "odor-0165",
+            "odor-0110",
+            "odor-0066",
+            "odor-0137",
+            "odor-0185",
+            "odor-0055",
+            "odor-0082",
+            "odor-0018"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000036",
+          "ranking": [
+            "odor-0086",
+            "odor-0132",
+            "odor-0142",
+            "odor-0047",
+            "odor-0128",
+            "odor-0183",
+            "odor-0189",
+            "odor-0090",
+            "odor-0070",
+            "odor-0045"
+          ],
+          "relevant_items": [
+            "odor-0140"
+          ]
+        },
+        {
+          "event_id": "ood_test-000037",
+          "ranking": [
+            "odor-0076",
+            "odor-0019",
+            "odor-0080",
+            "odor-0077",
+            "odor-0021",
+            "odor-0020",
+            "odor-0058",
+            "odor-0067",
+            "odor-0184",
+            "odor-0068"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000038",
+          "ranking": [
+            "odor-0057",
+            "odor-0056",
+            "odor-0156",
+            "odor-0187",
+            "odor-0032",
+            "odor-0062",
+            "odor-0099",
+            "odor-0166",
+            "odor-0008",
+            "odor-0078"
+          ],
+          "relevant_items": [
+            "odor-0084"
+          ]
+        },
+        {
+          "event_id": "ood_test-000039",
+          "ranking": [
+            "odor-0154",
+            "odor-0074",
+            "odor-0099",
+            "odor-0005",
+            "odor-0045",
+            "odor-0068",
+            "odor-0050",
+            "odor-0090",
+            "odor-0033",
+            "odor-0082"
+          ],
+          "relevant_items": [
+            "odor-0176"
+          ]
+        }
+      ],
+      "split": "ood_test"
+    },
+    {
+      "baseline": "text_only_cosine",
+      "events": [
+        {
+          "event_id": "ood_test-000000",
+          "ranking": [
+            "odor-0131",
+            "odor-0156",
+            "odor-0105",
+            "odor-0067",
+            "odor-0061",
+            "odor-0137",
+            "odor-0132",
+            "odor-0069",
+            "odor-0062",
+            "odor-0057"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000001",
+          "ranking": [
+            "odor-0045",
+            "odor-0185",
+            "odor-0172",
+            "odor-0149",
+            "odor-0046",
+            "odor-0099",
+            "odor-0055",
+            "odor-0009",
+            "odor-0170",
+            "odor-0008"
+          ],
+          "relevant_items": [
+            "odor-0004"
+          ]
+        },
+        {
+          "event_id": "ood_test-000002",
+          "ranking": [
+            "odor-0051",
+            "odor-0033",
+            "odor-0053",
+            "odor-0153",
+            "odor-0152",
+            "odor-0055",
+            "odor-0157",
+            "odor-0121",
+            "odor-0050",
+            "odor-0143"
+          ],
+          "relevant_items": [
+            "odor-0142"
+          ]
+        },
+        {
+          "event_id": "ood_test-000003",
+          "ranking": [
+            "odor-0156",
+            "odor-0060",
+            "odor-0134",
+            "odor-0057",
+            "odor-0067",
+            "odor-0105",
+            "odor-0151",
+            "odor-0155",
+            "odor-0153",
+            "odor-0158"
+          ],
+          "relevant_items": [
+            "odor-0059"
+          ]
+        },
+        {
+          "event_id": "ood_test-000004",
+          "ranking": [
+            "odor-0155",
+            "odor-0142",
+            "odor-0072",
+            "odor-0143",
+            "odor-0053",
+            "odor-0121",
+            "odor-0033",
+            "odor-0132",
+            "odor-0148",
+            "odor-0055"
+          ],
+          "relevant_items": [
+            "odor-0146"
+          ]
+        },
+        {
+          "event_id": "ood_test-000005",
+          "ranking": [
+            "odor-0068",
+            "odor-0092",
+            "odor-0066",
+            "odor-0019",
+            "odor-0104",
+            "odor-0018",
+            "odor-0010",
+            "odor-0040",
+            "odor-0082",
+            "odor-0087"
+          ],
+          "relevant_items": [
+            "odor-0056"
+          ]
+        },
+        {
+          "event_id": "ood_test-000006",
+          "ranking": [
+            "odor-0105",
+            "odor-0131",
+            "odor-0067",
+            "odor-0005",
+            "odor-0137",
+            "odor-0043",
+            "odor-0057",
+            "odor-0001",
+            "odor-0064",
+            "odor-0142"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000007",
+          "ranking": [
+            "odor-0092",
+            "odor-0067",
+            "odor-0060",
+            "odor-0104",
+            "odor-0119",
+            "odor-0133",
+            "odor-0115",
+            "odor-0101",
+            "odor-0105",
+            "odor-0095"
+          ],
+          "relevant_items": [
+            "odor-0057"
+          ]
+        },
+        {
+          "event_id": "ood_test-000008",
+          "ranking": [
+            "odor-0156",
+            "odor-0067",
+            "odor-0061",
+            "odor-0062",
+            "odor-0060",
+            "odor-0105",
+            "odor-0119",
+            "odor-0106",
+            "odor-0131",
+            "odor-0104"
+          ],
+          "relevant_items": [
+            "odor-0175"
+          ]
+        },
+        {
+          "event_id": "ood_test-000009",
+          "ranking": [
+            "odor-0049",
+            "odor-0007",
+            "odor-0137",
+            "odor-0139",
+            "odor-0136",
+            "odor-0138",
+            "odor-0043",
+            "odor-0033",
+            "odor-0064",
+            "odor-0135"
+          ],
+          "relevant_items": [
+            "odor-0134"
+          ]
+        },
+        {
+          "event_id": "ood_test-000010",
+          "ranking": [
+            "odor-0043",
+            "odor-0005",
+            "odor-0067",
+            "odor-0137",
+            "odor-0061",
+            "odor-0138",
+            "odor-0069",
+            "odor-0131",
+            "odor-0049",
+            "odor-0033"
+          ],
+          "relevant_items": [
+            "odor-0176"
+          ]
+        },
+        {
+          "event_id": "ood_test-000011",
+          "ranking": [
+            "odor-0136",
+            "odor-0031",
+            "odor-0133",
+            "odor-0164",
+            "odor-0137",
+            "odor-0030",
+            "odor-0097",
+            "odor-0161",
+            "odor-0157",
+            "odor-0042"
+          ],
+          "relevant_items": [
+            "odor-0130"
+          ]
+        },
+        {
+          "event_id": "ood_test-000012",
+          "ranking": [
+            "odor-0137",
+            "odor-0049",
+            "odor-0139",
+            "odor-0043",
+            "odor-0001",
+            "odor-0089",
+            "odor-0005",
+            "odor-0135",
+            "odor-0004",
+            "odor-0132"
+          ],
+          "relevant_items": [
+            "odor-0136"
+          ]
+        },
+        {
+          "event_id": "ood_test-000013",
+          "ranking": [
+            "odor-0118",
+            "odor-0136",
+            "odor-0119",
+            "odor-0137",
+            "odor-0094",
+            "odor-0133",
+            "odor-0132",
+            "odor-0117",
+            "odor-0042",
+            "odor-0097"
+          ],
+          "relevant_items": [
+            "odor-0130"
+          ]
+        },
+        {
+          "event_id": "ood_test-000014",
+          "ranking": [
+            "odor-0059",
+            "odor-0029",
+            "odor-0145",
+            "odor-0142",
+            "odor-0037",
+            "odor-0131",
+            "odor-0133",
+            "odor-0052",
+            "odor-0173",
+            "odor-0147"
+          ],
+          "relevant_items": [
+            "odor-0084"
+          ]
+        },
+        {
+          "event_id": "ood_test-000015",
+          "ranking": [
+            "odor-0041",
+            "odor-0040",
+            "odor-0133",
+            "odor-0121",
+            "odor-0173",
+            "odor-0172",
+            "odor-0033",
+            "odor-0051",
+            "odor-0187",
+            "odor-0185"
+          ],
+          "relevant_items": [
+            "odor-0006"
+          ]
+        },
+        {
+          "event_id": "ood_test-000016",
+          "ranking": [
+            "odor-0176",
+            "odor-0138",
+            "odor-0134",
+            "odor-0126",
+            "odor-0123",
+            "odor-0122",
+            "odor-0058",
+            "odor-0147",
+            "odor-0137",
+            "odor-0081"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000017",
+          "ranking": [
+            "odor-0049",
+            "odor-0137",
+            "odor-0096",
+            "odor-0132",
+            "odor-0005",
+            "odor-0139",
+            "odor-0147",
+            "odor-0094",
+            "odor-0138",
+            "odor-0134"
+          ],
+          "relevant_items": [
+            "odor-0134"
+          ]
+        },
+        {
+          "event_id": "ood_test-000018",
+          "ranking": [
+            "odor-0006",
+            "odor-0196",
+            "odor-0023",
+            "odor-0142",
+            "odor-0024",
+            "odor-0050",
+            "odor-0009",
+            "odor-0003",
+            "odor-0195",
+            "odor-0026"
+          ],
+          "relevant_items": [
+            "odor-0001"
+          ]
+        },
+        {
+          "event_id": "ood_test-000019",
+          "ranking": [
+            "odor-0044",
+            "odor-0085",
+            "odor-0089",
+            "odor-0028",
+            "odor-0043",
+            "odor-0083",
+            "odor-0185",
+            "odor-0084",
+            "odor-0047",
+            "odor-0080"
+          ],
+          "relevant_items": [
+            "odor-0139"
+          ]
+        },
+        {
+          "event_id": "ood_test-000020",
+          "ranking": [
+            "odor-0156",
+            "odor-0135",
+            "odor-0131",
+            "odor-0139",
+            "odor-0172",
+            "odor-0199",
+            "odor-0057",
+            "odor-0055",
+            "odor-0134",
+            "odor-0147"
+          ],
+          "relevant_items": [
+            "odor-0009"
+          ]
+        },
+        {
+          "event_id": "ood_test-000021",
+          "ranking": [
+            "odor-0067",
+            "odor-0092",
+            "odor-0069",
+            "odor-0105",
+            "odor-0119",
+            "odor-0068",
+            "odor-0112",
+            "odor-0056",
+            "odor-0066",
+            "odor-0145"
+          ],
+          "relevant_items": [
+            "odor-0057"
+          ]
+        },
+        {
+          "event_id": "ood_test-000022",
+          "ranking": [
+            "odor-0027",
+            "odor-0067",
+            "odor-0061",
+            "odor-0026",
+            "odor-0062",
+            "odor-0156",
+            "odor-0060",
+            "odor-0105",
+            "odor-0116",
+            "odor-0101"
+          ],
+          "relevant_items": [
+            "odor-0173"
+          ]
+        },
+        {
+          "event_id": "ood_test-000023",
+          "ranking": [
+            "odor-0189",
+            "odor-0064",
+            "odor-0014",
+            "odor-0185",
+            "odor-0017",
+            "odor-0183",
+            "odor-0013",
+            "odor-0197",
+            "odor-0043",
+            "odor-0006"
+          ],
+          "relevant_items": [
+            "odor-0007"
+          ]
+        },
+        {
+          "event_id": "ood_test-000024",
+          "ranking": [
+            "odor-0151",
+            "odor-0078",
+            "odor-0179",
+            "odor-0059",
+            "odor-0147",
+            "odor-0077",
+            "odor-0172",
+            "odor-0053",
+            "odor-0175",
+            "odor-0075"
+          ],
+          "relevant_items": [
+            "odor-0000"
+          ]
+        },
+        {
+          "event_id": "ood_test-000025",
+          "ranking": [
+            "odor-0142",
+            "odor-0143",
+            "odor-0009",
+            "odor-0003",
+            "odor-0017",
+            "odor-0055",
+            "odor-0008",
+            "odor-0165",
+            "odor-0000",
+            "odor-0007"
+          ],
+          "relevant_items": [
+            "odor-0146"
+          ]
+        },
+        {
+          "event_id": "ood_test-000026",
+          "ranking": [
+            "odor-0147",
+            "odor-0037",
+            "odor-0122",
+            "odor-0033",
+            "odor-0132",
+            "odor-0041",
+            "odor-0102",
+            "odor-0157",
+            "odor-0109",
+            "odor-0074"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000027",
+          "ranking": [
+            "odor-0105",
+            "odor-0198",
+            "odor-0191",
+            "odor-0067",
+            "odor-0107",
+            "odor-0194",
+            "odor-0199",
+            "odor-0060",
+            "odor-0019",
+            "odor-0106"
+          ],
+          "relevant_items": [
+            "odor-0051"
+          ]
+        },
+        {
+          "event_id": "ood_test-000028",
+          "ranking": [
+            "odor-0123",
+            "odor-0138",
+            "odor-0042",
+            "odor-0129",
+            "odor-0121",
+            "odor-0147",
+            "odor-0049",
+            "odor-0128",
+            "odor-0037",
+            "odor-0124"
+          ],
+          "relevant_items": [
+            "odor-0088"
+          ]
+        },
+        {
+          "event_id": "ood_test-000029",
+          "ranking": [
+            "odor-0050",
+            "odor-0055",
+            "odor-0045",
+            "odor-0189",
+            "odor-0017",
+            "odor-0054",
+            "odor-0195",
+            "odor-0064",
+            "odor-0185",
+            "odor-0051"
+          ],
+          "relevant_items": [
+            "odor-0007"
+          ]
+        },
+        {
+          "event_id": "ood_test-000030",
+          "ranking": [
+            "odor-0069",
+            "odor-0146",
+            "odor-0068",
+            "odor-0102",
+            "odor-0157",
+            "odor-0061",
+            "odor-0105",
+            "odor-0062",
+            "odor-0067",
+            "odor-0060"
+          ],
+          "relevant_items": [
+            "odor-0058"
+          ]
+        },
+        {
+          "event_id": "ood_test-000031",
+          "ranking": [
+            "odor-0189",
+            "odor-0149",
+            "odor-0199",
+            "odor-0055",
+            "odor-0190",
+            "odor-0185",
+            "odor-0195",
+            "odor-0158",
+            "odor-0017",
+            "odor-0186"
+          ],
+          "relevant_items": [
+            "odor-0009"
+          ]
+        },
+        {
+          "event_id": "ood_test-000032",
+          "ranking": [
+            "odor-0152",
+            "odor-0117",
+            "odor-0177",
+            "odor-0038",
+            "odor-0099",
+            "odor-0026",
+            "odor-0061",
+            "odor-0150",
+            "odor-0157",
+            "odor-0153"
+          ],
+          "relevant_items": [
+            "odor-0082"
+          ]
+        },
+        {
+          "event_id": "ood_test-000033",
+          "ranking": [
+            "odor-0097",
+            "odor-0034",
+            "odor-0044",
+            "odor-0089",
+            "odor-0091",
+            "odor-0005",
+            "odor-0093",
+            "odor-0049",
+            "odor-0004",
+            "odor-0000"
+          ],
+          "relevant_items": [
+            "odor-0137"
+          ]
+        },
+        {
+          "event_id": "ood_test-000034",
+          "ranking": [
+            "odor-0044",
+            "odor-0049",
+            "odor-0129",
+            "odor-0043",
+            "odor-0042",
+            "odor-0046",
+            "odor-0138",
+            "odor-0028",
+            "odor-0141",
+            "odor-0083"
+          ],
+          "relevant_items": [
+            "odor-0139"
+          ]
+        },
+        {
+          "event_id": "ood_test-000035",
+          "ranking": [
+            "odor-0132",
+            "odor-0041",
+            "odor-0137",
+            "odor-0138",
+            "odor-0044",
+            "odor-0122",
+            "odor-0047",
+            "odor-0100",
+            "odor-0033",
+            "odor-0139"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000036",
+          "ranking": [
+            "odor-0025",
+            "odor-0051",
+            "odor-0053",
+            "odor-0022",
+            "odor-0069",
+            "odor-0153",
+            "odor-0164",
+            "odor-0067",
+            "odor-0143",
+            "odor-0132"
+          ],
+          "relevant_items": [
+            "odor-0140"
+          ]
+        },
+        {
+          "event_id": "ood_test-000037",
+          "ranking": [
+            "odor-0005",
+            "odor-0105",
+            "odor-0001",
+            "odor-0131",
+            "odor-0061",
+            "odor-0067",
+            "odor-0142",
+            "odor-0043",
+            "odor-0106",
+            "odor-0156"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000038",
+          "ranking": [
+            "odor-0145",
+            "odor-0029",
+            "odor-0136",
+            "odor-0147",
+            "odor-0037",
+            "odor-0140",
+            "odor-0142",
+            "odor-0133",
+            "odor-0036",
+            "odor-0050"
+          ],
+          "relevant_items": [
+            "odor-0084"
+          ]
+        },
+        {
+          "event_id": "ood_test-000039",
+          "ranking": [
+            "odor-0141",
+            "odor-0061",
+            "odor-0026",
+            "odor-0005",
+            "odor-0042",
+            "odor-0060",
+            "odor-0067",
+            "odor-0117",
+            "odor-0068",
+            "odor-0156"
+          ],
+          "relevant_items": [
+            "odor-0176"
+          ]
+        }
+      ],
+      "split": "ood_test"
+    },
+    {
+      "baseline": "mean_fusion_cosine",
+      "events": [
+        {
+          "event_id": "ood_test-000000",
+          "ranking": [
+            "odor-0115",
+            "odor-0096",
+            "odor-0067",
+            "odor-0156",
+            "odor-0104",
+            "odor-0032",
+            "odor-0091",
+            "odor-0119",
+            "odor-0113",
+            "odor-0029"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000001",
+          "ranking": [
+            "odor-0170",
+            "odor-0172",
+            "odor-0175",
+            "odor-0029",
+            "odor-0009",
+            "odor-0183",
+            "odor-0099",
+            "odor-0173",
+            "odor-0141",
+            "odor-0022"
+          ],
+          "relevant_items": [
+            "odor-0004"
+          ]
+        },
+        {
+          "event_id": "ood_test-000002",
+          "ranking": [
+            "odor-0143",
+            "odor-0141",
+            "odor-0051",
+            "odor-0069",
+            "odor-0043",
+            "odor-0145",
+            "odor-0033",
+            "odor-0142",
+            "odor-0146",
+            "odor-0052"
+          ],
+          "relevant_items": [
+            "odor-0142"
+          ]
+        },
+        {
+          "event_id": "ood_test-000003",
+          "ranking": [
+            "odor-0072",
+            "odor-0146",
+            "odor-0143",
+            "odor-0165",
+            "odor-0141",
+            "odor-0140",
+            "odor-0012",
+            "odor-0067",
+            "odor-0142",
+            "odor-0149"
+          ],
+          "relevant_items": [
+            "odor-0059"
+          ]
+        },
+        {
+          "event_id": "ood_test-000004",
+          "ranking": [
+            "odor-0143",
+            "odor-0142",
+            "odor-0165",
+            "odor-0003",
+            "odor-0163",
+            "odor-0069",
+            "odor-0036",
+            "odor-0162",
+            "odor-0009",
+            "odor-0146"
+          ],
+          "relevant_items": [
+            "odor-0146"
+          ]
+        },
+        {
+          "event_id": "ood_test-000005",
+          "ranking": [
+            "odor-0087",
+            "odor-0084",
+            "odor-0083",
+            "odor-0012",
+            "odor-0086",
+            "odor-0019",
+            "odor-0088",
+            "odor-0085",
+            "odor-0089",
+            "odor-0090"
+          ],
+          "relevant_items": [
+            "odor-0056"
+          ]
+        },
+        {
+          "event_id": "ood_test-000006",
+          "ranking": [
+            "odor-0120",
+            "odor-0162",
+            "odor-0113",
+            "odor-0001",
+            "odor-0005",
+            "odor-0091",
+            "odor-0043",
+            "odor-0032",
+            "odor-0165",
+            "odor-0139"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000007",
+          "ranking": [
+            "odor-0165",
+            "odor-0085",
+            "odor-0087",
+            "odor-0025",
+            "odor-0067",
+            "odor-0190",
+            "odor-0149",
+            "odor-0089",
+            "odor-0083",
+            "odor-0143"
+          ],
+          "relevant_items": [
+            "odor-0057"
+          ]
+        },
+        {
+          "event_id": "ood_test-000008",
+          "ranking": [
+            "odor-0141",
+            "odor-0090",
+            "odor-0096",
+            "odor-0119",
+            "odor-0146",
+            "odor-0117",
+            "odor-0115",
+            "odor-0104",
+            "odor-0098",
+            "odor-0106"
+          ],
+          "relevant_items": [
+            "odor-0175"
+          ]
+        },
+        {
+          "event_id": "ood_test-000009",
+          "ranking": [
+            "odor-0153",
+            "odor-0096",
+            "odor-0022",
+            "odor-0170",
+            "odor-0043",
+            "odor-0005",
+            "odor-0179",
+            "odor-0038",
+            "odor-0099",
+            "odor-0167"
+          ],
+          "relevant_items": [
+            "odor-0134"
+          ]
+        },
+        {
+          "event_id": "ood_test-000010",
+          "ranking": [
+            "odor-0032",
+            "odor-0113",
+            "odor-0111",
+            "odor-0162",
+            "odor-0031",
+            "odor-0038",
+            "odor-0096",
+            "odor-0114",
+            "odor-0091",
+            "odor-0164"
+          ],
+          "relevant_items": [
+            "odor-0176"
+          ]
+        },
+        {
+          "event_id": "ood_test-000011",
+          "ranking": [
+            "odor-0056",
+            "odor-0097",
+            "odor-0100",
+            "odor-0041",
+            "odor-0133",
+            "odor-0132",
+            "odor-0164",
+            "odor-0109",
+            "odor-0094",
+            "odor-0137"
+          ],
+          "relevant_items": [
+            "odor-0130"
+          ]
+        },
+        {
+          "event_id": "ood_test-000012",
+          "ranking": [
+            "odor-0096",
+            "odor-0089",
+            "odor-0090",
+            "odor-0085",
+            "odor-0106",
+            "odor-0097",
+            "odor-0099",
+            "odor-0025",
+            "odor-0091",
+            "odor-0108"
+          ],
+          "relevant_items": [
+            "odor-0136"
+          ]
+        },
+        {
+          "event_id": "ood_test-000013",
+          "ranking": [
+            "odor-0097",
+            "odor-0133",
+            "odor-0132",
+            "odor-0094",
+            "odor-0100",
+            "odor-0056",
+            "odor-0096",
+            "odor-0104",
+            "odor-0164",
+            "odor-0025"
+          ],
+          "relevant_items": [
+            "odor-0130"
+          ]
+        },
+        {
+          "event_id": "ood_test-000014",
+          "ranking": [
+            "odor-0029",
+            "odor-0032",
+            "odor-0166",
+            "odor-0169",
+            "odor-0141",
+            "odor-0161",
+            "odor-0163",
+            "odor-0145",
+            "odor-0136",
+            "odor-0039"
+          ],
+          "relevant_items": [
+            "odor-0084"
+          ]
+        },
+        {
+          "event_id": "ood_test-000015",
+          "ranking": [
+            "odor-0109",
+            "odor-0170",
+            "odor-0106",
+            "odor-0173",
+            "odor-0183",
+            "odor-0124",
+            "odor-0185",
+            "odor-0172",
+            "odor-0127",
+            "odor-0181"
+          ],
+          "relevant_items": [
+            "odor-0006"
+          ]
+        },
+        {
+          "event_id": "ood_test-000016",
+          "ranking": [
+            "odor-0033",
+            "odor-0158",
+            "odor-0139",
+            "odor-0133",
+            "odor-0136",
+            "odor-0152",
+            "odor-0037",
+            "odor-0154",
+            "odor-0109",
+            "odor-0131"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000017",
+          "ranking": [
+            "odor-0096",
+            "odor-0091",
+            "odor-0025",
+            "odor-0097",
+            "odor-0160",
+            "odor-0164",
+            "odor-0161",
+            "odor-0167",
+            "odor-0113",
+            "odor-0162"
+          ],
+          "relevant_items": [
+            "odor-0134"
+          ]
+        },
+        {
+          "event_id": "ood_test-000018",
+          "ranking": [
+            "odor-0023",
+            "odor-0029",
+            "odor-0026",
+            "odor-0024",
+            "odor-0021",
+            "odor-0020",
+            "odor-0054",
+            "odor-0028",
+            "odor-0022",
+            "odor-0003"
+          ],
+          "relevant_items": [
+            "odor-0001"
+          ]
+        },
+        {
+          "event_id": "ood_test-000019",
+          "ranking": [
+            "odor-0089",
+            "odor-0038",
+            "odor-0109",
+            "odor-0101",
+            "odor-0045",
+            "odor-0196",
+            "odor-0085",
+            "odor-0086",
+            "odor-0111",
+            "odor-0048"
+          ],
+          "relevant_items": [
+            "odor-0139"
+          ]
+        },
+        {
+          "event_id": "ood_test-000020",
+          "ranking": [
+            "odor-0153",
+            "odor-0156",
+            "odor-0120",
+            "odor-0123",
+            "odor-0124",
+            "odor-0121",
+            "odor-0152",
+            "odor-0071",
+            "odor-0170",
+            "odor-0172"
+          ],
+          "relevant_items": [
+            "odor-0009"
+          ]
+        },
+        {
+          "event_id": "ood_test-000021",
+          "ranking": [
+            "odor-0165",
+            "odor-0036",
+            "odor-0049",
+            "odor-0087",
+            "odor-0089",
+            "odor-0080",
+            "odor-0004",
+            "odor-0001",
+            "odor-0067",
+            "odor-0143"
+          ],
+          "relevant_items": [
+            "odor-0057"
+          ]
+        },
+        {
+          "event_id": "ood_test-000022",
+          "ranking": [
+            "odor-0034",
+            "odor-0030",
+            "odor-0100",
+            "odor-0052",
+            "odor-0164",
+            "odor-0056",
+            "odor-0174",
+            "odor-0109",
+            "odor-0037",
+            "odor-0104"
+          ],
+          "relevant_items": [
+            "odor-0173"
+          ]
+        },
+        {
+          "event_id": "ood_test-000023",
+          "ranking": [
+            "odor-0071",
+            "odor-0026",
+            "odor-0050",
+            "odor-0170",
+            "odor-0112",
+            "odor-0108",
+            "odor-0098",
+            "odor-0116",
+            "odor-0054",
+            "odor-0103"
+          ],
+          "relevant_items": [
+            "odor-0007"
+          ]
+        },
+        {
+          "event_id": "ood_test-000024",
+          "ranking": [
+            "odor-0009",
+            "odor-0008",
+            "odor-0172",
+            "odor-0017",
+            "odor-0179",
+            "odor-0147",
+            "odor-0175",
+            "odor-0153",
+            "odor-0124",
+            "odor-0170"
+          ],
+          "relevant_items": [
+            "odor-0000"
+          ]
+        },
+        {
+          "event_id": "ood_test-000025",
+          "ranking": [
+            "odor-0165",
+            "odor-0143",
+            "odor-0163",
+            "odor-0036",
+            "odor-0144",
+            "odor-0120",
+            "odor-0142",
+            "odor-0003",
+            "odor-0063",
+            "odor-0009"
+          ],
+          "relevant_items": [
+            "odor-0146"
+          ]
+        },
+        {
+          "event_id": "ood_test-000026",
+          "ranking": [
+            "odor-0172",
+            "odor-0033",
+            "odor-0152",
+            "odor-0154",
+            "odor-0139",
+            "odor-0156",
+            "odor-0185",
+            "odor-0131",
+            "odor-0106",
+            "odor-0099"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000027",
+          "ranking": [
+            "odor-0053",
+            "odor-0106",
+            "odor-0059",
+            "odor-0056",
+            "odor-0000",
+            "odor-0095",
+            "odor-0102",
+            "odor-0165",
+            "odor-0081",
+            "odor-0001"
+          ],
+          "relevant_items": [
+            "odor-0051"
+          ]
+        },
+        {
+          "event_id": "ood_test-000028",
+          "ranking": [
+            "odor-0174",
+            "odor-0039",
+            "odor-0138",
+            "odor-0152",
+            "odor-0037",
+            "odor-0176",
+            "odor-0033",
+            "odor-0034",
+            "odor-0038",
+            "odor-0136"
+          ],
+          "relevant_items": [
+            "odor-0088"
+          ]
+        },
+        {
+          "event_id": "ood_test-000029",
+          "ranking": [
+            "odor-0054",
+            "odor-0022",
+            "odor-0035",
+            "odor-0043",
+            "odor-0170",
+            "odor-0034",
+            "odor-0185",
+            "odor-0045",
+            "odor-0048",
+            "odor-0103"
+          ],
+          "relevant_items": [
+            "odor-0007"
+          ]
+        },
+        {
+          "event_id": "ood_test-000030",
+          "ranking": [
+            "odor-0090",
+            "odor-0108",
+            "odor-0067",
+            "odor-0086",
+            "odor-0080",
+            "odor-0105",
+            "odor-0025",
+            "odor-0115",
+            "odor-0096",
+            "odor-0112"
+          ],
+          "relevant_items": [
+            "odor-0058"
+          ]
+        },
+        {
+          "event_id": "ood_test-000031",
+          "ranking": [
+            "odor-0156",
+            "odor-0153",
+            "odor-0155",
+            "odor-0017",
+            "odor-0071",
+            "odor-0120",
+            "odor-0146",
+            "odor-0123",
+            "odor-0124",
+            "odor-0188"
+          ],
+          "relevant_items": [
+            "odor-0009"
+          ]
+        },
+        {
+          "event_id": "ood_test-000032",
+          "ranking": [
+            "odor-0118",
+            "odor-0050",
+            "odor-0164",
+            "odor-0152",
+            "odor-0071",
+            "odor-0059",
+            "odor-0117",
+            "odor-0035",
+            "odor-0141",
+            "odor-0179"
+          ],
+          "relevant_items": [
+            "odor-0082"
+          ]
+        },
+        {
+          "event_id": "ood_test-000033",
+          "ranking": [
+            "odor-0089",
+            "odor-0097",
+            "odor-0085",
+            "odor-0025",
+            "odor-0086",
+            "odor-0022",
+            "odor-0096",
+            "odor-0084",
+            "odor-0091",
+            "odor-0093"
+          ],
+          "relevant_items": [
+            "odor-0137"
+          ]
+        },
+        {
+          "event_id": "ood_test-000034",
+          "ranking": [
+            "odor-0038",
+            "odor-0089",
+            "odor-0086",
+            "odor-0088",
+            "odor-0066",
+            "odor-0028",
+            "odor-0085",
+            "odor-0021",
+            "odor-0022",
+            "odor-0045"
+          ],
+          "relevant_items": [
+            "odor-0139"
+          ]
+        },
+        {
+          "event_id": "ood_test-000035",
+          "ranking": [
+            "odor-0185",
+            "odor-0109",
+            "odor-0048",
+            "odor-0139",
+            "odor-0040",
+            "odor-0131",
+            "odor-0106",
+            "odor-0187",
+            "odor-0127",
+            "odor-0174"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000036",
+          "ranking": [
+            "odor-0067",
+            "odor-0082",
+            "odor-0130",
+            "odor-0163",
+            "odor-0193",
+            "odor-0120",
+            "odor-0124",
+            "odor-0101",
+            "odor-0123",
+            "odor-0165"
+          ],
+          "relevant_items": [
+            "odor-0140"
+          ]
+        },
+        {
+          "event_id": "ood_test-000037",
+          "ranking": [
+            "odor-0120",
+            "odor-0138",
+            "odor-0038",
+            "odor-0174",
+            "odor-0131",
+            "odor-0113",
+            "odor-0005",
+            "odor-0096",
+            "odor-0124",
+            "odor-0034"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000038",
+          "ranking": [
+            "odor-0029",
+            "odor-0141",
+            "odor-0183",
+            "odor-0144",
+            "odor-0145",
+            "odor-0172",
+            "odor-0140",
+            "odor-0175",
+            "odor-0149",
+            "odor-0015"
+          ],
+          "relevant_items": [
+            "odor-0084"
+          ]
+        },
+        {
+          "event_id": "ood_test-000039",
+          "ranking": [
+            "odor-0022",
+            "odor-0091",
+            "odor-0032",
+            "odor-0096",
+            "odor-0160",
+            "odor-0038",
+            "odor-0164",
+            "odor-0025",
+            "odor-0111",
+            "odor-0028"
+          ],
+          "relevant_items": [
+            "odor-0176"
+          ]
+        }
+      ],
+      "split": "ood_test"
+    },
+    {
+      "baseline": "ridge_fusion",
+      "events": [
+        {
+          "event_id": "ood_test-000000",
+          "ranking": [
+            "odor-0139",
+            "odor-0195",
+            "odor-0189",
+            "odor-0064",
+            "odor-0197",
+            "odor-0188",
+            "odor-0055",
+            "odor-0131",
+            "odor-0135",
+            "odor-0137"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000001",
+          "ranking": [
+            "odor-0039",
+            "odor-0164",
+            "odor-0048",
+            "odor-0100",
+            "odor-0035",
+            "odor-0094",
+            "odor-0169",
+            "odor-0097",
+            "odor-0037",
+            "odor-0032"
+          ],
+          "relevant_items": [
+            "odor-0004"
+          ]
+        },
+        {
+          "event_id": "ood_test-000002",
+          "ranking": [
+            "odor-0126",
+            "odor-0197",
+            "odor-0128",
+            "odor-0195",
+            "odor-0123",
+            "odor-0127",
+            "odor-0139",
+            "odor-0196",
+            "odor-0037",
+            "odor-0121"
+          ],
+          "relevant_items": [
+            "odor-0142"
+          ]
+        },
+        {
+          "event_id": "ood_test-000003",
+          "ranking": [
+            "odor-0182",
+            "odor-0147",
+            "odor-0188",
+            "odor-0183",
+            "odor-0140",
+            "odor-0122",
+            "odor-0074",
+            "odor-0129",
+            "odor-0195",
+            "odor-0126"
+          ],
+          "relevant_items": [
+            "odor-0059"
+          ]
+        },
+        {
+          "event_id": "ood_test-000004",
+          "ranking": [
+            "odor-0073",
+            "odor-0072",
+            "odor-0076",
+            "odor-0123",
+            "odor-0011",
+            "odor-0128",
+            "odor-0158",
+            "odor-0071",
+            "odor-0197",
+            "odor-0126"
+          ],
+          "relevant_items": [
+            "odor-0146"
+          ]
+        },
+        {
+          "event_id": "ood_test-000005",
+          "ranking": [
+            "odor-0074",
+            "odor-0036",
+            "odor-0140",
+            "odor-0122",
+            "odor-0187",
+            "odor-0070",
+            "odor-0159",
+            "odor-0188",
+            "odor-0145",
+            "odor-0124"
+          ],
+          "relevant_items": [
+            "odor-0056"
+          ]
+        },
+        {
+          "event_id": "ood_test-000006",
+          "ranking": [
+            "odor-0195",
+            "odor-0139",
+            "odor-0188",
+            "odor-0197",
+            "odor-0064",
+            "odor-0198",
+            "odor-0006",
+            "odor-0131",
+            "odor-0137",
+            "odor-0135"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000007",
+          "ranking": [
+            "odor-0188",
+            "odor-0140",
+            "odor-0017",
+            "odor-0195",
+            "odor-0147",
+            "odor-0197",
+            "odor-0123",
+            "odor-0135",
+            "odor-0186",
+            "odor-0183"
+          ],
+          "relevant_items": [
+            "odor-0057"
+          ]
+        },
+        {
+          "event_id": "ood_test-000008",
+          "ranking": [
+            "odor-0183",
+            "odor-0122",
+            "odor-0187",
+            "odor-0182",
+            "odor-0186",
+            "odor-0184",
+            "odor-0126",
+            "odor-0188",
+            "odor-0041",
+            "odor-0195"
+          ],
+          "relevant_items": [
+            "odor-0175"
+          ]
+        },
+        {
+          "event_id": "ood_test-000009",
+          "ranking": [
+            "odor-0136",
+            "odor-0137",
+            "odor-0003",
+            "odor-0006",
+            "odor-0044",
+            "odor-0064",
+            "odor-0198",
+            "odor-0135",
+            "odor-0131",
+            "odor-0031"
+          ],
+          "relevant_items": [
+            "odor-0134"
+          ]
+        },
+        {
+          "event_id": "ood_test-000010",
+          "ranking": [
+            "odor-0064",
+            "odor-0194",
+            "odor-0136",
+            "odor-0055",
+            "odor-0195",
+            "odor-0006",
+            "odor-0198",
+            "odor-0189",
+            "odor-0197",
+            "odor-0069"
+          ],
+          "relevant_items": [
+            "odor-0176"
+          ]
+        },
+        {
+          "event_id": "ood_test-000011",
+          "ranking": [
+            "odor-0138",
+            "odor-0123",
+            "odor-0045",
+            "odor-0043",
+            "odor-0016",
+            "odor-0128",
+            "odor-0063",
+            "odor-0083",
+            "odor-0055",
+            "odor-0044"
+          ],
+          "relevant_items": [
+            "odor-0130"
+          ]
+        },
+        {
+          "event_id": "ood_test-000012",
+          "ranking": [
+            "odor-0047",
+            "odor-0006",
+            "odor-0048",
+            "odor-0044",
+            "odor-0198",
+            "odor-0003",
+            "odor-0005",
+            "odor-0131",
+            "odor-0024",
+            "odor-0042"
+          ],
+          "relevant_items": [
+            "odor-0136"
+          ]
+        },
+        {
+          "event_id": "ood_test-000013",
+          "ranking": [
+            "odor-0138",
+            "odor-0123",
+            "odor-0064",
+            "odor-0055",
+            "odor-0045",
+            "odor-0063",
+            "odor-0135",
+            "odor-0044",
+            "odor-0043",
+            "odor-0017"
+          ],
+          "relevant_items": [
+            "odor-0130"
+          ]
+        },
+        {
+          "event_id": "ood_test-000014",
+          "ranking": [
+            "odor-0163",
+            "odor-0166",
+            "odor-0169",
+            "odor-0051",
+            "odor-0158",
+            "odor-0050",
+            "odor-0186",
+            "odor-0190",
+            "odor-0133",
+            "odor-0136"
+          ],
+          "relevant_items": [
+            "odor-0084"
+          ]
+        },
+        {
+          "event_id": "ood_test-000015",
+          "ranking": [
+            "odor-0100",
+            "odor-0037",
+            "odor-0031",
+            "odor-0048",
+            "odor-0041",
+            "odor-0133",
+            "odor-0039",
+            "odor-0047",
+            "odor-0198",
+            "odor-0196"
+          ],
+          "relevant_items": [
+            "odor-0006"
+          ]
+        },
+        {
+          "event_id": "ood_test-000016",
+          "ranking": [
+            "odor-0021",
+            "odor-0092",
+            "odor-0026",
+            "odor-0038",
+            "odor-0031",
+            "odor-0032",
+            "odor-0024",
+            "odor-0160",
+            "odor-0022",
+            "odor-0025"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000017",
+          "ranking": [
+            "odor-0135",
+            "odor-0064",
+            "odor-0137",
+            "odor-0006",
+            "odor-0197",
+            "odor-0198",
+            "odor-0136",
+            "odor-0131",
+            "odor-0189",
+            "odor-0003"
+          ],
+          "relevant_items": [
+            "odor-0134"
+          ]
+        },
+        {
+          "event_id": "ood_test-000018",
+          "ranking": [
+            "odor-0164",
+            "odor-0167",
+            "odor-0168",
+            "odor-0056",
+            "odor-0035",
+            "odor-0169",
+            "odor-0166",
+            "odor-0059",
+            "odor-0030",
+            "odor-0097"
+          ],
+          "relevant_items": [
+            "odor-0001"
+          ]
+        },
+        {
+          "event_id": "ood_test-000019",
+          "ranking": [
+            "odor-0030",
+            "odor-0131",
+            "odor-0048",
+            "odor-0036",
+            "odor-0047",
+            "odor-0035",
+            "odor-0006",
+            "odor-0027",
+            "odor-0056",
+            "odor-0031"
+          ],
+          "relevant_items": [
+            "odor-0139"
+          ]
+        },
+        {
+          "event_id": "ood_test-000020",
+          "ranking": [
+            "odor-0100",
+            "odor-0094",
+            "odor-0097",
+            "odor-0197",
+            "odor-0198",
+            "odor-0099",
+            "odor-0177",
+            "odor-0133",
+            "odor-0196",
+            "odor-0037"
+          ],
+          "relevant_items": [
+            "odor-0009"
+          ]
+        },
+        {
+          "event_id": "ood_test-000021",
+          "ranking": [
+            "odor-0188",
+            "odor-0017",
+            "odor-0124",
+            "odor-0140",
+            "odor-0123",
+            "odor-0128",
+            "odor-0122",
+            "odor-0127",
+            "odor-0195",
+            "odor-0186"
+          ],
+          "relevant_items": [
+            "odor-0057"
+          ]
+        },
+        {
+          "event_id": "ood_test-000022",
+          "ranking": [
+            "odor-0055",
+            "odor-0045",
+            "odor-0051",
+            "odor-0041",
+            "odor-0040",
+            "odor-0033",
+            "odor-0138",
+            "odor-0187",
+            "odor-0126",
+            "odor-0122"
+          ],
+          "relevant_items": [
+            "odor-0173"
+          ]
+        },
+        {
+          "event_id": "ood_test-000023",
+          "ranking": [
+            "odor-0031",
+            "odor-0024",
+            "odor-0097",
+            "odor-0116",
+            "odor-0100",
+            "odor-0080",
+            "odor-0094",
+            "odor-0020",
+            "odor-0026",
+            "odor-0111"
+          ],
+          "relevant_items": [
+            "odor-0007"
+          ]
+        },
+        {
+          "event_id": "ood_test-000024",
+          "ranking": [
+            "odor-0097",
+            "odor-0094",
+            "odor-0039",
+            "odor-0174",
+            "odor-0170",
+            "odor-0111",
+            "odor-0085",
+            "odor-0088",
+            "odor-0096",
+            "odor-0171"
+          ],
+          "relevant_items": [
+            "odor-0000"
+          ]
+        },
+        {
+          "event_id": "ood_test-000025",
+          "ranking": [
+            "odor-0073",
+            "odor-0077",
+            "odor-0076",
+            "odor-0075",
+            "odor-0071",
+            "odor-0078",
+            "odor-0070",
+            "odor-0072",
+            "odor-0074",
+            "odor-0155"
+          ],
+          "relevant_items": [
+            "odor-0146"
+          ]
+        },
+        {
+          "event_id": "ood_test-000026",
+          "ranking": [
+            "odor-0032",
+            "odor-0031",
+            "odor-0037",
+            "odor-0039",
+            "odor-0164",
+            "odor-0024",
+            "odor-0038",
+            "odor-0034",
+            "odor-0035",
+            "odor-0111"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000027",
+          "ranking": [
+            "odor-0111",
+            "odor-0114",
+            "odor-0128",
+            "odor-0182",
+            "odor-0127",
+            "odor-0181",
+            "odor-0187",
+            "odor-0043",
+            "odor-0188",
+            "odor-0184"
+          ],
+          "relevant_items": [
+            "odor-0051"
+          ]
+        },
+        {
+          "event_id": "ood_test-000028",
+          "ranking": [
+            "odor-0161",
+            "odor-0021",
+            "odor-0136",
+            "odor-0051",
+            "odor-0178",
+            "odor-0064",
+            "odor-0068",
+            "odor-0030",
+            "odor-0163",
+            "odor-0131"
+          ],
+          "relevant_items": [
+            "odor-0088"
+          ]
+        },
+        {
+          "event_id": "ood_test-000029",
+          "ranking": [
+            "odor-0031",
+            "odor-0024",
+            "odor-0097",
+            "odor-0020",
+            "odor-0164",
+            "odor-0111",
+            "odor-0025",
+            "odor-0037",
+            "odor-0032",
+            "odor-0038"
+          ],
+          "relevant_items": [
+            "odor-0007"
+          ]
+        },
+        {
+          "event_id": "ood_test-000030",
+          "ranking": [
+            "odor-0188",
+            "odor-0062",
+            "odor-0103",
+            "odor-0197",
+            "odor-0011",
+            "odor-0105",
+            "odor-0075",
+            "odor-0064",
+            "odor-0078",
+            "odor-0195"
+          ],
+          "relevant_items": [
+            "odor-0058"
+          ]
+        },
+        {
+          "event_id": "ood_test-000031",
+          "ranking": [
+            "odor-0094",
+            "odor-0100",
+            "odor-0097",
+            "odor-0093",
+            "odor-0111",
+            "odor-0099",
+            "odor-0037",
+            "odor-0098",
+            "odor-0180",
+            "odor-0090"
+          ],
+          "relevant_items": [
+            "odor-0009"
+          ]
+        },
+        {
+          "event_id": "ood_test-000032",
+          "ranking": [
+            "odor-0018",
+            "odor-0068",
+            "odor-0051",
+            "odor-0014",
+            "odor-0010",
+            "odor-0013",
+            "odor-0158",
+            "odor-0150",
+            "odor-0050",
+            "odor-0058"
+          ],
+          "relevant_items": [
+            "odor-0082"
+          ]
+        },
+        {
+          "event_id": "ood_test-000033",
+          "ranking": [
+            "odor-0047",
+            "odor-0030",
+            "odor-0131",
+            "odor-0048",
+            "odor-0137",
+            "odor-0006",
+            "odor-0016",
+            "odor-0003",
+            "odor-0044",
+            "odor-0005"
+          ],
+          "relevant_items": [
+            "odor-0137"
+          ]
+        },
+        {
+          "event_id": "ood_test-000034",
+          "ranking": [
+            "odor-0131",
+            "odor-0161",
+            "odor-0030",
+            "odor-0057",
+            "odor-0137",
+            "odor-0048",
+            "odor-0006",
+            "odor-0168",
+            "odor-0064",
+            "odor-0198"
+          ],
+          "relevant_items": [
+            "odor-0139"
+          ]
+        },
+        {
+          "event_id": "ood_test-000035",
+          "ranking": [
+            "odor-0031",
+            "odor-0024",
+            "odor-0037",
+            "odor-0030",
+            "odor-0034",
+            "odor-0048",
+            "odor-0032",
+            "odor-0047",
+            "odor-0131",
+            "odor-0003"
+          ],
+          "relevant_items": [
+            "odor-0085"
+          ]
+        },
+        {
+          "event_id": "ood_test-000036",
+          "ranking": [
+            "odor-0139",
+            "odor-0197",
+            "odor-0195",
+            "odor-0188",
+            "odor-0199",
+            "odor-0103",
+            "odor-0107",
+            "odor-0135",
+            "odor-0198",
+            "odor-0192"
+          ],
+          "relevant_items": [
+            "odor-0140"
+          ]
+        },
+        {
+          "event_id": "ood_test-000037",
+          "ranking": [
+            "odor-0131",
+            "odor-0139",
+            "odor-0048",
+            "odor-0064",
+            "odor-0041",
+            "odor-0137",
+            "odor-0136",
+            "odor-0054",
+            "odor-0047",
+            "odor-0195"
+          ],
+          "relevant_items": [
+            "odor-0172"
+          ]
+        },
+        {
+          "event_id": "ood_test-000038",
+          "ranking": [
+            "odor-0147",
+            "odor-0074",
+            "odor-0170",
+            "odor-0076",
+            "odor-0186",
+            "odor-0158",
+            "odor-0121",
+            "odor-0140",
+            "odor-0059",
+            "odor-0072"
+          ],
+          "relevant_items": [
+            "odor-0084"
+          ]
+        },
+        {
+          "event_id": "ood_test-000039",
+          "ranking": [
+            "odor-0136",
+            "odor-0064",
+            "odor-0014",
+            "odor-0194",
+            "odor-0013",
+            "odor-0131",
+            "odor-0189",
+            "odor-0137",
+            "odor-0198",
+            "odor-0161"
+          ],
+          "relevant_items": [
+            "odor-0176"
+          ]
+        }
+      ],
+      "split": "ood_test"
+    }
+  ],
+  "experiment": "NOI baseline pilot",
+  "owner": "GUARDIANX LLC",
+  "schema_version": "1.0.0",
+  "scope_limitations": [
+    "Synthetic implementation evaluation only.",
+    "No human perceptual validity claim.",
+    "No clinical or diagnostic claim.",
+    "No physical odor-emission safety claim.",
+    "Pilot results are not final confirmatory evidence."
+  ],
+  "settings": {
+    "random_seed": 2026,
+    "ridge_alpha": 1.0,
+    "top_k": 10
+  },
+  "strongest_observed_baselines": {
+    "ood_test": {
+      "baseline": "random",
+      "mean_reciprocal_rank": 0.017499999999999998,
+      "recall_at_10": 0.075
+    },
+    "validation": {
+      "baseline": "ridge_fusion",
+      "mean_reciprocal_rank": 0.95,
+      "recall_at_10": 1.0
+    }
+  },
+  "summaries": [
+    {
+      "baseline": "random",
+      "event_count": 20,
+      "mean_reciprocal_rank": 0.007142857142857143,
+      "ndcg_at_10": 0.016666666666666666,
+      "recall_at_1": 0.0,
+      "recall_at_10": 0.05,
+      "split": "validation"
+    },
+    {
+      "baseline": "text_only_cosine",
+      "event_count": 20,
+      "mean_reciprocal_rank": 0.01,
+      "ndcg_at_10": 0.01934264036172708,
+      "recall_at_1": 0.0,
+      "recall_at_10": 0.05,
+      "split": "validation"
+    },
+    {
+      "baseline": "mean_fusion_cosine",
+      "event_count": 20,
+      "mean_reciprocal_rank": 0.05972222222222222,
+      "ndcg_at_10": 0.0931318153654416,
+      "recall_at_1": 0.0,
+      "recall_at_10": 0.2,
+      "split": "validation"
+    },
+    {
+      "baseline": "ridge_fusion",
+      "event_count": 20,
+      "mean_reciprocal_rank": 0.95,
+      "ndcg_at_10": 0.9630929753571458,
+      "recall_at_1": 0.9,
+      "recall_at_10": 1.0,
+      "split": "validation"
+    },
+    {
+      "baseline": "random",
+      "event_count": 40,
+      "mean_reciprocal_rank": 0.017499999999999998,
+      "ndcg_at_10": 0.031076499858564095,
+      "recall_at_1": 0.0,
+      "recall_at_10": 0.075,
+      "split": "ood_test"
+    },
+    {
+      "baseline": "text_only_cosine",
+      "event_count": 40,
+      "mean_reciprocal_rank": 0.0025,
+      "ndcg_at_10": 0.007226620657947197,
+      "recall_at_1": 0.0,
+      "recall_at_10": 0.025,
+      "split": "ood_test"
+    },
+    {
+      "baseline": "mean_fusion_cosine",
+      "event_count": 40,
+      "mean_reciprocal_rank": 0.005625,
+      "ndcg_at_10": 0.015113242577590415,
+      "recall_at_1": 0.0,
+      "recall_at_10": 0.05,
+      "split": "ood_test"
+    },
+    {
+      "baseline": "ridge_fusion",
+      "event_count": 40,
+      "mean_reciprocal_rank": 0.005,
+      "ndcg_at_10": 0.00967132018086354,
+      "recall_at_1": 0.0,
+      "recall_at_10": 0.025,
+      "split": "ood_test"
+    }
+  ]
+}

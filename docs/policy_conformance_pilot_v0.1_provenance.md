@@ -166,3 +166,7 @@ For an intentional deterministic rerun:
     )
 
     run_policy_conformance_pilot(overwrite=True)
+
+## Scope Clarification
+
+Not comprehensive safety evidence.

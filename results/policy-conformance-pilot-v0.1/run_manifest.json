@@ -1,0 +1,53 @@
+{
+  "configuration_hashes": {
+    "policy_conformance_evaluation_v0.1.yaml": "4b9f4f65967e99ec67eaee640355223cd66b9b6e1c1e35c66416a24e31163ea3",
+    "policy_rules.yaml": "c30ae8b5cfa24a1e10efab06b7604e08837c528bbe285bbefcf3622604f6eaad",
+    "research_protocol.yaml": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512"
+  },
+  "counts": {
+    "exact_matches": 26,
+    "expected_allow": 4,
+    "expected_block": 15,
+    "expected_missing_information": 7,
+    "total_cases": 26
+  },
+  "environment": {
+    "python": "3.11.14",
+    "pyyaml": "6.0.3"
+  },
+  "output_files": {
+    "policy_conformance_results.json": {
+      "case_count": 26,
+      "sha256": "c84f2b823abdb3ee52ad4f04dfb92f9eedc14050b8c154feb62dee66a85dbf9a"
+    },
+    "policy_conformance_summary.json": {
+      "sha256": "6128191ae40efdca6d3430ab3d4a0d286d8647fef68e586d8c249fc3f89f110f"
+    }
+  },
+  "owner": "GUARDIANX LLC",
+  "project": "Neuro-Olfactive Intelligence",
+  "registration": {
+    "experiment_implemented_after_registration": true,
+    "tag": "policy-conformance-v0.1-preimplementation"
+  },
+  "release": "policy-conformance-pilot-v0.1",
+  "schema_version": "1.0.0",
+  "scope_limitations": [
+    "Exploratory locked computational test suite only.",
+    "Thresholds are simulated and are not exposure limits.",
+    "Not comprehensive safety evidence.",
+    "Not chemical or clinical safety evidence.",
+    "Not physical-device or emission evidence.",
+    "Not adversarial robustness evidence.",
+    "Not legal-compliance evidence.",
+    "Not deployment-readiness evidence."
+  ],
+  "status": "exploratory",
+  "verification": {
+    "decision_audit_retained": "PASSED",
+    "locked_case_order": "PASSED",
+    "physical_emission_performed": false,
+    "tests_required_before_release": true,
+    "unique_request_ids": "PASSED"
+  }
+}

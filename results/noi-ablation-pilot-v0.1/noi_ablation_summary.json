@@ -1,0 +1,134 @@
+{
+  "full_hybrid_equals_ridge_rankings_all_conditions": true,
+  "full_hybrid_minus_ridge_only": [
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.9291666666666666,
+      "ridge_only_mrr": 0.9291666666666666,
+      "temporal_displacement_days": 0,
+      "tier": "mild"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.9291666666666666,
+      "ridge_only_mrr": 0.9291666666666666,
+      "temporal_displacement_days": 1,
+      "tier": "mild"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.9291666666666666,
+      "ridge_only_mrr": 0.9291666666666666,
+      "temporal_displacement_days": 7,
+      "tier": "mild"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.9291666666666666,
+      "ridge_only_mrr": 0.9291666666666666,
+      "temporal_displacement_days": 30,
+      "tier": "mild"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.9291666666666666,
+      "ridge_only_mrr": 0.9291666666666666,
+      "temporal_displacement_days": 90,
+      "tier": "mild"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.44062499999999993,
+      "ridge_only_mrr": 0.44062499999999993,
+      "temporal_displacement_days": 0,
+      "tier": "moderate"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.44062499999999993,
+      "ridge_only_mrr": 0.44062499999999993,
+      "temporal_displacement_days": 1,
+      "tier": "moderate"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.44062499999999993,
+      "ridge_only_mrr": 0.44062499999999993,
+      "temporal_displacement_days": 7,
+      "tier": "moderate"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.44062499999999993,
+      "ridge_only_mrr": 0.44062499999999993,
+      "temporal_displacement_days": 30,
+      "tier": "moderate"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.44062499999999993,
+      "ridge_only_mrr": 0.44062499999999993,
+      "temporal_displacement_days": 90,
+      "tier": "moderate"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.005,
+      "ridge_only_mrr": 0.005,
+      "temporal_displacement_days": 0,
+      "tier": "severe"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.005,
+      "ridge_only_mrr": 0.005,
+      "temporal_displacement_days": 1,
+      "tier": "severe"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.005,
+      "ridge_only_mrr": 0.005,
+      "temporal_displacement_days": 7,
+      "tier": "severe"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.005,
+      "ridge_only_mrr": 0.005,
+      "temporal_displacement_days": 30,
+      "tier": "severe"
+    },
+    {
+      "difference": 0.0,
+      "full_hybrid_mrr": 0.005,
+      "ridge_only_mrr": 0.005,
+      "temporal_displacement_days": 90,
+      "tier": "severe"
+    }
+  ],
+  "interpretation": {
+    "associative_memory_incremental_benefit_detected": false,
+    "claim_limit": "This pilot does not establish an incremental associative-memory advantage under target-held-out OOD conditions.",
+    "negative_result_reported": true,
+    "reason_memory_only_cannot_retrieve_held_out_targets": "The associative memory was built from training associations only, while the paired OOD evaluation contains held-out odor families and target items.",
+    "ridge_component_supported_in_this_pilot": true,
+    "temporal_decay_incremental_benefit_detected": false
+  },
+  "memory_only_any_nonzero_mrr": false,
+  "owner": "GUARDIANX LLC",
+  "project": "Neuro-Olfactive Intelligence",
+  "release": "noi-ablation-pilot-v0.1",
+  "schema_version": "1.0.0",
+  "scope_limitations": [
+    "Exploratory synthetic computational evidence only.",
+    "Not a final confirmatory result.",
+    "No independent human perceptual evidence.",
+    "No clinical or diagnostic evidence.",
+    "No chemical exposure or emission-safety evidence.",
+    "No physical-device validation.",
+    "No deployment-readiness claim."
+  ],
+  "selected_validation_alpha": 1.0,
+  "status": "exploratory"
+}

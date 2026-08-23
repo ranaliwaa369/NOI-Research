@@ -1,0 +1,30 @@
+{
+  "title": "Neuro-Olfactive Intelligence (NOI): Reproducible Research Framework",
+  "upload_type": "software",
+  "description": "Version 0.1.0 of a proprietary, publicly inspectable research framework for reproducible simulation and evaluation of neuro-olfactive artificial intelligence, contextual olfactory memory, multimodal odor representation, corrective associative memory, graded out-of-distribution behavior, and deterministic policy conformance. The evidence is exploratory and limited to controlled simulations. It does not establish clinical validity, real-world odor sensing, deployment readiness, or comprehensive safety.",
+  "creators": [
+    {
+      "name": "Al-Dahlake, Rana",
+      "affiliation": "GuardianX LLC",
+      "orcid": "0009-0001-8919-8177"
+    },
+    {
+      "name": "Alazirji, Jalal",
+      "affiliation": "GuardianX LLC"
+    }
+  ],
+  "keywords": [
+    "artificial olfaction",
+    "neuro-olfactive artificial intelligence",
+    "contextual olfactory memory",
+    "multimodal learning",
+    "associative memory",
+    "odor representation",
+    "safety-aware AI",
+    "reproducible simulation"
+  ],
+  "access_right": "open",
+  "version": "0.1.0",
+  "publication_date": "2026-08-22",
+  "notes": "Copyright 2026 GuardianX LLC. All Rights Reserved. Public access permits scientific inspection and citation only and does not grant permission to copy, modify, redistribute, deploy, commercialize, or create derivative works. This exploratory framework is not a certified medical, clinical, industrial, environmental, or public-safety system."
+}

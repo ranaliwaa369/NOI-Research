@@ -1,0 +1,66 @@
+{
+  "configuration_hashes": {
+    "graded_ood_generation.yaml": "45d247dfb18152d64701b3f088be950aeece07ff3592eba82e702021b2ea3cb3",
+    "noi_system_v0.1.yaml": "667432be1030ddb9cc05a40f863e0bc7aa6baf961dd046fe9a62b7e70efb4cc9",
+    "policy_rules.yaml": "c30ae8b5cfa24a1e10efab06b7604e08837c528bbe285bbefcf3622604f6eaad",
+    "protocol_amendment_v0.2.yaml": "5292e0208576a79342923fdf72855de39bffe63331721fff01b94ae35aa39f7b",
+    "research_protocol.yaml": "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512",
+    "synthetic_data.yaml": "16cc1ddfb752f5f4955931fd11bb5544af919153fca5650fe805b5a1f83ad817"
+  },
+  "counts": {
+    "ablation_evaluations": 60,
+    "latent_ood_events": 40,
+    "observed_graded_ood_rows": 120,
+    "odor_targets": 200,
+    "original_events": 200,
+    "systems": 4,
+    "temporal_displacements": 5,
+    "tiers": 3
+  },
+  "environment": {
+    "numpy": "2.4.6",
+    "python": "3.11.14",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.9.0"
+  },
+  "output_files": {
+    "noi_ablation_results.json": {
+      "evaluations": 60,
+      "sha256": "363f25e09172f6cb280dcf69b6c4633f06c5c3e759a7fa9ca315964a552691cd"
+    },
+    "noi_ablation_summary.json": {
+      "sha256": "8847a62972690908e5ce85953dfe7ba8c43f7a2be0659dd14097ecd7576c9e36"
+    }
+  },
+  "owner": "GUARDIANX LLC",
+  "project": "Neuro-Olfactive Intelligence",
+  "randomness": {
+    "generator_seed": 1001,
+    "ood_seed": 9001
+  },
+  "registration": {
+    "experiment_implemented_after_registration": true,
+    "tag": "noi-ablation-v0.1-preimplementation"
+  },
+  "release": "noi-ablation-pilot-v0.1",
+  "schema_version": "1.0.0",
+  "scope_limitations": [
+    "Exploratory synthetic computational evidence only.",
+    "Not a final confirmatory result.",
+    "No independent human perceptual evidence.",
+    "No clinical or diagnostic evidence.",
+    "No chemical exposure or emission-safety evidence.",
+    "No physical-device validation.",
+    "No deployment-readiness claim."
+  ],
+  "status": "exploratory",
+  "verification": {
+    "analysis_unit": "latent_event_id",
+    "negative_result_reported": true,
+    "ood_tuning_used": false,
+    "oracle_used": false,
+    "paired_ground_truth": "PASSED",
+    "severe_reference_replay": "PASSED",
+    "tests_required_before_release": true
+  }
+}

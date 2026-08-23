@@ -1,0 +1,885 @@
+{
+  "alpha": 0.0,
+  "apply_temporal_decay": false,
+  "eligible_target_count": 14,
+  "eligible_target_ids": [
+    "odor-0019",
+    "odor-0032",
+    "odor-0040",
+    "odor-0044",
+    "odor-0045",
+    "odor-0064",
+    "odor-0072",
+    "odor-0077",
+    "odor-0090",
+    "odor-0093",
+    "odor-0157",
+    "odor-0159",
+    "odor-0162",
+    "odor-0163"
+  ],
+  "eligible_validation_event_count": 15,
+  "eligible_validation_event_ids": [
+    "validation-000000",
+    "validation-000001",
+    "validation-000002",
+    "validation-000003",
+    "validation-000004",
+    "validation-000005",
+    "validation-000006",
+    "validation-000008",
+    "validation-000010",
+    "validation-000013",
+    "validation-000014",
+    "validation-000015",
+    "validation-000016",
+    "validation-000017",
+    "validation-000018"
+  ],
+  "excluded_validation_target_ids": [
+    "odor-0023",
+    "odor-0104",
+    "odor-0128",
+    "odor-0164",
+    "odor-0185"
+  ],
+  "experiment_type": "controlled_corrective_memory_mechanism_evaluation",
+  "ood_tuning_used": false,
+  "oracle_used": false,
+  "owner": "GUARDIANX LLC",
+  "project": "Neuro-Olfactive Intelligence",
+  "release": "corrective-memory-pilot-v0.1",
+  "schema_version": "1.0.0",
+  "status": "exploratory",
+  "target_results": [
+    {
+      "corrected_mrr": 0.5,
+      "corrected_ndcg_at_10": 0.6309297535714575,
+      "corrected_rankings": [
+        [
+          "odor-0018",
+          "odor-0019",
+          "odor-0012",
+          "odor-0068",
+          "odor-0010",
+          "odor-0181",
+          "odor-0013",
+          "odor-0060",
+          "odor-0017",
+          "odor-0067"
+        ]
+      ],
+      "corrected_recall_at_1": 0.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000083"
+      ],
+      "decoy_item_id": "odor-0021",
+      "mrr_difference": 0.5,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0018",
+          "odor-0021",
+          "odor-0012",
+          "odor-0068",
+          "odor-0010",
+          "odor-0181",
+          "odor-0013",
+          "odor-0060",
+          "odor-0017",
+          "odor-0067"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9642857142857143,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9642857142857143,
+      "relevant_items": [
+        [
+          "odor-0019"
+        ]
+      ],
+      "restoration_audit_count": 1,
+      "target_item_id": "odor-0019",
+      "validation_event_ids": [
+        "validation-000016"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0032",
+          "odor-0039",
+          "odor-0168",
+          "odor-0167",
+          "odor-0161",
+          "odor-0094",
+          "odor-0029",
+          "odor-0031",
+          "odor-0180",
+          "odor-0162"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000017",
+        "memory::train-000023",
+        "memory::train-000064"
+      ],
+      "decoy_item_id": "odor-0034",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0034",
+          "odor-0039",
+          "odor-0168",
+          "odor-0167",
+          "odor-0161",
+          "odor-0094",
+          "odor-0029",
+          "odor-0031",
+          "odor-0180",
+          "odor-0162"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0032"
+        ]
+      ],
+      "restoration_audit_count": 3,
+      "target_item_id": "odor-0032",
+      "validation_event_ids": [
+        "validation-000014"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0040",
+          "odor-0030",
+          "odor-0041",
+          "odor-0109",
+          "odor-0045",
+          "odor-0038",
+          "odor-0047",
+          "odor-0034",
+          "odor-0153",
+          "odor-0159"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000125",
+        "memory::train-000138"
+      ],
+      "decoy_item_id": "odor-0041",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0041",
+          "odor-0030",
+          "odor-0109",
+          "odor-0045",
+          "odor-0038",
+          "odor-0047",
+          "odor-0034",
+          "odor-0153",
+          "odor-0159",
+          "odor-0123"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0040"
+        ]
+      ],
+      "restoration_audit_count": 2,
+      "target_item_id": "odor-0040",
+      "validation_event_ids": [
+        "validation-000008"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0044",
+          "odor-0043",
+          "odor-0034",
+          "odor-0129",
+          "odor-0118",
+          "odor-0098",
+          "odor-0047",
+          "odor-0102",
+          "odor-0072",
+          "odor-0100"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000004"
+      ],
+      "decoy_item_id": "odor-0045",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0045",
+          "odor-0043",
+          "odor-0034",
+          "odor-0129",
+          "odor-0118",
+          "odor-0098",
+          "odor-0047",
+          "odor-0102",
+          "odor-0072",
+          "odor-0100"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0044"
+        ]
+      ],
+      "restoration_audit_count": 1,
+      "target_item_id": "odor-0044",
+      "validation_event_ids": [
+        "validation-000010"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0045",
+          "odor-0047",
+          "odor-0030",
+          "odor-0181",
+          "odor-0035",
+          "odor-0021",
+          "odor-0039",
+          "odor-0040",
+          "odor-0038",
+          "odor-0029"
+        ],
+        [
+          "odor-0045",
+          "odor-0039",
+          "odor-0047",
+          "odor-0181",
+          "odor-0038",
+          "odor-0029",
+          "odor-0035",
+          "odor-0030",
+          "odor-0021",
+          "odor-0040"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000061"
+      ],
+      "decoy_item_id": "odor-0047",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0047",
+          "odor-0030",
+          "odor-0181",
+          "odor-0035",
+          "odor-0021",
+          "odor-0039",
+          "odor-0040",
+          "odor-0038",
+          "odor-0029",
+          "odor-0010"
+        ],
+        [
+          "odor-0047",
+          "odor-0039",
+          "odor-0181",
+          "odor-0038",
+          "odor-0029",
+          "odor-0035",
+          "odor-0030",
+          "odor-0021",
+          "odor-0040",
+          "odor-0161"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9230769230769231,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9230769230769231,
+      "relevant_items": [
+        [
+          "odor-0045"
+        ],
+        [
+          "odor-0045"
+        ]
+      ],
+      "restoration_audit_count": 1,
+      "target_item_id": "odor-0045",
+      "validation_event_ids": [
+        "validation-000001",
+        "validation-000017"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0064",
+          "odor-0093",
+          "odor-0161",
+          "odor-0153",
+          "odor-0038",
+          "odor-0034",
+          "odor-0113",
+          "odor-0069",
+          "odor-0156",
+          "odor-0040"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000011",
+        "memory::train-000080",
+        "memory::train-000090"
+      ],
+      "decoy_item_id": "odor-0067",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0067",
+          "odor-0093",
+          "odor-0161",
+          "odor-0153",
+          "odor-0038",
+          "odor-0034",
+          "odor-0113",
+          "odor-0069",
+          "odor-0156",
+          "odor-0040"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0064"
+        ]
+      ],
+      "restoration_audit_count": 3,
+      "target_item_id": "odor-0064",
+      "validation_event_ids": [
+        "validation-000013"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0072",
+          "odor-0013",
+          "odor-0117",
+          "odor-0075",
+          "odor-0073",
+          "odor-0157",
+          "odor-0071",
+          "odor-0060",
+          "odor-0155",
+          "odor-0077"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000032",
+        "memory::train-000081"
+      ],
+      "decoy_item_id": "odor-0073",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0073",
+          "odor-0013",
+          "odor-0117",
+          "odor-0075",
+          "odor-0157",
+          "odor-0071",
+          "odor-0060",
+          "odor-0155",
+          "odor-0077",
+          "odor-0011"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0072"
+        ]
+      ],
+      "restoration_audit_count": 2,
+      "target_item_id": "odor-0072",
+      "validation_event_ids": [
+        "validation-000004"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0077",
+          "odor-0075",
+          "odor-0073",
+          "odor-0078",
+          "odor-0117",
+          "odor-0072",
+          "odor-0071",
+          "odor-0012",
+          "odor-0013",
+          "odor-0068"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000123"
+      ],
+      "decoy_item_id": "odor-0078",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0078",
+          "odor-0075",
+          "odor-0073",
+          "odor-0117",
+          "odor-0072",
+          "odor-0071",
+          "odor-0012",
+          "odor-0013",
+          "odor-0068",
+          "odor-0118"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0077"
+        ]
+      ],
+      "restoration_audit_count": 1,
+      "target_item_id": "odor-0077",
+      "validation_event_ids": [
+        "validation-000005"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0090",
+          "odor-0095",
+          "odor-0102",
+          "odor-0098",
+          "odor-0093",
+          "odor-0108",
+          "odor-0113",
+          "odor-0067",
+          "odor-0071",
+          "odor-0034"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000102",
+        "memory::train-000130"
+      ],
+      "decoy_item_id": "odor-0092",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0092",
+          "odor-0095",
+          "odor-0102",
+          "odor-0098",
+          "odor-0093",
+          "odor-0108",
+          "odor-0113",
+          "odor-0067",
+          "odor-0071",
+          "odor-0034"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0090"
+        ]
+      ],
+      "restoration_audit_count": 2,
+      "target_item_id": "odor-0090",
+      "validation_event_ids": [
+        "validation-000002"
+      ]
+    },
+    {
+      "corrected_mrr": 0.5,
+      "corrected_ndcg_at_10": 0.6309297535714575,
+      "corrected_rankings": [
+        [
+          "odor-0098",
+          "odor-0093",
+          "odor-0094",
+          "odor-0095",
+          "odor-0090",
+          "odor-0113",
+          "odor-0034",
+          "odor-0032",
+          "odor-0100",
+          "odor-0118"
+        ]
+      ],
+      "corrected_recall_at_1": 0.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000129"
+      ],
+      "decoy_item_id": "odor-0094",
+      "mrr_difference": 0.5,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0098",
+          "odor-0094",
+          "odor-0095",
+          "odor-0090",
+          "odor-0113",
+          "odor-0034",
+          "odor-0032",
+          "odor-0100",
+          "odor-0118",
+          "odor-0037"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9642857142857143,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9642857142857143,
+      "relevant_items": [
+        [
+          "odor-0093"
+        ]
+      ],
+      "restoration_audit_count": 1,
+      "target_item_id": "odor-0093",
+      "validation_event_ids": [
+        "validation-000015"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0157",
+          "odor-0069",
+          "odor-0117",
+          "odor-0062",
+          "odor-0155",
+          "odor-0034",
+          "odor-0064",
+          "odor-0102",
+          "odor-0108",
+          "odor-0109"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000006",
+        "memory::train-000131",
+        "memory::train-000134"
+      ],
+      "decoy_item_id": "odor-0159",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0159",
+          "odor-0069",
+          "odor-0117",
+          "odor-0062",
+          "odor-0155",
+          "odor-0034",
+          "odor-0064",
+          "odor-0102",
+          "odor-0108",
+          "odor-0109"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0157"
+        ]
+      ],
+      "restoration_audit_count": 3,
+      "target_item_id": "odor-0157",
+      "validation_event_ids": [
+        "validation-000018"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0159",
+          "odor-0123",
+          "odor-0151",
+          "odor-0155",
+          "odor-0036",
+          "odor-0157",
+          "odor-0017",
+          "odor-0078",
+          "odor-0011",
+          "odor-0077"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000026",
+        "memory::train-000097"
+      ],
+      "decoy_item_id": "odor-0161",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0161",
+          "odor-0123",
+          "odor-0151",
+          "odor-0155",
+          "odor-0036",
+          "odor-0157",
+          "odor-0017",
+          "odor-0078",
+          "odor-0011",
+          "odor-0077"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0159"
+        ]
+      ],
+      "restoration_audit_count": 2,
+      "target_item_id": "odor-0159",
+      "validation_event_ids": [
+        "validation-000000"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0162",
+          "odor-0168",
+          "odor-0161",
+          "odor-0167",
+          "odor-0036",
+          "odor-0113",
+          "odor-0188",
+          "odor-0076",
+          "odor-0127",
+          "odor-0151"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000010",
+        "memory::train-000063",
+        "memory::train-000120"
+      ],
+      "decoy_item_id": "odor-0163",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0163",
+          "odor-0168",
+          "odor-0161",
+          "odor-0167",
+          "odor-0036",
+          "odor-0113",
+          "odor-0188",
+          "odor-0076",
+          "odor-0127",
+          "odor-0151"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0162"
+        ]
+      ],
+      "restoration_audit_count": 3,
+      "target_item_id": "odor-0162",
+      "validation_event_ids": [
+        "validation-000003"
+      ]
+    },
+    {
+      "corrected_mrr": 1.0,
+      "corrected_ndcg_at_10": 1.0,
+      "corrected_rankings": [
+        [
+          "odor-0163",
+          "odor-0168",
+          "odor-0076",
+          "odor-0021",
+          "odor-0162",
+          "odor-0036",
+          "odor-0167",
+          "odor-0161",
+          "odor-0123",
+          "odor-0039"
+        ]
+      ],
+      "corrected_recall_at_1": 1.0,
+      "corrected_recall_at_10": 1.0,
+      "corrupted_memory_ids": [
+        "memory::train-000086",
+        "memory::train-000116"
+      ],
+      "decoy_item_id": "odor-0167",
+      "mrr_difference": 1.0,
+      "no_update_mrr": 0.0,
+      "no_update_ndcg_at_10": 0.0,
+      "no_update_rankings": [
+        [
+          "odor-0167",
+          "odor-0168",
+          "odor-0076",
+          "odor-0021",
+          "odor-0162",
+          "odor-0036",
+          "odor-0161",
+          "odor-0123",
+          "odor-0039",
+          "odor-0151"
+        ]
+      ],
+      "no_update_recall_at_1": 0.0,
+      "no_update_recall_at_10": 0.0,
+      "old_memory_baseline_mrr": 0.9285714285714286,
+      "old_memory_degradation": 0.0,
+      "old_memory_post_correction_mrr": 0.9285714285714286,
+      "relevant_items": [
+        [
+          "odor-0163"
+        ]
+      ],
+      "restoration_audit_count": 2,
+      "target_item_id": "odor-0163",
+      "validation_event_ids": [
+        "validation-000006"
+      ]
+    }
+  ],
+  "top_k": 10,
+  "trained_at_utc": "2026-08-22T19:05:00+00:00",
+  "training_event_count": 140,
+  "validation_event_count": 20
+}
