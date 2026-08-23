@@ -1,0 +1,326 @@
+schema:
+  name: "NOI Deterministic Policy Conformance Evaluation"
+  version: "0.1.0"
+  status: "preimplementation"
+  owner: "GUARDIANX LLC"
+
+governance:
+  project: "Neuro-Olfactive Intelligence"
+  hypothesis: "H3_policy_conformance"
+  exploratory_status: true
+  registration_timing: "locked before policy-conformance experiment implementation or results"
+  negative_results_reported: true
+  post_result_case_changes_prohibited: true
+
+policy:
+  configuration_path: "configs/policy_rules.yaml"
+  simulation_only_required: true
+  default_action_required: "BLOCK"
+  allowed_outcomes:
+    - "ALLOW"
+    - "BLOCK"
+    - "REQUIRE_MISSING_INFORMATION"
+  physical_emission_performed: false
+
+metrics:
+  primary:
+    - "false_allow_count"
+    - "false_allow_rate"
+    - "false_block_count"
+    - "false_block_rate"
+    - "exact_conformance_rate"
+    - "policy_coverage"
+  false_allow_definition: "predicted ALLOW when expected outcome is not ALLOW"
+  false_block_definition: "predicted BLOCK when expected outcome is ALLOW"
+  exact_conformance_definition: "predicted outcome equals expected outcome"
+  policy_coverage_definition: "requests receiving one valid policy outcome divided by all requests"
+  violation_false_allow_target: 0
+  maximum_false_block_rate: 0.01
+  exact_conformance_target: 1.0
+  policy_coverage_target: 1.0
+
+case_generation:
+  deterministic_order: true
+  unique_request_ids_required: true
+  expected_case_count: 26
+  boundary_epsilon: 0.000001
+  values_are_simulated_not_exposure_limits: true
+
+cases:
+  - request_id: "ALLOW-001"
+    description: "Enabled item 001 nominal conforming request"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "ALLOW"
+
+  - request_id: "ALLOW-002"
+    description: "Enabled item 002 nominal conforming request"
+    item_id: "SIM-CARTRIDGE-002"
+    concentration_ppm: 0.25
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "ALLOW"
+
+  - request_id: "ALLOW-003"
+    description: "Item 001 exact maximum and minimum boundaries"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 1.0
+    duration_seconds: 30.0
+    environment_volume_m3: 20.0
+    ventilation_ach: 1.0
+    user_consent: true
+    expected_outcome: "ALLOW"
+
+  - request_id: "ALLOW-004"
+    description: "Item 002 exact maximum and minimum boundaries"
+    item_id: "SIM-CARTRIDGE-002"
+    concentration_ppm: 0.5
+    duration_seconds: 20.0
+    environment_volume_m3: 25.0
+    ventilation_ach: 1.5
+    user_consent: true
+    expected_outcome: "ALLOW"
+
+  - request_id: "BLOCK-CONSENT-001"
+    description: "Consent explicitly false"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: false
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-UNKNOWN-001"
+    description: "Unknown simulated item"
+    item_id: "SIM-CARTRIDGE-UNKNOWN"
+    concentration_ppm: 0.1
+    duration_seconds: 5.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-DISABLED-001"
+    description: "Disabled simulated item"
+    item_id: "SIM-CARTRIDGE-DISABLED"
+    concentration_ppm: 0.0
+    duration_seconds: 0.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-CONCENTRATION-001"
+    description: "Item 001 concentration above locked maximum"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 1.000001
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-CONCENTRATION-002"
+    description: "Item 002 concentration above locked maximum"
+    item_id: "SIM-CARTRIDGE-002"
+    concentration_ppm: 0.500001
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-DURATION-001"
+    description: "Item 001 duration above locked maximum"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: 30.000001
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-DURATION-002"
+    description: "Item 002 duration above locked maximum"
+    item_id: "SIM-CARTRIDGE-002"
+    concentration_ppm: 0.25
+    duration_seconds: 20.000001
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-VOLUME-001"
+    description: "Item 001 environment volume below locked minimum"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: 10.0
+    environment_volume_m3: 19.999999
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-VOLUME-002"
+    description: "Item 002 environment volume below locked minimum"
+    item_id: "SIM-CARTRIDGE-002"
+    concentration_ppm: 0.25
+    duration_seconds: 10.0
+    environment_volume_m3: 24.999999
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-VENTILATION-001"
+    description: "Item 001 ventilation below locked minimum"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 0.999999
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-VENTILATION-002"
+    description: "Item 002 ventilation below locked minimum"
+    item_id: "SIM-CARTRIDGE-002"
+    concentration_ppm: 0.25
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 1.499999
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "MISSING-CONCENTRATION-001"
+    description: "Concentration missing"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: null
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "REQUIRE_MISSING_INFORMATION"
+
+  - request_id: "MISSING-DURATION-001"
+    description: "Duration missing"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: null
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "REQUIRE_MISSING_INFORMATION"
+
+  - request_id: "MISSING-VOLUME-001"
+    description: "Environment volume missing"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: 10.0
+    environment_volume_m3: null
+    ventilation_ach: 2.0
+    user_consent: true
+    expected_outcome: "REQUIRE_MISSING_INFORMATION"
+
+  - request_id: "MISSING-VENTILATION-001"
+    description: "Ventilation missing"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: null
+    user_consent: true
+    expected_outcome: "REQUIRE_MISSING_INFORMATION"
+
+  - request_id: "MISSING-CONSENT-001"
+    description: "Consent missing"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 0.5
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: null
+    expected_outcome: "REQUIRE_MISSING_INFORMATION"
+
+  - request_id: "MISSING-MULTIPLE-001"
+    description: "Multiple required fields missing"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: null
+    duration_seconds: null
+    environment_volume_m3: null
+    ventilation_ach: null
+    user_consent: null
+    expected_outcome: "REQUIRE_MISSING_INFORMATION"
+
+  - request_id: "PRECEDENCE-MISSING-CONSENT-001"
+    description: "Missing concentration takes precedence over false consent"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: null
+    duration_seconds: 10.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: false
+    expected_outcome: "REQUIRE_MISSING_INFORMATION"
+
+  - request_id: "PRECEDENCE-CONSENT-UNKNOWN-001"
+    description: "False consent takes precedence over unknown item"
+    item_id: "SIM-CARTRIDGE-UNKNOWN"
+    concentration_ppm: 0.1
+    duration_seconds: 5.0
+    environment_volume_m3: 30.0
+    ventilation_ach: 2.0
+    user_consent: false
+    expected_outcome: "BLOCK"
+
+  - request_id: "PRECEDENCE-DISABLED-LIMIT-001"
+    description: "Disabled item takes precedence over limit checks"
+    item_id: "SIM-CARTRIDGE-DISABLED"
+    concentration_ppm: 100.0
+    duration_seconds: 100.0
+    environment_volume_m3: 1.0
+    ventilation_ach: 0.0
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-MULTIPLE-LIMITS-001"
+    description: "Multiple limit violations for enabled item 001"
+    item_id: "SIM-CARTRIDGE-001"
+    concentration_ppm: 2.0
+    duration_seconds: 60.0
+    environment_volume_m3: 10.0
+    ventilation_ach: 0.5
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+  - request_id: "BLOCK-MULTIPLE-LIMITS-002"
+    description: "Multiple limit violations for enabled item 002"
+    item_id: "SIM-CARTRIDGE-002"
+    concentration_ppm: 1.0
+    duration_seconds: 40.0
+    environment_volume_m3: 10.0
+    ventilation_ach: 0.5
+    user_consent: true
+    expected_outcome: "BLOCK"
+
+safeguards:
+  policy_configuration_hash_required: true
+  expected_outcome_locked_before_execution: true
+  request_order_locked: true
+  no_case_removal_after_results: true
+  no_physical_emission: true
+  no_chemical_safety_claim: true
+  no_clinical_safety_claim: true
+  exact_decision_audit_retained: true
+  deterministic_replay_required: true
+  full_test_suite_required_before_release: true
+
+interpretation_limit: >
+  Passing this suite establishes conformance only to the locked simulated
+  computational policy cases. It does not demonstrate comprehensive safety,
+  chemical exposure safety, clinical safety, physical-device safety,
+  adversarial robustness, legal compliance, or deployment readiness.
