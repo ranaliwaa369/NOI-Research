@@ -1,0 +1,103 @@
+schema:
+  name: "NOI Paired Graded OOD Generation"
+  version: "1.0.0"
+  status: "preimplementation"
+  owner: "GUARDIANX LLC"
+
+governance:
+  amendment_path: "configs/protocol_amendment_v0.2.yaml"
+  amendment_sha256: "5292e0208576a79342923fdf72855de39bffe63331721fff01b94ae35aa39f7b"
+  amendment_tag: "protocol-amendment-v0.2-preimplementation"
+  original_generator_path: "configs/synthetic_data.yaml"
+  preserve_original_pilot_results: true
+  modify_original_pilot_generator: false
+
+paired_source_generation:
+  analysis_unit: "latent_event_id"
+  reuse_same_latent_event: true
+  preserve_target_item: true
+  preserve_target_family: true
+  preserve_context_template: true
+
+  latent_event:
+    formula: "normalize(target_vector + 0.25 * template_offset + latent_noise)"
+    template_offset_weight: 0.25
+    latent_noise_standard_deviation: 0.05
+    random_stream: "independent_ood_seed"
+    sample_once_per_latent_event: true
+
+  identity_reference:
+    modality_transformations: "original ID orthogonal transformations"
+    added_observation_noise: false
+    observation_noise_standard_deviation: 0.0
+    normalize_output: true
+    explanation: >
+      The identity reference is a noise-free projection of the same latent
+      event through the original ID modality transformations. It is not
+      generated from target identifiers or target labels.
+
+  severe_reference:
+    modality_transformations: "original independent OOD orthogonal transformations"
+    added_observation_noise: true
+    observation_noise_standard_deviation: 0.10
+    random_stream: "independent_ood_seed"
+    normalize_output: true
+    require_original_severe_direction: true
+
+graded_views:
+  formula: >
+    normalize(
+      (1 - shift_strength) * identity_reference_vector
+      + shift_strength * severe_reference_vector
+    )
+
+  tiers:
+    mild:
+      shift_strength: 0.25
+      provenance_seed: 7001
+    moderate:
+      shift_strength: 0.50
+      provenance_seed: 8001
+    severe:
+      shift_strength: 1.00
+      provenance_seed: 9001
+
+  stochastic_tier_noise:
+    enabled: false
+    explanation: >
+      Tier seeds are retained as locked provenance metadata. The registered
+      interpolation itself is deterministic and consumes no additional random
+      values.
+
+determinism:
+  sort_latent_events_by_identifier: true
+  sort_tiers_as:
+    - "mild"
+    - "moderate"
+    - "severe"
+  identical_inputs_produce_identical_outputs: true
+  environment_versions_must_be_recorded: true
+  file_hashes_required: true
+
+leakage_controls:
+  expose_target_identifier_to_features: false
+  expose_family_identifier_to_features: false
+  derive_identity_reference_from_target_label: false
+  pair_by_target_identifier_only: false
+  reuse_same_sampled_latent_event: true
+  duplicate_observed_identifiers_prohibited: true
+  cross_latent_feature_duplicates_prohibited: true
+
+verification:
+  original_generator_tests_must_pass: true
+  original_pilot_hashes_must_remain_unchanged: true
+  severe_view_must_equal_normalized_severe_reference: true
+  every_latent_event_must_have_three_views: true
+  paired_ground_truth_must_be_identical: true
+  vectors_must_be_finite_and_unit_normalized: true
+
+scope:
+  statement: >
+    This configuration defines a synthetic implementation stress test only.
+    It does not establish human olfactory validity, clinical effectiveness,
+    physical odor-emission safety, or deployment readiness.
