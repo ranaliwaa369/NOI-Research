@@ -1,5 +1,7 @@
 # Neuro-Olfactive Intelligence (NOI)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22064263.svg)](https://doi.org/10.5281/zenodo.22064263)
+
 ## Overview
 
 Neuro-Olfactive Intelligence (NOI) is a software-first artificial
@@ -145,8 +147,9 @@ rerunning an experiment or interpreting its outputs.
 
 Citation metadata are provided in `CITATION.cff`.
 
-The permanent Zenodo DOI will be added after archival deposition of the
-version 0.1.0 GitHub release.
+Software release DOI:
+
+https://doi.org/10.5281/zenodo.22064263
 
 ## Authors
 
