@@ -1,0 +1,528 @@
+amendment:
+  id: "NOI-PROTOCOL-AMENDMENT-0.2"
+  version: "0.2.0"
+  status: "preimplementation"
+  date: "2026-08-23"
+
+  title: >
+    Prespecified Multi-Severity Out-of-Distribution Evaluation
+    for the Neuro-Olfactive Interface
+
+  project: "Neuro-Olfactive Interface"
+  owner: "GUARDIANX LLC"
+
+  authors:
+    - "Rana Al-Dahlake"
+    - "Jalal Alazirji"
+
+parent_protocol:
+  path: "configs/research_protocol.yaml"
+  version_tag: "protocol-v0.1-preimplementation"
+  sha256: "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512"
+
+pilot_evidence:
+  synthetic_pilot_tag: "pilot-v0.1"
+  baseline_pilot_tag: "baseline-pilot-v0.1"
+
+  dataset:
+    event_count: 200
+    odor_target_count: 200
+    training_count: 140
+    validation_count: 20
+    severe_ood_count: 40
+    leakage_audit_passed: true
+
+  baseline_results_sha256: "4987f02fa6629226fe23cf6fe349c94a60a24f67c2be1b908f6ac291234754b9"
+
+  severe_ood_baseline_observation:
+    ridge_fusion:
+      recall_at_1: 0.0
+      recall_at_10: 0.025
+      mean_reciprocal_rank: 0.005
+      ndcg_at_10: 0.0097
+
+  distribution_shift_diagnostic:
+    validation_count: 20
+    severe_ood_count: 40
+    feature_dimension: 16
+    mean_shift_l2: 0.5066211983190031
+    covariance_shift_frobenius: 0.38792766095110415
+    centroid_cosine_similarity: -0.20708312206631957
+    rbf_mmd_squared: 0.09503913477168235
+
+  repeated_ood_oracle_diagnostic:
+    partition_count: 10
+    bootstrap_resamples: 10000
+    mean_mrr: 0.6303928571428572
+    standard_deviation_mrr: 0.13325277430601687
+    minimum_mrr: 0.465952380952381
+    maximum_mrr: 0.8458333333333334
+    bootstrap_ci_level: 0.95
+    bootstrap_ci_lower: 0.5542618055555556
+    bootstrap_ci_upper: 0.7092084821428573
+
+  interpretation:
+    - >
+      The original severe OOD condition produced a substantial
+      distribution shift and poor train-to-OOD baseline generalization.
+    - >
+      OOD-only oracle calibration recovered substantial retrieval signal,
+      indicating that the severe OOD data are not purely random or
+      intrinsically unlearnable.
+    - >
+      Oracle results are diagnostic only and are excluded from deployable
+      baseline comparisons and confirmatory superiority claims.
+    - >
+      The repeated oracle confidence interval is based on partitions of the
+      same forty OOD events and does not represent independent datasets.
+
+reason_for_amendment:
+  classification: "post-pilot and pre-confirmatory"
+  rationale:
+    - >
+      The pilot identified a large gap between validation performance and
+      severe OOD performance.
+    - >
+      A graded shift evaluation is required to distinguish gradual
+      degradation from catastrophic failure.
+    - >
+      The original severe OOD condition must remain unchanged and must
+      continue to be reported as the maximum stress condition.
+    - >
+      This amendment is registered before implementation or inspection of
+      results from the new mild and moderate OOD conditions.
+
+unchanged_commitments:
+  hypotheses:
+    - "H1"
+    - "H2"
+    - "H3"
+    - "H4"
+    - "H5"
+
+  locked_metrics:
+    - "recall_at_1"
+    - "recall_at_10"
+    - "mean_reciprocal_rank"
+    - "ndcg_at_10"
+    - "retrieval_latency_ms"
+    - "peak_memory_mb"
+    - "false_block_rate"
+    - "false_allow_rate"
+    - "policy_coverage"
+
+  success_thresholds:
+    absolute_mrr_improvement: 0.05
+    relative_mrr_improvement: 0.10
+    reproducibility_tolerance: 0.02
+    maximum_false_block_rate: 0.01
+
+  preserved_conditions:
+    - "The original severe OOD transformation remains unchanged."
+    - "The original negative OOD baseline result remains documented."
+    - "Training data cannot contain validation or OOD observations."
+    - "OOD labels cannot be used to fit deployable retrieval systems."
+    - "The fixed odor library remains identical across comparisons."
+    - "All random seeds and configuration files must be versioned."
+    - "Negative and null results must be reported."
+    - "No success threshold may be changed after confirmatory evaluation."
+
+ood_severity_extension:
+  design: "paired deterministic severity conditions"
+
+  tiers:
+    mild:
+      shift_strength: 0.25
+      seed: 7001
+      description: >
+        A low-intensity deterministic interpolation between the
+        in-distribution representation and the locked severe OOD
+        transformation.
+
+    moderate:
+      shift_strength: 0.50
+      seed: 8001
+      description: >
+        An intermediate deterministic interpolation between the
+        in-distribution representation and the locked severe OOD
+        transformation.
+
+    severe:
+      shift_strength: 1.00
+      seed: 9001
+      description: >
+        The original locked OOD transformation used by the synthetic
+        pilot. Its implementation and seed must not be changed.
+
+  interpolation_rule:
+    formula: >
+      shifted_vector = normalize(
+        (1.0 - shift_strength) * id_vector
+        + shift_strength * severe_ood_vector
+      )
+    normalization: "L2"
+    numerical_dtype: "float64"
+    deterministic: true
+
+  pairing:
+    enabled: true
+    unit_of_analysis: "latent_event_id"
+    requirements:
+      - >
+        Mild, moderate, and severe observations must share the same
+        latent event identifier, target item, target family, and
+        context-template identifier.
+      - >
+        Only the prespecified shift strength may differ across the
+        three paired observations.
+      - >
+        Multiple severity views of one latent event must not be counted
+        as independent samples.
+      - >
+        Statistical comparisons across severity levels must use paired
+        observations.
+
+  dataset_allocation:
+    confirmatory_base_event_count: 10000
+    training_fraction: 0.70
+    validation_fraction: 0.10
+    ood_latent_fraction: 0.20
+
+    expected_counts:
+      training_events: 7000
+      validation_events: 1000
+      ood_latent_events: 2000
+      ood_views_per_latent_event: 3
+      total_ood_views: 6000
+
+    note: >
+      The 6000 OOD rows represent three paired severity views of 2000
+      independent latent OOD events. The effective OOD sample size is
+      therefore 2000, not 6000.
+
+evaluation_plan:
+  deployable_baselines:
+    - "random"
+    - "text_only_cosine"
+    - "mean_fusion_cosine"
+    - "ridge_fusion"
+    - "full_noi_system"
+
+  evaluation_splits:
+    - "validation"
+    - "ood_mild"
+    - "ood_moderate"
+    - "ood_severe"
+
+  primary_comparisons:
+    - >
+      Compare the full NOI system with every prespecified baseline
+      separately at each severity level.
+    - >
+      Measure performance degradation from validation through mild,
+      moderate, and severe OOD conditions.
+    - >
+      Report paired changes for the same latent OOD events across
+      severity levels.
+    - >
+      Preserve the severe OOD result even if it is negative.
+
+  diagnostics:
+    - "mean_shift_l2"
+    - "covariance_shift_frobenius"
+    - "centroid_cosine_similarity"
+    - "rbf_mmd_squared"
+    - "mmd_permutation_test"
+    - "repeated_ood_oracle_diagnostic"
+
+  oracle_policy:
+    classification: "diagnostic_only"
+    allowed_uses:
+      - "Estimate whether recoverable signal exists inside an OOD condition."
+      - "Diagnose representation or mapping failure."
+    prohibited_uses:
+      - "Claim deployable OOD generalization."
+      - "Compete against prespecified deployable baselines."
+      - "Support the primary superiority hypothesis."
+      - "Train or tune the final NOI system."
+
+statistical_controls:
+  confidence_level: 0.95
+  bootstrap_seed: 4242
+  bootstrap_resamples: 10000
+
+  paired_bootstrap:
+    enabled: true
+    resampling_unit: "latent_event_id"
+
+  mmd_permutation_test:
+    enabled: true
+    seed: 5151
+    permutations: 10000
+    significance_level: 0.05
+
+  multiple_testing:
+    method: "holm"
+    family: >
+      Primary comparisons of the full NOI system against prespecified
+      deployable baselines across the three OOD severity conditions.
+
+leakage_controls:
+  requirements:
+    - "No latent event may occur in both training and evaluation splits."
+    - "No context template may cross a locked split boundary."
+    - "Held-out odor families must remain absent from training."
+    - "Target identifiers must never be exposed as input features."
+    - "Paired severity views must remain together in one evaluation group."
+    - "Preprocessing must be fitted using training observations only."
+    - "Hyperparameter selection must not use severe OOD results."
+    - "Every exported dataset must pass the deterministic leakage audit."
+
+reporting_requirements:
+  mandatory:
+    - "Report all severity levels."
+    - "Report all prespecified baselines."
+    - "Report confidence intervals."
+    - "Report effect sizes."
+    - "Report failed and negative results."
+    - "Report all excluded records and exclusion reasons."
+    - "Report configuration and artifact SHA-256 hashes."
+    - "Clearly separate oracle diagnostics from deployable evaluations."
+
+  prohibited_claims:
+    - "Human olfactory equivalence"
+    - "Human perceptual validity"
+    - "Clinical or diagnostic validity"
+    - "Physical odor-emission safety"
+    - "Comprehensive real-world safety"
+    - "Production readiness based only on synthetic evidence"
+
+scope:
+  statement: >
+    This amendment covers synthetic computational implementation
+    evaluation only. It does not establish human perceptual validity,
+    clinical utility, physical odor-device safety, or comprehensive
+    real-world performance.
+
+reproducibility:
+  lock_before_implementation: true
+  publish_code: true
+  publish_configuration_files: true
+  publish_environment_versions: true
+  publish_negative_results: true
+  preserve_random_seeds: true
+
+locking:
+  amendment_sha256_file: "configs/protocol_amendment_v0.2.sha256"
+
+
+إي نكمل. الملف `configs/protocol_amendment_v0.2.yaml` موجود ومفتوح عندك. الصقي داخله في PyCharm الكود الكامل التالي — لا تلصقيه في Terminal:
+
+```yaml
+amendment:
+  id: "NOI-PROTOCOL-AMENDMENT-0.2"
+  version: "0.2.0"
+  date: "2026-08-23"
+  status: "preimplementation"
+  owner: "GUARDIANX LLC"
+  project: "Neuro-Olfactive Interface"
+
+parent_protocol:
+  path: "configs/research_protocol.yaml"
+  version_tag: "protocol-v0.1-preimplementation"
+  sha256: "e885f537b3209d7052d1517efc5be75324df39689cb4e54b38a241c95f22e512"
+
+reason_for_amendment:
+  stage: "post-pilot, pre-confirmatory implementation"
+  summary: >
+    The exploratory synthetic pilot demonstrated strong validation performance
+    for the ridge-fusion baseline but severe degradation under the original
+    held-out OOD transformation. Distribution diagnostics indicated that the
+    OOD split contains recoverable target information after OOD-only
+    calibration, while differing substantially from the validation
+    distribution. This amendment preregisters graded OOD severity levels
+    without removing or weakening the original severe stress test.
+
+evidence_reviewed:
+  synthetic_pilot:
+    tag: "pilot-v0.1"
+    event_count: 200
+    validation_count: 20
+    ood_count: 40
+    leakage_audit_passed: true
+
+  baseline_pilot:
+    tag: "baseline-pilot-v0.1"
+    results_path: "results/baseline-pilot-v0.1/baseline_results.json"
+    results_sha256: "4987f02fa6629226fe23cf6fe349c94a60a24f67c2be1b908f6ac291234754b9"
+
+    ridge_validation:
+      recall_at_1: 0.90
+      recall_at_10: 1.00
+      mean_reciprocal_rank: 0.95
+      ndcg_at_10: 0.9631
+
+    ridge_severe_ood:
+      recall_at_1: 0.00
+      recall_at_10: 0.025
+      mean_reciprocal_rank: 0.0050
+      ndcg_at_10: 0.0097
+
+  distribution_diagnostics:
+    mean_shift_l2: 0.5066211983190031
+    covariance_shift_frobenius: 0.38792766095110415
+    centroid_cosine_similarity: -0.20708312206631957
+    rbf_mmd_squared: 0.09503913477168235
+
+  repeated_ood_oracle_diagnostic:
+    partitions: 10
+    bootstrap_seed: 4242
+    bootstrap_resamples: 10000
+    mean_mrr: 0.6303928571428572
+    standard_deviation_mrr: 0.13325277430601687
+    minimum_mrr: 0.465952380952381
+    maximum_mrr: 0.8458333333333334
+    bootstrap_95_percent_ci:
+      lower: 0.5542618055555556
+      upper: 0.7092084821428573
+    interpretation: >
+      The severe OOD observations contain recoverable synthetic signal, but
+      this diagnostic uses OOD labels for calibration and therefore is not a
+      deployable baseline or evidence of ordinary train-to-OOD generalization.
+
+unchanged_commitments:
+  original_negative_result_retained: true
+  severe_ood_stress_test_retained: true
+  original_hypotheses_unchanged: true
+  original_success_thresholds_unchanged: true
+  locked_metrics_unchanged: true
+  safety_policy_unchanged: true
+  leakage_controls_unchanged: true
+  synthetic_scope_unchanged: true
+
+  prohibited_claims:
+    - "Human olfactory equivalence"
+    - "Human perceptual validity"
+    - "Clinical or diagnostic effectiveness"
+    - "Physical odor-emission safety"
+    - "Comprehensive real-world safety"
+    - "Production deployment readiness"
+
+graded_ood_design:
+  enabled: true
+  design_type: "paired latent-event severity evaluation"
+
+  purpose: >
+    Measure performance degradation across prespecified distribution-shift
+    strengths while preserving the original severe OOD condition.
+
+  latent_event_policy:
+    reuse_same_latent_events_across_tiers: true
+    preserve_target_item: true
+    preserve_target_family: true
+    preserve_context_template: true
+    vary_only_shift_transformation_strength: true
+    independent_unit: "latent_event_id"
+    observed_tier_rows_are_not_independent_units: true
+
+  tiers:
+    mild:
+      shift_strength: 0.25
+      seed: 7001
+      interpretation: "Limited synthetic distribution displacement."
+
+    moderate:
+      shift_strength: 0.50
+      seed: 8001
+      interpretation: "Intermediate synthetic distribution displacement."
+
+    severe:
+      shift_strength: 1.00
+      seed: 9001
+      interpretation: >
+        Original pilot OOD transformation retained as the primary stress test.
+
+  transformation_rule:
+    formula: >
+      tier_vector = normalize(
+        (1 - shift_strength) * identity_reference_vector
+        + shift_strength * severe_ood_vector
+      )
+    deterministic: true
+    clipping_or_hidden_adjustment_allowed: false
+    target_identifiers_exposed_to_features: false
+
+confirmatory_evaluation:
+  dataset_event_count: 10000
+  training_fraction: 0.70
+  validation_fraction: 0.10
+  base_ood_fraction: 0.20
+
+  ood_evaluation:
+    base_latent_ood_events: 2000
+    severity_views_per_latent_event: 3
+    expected_observed_ood_rows: 6000
+    analysis_unit: "latent_event_id"
+    paired_across_severity_tiers: true
+
+  evaluated_systems:
+    - "random"
+    - "text_only_cosine"
+    - "mean_fusion_cosine"
+    - "ridge_fusion"
+    - "full_noi_system"
+
+  primary_metrics:
+    - "recall_at_1"
+    - "recall_at_10"
+    - "mean_reciprocal_rank"
+    - "ndcg_at_10"
+
+  reporting_requirements:
+    report_each_severity_separately: true
+    report_original_severe_result: true
+    report_all_negative_results: true
+    report_confidence_intervals: true
+    report_effect_sizes: true
+    report_seed_values: true
+    report_environment_versions: true
+
+statistical_analysis:
+  comparison_structure: "paired by latent_event_id"
+  confidence_level: 0.95
+  bootstrap_unit: "latent_event_id"
+  bootstrap_resamples: 10000
+  bootstrap_seed: 4242
+
+  planned_diagnostics:
+    - "mean_shift_l2"
+    - "covariance_shift_frobenius"
+    - "centroid_cosine_similarity"
+    - "rbf_mmd_squared"
+    - "rbf_mmd_permutation_test"
+
+  oracle_policy:
+    allowed_for_diagnostics_only: true
+    excluded_from_baseline_superiority_tests: true
+    excluded_from_deployment_claims: true
+    must_be_labeled_as_ood_calibrated: true
+
+implementation_lock:
+  implementation_must_follow_amendment: true
+  tests_required_before_confirmatory_run: true
+  leakage_audit_required: true
+  deterministic_export_required: true
+  hashes_required: true
+  confirmatory_results_must_not_be_inspected_before_lock: true
+
+publication_language:
+  approved_scope_statement: >
+    The evaluation tests computational retrieval of synthetic context-to-odor
+    associations under prespecified distribution shifts. It does not establish
+    human olfactory perception, clinical effectiveness, physical odor-device
+    safety, or real-world deployment readiness.
+
+  ownership_statement: >
+    Copyright and applicable proprietary rights are owned by GUARDIANX LLC,
+    subject to signed written authorship, inventorship, and assignment
+    agreements.
