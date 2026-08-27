@@ -1,0 +1,132 @@
+protocol:
+  name: "NOI Seen-Item Repeated Evaluation"
+  version: "0.2.1"
+  status: "prespecified_preimplementation"
+  date: "2026-08-27"
+  owner: "GUARDIANX LLC"
+
+scope:
+  evaluation_track: "Track A: Seen-item episodic retrieval"
+  evidence_type: "synthetic computational evaluation only"
+  modifies_v0_1_results: false
+  modifies_existing_track_a_result: false
+
+provenance:
+  development_branch: "development-v0.2"
+  locked_track_a_commit: "01054da"
+  pilot_result_path: "results/v0.2/seen_item_track_a_results.json"
+  pilot_result_sha256: "7b75efb63f939b435fbcf8fee652457190df1dd9309a6c177e998f5d1cb8fffc"
+
+pilot_reference:
+  generator_seed: 1001
+  ood_seed: 9001
+  partition_seed: 2102
+  inspected_before_repeated_run_lock: true
+  include_in_primary_ten_seed_aggregate: false
+  use: "context and implementation validation only"
+
+primary_runs:
+  include_pilot_reference: false
+  independent_run_count: 10
+  runs:
+    - run_id: "seed-01"
+      generator_seed: 1101
+      ood_seed: 9101
+      partition_seed: 2201
+    - run_id: "seed-02"
+      generator_seed: 1201
+      ood_seed: 9201
+      partition_seed: 2301
+    - run_id: "seed-03"
+      generator_seed: 1301
+      ood_seed: 9301
+      partition_seed: 2401
+    - run_id: "seed-04"
+      generator_seed: 1401
+      ood_seed: 9401
+      partition_seed: 2501
+    - run_id: "seed-05"
+      generator_seed: 1501
+      ood_seed: 9501
+      partition_seed: 2601
+    - run_id: "seed-06"
+      generator_seed: 1601
+      ood_seed: 9601
+      partition_seed: 2701
+    - run_id: "seed-07"
+      generator_seed: 1701
+      ood_seed: 9701
+      partition_seed: 2801
+    - run_id: "seed-08"
+      generator_seed: 1801
+      ood_seed: 9801
+      partition_seed: 2901
+    - run_id: "seed-09"
+      generator_seed: 1901
+      ood_seed: 9901
+      partition_seed: 3001
+    - run_id: "seed-10"
+      generator_seed: 2001
+      ood_seed: 10001
+      partition_seed: 3101
+
+dataset:
+  events_per_run: 10000
+  training_fraction: 0.70
+  validation_fraction: 0.10
+  ood_fraction: 0.20
+  calibration_template_fraction: 0.50
+  require_final_target_reachability: true
+  prohibit_template_overlap: true
+  prohibit_event_overlap: true
+  prohibit_final_test_tuning: true
+  prohibit_ood_use: true
+
+systems:
+  - "memory_only"
+  - "ridge_only"
+  - "hybrid"
+
+metrics:
+  primary: "mean_reciprocal_rank"
+  secondary:
+    - "recall_at_1"
+    - "recall_at_10"
+    - "ndcg_at_10"
+    - "reachable_event_fraction"
+
+primary_comparison:
+  direction: "memory_only minus ridge_only"
+  pairing: "within identical final-test events"
+  independent_replication_unit: "seed"
+  report_every_seed: true
+  retain_negative_and_null_results: true
+
+statistics:
+  confidence_level: 0.95
+  bootstrap_seed: 4243
+  bootstrap_resamples: 10000
+  primary_interval_unit: "seed"
+  paired_seed_differences: true
+  report_mean_difference: true
+  report_median_difference: true
+  report_standard_deviation: true
+  report_minimum_and_maximum: true
+  multiple_testing_method: "holm"
+
+reproducibility:
+  deterministic: true
+  version_all_seed_values: true
+  export_per_seed_results: true
+  export_aggregate_results: true
+  hash_every_export: true
+  record_environment_versions: true
+  oracle_use_prohibited: true
+
+prohibited_claims:
+  - "Human olfactory equivalence"
+  - "Human perceptual validity"
+  - "Clinical effectiveness"
+  - "Physical odor-emission safety"
+  - "Real-world deployment readiness"
+  - "Statistical generalization beyond synthetic evidence"
