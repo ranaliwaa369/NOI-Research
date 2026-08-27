@@ -61,6 +61,76 @@ def generate_synthetic_pilot(
     )
 
 
+def generate_synthetic_pilot_with_seeds(
+    configuration_path: str | Path,
+    protocol_path: str | Path,
+    *,
+    event_count: int = 200,
+    generator_seed: int,
+    ood_seed: int,
+) -> SyntheticDataset:
+    """Generate a pilot using explicit prespecified seeds.
+
+    This function leaves the locked configuration and the original
+    generate_synthetic_pilot behavior unchanged.
+    """
+
+    if (
+        isinstance(generator_seed, bool)
+        or not isinstance(generator_seed, int)
+        or generator_seed < 0
+        or isinstance(ood_seed, bool)
+        or not isinstance(ood_seed, int)
+        or ood_seed < 0
+        or generator_seed == ood_seed
+    ):
+        raise SyntheticGenerationError(
+            "Explicit seeds must be distinct "
+            "nonnegative integers."
+        )
+
+    configuration = load_synthetic_configuration(
+        configuration_path,
+        protocol_path,
+    )
+
+    maximum_events = configuration[
+        "dataset"
+    ]["total_events"]
+
+    if (
+        isinstance(event_count, bool)
+        or not isinstance(event_count, int)
+        or event_count < 10
+        or event_count > maximum_events
+    ):
+        raise SyntheticGenerationError(
+            "event_count must be an integer between 10 and "
+            f"{maximum_events}."
+        )
+
+    overridden_configuration = dict(configuration)
+    overridden_randomness = dict(
+        configuration["randomness"]
+    )
+
+    overridden_randomness["generator_seed"] = (
+        generator_seed
+    )
+    overridden_randomness["independent_ood_seed"] = (
+        ood_seed
+    )
+
+    overridden_configuration["randomness"] = (
+        overridden_randomness
+    )
+
+    return _generate_dataset(
+        configuration=overridden_configuration,
+        event_count=event_count,
+    )
+
+
 def _generate_dataset(
     *,
     configuration: dict[str, Any],
