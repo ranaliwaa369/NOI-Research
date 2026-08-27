@@ -1,0 +1,54 @@
+{
+  "artifact_type": "computational_environment_provenance",
+  "dependency_lock": {
+    "path": "requirements-lock.txt",
+    "sha256": "c14f5d344875a9afe640418589a1fe13e5412efb7bd21b963a4ed3d50116ce5e"
+  },
+  "execution_environment": {
+    "operating_system": {
+      "architecture": "arm64",
+      "build": "25G83",
+      "name": "macOS",
+      "version": "26.6.2"
+    },
+    "packages": {
+      "PyYAML": "6.0.3",
+      "numpy": "2.4.6",
+      "pytest": "8.4.2",
+      "scikit-learn": "1.9.0"
+    },
+    "python": {
+      "compiler": "Clang 17.0.0 (clang-1700.0.13.3)",
+      "version": "3.11.14"
+    }
+  },
+  "result_artifacts": {
+    "aggregate_json": "results/v0.2.1/repeated_track_a_aggregate.json",
+    "aggregate_sha256": "6a210574087f17efeaf92a751985895716a40dd529ee96844c87c092b7158da0",
+    "independent_seed_count": 10
+  },
+  "schema_version": "1.0",
+  "scope_limits": [
+    "The evaluation uses synthetic data.",
+    "The results do not establish human olfactory equivalence.",
+    "The results do not establish physical sensor performance.",
+    "The results do not establish real-world deployment readiness."
+  ],
+  "source_control": {
+    "branch": "development-v0.2",
+    "commit": "8f1e7400f8360b159ee952b8354609844d2ba085",
+    "repository": "ranaliwaa369/NOI-Research",
+    "synchronized_with_remote": true,
+    "working_tree_clean": true
+  },
+  "study": "NOI v0.2.1 Repeated Track A",
+  "verification": {
+    "aggregate_hash_verified": true,
+    "all_final_test_targets_reachable": true,
+    "all_seed_hashes_verified": true,
+    "final_test_tuning_used": false,
+    "full_test_suite_passed": true,
+    "oracle_used": false,
+    "passed_test_count": 690
+  }
+}
