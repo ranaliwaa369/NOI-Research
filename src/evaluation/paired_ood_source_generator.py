@@ -30,6 +30,7 @@ from src.evaluation.synthetic_generator import (
     _orthogonal_matrix,
     _split_event_counts,
     generate_synthetic_pilot,
+    generate_synthetic_pilot_with_seeds,
 )
 from src.evaluation.synthetic_records import (
     SplitLabel,
@@ -138,8 +139,14 @@ def generate_paired_graded_ood_bundle(
     generation_definition_path: str | Path,
     *,
     event_count: int = 200,
+    generator_seed: int | None = None,
+    ood_seed: int | None = None,
 ) -> PairedGradedOODBundle:
-    """Replay original severe OOD events and create paired graded views."""
+    """Replay severe OOD events and create paired graded views.
+
+    Optional seeds permit prespecified independent repetitions.
+    Omitting both seeds preserves the original locked behavior.
+    """
 
     if (
         isinstance(event_count, bool)
@@ -148,6 +155,24 @@ def generate_paired_graded_ood_bundle(
     ):
         raise PairedOODSourceGenerationError(
             "event_count must be an integer of at least 10."
+        )
+
+    _validate_optional_seed(
+        generator_seed,
+        "generator_seed",
+    )
+    _validate_optional_seed(
+        ood_seed,
+        "ood_seed",
+    )
+
+    if (
+        generator_seed is not None
+        and ood_seed is not None
+        and generator_seed == ood_seed
+    ):
+        raise PairedOODSourceGenerationError(
+            "generator_seed and ood_seed must differ."
         )
 
     synthetic_path = Path(synthetic_configuration_path)
@@ -188,15 +213,51 @@ def generate_paired_graded_ood_bundle(
         protocol_file,
     )
 
-    original_dataset = generate_synthetic_pilot(
-        synthetic_path,
-        protocol_file,
-        event_count=event_count,
+    randomness = configuration["randomness"]
+
+    resolved_generator_seed = (
+        randomness["generator_seed"]
+        if generator_seed is None
+        else generator_seed
     )
+    resolved_ood_seed = (
+        randomness["independent_ood_seed"]
+        if ood_seed is None
+        else ood_seed
+    )
+
+    if resolved_generator_seed == resolved_ood_seed:
+        raise PairedOODSourceGenerationError(
+            "Resolved generator and OOD seeds must differ."
+        )
+
+    if (
+        generator_seed is None
+        and ood_seed is None
+    ):
+        original_dataset = generate_synthetic_pilot(
+            synthetic_path,
+            protocol_file,
+            event_count=event_count,
+        )
+    else:
+        original_dataset = (
+            generate_synthetic_pilot_with_seeds(
+                synthetic_path,
+                protocol_file,
+                event_count=event_count,
+                generator_seed=(
+                    resolved_generator_seed
+                ),
+                ood_seed=resolved_ood_seed,
+            )
+        )
 
     sources, replayed_targets = _replay_paired_sources(
         configuration=configuration,
         event_count=event_count,
+        generator_seed=resolved_generator_seed,
+        ood_seed=resolved_ood_seed,
     )
 
     if tuple(replayed_targets) != original_dataset.odor_targets:
@@ -425,6 +486,8 @@ def _replay_paired_sources(
     *,
     configuration: dict[str, Any],
     event_count: int,
+    generator_seed: int,
+    ood_seed: int,
 ) -> tuple[
     tuple[PairedOODSource, ...],
     tuple[SyntheticOdorTarget, ...],
@@ -433,17 +496,12 @@ def _replay_paired_sources(
 
     dataset_config = configuration["dataset"]
     split_config = configuration["splits"]
-    randomness = configuration["randomness"]
-
     dimension = dataset_config["latent_dimension"]
 
     if dimension != dataset_config["modality_dimension"]:
         raise PairedOODSourceGenerationError(
             "Latent and modality dimensions must match."
         )
-
-    generator_seed = randomness["generator_seed"]
-    ood_seed = randomness["independent_ood_seed"]
 
     id_rng = np.random.default_rng(generator_seed)
     ood_rng = np.random.default_rng(ood_seed)
@@ -641,3 +699,21 @@ def _first_mismatch(
             )
 
     return ""
+
+def _validate_optional_seed(
+    value: int | None,
+    name: str,
+) -> None:
+    """Validate one optional deterministic RNG seed."""
+
+    if value is None:
+        return
+
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, int)
+        or value < 0
+    ):
+        raise PairedOODSourceGenerationError(
+            f"{name} must be a nonnegative integer seed."
+        )
