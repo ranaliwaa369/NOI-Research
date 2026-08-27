@@ -1,0 +1,449 @@
+{
+  "artifact_type": "repeated_track_a_aggregate",
+  "bootstrap": {
+    "confidence_level": 0.95,
+    "method": "paired percentile bootstrap of seed-level mean differences",
+    "resamples": 10000,
+    "seed": 4243
+  },
+  "controls": {
+    "all_targets_reachable": true,
+    "final_test_tuning_used": false,
+    "independent_replication_unit": "seed",
+    "oracle_used": false,
+    "pilot_included": false,
+    "systems_use_paired_seed_runs": true
+  },
+  "evaluation_track": "seen_item_episodic_retrieval",
+  "evidence_scope": "synthetic_computational_evaluation_only",
+  "inference": {
+    "configured_multiple_testing_method": "holm",
+    "multiple_testing_applied": false,
+    "p_values_reported": false,
+    "reason": "No null-hypothesis significance test was prespecified.",
+    "secondary_comparisons_are": "descriptive_not_confirmatory"
+  },
+  "interpretation": {
+    "hybrid_statement": "The hybrid system had the highest descriptive mean MRR, but hybrid comparisons are not the prespecified primary confirmatory comparison.",
+    "primary_supported": true,
+    "statement": "Across the ten prespecified synthetic seed runs, memory-only achieved a positive mean MRR difference relative to ridge-only, and the prespecified paired 95% bootstrap confidence interval excluded zero."
+  },
+  "limitations": [
+    "Synthetic computational evidence does not establish human olfactory equivalence or human perceptual validity.",
+    "These results do not establish real-world deployment readiness or performance with physical chemical sensors.",
+    "Track A evaluates retrieval only when the correct target is represented in training memory.",
+    "The held-out-family OOD question remains a separate evaluation track.",
+    "Hybrid comparisons are secondary descriptive analyses in this artifact."
+  ],
+  "primary_comparison": {
+    "confidence_interval": {
+      "level": 0.95,
+      "lower": 0.004399445015426598,
+      "method": "paired percentile bootstrap",
+      "upper": 0.014384733916710307
+    },
+    "confirmatory_interval_excludes_zero": true,
+    "differences": [
+      -0.003968253968253954,
+      0.013006966313579671,
+      0.004295532646048206,
+      0.01543967280163594,
+      0.00810854206807965,
+      0.004685408299866078,
+      0.00677618069815189,
+      0.009813705921490445,
+      0.004873294346978585,
+      0.027637130801687948
+    ],
+    "direction": "memory_only minus ridge_only",
+    "left_system": "memory_only",
+    "losses": 1,
+    "maximum_difference": 0.027637130801687948,
+    "mean_difference": 0.009066817992926446,
+    "median_difference": 0.00744236138311577,
+    "metric": "mean_reciprocal_rank",
+    "minimum_difference": -0.003968253968253954,
+    "right_system": "ridge_only",
+    "standard_deviation": 0.008414130805582891,
+    "status": "prespecified_confirmatory",
+    "ties": 0,
+    "wins": 9
+  },
+  "repeated_protocol_sha256": "0c7477a2357fbd0811c8bbcdf3183c33365cab9dc1eaacc66d252f00174995c0",
+  "run_count": 10,
+  "run_ids": [
+    "seed-01",
+    "seed-02",
+    "seed-03",
+    "seed-04",
+    "seed-05",
+    "seed-06",
+    "seed-07",
+    "seed-08",
+    "seed-09",
+    "seed-10"
+  ],
+  "schema_version": "0.2.1",
+  "secondary_descriptive_comparisons": {
+    "hybrid_minus_memory_mrr": {
+      "differences": [
+        0.008297258297258248,
+        0.0010020040080159776,
+        0.008075601374570418,
+        0.0023858214042263848,
+        0.0012845215157353262,
+        0.0006693440428381381,
+        0.0010266940451745254,
+        0.005988023952095856,
+        0.0,
+        0.0052742616033755185
+      ],
+      "losses": 0,
+      "mean_difference": 0.0034003530243290393,
+      "status": "secondary_descriptive",
+      "ties": 1,
+      "wins": 9
+    },
+    "hybrid_minus_ridge_mrr": {
+      "differences": [
+        0.0043290043290042934,
+        0.014008970321595648,
+        0.012371134020618624,
+        0.017825494205862324,
+        0.009393063583814976,
+        0.0053547523427042165,
+        0.007802874743326416,
+        0.0158017298735863,
+        0.004873294346978585,
+        0.032911392405063467
+      ],
+      "losses": 0,
+      "mean_difference": 0.012467171017255484,
+      "status": "secondary_descriptive",
+      "ties": 0,
+      "wins": 10
+    }
+  },
+  "selected_hybrid_alphas": [
+    0.5,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.75,
+    0.25,
+    0.25,
+    0.0,
+    0.25
+  ],
+  "source_artifacts": [
+    {
+      "json_sha256": "8d45524843a1af853f7d3f149f05e94d32997e1194115a2d9d6b3be0e28a5d67",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-01",
+      "selected_hybrid_alpha": 0.5
+    },
+    {
+      "json_sha256": "4a1224da5dff0bf238c226d5ded9f2a5f5ee14dc01947d6d26ea1468321db215",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-02",
+      "selected_hybrid_alpha": 0.25
+    },
+    {
+      "json_sha256": "c1ab47db48ce373a195853ba0c57a885b3fc657b5bee15560569298ce9b3c0c9",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-03",
+      "selected_hybrid_alpha": 0.25
+    },
+    {
+      "json_sha256": "8ce9c792d0fae7f3f4b04c0616038fd9511dbc7e2187898aa7a10b67d1a08d67",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-04",
+      "selected_hybrid_alpha": 0.25
+    },
+    {
+      "json_sha256": "8650c5119664a133b00182c656d60de99a581f1899fd035ef4c4e0be52158bcb",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-05",
+      "selected_hybrid_alpha": 0.25
+    },
+    {
+      "json_sha256": "a9f3f750963ae9c17700e5f5a81881b66428e4d97766196ef445fd0d2adb398b",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-06",
+      "selected_hybrid_alpha": 0.75
+    },
+    {
+      "json_sha256": "c74cc8927e2b88038db453bd5774f369e2f811d2fa5fcff521a8aad3f34f7f13",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-07",
+      "selected_hybrid_alpha": 0.25
+    },
+    {
+      "json_sha256": "d3bdfd98575caebb37e75ca449dc844185cdba7fe9c54fca4cd56a2dd50d479d",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-08",
+      "selected_hybrid_alpha": 0.25
+    },
+    {
+      "json_sha256": "c84e6ccf09aa374d87e58eaaf234d9ccb26090d5982e3e2af3fd04024b0079af",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-09",
+      "selected_hybrid_alpha": 0.0
+    },
+    {
+      "json_sha256": "8579ce4c2d0a221b3002c3251fadbf3bfcf564dcaef3abf1581968adfb3e45f9",
+      "reachable_event_fraction": 1.0,
+      "run_id": "seed-10",
+      "selected_hybrid_alpha": 0.25
+    }
+  ],
+  "systems": {
+    "hybrid": {
+      "mean_reciprocal_rank": {
+        "count": 10,
+        "maximum": 0.9959919839679359,
+        "mean": 0.994437082214229,
+        "median": 0.9948235900939826,
+        "minimum": 0.9924242424242424,
+        "standard_deviation": 0.0012317433818712508,
+        "values": [
+          0.9924242424242424,
+          0.9959919839679359,
+          0.9948453608247423,
+          0.9928425357873211,
+          0.9951830443159922,
+          0.9953145917001339,
+          0.9945242984257358,
+          0.9930139720558883,
+          0.9948018193632229,
+          0.9954289732770745
+        ]
+      },
+      "ndcg_at_10": {
+        "count": 10,
+        "maximum": 0.9970415210707132,
+        "mean": 0.995885777209329,
+        "median": 0.9961713762581931,
+        "minimum": 0.9944080265692647,
+        "standard_deviation": 0.0009046174915094045,
+        "values": [
+          0.9944080265692647,
+          0.9970415210707132,
+          0.9961951520986749,
+          0.9947167858384464,
+          0.996444409957336,
+          0.9965097580464718,
+          0.9959419281607512,
+          0.99484332989022,
+          0.9961476004177112,
+          0.9966092600437013
+        ]
+      },
+      "recall_at_1": {
+        "count": 10,
+        "maximum": 0.9919839679358717,
+        "mean": 0.9892117802527085,
+        "median": 0.9899932354271488,
+        "minimum": 0.9848484848484849,
+        "standard_deviation": 0.0026942762965237767,
+        "values": [
+          0.9848484848484849,
+          0.9919839679358717,
+          0.9896907216494846,
+          0.9856850715746421,
+          0.9903660886319846,
+          0.9919678714859438,
+          0.9897330595482546,
+          0.9860279441117764,
+          0.9902534113060428,
+          0.9915611814345991
+        ]
+      },
+      "recall_at_10": {
+        "count": 10,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "standard_deviation": 0.0,
+        "values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "memory_only": {
+      "mean_reciprocal_rank": {
+        "count": 10,
+        "maximum": 0.9949899799599199,
+        "mean": 0.9910367291898998,
+        "median": 0.991977159381828,
+        "minimum": 0.9841269841269842,
+        "standard_deviation": 0.003947201753643061,
+        "values": [
+          0.9841269841269842,
+          0.9949899799599199,
+          0.9867697594501719,
+          0.9904567143830947,
+          0.9938985228002569,
+          0.9946452476572958,
+          0.9934976043805612,
+          0.9870259481037924,
+          0.9948018193632229,
+          0.990154711673699
+        ]
+      },
+      "ndcg_at_10": {
+        "count": 10,
+        "maximum": 0.9963019013383915,
+        "mean": 0.9933591883229594,
+        "median": 0.9940618148914657,
+        "minimum": 0.9881812140655628,
+        "standard_deviation": 0.0029344951867036873,
+        "values": [
+          0.9881812140655628,
+          0.9963019013383915,
+          0.9901855135954394,
+          0.9929395460706988,
+          0.9954810188205344,
+          0.9960315642857146,
+          0.9951840837122328,
+          0.99042332693898,
+          0.9961476004177112,
+          0.9927161139843286
+        ]
+      },
+      "recall_at_1": {
+        "count": 10,
+        "maximum": 0.9902534113060428,
+        "mean": 0.9830091038679807,
+        "median": 0.9846373817412227,
+        "minimum": 0.9718614718614719,
+        "standard_deviation": 0.0072361523576061435,
+        "values": [
+          0.9718614718614719,
+          0.9899799599198397,
+          0.9752577319587629,
+          0.9815950920245399,
+          0.9884393063583815,
+          0.9899598393574297,
+          0.9876796714579056,
+          0.9740518962075848,
+          0.9902534113060428,
+          0.9810126582278481
+        ]
+      },
+      "recall_at_10": {
+        "count": 10,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "standard_deviation": 0.0,
+        "values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "ridge_only": {
+      "mean_reciprocal_rank": {
+        "count": 10,
+        "maximum": 0.9899598393574297,
+        "mean": 0.9819699111969735,
+        "median": 0.9841321037681505,
+        "minimum": 0.962517580872011,
+        "standard_deviation": 0.008508122844395703,
+        "values": [
+          0.9880952380952381,
+          0.9819830136463402,
+          0.9824742268041237,
+          0.9750170415814587,
+          0.9857899807321773,
+          0.9899598393574297,
+          0.9867214236824093,
+          0.977212242182302,
+          0.9899285250162443,
+          0.962517580872011
+        ]
+      },
+      "ndcg_at_10": {
+        "count": 10,
+        "maximum": 0.992550424526595,
+        "mean": 0.98651128042834,
+        "median": 0.9882255638497028,
+        "minimum": 0.9718726299483376,
+        "standard_deviation": 0.006463056883726298,
+        "values": [
+          0.991212613180273,
+          0.9865557979627764,
+          0.9870146119514002,
+          0.9808541571697096,
+          0.9894365157480054,
+          0.9925413223321864,
+          0.9901358323263844,
+          0.9829388991377327,
+          0.992550424526595,
+          0.9718726299483376
+        ]
+      },
+      "recall_at_1": {
+        "count": 10,
+        "maximum": 0.9819277108433735,
+        "mean": 0.9679905210181305,
+        "median": 0.9704804599565219,
+        "minimum": 0.9388185654008439,
+        "standard_deviation": 0.012928518879025413,
+        "values": [
+          0.9761904761904762,
+          0.9679358717434869,
+          0.9670103092783505,
+          0.9570552147239264,
+          0.9730250481695568,
+          0.9819277108433735,
+          0.9753593429158111,
+          0.9620758483033932,
+          0.9805068226120858,
+          0.9388185654008439
+        ]
+      },
+      "recall_at_10": {
+        "count": 10,
+        "maximum": 1.0,
+        "mean": 0.9997955010224949,
+        "median": 1.0,
+        "minimum": 0.9979550102249489,
+        "standard_deviation": 0.0006466825480916777,
+        "values": [
+          1.0,
+          1.0,
+          1.0,
+          0.9979550102249489,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    }
+  }
+}
