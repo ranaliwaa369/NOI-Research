@@ -1,0 +1,63 @@
+protocol:
+  name: "NOI v0.2 Seen-Item Episodic Retrieval"
+  version: "0.2.0"
+  status: "prespecified_development"
+  modifies_v0_1_results: false
+
+dataset:
+  source_config: "configs/synthetic_data.yaml"
+  research_protocol: "configs/research_protocol.yaml"
+  total_event_count: 10000
+  evaluation_split: "validation"
+
+template_partition:
+  method: "deterministic_group_partition"
+  grouping_field: "template_id"
+  calibration_fraction: 0.50
+  partition_seed: 2102
+  prohibit_template_overlap: true
+  prohibit_random_row_split: true
+
+calibration:
+  purpose: "hybrid_alpha_selection"
+  require_training_target_reachability: false
+
+seen_item_test:
+  purpose: "final_seen_item_evaluation"
+  require_training_target_reachability: true
+  prohibit_calibration_events: true
+  prohibit_calibration_templates: true
+  prohibit_training_events: true
+  prohibit_ood_events: true
+
+systems:
+  - "memory_only"
+  - "ridge_only"
+  - "hybrid"
+
+alpha:
+  memory_only: 0.0
+  ridge_only: 1.0
+  hybrid_selection_source: "calibration_only"
+
+metrics:
+  - "recall_at_1"
+  - "recall_at_10"
+  - "mean_reciprocal_rank"
+  - "ndcg_at_10"
+  - "reachable_target_fraction"
+  - "reachable_event_fraction"
+
+controls:
+  top_k: 10
+  oracle_use_prohibited: true
+  final_test_tuning_prohibited: true
+  ood_pool_use_prohibited: true
+  retain_negative_results: true
+  export_reachability_indicator: true
+  hash_outputs: true
+
+reporting:
+  label: "Track A: Seen-item episodic retrieval"
+  do_not_pool_with_unseen_family_results: true
+  synthetic_evidence_only: true
