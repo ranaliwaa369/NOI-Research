@@ -1,0 +1,187 @@
+protocol:
+  name: "NOI Unseen-Family Generalization and Abstention"
+  version: "0.2.2"
+  status: "prespecified_preimplementation"
+  date: "2026-08-27"
+  owner: "GUARDIANX LLC"
+
+scope:
+  evaluation_track: "Track B: Unseen-family generalization"
+  evidence_type: "synthetic computational evaluation only"
+  modifies_v0_1_results: false
+  modifies_track_a_results: false
+  pools_seen_and_unseen_metrics: false
+
+governance:
+  development_branch: "development-v0.2"
+  locked_track_a_commit: "fc7d8c2"
+  parent_protocol: "configs/research_protocol.yaml"
+  amendment: "configs/protocol_amendment_v0.2.yaml"
+  graded_ood_definition: "configs/graded_ood_generation.yaml"
+  prohibit_result_inspection_before_implementation_lock: true
+  prohibit_final_test_tuning: true
+  retain_all_runs: true
+  hash_every_export: true
+
+dataset:
+  events_per_run: 10000
+  training_fraction: 0.70
+  validation_fraction: 0.10
+  base_ood_fraction: 0.20
+  base_latent_ood_events: 2000
+  severity_views_per_latent_event: 3
+  expected_observed_ood_rows: 6000
+  paired_analysis_unit: "latent_event_id"
+  severity_tiers:
+    - "mild"
+    - "moderate"
+    - "severe"
+  strict_odor_family_separation: true
+  require_all_final_ood_targets_unreachable: true
+  report_each_severity_separately: true
+  prohibit_seen_unseen_pooling: true
+
+primary_runs:
+  independent_run_count: 10
+  runs:
+    - run_id: "track-b-seed-01"
+      generator_seed: 1101
+      ood_seed: 9101
+    - run_id: "track-b-seed-02"
+      generator_seed: 1201
+      ood_seed: 9201
+    - run_id: "track-b-seed-03"
+      generator_seed: 1301
+      ood_seed: 9301
+    - run_id: "track-b-seed-04"
+      generator_seed: 1401
+      ood_seed: 9401
+    - run_id: "track-b-seed-05"
+      generator_seed: 1501
+      ood_seed: 9501
+    - run_id: "track-b-seed-06"
+      generator_seed: 1601
+      ood_seed: 9601
+    - run_id: "track-b-seed-07"
+      generator_seed: 1701
+      ood_seed: 9701
+    - run_id: "track-b-seed-08"
+      generator_seed: 1801
+      ood_seed: 9801
+    - run_id: "track-b-seed-09"
+      generator_seed: 1901
+      ood_seed: 9901
+    - run_id: "track-b-seed-10"
+      generator_seed: 2001
+      ood_seed: 10001
+
+systems:
+  amendment_required:
+    - "random"
+    - "text_only_cosine"
+    - "mean_fusion_cosine"
+    - "ridge_fusion"
+    - "full_noi_system"
+  reachability_extension:
+    - "memory_only_diagnostic"
+    - "reachability_aware_hybrid"
+
+memory_support:
+  signal: "maximum clipped cosine similarity to any active training memory"
+  feature_source: "mean_fused_context"
+  target_item_identifier_used: false
+  target_family_identifier_used: false
+  ood_oracle_used: false
+  temporal_decay_applied: false
+
+threshold_calibration:
+  source_split: "validation"
+  require_memory_reachable_events: true
+  exclude_memory_unreachable_events: true
+  ood_events_used: false
+  final_test_events_used: false
+  minimum_reachable_coverage: 0.95
+  selection_rule: >
+    Select the largest observed support-score threshold for which
+    validation coverage remains at least 0.95.
+  support_rule: "support_score >= threshold"
+  abstention_rule: "support_score < threshold"
+  ties_are_supported: true
+
+primary_questions:
+  representation_generalization: >
+    Can ridge fusion retrieve targets from odor families absent from
+    training memory?
+  unsupported_query_detection: >
+    Can a memory-aware system identify unsupported queries and abstain
+    without using target identifiers, family identifiers, or an OOD
+    oracle?
+
+metrics:
+  retrieval:
+    - "recall_at_1"
+    - "recall_at_10"
+    - "mean_reciprocal_rank"
+    - "ndcg_at_10"
+  reachability:
+    - "reachable_target_fraction"
+    - "reachable_event_fraction"
+  selective_prediction:
+    - "coverage"
+    - "abstention_rate"
+    - "selective_error_rate"
+    - "false_support_rate_on_unreachable_events"
+  report_by:
+    - "run_id"
+    - "severity_tier"
+    - "system"
+
+confirmatory_abstention_criterion:
+  calibration_reachable_coverage_minimum: 0.95
+  unseen_family_abstention_rate_minimum: 0.80
+  require_both_conditions: true
+  interpretation: >
+    This is a prespecified synthetic engineering criterion and is not
+    a clinical, biological, or deployment-safety certification.
+
+statistics:
+  confidence_level: 0.95
+  bootstrap_resamples: 10000
+  bootstrap_seed: 4244
+  bootstrap_unit: "latent_event_id"
+  severity_pairing: true
+  seed_level_aggregate: true
+  report_mean: true
+  report_median: true
+  report_standard_deviation: true
+  report_minimum_and_maximum: true
+  report_paired_confidence_intervals: true
+  multiple_testing_method: "holm"
+
+non_negotiable_controls:
+  - "No OOD target may be represented as memory-reachable."
+  - "Target identifiers must not enter feature vectors."
+  - "Family identifiers must not enter feature vectors."
+  - "The abstention threshold must not use OOD events."
+  - "The final test must not select models or thresholds."
+  - "Mild, moderate, and severe results must remain separate."
+  - "Seen-item and unseen-family results must remain separate."
+  - "Every result must include reachability and coverage."
+  - "All negative and null results must be retained."
+  - "The locked v0.1 and Track A artifacts must remain unchanged."
+
+remaining_robustness_work:
+  missing_modality_evaluation_required: true
+  temporal_displacement_evaluation_required: true
+  note: >
+    These robustness evaluations remain required before the complete
+    NOI v0.2 research package can be closed.
+
+prohibited_claims:
+  - "Human olfactory equivalence"
+  - "Animal olfactory equivalence"
+  - "Human perceptual validity"
+  - "Clinical effectiveness"
+  - "Physical sensor performance"
+  - "Real-world deployment readiness"
+  - "Certified safety performance"
