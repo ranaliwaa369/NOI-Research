@@ -110,6 +110,22 @@ def export_seen_item_final_experiment(
     )
 
 
+def build_seen_item_final_payload(
+    experiment: SeenItemFinalExperiment,
+) -> dict[str, Any]:
+    """Return the deterministic Track A result payload."""
+
+    if not isinstance(
+        experiment,
+        SeenItemFinalExperiment,
+    ):
+        raise SeenItemResultExportError(
+            "experiment must be a SeenItemFinalExperiment."
+        )
+
+    return _build_payload(experiment)
+
+
 def _build_payload(
     experiment: SeenItemFinalExperiment,
 ) -> dict[str, Any]:
