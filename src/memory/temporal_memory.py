@@ -54,6 +54,7 @@ class TemporalAssociativeMemory:
         self._dimension = dimension
         self._decay_rate_per_day = float(decay_rate_per_day)
         self._records: dict[str, AssociativeMemoryRecord] = {}
+        self._item_score_cache = None
 
     @property
     def dimension(self) -> int:
@@ -96,8 +97,12 @@ class TemporalAssociativeMemory:
             )
 
         self._records[record.memory_id] = record
+        self._item_score_cache = None
 
-    def get(self, memory_id: str) -> AssociativeMemoryRecord:
+    def get(
+        self,
+        memory_id: str,
+    ) -> AssociativeMemoryRecord:
         """Return one stored association by identifier."""
 
         try:
@@ -139,6 +144,7 @@ class TemporalAssociativeMemory:
             )
 
         self._records[record.memory_id] = record
+        self._item_score_cache = None
 
     def retrieve(
         self,
@@ -292,6 +298,212 @@ class TemporalAssociativeMemory:
                 start=1,
             )
         )
+
+    def retrieve_item_scores(
+        self,
+        query_vector: Iterable[float] | FloatArray,
+        *,
+        as_of_utc: datetime,
+        apply_temporal_decay: bool = True,
+    ) -> dict[str, float]:
+        """Return maximum score per odor without ranking every memory."""
+
+        self._validate_as_of(as_of_utc)
+
+        if not isinstance(apply_temporal_decay, bool):
+            raise AssociativeMemoryError(
+                "apply_temporal_decay must be boolean."
+            )
+
+        query = np.asarray(
+            tuple(query_vector),
+            dtype=np.float64,
+        )
+
+        if query.ndim != 1:
+            raise AssociativeMemoryError(
+                "The query must be one-dimensional."
+            )
+
+        if query.shape[0] != self._dimension:
+            raise AssociativeMemoryError(
+                "The query dimension does not match "
+                "the memory dimension."
+            )
+
+        if not np.all(np.isfinite(query)):
+            raise AssociativeMemoryError(
+                "The query must contain only finite values."
+            )
+
+        query_norm = float(np.linalg.norm(query))
+
+        if (
+            not np.isfinite(query_norm)
+            or query_norm <= np.finfo(np.float64).eps
+        ):
+            raise AssociativeMemoryError(
+                "The query must have a nonzero finite norm."
+            )
+
+        if self._item_score_cache is None:
+            records = tuple(
+                record
+                for record in self._records.values()
+                if record.active
+            )
+
+            if records:
+                contexts = np.asarray(
+                    [
+                        record.context_vector
+                        for record in records
+                    ],
+                    dtype=np.float64,
+                )
+                norms = np.linalg.norm(
+                    contexts,
+                    axis=1,
+                )
+
+                if np.any(
+                    norms
+                    <= np.finfo(np.float64).eps
+                ):
+                    raise AssociativeMemoryError(
+                        "An active memory has a zero "
+                        "context norm."
+                    )
+
+                normalized_contexts = (
+                    contexts / norms[:, None]
+                )
+                strengths = np.asarray(
+                    [
+                        record.strength
+                        for record in records
+                    ],
+                    dtype=np.float64,
+                )
+                updated_seconds = np.asarray(
+                    [
+                        record.updated_at_utc.timestamp()
+                        for record in records
+                    ],
+                    dtype=np.float64,
+                )
+                item_ids = tuple(
+                    dict.fromkeys(
+                        record.odor_item_id
+                        for record in records
+                    )
+                )
+                item_lookup = {
+                    item_id: index
+                    for index, item_id
+                    in enumerate(item_ids)
+                }
+                item_indices = np.asarray(
+                    [
+                        item_lookup[
+                            record.odor_item_id
+                        ]
+                        for record in records
+                    ],
+                    dtype=np.int64,
+                )
+            else:
+                normalized_contexts = np.empty(
+                    (0, self._dimension),
+                    dtype=np.float64,
+                )
+                strengths = np.empty(
+                    0,
+                    dtype=np.float64,
+                )
+                updated_seconds = np.empty(
+                    0,
+                    dtype=np.float64,
+                )
+                item_ids = ()
+                item_indices = np.empty(
+                    0,
+                    dtype=np.int64,
+                )
+
+            self._item_score_cache = (
+                normalized_contexts,
+                strengths,
+                updated_seconds,
+                item_ids,
+                item_indices,
+            )
+
+        (
+            normalized_contexts,
+            strengths,
+            updated_seconds,
+            item_ids,
+            item_indices,
+        ) = self._item_score_cache
+
+        if not item_ids:
+            return {}
+
+        as_of_seconds = as_of_utc.timestamp()
+
+        if np.any(
+            as_of_seconds < updated_seconds
+        ):
+            raise AssociativeMemoryError(
+                "as_of_utc cannot precede a "
+                "record's updated_at_utc."
+            )
+
+        similarities = np.clip(
+            normalized_contexts
+            @ (query / query_norm),
+            0.0,
+            1.0,
+        )
+
+        if apply_temporal_decay:
+            age_days = (
+                as_of_seconds - updated_seconds
+            ) / SECONDS_PER_DAY
+            temporal_weights = np.maximum(
+                np.exp(
+                    -self._decay_rate_per_day
+                    * age_days
+                ),
+                np.finfo(np.float64).tiny,
+            )
+        else:
+            temporal_weights = np.ones_like(
+                strengths
+            )
+
+        scores = (
+            similarities
+            * strengths
+            * temporal_weights
+        )
+
+        maximum_scores = np.zeros(
+            len(item_ids),
+            dtype=np.float64,
+        )
+        np.maximum.at(
+            maximum_scores,
+            item_indices,
+            scores,
+        )
+
+        return {
+            item_id: float(maximum_scores[index])
+            for index, item_id
+            in enumerate(item_ids)
+        }
 
     @staticmethod
     def _validate_as_of(as_of_utc: datetime) -> None:

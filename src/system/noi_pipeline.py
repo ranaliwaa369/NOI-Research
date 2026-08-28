@@ -730,33 +730,29 @@ class NOIPipeline:
             for item_id, odor_vector in self._library_vectors.items()
         }
 
-        memory_candidates = self._memory.retrieve(
-            query,
-            as_of_utc=as_of_utc,
-            top_k=max(1, len(self._training_event_ids)),
-            apply_temporal_decay=apply_temporal_decay,
+        retrieved_memory_scores = (
+            self._memory.retrieve_item_scores(
+                query,
+                as_of_utc=as_of_utc,
+                apply_temporal_decay=(
+                    apply_temporal_decay
+                ),
+            )
         )
 
         memory_scores = {
-            item_id: 0.0
+            item_id: float(
+                np.clip(
+                    retrieved_memory_scores.get(
+                        item_id,
+                        0.0,
+                    ),
+                    0.0,
+                    1.0,
+                )
+            )
             for item_id in self._library_vectors
         }
-
-        for candidate in memory_candidates:
-            current = memory_scores.get(
-                candidate.odor_item_id,
-                0.0,
-            )
-            memory_scores[candidate.odor_item_id] = max(
-                current,
-                float(
-                    np.clip(
-                        candidate.score,
-                        0.0,
-                        1.0,
-                    )
-                ),
-            )
 
         scored = []
 
