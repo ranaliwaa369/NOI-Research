@@ -1,6 +1,6 @@
 # Neuro-Olfactive Intelligence (NOI)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22064263.svg)](https://doi.org/10.5281/zenodo.22064263)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22139127.svg)](https://doi.org/10.5281/zenodo.22139127)
 
 ## Overview
 
@@ -22,13 +22,17 @@ temporal-displacement, correction, and policy-conformance conditions.
 
 ## Release Status
 
-The current public research-software release is version 0.1.0.
+The current public research-software release is version 0.2.0.
 
-This is an exploratory release containing implemented experiments,
-machine-readable results, provenance records, locked configurations,
-verification functions, and automated tests.
+This release contains repeated seen-item evaluation, unseen-family
+evaluation, selective memory-support abstention, final missing-modality
+and temporal-displacement robustness evaluation, machine-readable
+results, provenance records, locked configurations, verification
+functions, and automated tests.
 
-It is not confirmatory evidence of real-world system performance.
+The evidence is synthetic computational evidence. It is not evidence of
+real-world odor sensing, human or animal olfactory equivalence, clinical
+effectiveness, chemical safety, or deployment readiness.
 
 ## Implemented Evaluations
 
@@ -37,13 +41,43 @@ It is not confirmatory evidence of real-world system performance.
 - NOI component-ablation pilot
 - Controlled corrective-memory pilot
 - Deterministic policy-conformance pilot
+- Repeated Track A seen-item evaluation
+- Track B unseen-family evaluation
+- Selective memory-support abstention evaluation
+- Missing-modality robustness evaluation
+- Temporal-displacement robustness evaluation
 
 Versioned configurations are in `configs/`.
 Experiment implementations are in `experiments/`.
 Provenance records are in `docs/`.
 Machine-readable outputs are in `results/`.
 
-## Main Exploratory Findings
+## Version 0.2 Findings
+
+The repeated Track A evaluation found a positive associative-memory
+contribution for previously represented target items. The mean paired
+memory-only minus ridge-only MRR advantage was `0.009066818`, with a 95%
+paired bootstrap interval of `[0.004399445, 0.014384734]`.
+
+Track B found that direct unseen-family target identification remained
+unresolved. The validation-calibrated support mechanism nevertheless
+abstained at high rates for unsupported unseen-family events, without
+using an OOD oracle or final-test tuning.
+
+The final robustness hypothesis H4 was not supported. Ridge-only was the
+strongest eligible baseline in all 36 missing-modality and
+temporal-displacement condition-tier tests, and the full hybrid exceeded
+it in 0 of 36 tests.
+
+Together, these results show that the current associative memory helps
+with previously represented items but does not solve unseen-family
+identity retrieval. The negative robustness result is retained as an
+architectural limitation and motivates future support-gated routing.
+
+See `docs/noi_v0.2_final_results.md` for the complete interpretation and
+reproducibility record.
+
+## Version 0.1 Exploratory Findings
 
 ### Graded out-of-distribution behavior
 
@@ -119,7 +153,7 @@ The principal protocol is `configs/research_protocol.yaml`.
 
 ## Environment and Testing
 
-Version 0.1.0 uses Python 3.11.
+Version 0.2.0 uses Python 3.11.
 
 Create an environment and install the locked dependencies:
 
@@ -149,7 +183,7 @@ Citation metadata are provided in `CITATION.cff`.
 
 Software release DOI:
 
-https://doi.org/10.5281/zenodo.22064263
+https://doi.org/10.5281/zenodo.22139127
 
 ## Authors
 

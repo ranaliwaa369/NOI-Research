@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use or discuss this research framework, please cite it using the metadata below."
 title: "Neuro-Olfactive Intelligence (NOI): Reproducible Research Framework"
 type: software
-version: 0.1.0
-date-released: 2026-08-22
+version: 0.2.0
+date-released: 2026-08-28
 authors:
   - family-names: "Al-Dahlake"
     given-names: "Rana"
@@ -35,4 +35,4 @@ contact:
     orcid: "https://orcid.org/0009-0001-8919-8177"
 
 repository-code: "https://github.com/ranaliwaa369/NOI-Research"
-doi: "10.5281/zenodo.22064263"
+doi: "10.5281/zenodo.22139127"
