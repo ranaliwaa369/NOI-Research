@@ -1,7 +1,7 @@
 {
   "title": "Neuro-Olfactive Intelligence (NOI): Reproducible Research Framework",
   "upload_type": "software",
-  "description": "Version 0.1.0 of a proprietary, publicly inspectable research framework for reproducible simulation and evaluation of neuro-olfactive artificial intelligence, contextual olfactory memory, multimodal odor representation, corrective associative memory, graded out-of-distribution behavior, and deterministic policy conformance. The evidence is exploratory and limited to controlled simulations. It does not establish clinical validity, real-world odor sensing, deployment readiness, or comprehensive safety.",
+  "description": "Version 0.2.0 of a proprietary, publicly inspectable research framework for reproducible simulation and evaluation of neuro-olfactive artificial intelligence. This release adds ten-run seen-item associative-memory evaluation, unseen-family generalization, calibrated selective abstention, missing-modality robustness, temporal-displacement robustness, paired bootstrap analysis, and deterministic provenance exports. Track A found a repeatable associative-memory contribution for previously represented items. Direct unseen-family identity retrieval remained unresolved, while calibrated abstention was high. The final H4 robustness hypothesis was not supported in any of 36 condition-tier tests. All positive, null, and negative findings are retained. The evidence is synthetic computational evidence and does not establish human or animal olfactory equivalence, clinical validity, physical odor sensing, chemical safety, deployment readiness, or comprehensive safety.",
   "creators": [
     {
       "name": "Al-Dahlake, Rana",
@@ -24,9 +24,9 @@
     "reproducible simulation"
   ],
   "access_right": "open",
-  "version": "0.1.0",
-  "publication_date": "2026-08-22",
-  "notes": "Copyright 2026 GuardianX LLC. All Rights Reserved. Public access permits scientific inspection and citation only and does not grant permission to copy, modify, redistribute, deploy, commercialize, or create derivative works. This exploratory framework is not a certified medical, clinical, industrial, environmental, or public-safety system.",
+  "version": "0.2.0",
+  "publication_date": "2026-08-28",
+  "notes": "Copyright 2026 GuardianX LLC. All Rights Reserved. Public access permits scientific inspection, verification, and citation only and does not grant permission to copy, modify, redistribute, deploy, commercialize, or create derivative works. This release provides synthetic computational evidence only and is not a certified medical, clinical, industrial, environmental, chemical, or public-safety system. DOI: 10.5281/zenodo.22139127.",
   "related_identifiers": [
     {
       "identifier": "https://github.com/ranaliwaa369/NOI-Research",
