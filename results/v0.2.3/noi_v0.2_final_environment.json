@@ -1,0 +1,62 @@
+{
+  "artifact_type": "computational_environment_provenance",
+  "dependency_lock": {
+    "path": "requirements-lock.txt",
+    "sha256": "c14f5d344875a9afe640418589a1fe13e5412efb7bd21b963a4ed3d50116ce5e"
+  },
+  "execution_environment": {
+    "packages": {
+      "numpy": "2.4.6",
+      "pytest": "8.4.2",
+      "pyyaml": "6.0.3",
+      "scikit_learn": "1.9.0"
+    },
+    "platform": {
+      "machine": "arm64",
+      "macos_build": "25G83",
+      "macos_version": "26.6.2",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "system": "Darwin"
+    },
+    "python": {
+      "executable_version_string": "3.11.14 (main, Oct  9 2025, 16:16:55) [Clang 17.0.0 (clang-1700.0.13.3)]",
+      "implementation": "CPython",
+      "version": "3.11.14"
+    }
+  },
+  "final_aggregate_artifacts": {
+    "final_robustness_aggregate": {
+      "sha256": "f9c5b0bfebbff8d10182f9709a7faa6e2854f2c6506263f0399589b792c01760"
+    },
+    "track_a_aggregate": {
+      "sha256": "6a210574087f17efeaf92a751985895716a40dd529ee96844c87c092b7158da0"
+    },
+    "track_b_aggregate": {
+      "sha256": "e64bc99ac00f800f2a53e742d329463f69a7561ba6ad2e4691852aaa9077a32a"
+    }
+  },
+  "generated_at_utc": "2026-08-28T05:41:46.907932+00:00",
+  "governance": {
+    "final_test_tuning_used": false,
+    "negative_results_retained": true,
+    "oracle_used": false
+  },
+  "internal_final_update": "0.2.3",
+  "research_package": "NOI v0.2",
+  "schema_version": "1.0",
+  "source_control": {
+    "branch": "development-v0.2",
+    "commit": "c07f428716edfcafdc5d2c38080eb914bfa8bf71",
+    "remote_branch": "origin/development-v0.2"
+  },
+  "verification": {
+    "command": "python -m pytest -q",
+    "configuration_hashes_verified": {
+      "final_robustness": true,
+      "track_b": true
+    },
+    "failed_test_count": 0,
+    "observed_duration_seconds": 47.12,
+    "passed_test_count": 778
+  }
+}
