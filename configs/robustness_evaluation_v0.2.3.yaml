@@ -1,0 +1,203 @@
+robustness_evaluation:
+  version: 0.2.3
+  status: prespecified_before_final_robustness_results
+  registration_timing: Locked after completion of Track B and before implementation or inspection
+    of final missing-modality and temporal-displacement robustness results.
+  parent_track_b_configuration: configs/track_b_unseen_family_evaluation_v0.2.2.yaml
+  parent_track_b_sha256: da88cbf40fcca2cfee53fab247a2d9e509598a1319129b53cc5045ba8f857fd0
+dataset:
+  event_count_per_run: 10000
+  independent_run_count: 10
+  runs:
+  - run_id: robustness-seed-01
+    generator_seed: 1101
+    ood_seed: 9101
+  - run_id: robustness-seed-02
+    generator_seed: 1201
+    ood_seed: 9201
+  - run_id: robustness-seed-03
+    generator_seed: 1301
+    ood_seed: 9301
+  - run_id: robustness-seed-04
+    generator_seed: 1401
+    ood_seed: 9401
+  - run_id: robustness-seed-05
+    generator_seed: 1501
+    ood_seed: 9501
+  - run_id: robustness-seed-06
+    generator_seed: 1601
+    ood_seed: 9601
+  - run_id: robustness-seed-07
+    generator_seed: 1701
+    ood_seed: 9701
+  - run_id: robustness-seed-08
+    generator_seed: 1801
+    ood_seed: 9801
+  - run_id: robustness-seed-09
+    generator_seed: 1901
+    ood_seed: 9901
+  - run_id: robustness-seed-10
+    generator_seed: 2001
+    ood_seed: 10001
+  severity_tiers:
+  - mild
+  - moderate
+  - severe
+  same_latent_events_across_systems: true
+  paired_analysis_unit: latent_event_id
+  strict_held_out_odor_families: true
+  strict_held_out_context_templates: true
+evaluation_axes:
+  axes_analyzed_separately: true
+  full_factorial_crossing_prohibited: true
+  reason: Missing-modality and temporal-displacement effects are estimated separately to retain
+    interpretability and avoid an unregistered post hoc interaction analysis.
+missing_modality:
+  available_modalities:
+  - text
+  - image
+  - audio
+  conditions:
+  - condition_id: all-present
+    missing_count: 0
+    missing_modalities: []
+  - condition_id: missing-text
+    missing_count: 1
+    missing_modalities:
+    - text
+  - condition_id: missing-image
+    missing_count: 1
+    missing_modalities:
+    - image
+  - condition_id: missing-audio
+    missing_count: 1
+    missing_modalities:
+    - audio
+  - condition_id: missing-text-image
+    missing_count: 2
+    missing_modalities:
+    - text
+    - image
+  - condition_id: missing-text-audio
+    missing_count: 2
+    missing_modalities:
+    - text
+    - audio
+  - condition_id: missing-image-audio
+    missing_count: 2
+    missing_modalities:
+    - image
+    - audio
+  temporal_displacement_days: 0
+  all_combinations_for_locked_counts_required: true
+temporal_displacement:
+  days:
+  - 0
+  - 1
+  - 7
+  - 30
+  - 90
+  missing_modalities: []
+  all_modalities_present_required: true
+systems:
+  ridge_only:
+    alpha: 1.0
+    alpha_source: fixed
+    apply_temporal_decay: false
+    role: baseline
+  memory_only:
+    alpha: 0.0
+    alpha_source: fixed
+    apply_temporal_decay: true
+    role: baseline
+  hybrid_without_temporal_decay:
+    alpha: validation_selected
+    alpha_source: validation_only
+    apply_temporal_decay: false
+    role: baseline
+  full_hybrid:
+    alpha: validation_selected
+    alpha_source: validation_only
+    apply_temporal_decay: true
+    role: full_noi
+metrics:
+  primary_metric: mean_reciprocal_rank
+  secondary_metrics:
+  - recall_at_1
+  - recall_at_10
+  - ndcg_at_10
+  report_every_metric_by:
+  - axis
+  - condition
+  - severity_tier
+  - system
+  - run_id
+  seen_and_unseen_metrics_pooled: false
+strongest_baseline_rule:
+  eligible_systems:
+  - ridge_only
+  - memory_only
+  - hybrid_without_temporal_decay
+  selection_unit: Each prespecified axis, condition, and severity tier.
+  selection_statistic: Highest across-run mean mean_reciprocal_rank.
+  tie_break_order:
+  - ridge_only
+  - memory_only
+  - hybrid_without_temporal_decay
+  selection_changes_models: false
+  selection_changes_thresholds: false
+hypothesis_h4:
+  direction: full_hybrid minus strongest_baseline
+  success_rule: The paired across-run mean advantage must be positive under every prespecified
+    missing-modality and temporal-displacement condition, separately for each severity tier.
+  confirmatory_interval_rule: The lower bound of the 95 percent paired bootstrap confidence
+    interval must be greater than zero for every prespecified condition and tier.
+  partial_support_reporting_required: true
+  null_and_negative_results_retained: true
+  failure_does_not_invalidate_other_tracks: true
+statistical_analysis:
+  analysis_unit: independent run seed
+  paired_by:
+  - run_id
+  - latent_event_id
+  - severity_tier
+  - axis
+  - condition
+  bootstrap_resamples: 10000
+  bootstrap_seed: 4245
+  confidence_level: 0.95
+  p_values_reported: false
+  multiplicity_note: Condition-specific intervals are reported transparently. No claim of
+    family-wise error control is made.
+governance:
+  ood_model_fitting_prohibited: true
+  ood_alpha_tuning_prohibited: true
+  final_test_tuning_prohibited: true
+  oracle_used: false
+  target_identifier_used_as_feature: false
+  family_identifier_used_as_feature: false
+  policy_gate_changes_ranking_prohibited: true
+  all_conditions_must_be_reported: true
+  all_runs_must_be_reported: true
+  all_failures_must_be_retained: true
+scope_accounting:
+  representation_noise: Already represented by the locked graded OOD severity views.
+  held_out_odor_families: Completed in Track B v0.2.2.
+  held_out_context_templates: Included in the leakage-resistant synthetic split and graded
+    OOD design.
+  remaining_axes_closed_by_this_protocol:
+  - missing modalities
+  - temporal displacement
+interpretation_limits:
+  evidence_type: Synthetic computational robustness evidence.
+  not_demonstrated:
+  - Human olfactory equivalence
+  - Animal olfactory equivalence
+  - Human perceptual validity
+  - Clinical effectiveness
+  - Physical sensor performance
+  - Chemical safety
+  - Deployment safety certification
+  negative_result_language: Failure of H4 must be reported as an architectural limitation
+    under the locked synthetic design and must not be hidden or converted into a positive
+    claim.
