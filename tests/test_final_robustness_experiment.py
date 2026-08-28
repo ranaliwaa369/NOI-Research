@@ -12,6 +12,10 @@ from src.evaluation.final_robustness_experiment import (
     FinalRobustnessExperimentError,
     run_final_robustness_experiment,
 )
+from src.evaluation.final_robustness_export import (
+    FinalRobustnessExportError,
+    export_final_robustness_experiment,
+)
 from src.evaluation.paired_ood_source_generator import (
     generate_paired_graded_ood_bundle,
 )
@@ -305,4 +309,137 @@ def test_mismatched_seed_is_rejected(
                 .configuration_sha256
             ),
             trained_at_utc=TRAINED_AT,
+        )
+
+def test_export_writes_verified_hash(
+    experiment,
+    tmp_path,
+) -> None:
+    from hashlib import sha256
+
+    exported = (
+        export_final_robustness_experiment(
+            experiment,
+            tmp_path
+            / "robustness-seed-01.json",
+        )
+    )
+
+    observed = sha256(
+        exported.json_path.read_bytes()
+    ).hexdigest()
+    recorded = (
+        exported.sha256_path.read_text(
+            encoding="utf-8"
+        ).strip()
+    )
+
+    assert observed == recorded
+    assert exported.sha256 == observed
+
+
+def test_export_is_compact_and_complete(
+    experiment,
+    tmp_path,
+) -> None:
+    import json
+
+    exported = (
+        export_final_robustness_experiment(
+            experiment,
+            tmp_path
+            / "robustness-seed-01.json",
+        )
+    )
+    payload = json.loads(
+        exported.json_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert payload["counts"] == {
+        "training_events": 140,
+        "validation_events": 20,
+        "latent_ood_events": 40,
+        "observed_ood_events": 120,
+        "odor_library_size": 200,
+        "evaluations": 144,
+    }
+    assert len(payload["evaluations"]) == 144
+    assert set(
+        payload[
+            "paired_latent_event_ids_by_tier"
+        ]
+    ) == {"mild", "moderate", "severe"}
+    assert all(
+        len(values) == 40
+        for values in payload[
+            "paired_latent_event_ids_by_tier"
+        ].values()
+    )
+    assert (
+        "latent_event_ids"
+        not in payload["evaluations"][0]
+    )
+
+
+def test_export_is_deterministic(
+    experiment,
+    tmp_path,
+) -> None:
+    first = export_final_robustness_experiment(
+        experiment,
+        tmp_path
+        / "first"
+        / "robustness-seed-01.json",
+    )
+    second = export_final_robustness_experiment(
+        experiment,
+        tmp_path
+        / "second"
+        / "robustness-seed-01.json",
+    )
+
+    assert (
+        first.json_path.read_bytes()
+        == second.json_path.read_bytes()
+    )
+    assert first.sha256 == second.sha256
+
+
+def test_export_protects_existing_file(
+    experiment,
+    tmp_path,
+) -> None:
+    output = (
+        tmp_path
+        / "robustness-seed-01.json"
+    )
+
+    export_final_robustness_experiment(
+        experiment,
+        output,
+    )
+
+    with pytest.raises(
+        FinalRobustnessExportError,
+        match="exists",
+    ):
+        export_final_robustness_experiment(
+            experiment,
+            output,
+        )
+
+
+def test_export_rejects_wrong_filename(
+    experiment,
+    tmp_path,
+) -> None:
+    with pytest.raises(
+        FinalRobustnessExportError,
+        match="run ID",
+    ):
+        export_final_robustness_experiment(
+            experiment,
+            tmp_path / "wrong.json",
         )
