@@ -1,0 +1,2278 @@
+{
+  "artifact_type": "track_b_unseen_family_aggregate",
+  "bootstrap": {
+    "confidence_level": 0.95,
+    "resamples": 10000,
+    "seed": 4244
+  },
+  "calibration": {
+    "achieved_coverage": {
+      "confidence_interval": {
+        "level": 0.95,
+        "lower": 0.95,
+        "method": "percentile bootstrap of the across-run mean",
+        "upper": 0.95
+      },
+      "maximum": 0.95,
+      "mean": 0.95,
+      "median": 0.95,
+      "minimum": 0.95,
+      "standard_deviation": 0.0,
+      "values": [
+        0.95,
+        0.95,
+        0.95,
+        0.95,
+        0.95,
+        0.95,
+        0.95,
+        0.95,
+        0.95,
+        0.95
+      ]
+    },
+    "condition_met_all_runs": true,
+    "minimum_reachable_coverage": 0.95,
+    "threshold": {
+      "confidence_interval": {
+        "level": 0.95,
+        "lower": 0.9050118017840394,
+        "method": "percentile bootstrap of the across-run mean",
+        "upper": 0.9117542441939122
+      },
+      "maximum": 0.9163628276513587,
+      "mean": 0.9084821094129053,
+      "median": 0.9082725950377251,
+      "minimum": 0.8973679750008525,
+      "standard_deviation": 0.005662505925978089,
+      "values": [
+        0.8973679750008525,
+        0.9100513567473181,
+        0.9119421788720707,
+        0.9163628276513587,
+        0.9058088172910483,
+        0.906493833328132,
+        0.9155340824429654,
+        0.9044621931424321,
+        0.9107976450154065,
+        0.9060001846374679
+      ]
+    }
+  },
+  "confirmatory_criterion": {
+    "abstention_condition_met": true,
+    "calibration_condition_met": true,
+    "criterion_supported": true,
+    "interpretation": "Prespecified synthetic engineering criterion only; this is not a clinical, biological, or deployment-safety certification.",
+    "minimum_ood_abstention_rate": 0.8,
+    "minimum_validation_coverage": 0.95,
+    "require_both_conditions": true
+  },
+  "governance": {
+    "all_hashes_verified": true,
+    "all_ood_targets_unreachable": true,
+    "final_test_tuning_used": false,
+    "ood_events_used_for_threshold": false,
+    "oracle_used": false,
+    "seen_and_unseen_metrics_pooled": false,
+    "strict_family_separation_verified": true
+  },
+  "independent_runs": 10,
+  "protocol_sha256": "da88cbf40fcca2cfee53fab247a2d9e509598a1319129b53cc5045ba8f857fd0",
+  "retrieval": {
+    "baselines": {
+      "mean_fusion_cosine": {
+        "mild": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.006184380952380952,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.02028251140873016
+            },
+            "maximum": 0.04208472222222223,
+            "mean": 0.012348690476190477,
+            "median": 0.00970287698412698,
+            "minimum": 0.001883730158730159,
+            "standard_deviation": 0.012157937192309266,
+            "values": [
+              0.0033740079365079364,
+              0.015496031746031745,
+              0.002596031746031746,
+              0.008512499999999996,
+              0.010893253968253965,
+              0.013086904761904756,
+              0.001883730158730159,
+              0.020943055555555562,
+              0.004616666666666666,
+              0.04208472222222223
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.011101692125652603,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.0290730473060087
+            },
+            "maximum": 0.056696143033589906,
+            "mean": 0.018868188097309363,
+            "median": 0.01766309612793336,
+            "minimum": 0.004416378739872863,
+            "standard_deviation": 0.015348705054405234,
+            "values": [
+              0.007392241807822661,
+              0.01908944820925856,
+              0.005678686361970451,
+              0.01623674404660816,
+              0.02049560644586442,
+              0.021427685184635,
+              0.004416378739872863,
+              0.027526262459458505,
+              0.009722684684013097,
+              0.056696143033589906
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.00115,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.01005
+            },
+            "maximum": 0.023,
+            "mean": 0.00495,
+            "median": 0.00125,
+            "minimum": 0.0,
+            "standard_deviation": 0.007584523716094505,
+            "values": [
+              0.0,
+              0.0105,
+              0.0,
+              0.0005,
+              0.002,
+              0.003,
+              0.0,
+              0.0105,
+              0.0,
+              0.023
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.027000000000000003,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.05885124999999998
+            },
+            "maximum": 0.1055,
+            "mean": 0.041049999999999996,
+            "median": 0.036750000000000005,
+            "minimum": 0.0135,
+            "standard_deviation": 0.026846735783372662,
+            "values": [
+              0.0215,
+              0.031,
+              0.0165,
+              0.0425,
+              0.054,
+              0.0495,
+              0.0135,
+              0.049,
+              0.0275,
+              0.1055
+            ]
+          }
+        },
+        "moderate": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.00578871378968254,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.01583730952380952
+            },
+            "maximum": 0.030133928571428582,
+            "mean": 0.010324484126984126,
+            "median": 0.008157936507936506,
+            "minimum": 0.002333134920634921,
+            "standard_deviation": 0.008762517534481979,
+            "values": [
+              0.004144444444444444,
+              0.014648611111111105,
+              0.002333134920634921,
+              0.004310912698412698,
+              0.019320436507936512,
+              0.008515277777777778,
+              0.007800595238095234,
+              0.030133928571428582,
+              0.00336765873015873,
+              0.008669841269841267
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.00997907310179876,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.022812427870747515
+            },
+            "maximum": 0.036858342646449875,
+            "mean": 0.015948593139353533,
+            "median": 0.014443776955041409,
+            "minimum": 0.005022604213450228,
+            "standard_deviation": 0.010914001900103712,
+            "values": [
+              0.0056954852592628145,
+              0.021343767746223395,
+              0.005022604213450228,
+              0.007682059620433373,
+              0.031037602307198934,
+              0.014427742777096759,
+              0.014459811132986061,
+              0.036858342646449875,
+              0.006967229428590206,
+              0.015991286261843683
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.001,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.0082
+            },
+            "maximum": 0.0205,
+            "mean": 0.00395,
+            "median": 0.00175,
+            "minimum": 0.0,
+            "standard_deviation": 0.006374645959667966,
+            "values": [
+              0.0025,
+              0.005,
+              0.0,
+              0.0,
+              0.008,
+              0.002,
+              0.0,
+              0.0205,
+              0.0,
+              0.0015
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.024,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.047049999999999995
+            },
+            "maximum": 0.0715,
+            "mean": 0.03505,
+            "median": 0.035750000000000004,
+            "minimum": 0.011,
+            "standard_deviation": 0.019757488031967356,
+            "values": [
+              0.011,
+              0.0435,
+              0.0145,
+              0.019,
+              0.0715,
+              0.0345,
+              0.037,
+              0.059,
+              0.0195,
+              0.041
+            ]
+          }
+        },
+        "severe": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.004708679067460317,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.01882740178571429
+            },
+            "maximum": 0.038997023809523815,
+            "mean": 0.010968928571428574,
+            "median": 0.006353273809523807,
+            "minimum": 0.0009283730158730159,
+            "standard_deviation": 0.012046853194556019,
+            "values": [
+              0.0009283730158730159,
+              0.014666269841269841,
+              0.004835317460317459,
+              0.0017353174603174607,
+              0.020356150793650815,
+              0.002176785714285714,
+              0.007871230158730154,
+              0.038997023809523815,
+              0.016164484126984128,
+              0.0019583333333333336
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.008008697665946625,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.026510243127322836
+            },
+            "maximum": 0.051635850562281364,
+            "mean": 0.016572257212002017,
+            "median": 0.011850046217704975,
+            "minimum": 0.0019513776722228154,
+            "standard_deviation": 0.016164919241713524,
+            "values": [
+              0.0019513776722228154,
+              0.019151146769441837,
+              0.009067603657727201,
+              0.0036992740870714115,
+              0.033739431620504926,
+              0.004272575930021784,
+              0.01463248877768275,
+              0.051635850562281364,
+              0.024143849139120696,
+              0.003428973903945373
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.001,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.0088
+            },
+            "maximum": 0.021,
+            "mean": 0.004350000000000001,
+            "median": 0.00075,
+            "minimum": 0.0,
+            "standard_deviation": 0.0067042689550928835,
+            "values": [
+              0.0,
+              0.0095,
+              0.0005,
+              0.0,
+              0.005,
+              0.0,
+              0.001,
+              0.021,
+              0.006,
+              0.0005
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0189,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.05415
+            },
+            "maximum": 0.0935,
+            "mean": 0.03555,
+            "median": 0.029,
+            "minimum": 0.0055,
+            "standard_deviation": 0.03069152072551056,
+            "values": [
+              0.0055,
+              0.0345,
+              0.0235,
+              0.0105,
+              0.079,
+              0.0115,
+              0.038,
+              0.0935,
+              0.051,
+              0.0085
+            ]
+          }
+        }
+      },
+      "random": {
+        "mild": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.013398262400793648,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.015107182539682537
+            },
+            "maximum": 0.01732142857142857,
+            "mean": 0.014197202380952376,
+            "median": 0.01405039682539682,
+            "minimum": 0.012013690476190468,
+            "standard_deviation": 0.0014558520398608693,
+            "values": [
+              0.014443055555555548,
+              0.013152976190476184,
+              0.013216666666666665,
+              0.014885515873015872,
+              0.013657738095238093,
+              0.012013690476190468,
+              0.014763492063492058,
+              0.01732142857142857,
+              0.013439682539682536,
+              0.015077777777777772
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.02143924165067539,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.023256961812469855
+            },
+            "maximum": 0.025560244003760592,
+            "mean": 0.022274307661598106,
+            "median": 0.02213732098218247,
+            "minimum": 0.019903215974531957,
+            "standard_deviation": 0.0015180349157916564,
+            "values": [
+              0.02221030560247009,
+              0.021830488808577256,
+              0.02093620442432149,
+              0.02303120323598685,
+              0.02214605658498881,
+              0.019903215974531957,
+              0.02212858537937613,
+              0.025560244003760592,
+              0.021598989781257898,
+              0.023397782820709978
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0036,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.0056500000000000005
+            },
+            "maximum": 0.008,
+            "mean": 0.0046,
+            "median": 0.00425,
+            "minimum": 0.0025,
+            "standard_deviation": 0.0017919573407620816,
+            "values": [
+              0.0045,
+              0.0025,
+              0.004,
+              0.0065,
+              0.004,
+              0.0025,
+              0.0055,
+              0.008,
+              0.003,
+              0.0055
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.04825,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.051000000000000004
+            },
+            "maximum": 0.0535,
+            "mean": 0.0496,
+            "median": 0.05,
+            "minimum": 0.0465,
+            "standard_deviation": 0.002342837785440743,
+            "values": [
+              0.0485,
+              0.051,
+              0.047,
+              0.051,
+              0.051,
+              0.0465,
+              0.047,
+              0.0535,
+              0.049,
+              0.0515
+            ]
+          }
+        },
+        "moderate": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.013391544642857137,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.015087196428571424
+            },
+            "maximum": 0.01732142857142857,
+            "mean": 0.014197202380952376,
+            "median": 0.01405039682539682,
+            "minimum": 0.012013690476190468,
+            "standard_deviation": 0.0014558520398608693,
+            "values": [
+              0.014443055555555548,
+              0.013152976190476184,
+              0.013216666666666665,
+              0.014885515873015872,
+              0.013657738095238093,
+              0.012013690476190468,
+              0.014763492063492058,
+              0.01732142857142857,
+              0.013439682539682536,
+              0.015077777777777772
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.021454033849584424,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.02321321852008314
+            },
+            "maximum": 0.025560244003760592,
+            "mean": 0.022274307661598106,
+            "median": 0.02213732098218247,
+            "minimum": 0.019903215974531957,
+            "standard_deviation": 0.0015180349157916564,
+            "values": [
+              0.02221030560247009,
+              0.021830488808577256,
+              0.02093620442432149,
+              0.02303120323598685,
+              0.02214605658498881,
+              0.019903215974531957,
+              0.02212858537937613,
+              0.025560244003760592,
+              0.021598989781257898,
+              0.023397782820709978
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0036,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.005699999999999999
+            },
+            "maximum": 0.008,
+            "mean": 0.0046,
+            "median": 0.00425,
+            "minimum": 0.0025,
+            "standard_deviation": 0.0017919573407620816,
+            "values": [
+              0.0045,
+              0.0025,
+              0.004,
+              0.0065,
+              0.004,
+              0.0025,
+              0.0055,
+              0.008,
+              0.003,
+              0.0055
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.04825,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.051000000000000004
+            },
+            "maximum": 0.0535,
+            "mean": 0.0496,
+            "median": 0.05,
+            "minimum": 0.0465,
+            "standard_deviation": 0.002342837785440743,
+            "values": [
+              0.0485,
+              0.051,
+              0.047,
+              0.051,
+              0.051,
+              0.0465,
+              0.047,
+              0.0535,
+              0.049,
+              0.0515
+            ]
+          }
+        },
+        "severe": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.013384901289682534,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.015087341765873013
+            },
+            "maximum": 0.01732142857142857,
+            "mean": 0.014197202380952376,
+            "median": 0.01405039682539682,
+            "minimum": 0.012013690476190468,
+            "standard_deviation": 0.0014558520398608693,
+            "values": [
+              0.014443055555555548,
+              0.013152976190476184,
+              0.013216666666666665,
+              0.014885515873015872,
+              0.013657738095238093,
+              0.012013690476190468,
+              0.014763492063492058,
+              0.01732142857142857,
+              0.013439682539682536,
+              0.015077777777777772
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.02144098361727569,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.023204950592905026
+            },
+            "maximum": 0.025560244003760592,
+            "mean": 0.022274307661598106,
+            "median": 0.02213732098218247,
+            "minimum": 0.019903215974531957,
+            "standard_deviation": 0.0015180349157916564,
+            "values": [
+              0.02221030560247009,
+              0.021830488808577256,
+              0.02093620442432149,
+              0.02303120323598685,
+              0.02214605658498881,
+              0.019903215974531957,
+              0.02212858537937613,
+              0.025560244003760592,
+              0.021598989781257898,
+              0.023397782820709978
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0036,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.00575
+            },
+            "maximum": 0.008,
+            "mean": 0.0046,
+            "median": 0.00425,
+            "minimum": 0.0025,
+            "standard_deviation": 0.0017919573407620816,
+            "values": [
+              0.0045,
+              0.0025,
+              0.004,
+              0.0065,
+              0.004,
+              0.0025,
+              0.0055,
+              0.008,
+              0.003,
+              0.0055
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.04825,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.050949999999999995
+            },
+            "maximum": 0.0535,
+            "mean": 0.0496,
+            "median": 0.05,
+            "minimum": 0.0465,
+            "standard_deviation": 0.002342837785440743,
+            "values": [
+              0.0485,
+              0.051,
+              0.047,
+              0.051,
+              0.051,
+              0.0465,
+              0.047,
+              0.0535,
+              0.049,
+              0.0515
+            ]
+          }
+        }
+      },
+      "ridge_fusion": {
+        "mild": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.8799404563492059,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.9176013020833329
+            },
+            "maximum": 0.9487351190476183,
+            "mean": 0.898360555555555,
+            "median": 0.8909968253968249,
+            "minimum": 0.8588910714285709,
+            "standard_deviation": 0.03282360660485751,
+            "values": [
+              0.8588910714285709,
+              0.901935714285714,
+              0.8876420634920625,
+              0.8689630952380947,
+              0.8604738095238094,
+              0.9361517857142857,
+              0.891350198412698,
+              0.8906434523809518,
+              0.9388192460317454,
+              0.9487351190476183
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.907828604918128,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.9376241790005158
+            },
+            "maximum": 0.9617973347828713,
+            "mean": 0.9222597946248801,
+            "median": 0.9163250876044189,
+            "minimum": 0.8924616684475053,
+            "standard_deviation": 0.02547878176600474,
+            "values": [
+              0.8924616684475053,
+              0.923599835928242,
+              0.9150557505055708,
+              0.8989271909440544,
+              0.8940070036253768,
+              0.9519132296605687,
+              0.9175944247032669,
+              0.9131780259366582,
+              0.9540634817146864,
+              0.9617973347828713
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.8086499999999999,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.86585125
+            },
+            "maximum": 0.909,
+            "mean": 0.8371000000000001,
+            "median": 0.829,
+            "minimum": 0.7765,
+            "standard_deviation": 0.049053145782009866,
+            "values": [
+              0.778,
+              0.8435,
+              0.818,
+              0.7955,
+              0.7765,
+              0.8945,
+              0.824,
+              0.834,
+              0.898,
+              0.909
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.99055,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.9974999999999999
+            },
+            "maximum": 1.0,
+            "mean": 0.9943,
+            "median": 0.9962500000000001,
+            "minimum": 0.9815,
+            "standard_deviation": 0.005931085716610217,
+            "values": [
+              0.9945,
+              0.9885,
+              0.9975,
+              0.99,
+              0.9955,
+              0.999,
+              0.997,
+              0.9815,
+              0.9995,
+              1.0
+            ]
+          }
+        },
+        "moderate": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.2485885391865078,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.3441190828373019
+            },
+            "maximum": 0.39158412698412765,
+            "mean": 0.2982584920634922,
+            "median": 0.3321667658730162,
+            "minimum": 0.17660595238095184,
+            "standard_deviation": 0.08214027340847711,
+            "values": [
+              0.17924365079365054,
+              0.3596547619047623,
+              0.17660595238095184,
+              0.3375125000000005,
+              0.2440277777777775,
+              0.38551884920634943,
+              0.23487460317460315,
+              0.3268210317460319,
+              0.39158412698412765,
+              0.34674166666666706
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.3162526903080034,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.42285950036993347
+            },
+            "maximum": 0.4768992020519923,
+            "mean": 0.3712544268496922,
+            "median": 0.4075675240674884,
+            "minimum": 0.2280232124073119,
+            "standard_deviation": 0.09230294334159818,
+            "values": [
+              0.2280232124073119,
+              0.43696324991288155,
+              0.23214558723497883,
+              0.4102713121370892,
+              0.31772957031001425,
+              0.4672106211180865,
+              0.31176938551586547,
+              0.4048637359978876,
+              0.4768992020519923,
+              0.4266683918108143
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.14715,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.2171
+            },
+            "maximum": 0.247,
+            "mean": 0.18295,
+            "median": 0.20600000000000002,
+            "minimum": 0.0985,
+            "standard_deviation": 0.05992423457073848,
+            "values": [
+              0.109,
+              0.235,
+              0.0985,
+              0.2135,
+              0.1355,
+              0.245,
+              0.1215,
+              0.1985,
+              0.247,
+              0.226
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.5304475000000001,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.67815125
+            },
+            "maximum": 0.7525,
+            "mean": 0.609,
+            "median": 0.651,
+            "minimum": 0.3895,
+            "standard_deviation": 0.12522623970682467,
+            "values": [
+              0.3895,
+              0.6875,
+              0.416,
+              0.645,
+              0.5595,
+              0.7295,
+              0.5645,
+              0.657,
+              0.7525,
+              0.689
+            ]
+          }
+        },
+        "severe": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.004973296626984127,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.022126947916666667
+            },
+            "maximum": 0.0501293650793651,
+            "mean": 0.012057321428571431,
+            "median": 0.007488194444444442,
+            "minimum": 0.00012142857142857143,
+            "standard_deviation": 0.014753408882690116,
+            "values": [
+              0.0063761904761904745,
+              0.0501293650793651,
+              0.0017025793650793652,
+              0.003517261904761905,
+              0.00860019841269841,
+              0.010715079365079365,
+              0.00012142857142857143,
+              0.018978174603174615,
+              0.003652777777777777,
+              0.016780158730158732
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.008623793910047745,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.030009193672496364
+            },
+            "maximum": 0.06533422589323575,
+            "mean": 0.017946522174275087,
+            "median": 0.0122459504115612,
+            "minimum": 0.00031119907982561054,
+            "standard_deviation": 0.018919349867739528,
+            "values": [
+              0.009133604205274289,
+              0.06533422589323575,
+              0.0037666640319996432,
+              0.0073038930846056685,
+              0.015358296617848112,
+              0.016968102816360207,
+              0.00031119907982561054,
+              0.026027143257571612,
+              0.007637949927530335,
+              0.02762414282849964
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0012000000000000001,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.01115
+            },
+            "maximum": 0.0295,
+            "mean": 0.0052,
+            "median": 0.0022500000000000003,
+            "minimum": 0.0,
+            "standard_deviation": 0.009071322334086078,
+            "values": [
+              0.003,
+              0.0295,
+              0.0,
+              0.0,
+              0.0015,
+              0.003,
+              0.0,
+              0.0095,
+              0.0,
+              0.0055
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.02095,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.059899999999999995
+            },
+            "maximum": 0.116,
+            "mean": 0.03795,
+            "median": 0.02975,
+            "minimum": 0.001,
+            "standard_deviation": 0.03333704146041357,
+            "values": [
+              0.0185,
+              0.116,
+              0.011,
+              0.0205,
+              0.0385,
+              0.038,
+              0.001,
+              0.0495,
+              0.0215,
+              0.065
+            ]
+          }
+        }
+      },
+      "text_only_cosine": {
+        "mild": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.006500919642857143,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.016225612599206362
+            },
+            "maximum": 0.021782539682539712,
+            "mean": 0.01124569444444445,
+            "median": 0.008814484126984122,
+            "minimum": 0.0008625000000000001,
+            "standard_deviation": 0.008229668151169071,
+            "values": [
+              0.021564484126984147,
+              0.01564642857142857,
+              0.02155634920634923,
+              0.0026037698412698413,
+              0.021782539682539712,
+              0.009884920634920632,
+              0.0008625000000000001,
+              0.007744047619047612,
+              0.004523809523809522,
+              0.006288095238095234
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.011526616120346224,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.02789458840399931
+            },
+            "maximum": 0.03992874660072193,
+            "mean": 0.01948693625747167,
+            "median": 0.01554745097494404,
+            "minimum": 0.0016754299295050324,
+            "standard_deviation": 0.01406034955849842,
+            "values": [
+              0.03545835165044839,
+              0.020098728133552478,
+              0.03992874660072193,
+              0.005594004819627016,
+              0.03953414311837709,
+              0.01615435473127217,
+              0.0016754299295050324,
+              0.014940547218615909,
+              0.008614858590607236,
+              0.01287019778198942
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0008500000000000001,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.0042499999999999994
+            },
+            "maximum": 0.009,
+            "mean": 0.00235,
+            "median": 0.00125,
+            "minimum": 0.0,
+            "standard_deviation": 0.002915952293467398,
+            "values": [
+              0.005,
+              0.009,
+              0.0015,
+              0.0,
+              0.004,
+              0.0025,
+              0.0,
+              0.0005,
+              0.001,
+              0.0
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.028350000000000004,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.06955
+            },
+            "maximum": 0.1025,
+            "mean": 0.047599999999999996,
+            "median": 0.0365,
+            "minimum": 0.0045,
+            "standard_deviation": 0.03492436271589091,
+            "values": [
+              0.0825,
+              0.0345,
+              0.1025,
+              0.016,
+              0.1005,
+              0.0375,
+              0.0045,
+              0.0395,
+              0.023,
+              0.0355
+            ]
+          }
+        },
+        "moderate": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0066476046626984114,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.019864045634920655
+            },
+            "maximum": 0.03725813492063498,
+            "mean": 0.012704007936507947,
+            "median": 0.011442162698412698,
+            "minimum": 0.00015555555555555556,
+            "standard_deviation": 0.011275166756695746,
+            "values": [
+              0.011527182539682537,
+              0.011616071428571425,
+              0.02104325396825399,
+              0.0002833333333333333,
+              0.03725813492063498,
+              0.004767460317460315,
+              0.00015555555555555556,
+              0.011357142857142859,
+              0.021075000000000017,
+              0.007956944444444438
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.011114318477051539,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.031330571219742566
+            },
+            "maximum": 0.05981979516707363,
+            "mean": 0.020445729204333383,
+            "median": 0.017739197282696906,
+            "minimum": 0.0003439414014492614,
+            "standard_deviation": 0.017474419412356553,
+            "values": [
+              0.018079756283495004,
+              0.017398638281898804,
+              0.03386891663032727,
+              0.0006605948234891698,
+              0.05981979516707363,
+              0.010280298850093355,
+              0.0003439414014492614,
+              0.019390747062647647,
+              0.029232007553469625,
+              0.015382595989390057
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0017000000000000001,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.006500000000000001
+            },
+            "maximum": 0.011,
+            "mean": 0.00395,
+            "median": 0.0035,
+            "minimum": 0.0,
+            "standard_deviation": 0.004199537011518188,
+            "values": [
+              0.004,
+              0.004,
+              0.0065,
+              0.0,
+              0.011,
+              0.0,
+              0.0,
+              0.003,
+              0.0105,
+              0.0005
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.026250000000000002,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.07200124999999999
+            },
+            "maximum": 0.1365,
+            "mean": 0.0468,
+            "median": 0.04075,
+            "minimum": 0.001,
+            "standard_deviation": 0.03896736526319884,
+            "values": [
+              0.0405,
+              0.0365,
+              0.0775,
+              0.002,
+              0.1365,
+              0.0295,
+              0.001,
+              0.047,
+              0.0565,
+              0.041
+            ]
+          }
+        },
+        "severe": {
+          "mean_reciprocal_rank": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.008484838293650796,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.028589940476190494
+            },
+            "maximum": 0.048348214285714314,
+            "mean": 0.0177877380952381,
+            "median": 0.010186904761904755,
+            "minimum": 0.00018948412698412698,
+            "standard_deviation": 0.017203683926698906,
+            "values": [
+              0.00967519841269841,
+              0.009806746031746024,
+              0.00815615079365079,
+              0.0019700396825396826,
+              0.048348214285714314,
+              0.010567063492063485,
+              0.00018948412698412698,
+              0.03201884920634925,
+              0.04374325396825399,
+              0.01340238095238095
+            ]
+          },
+          "ndcg_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.013478840101340489,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.042011138376263225
+            },
+            "maximum": 0.07337547952409312,
+            "mean": 0.026764677632294426,
+            "median": 0.017104793522082447,
+            "minimum": 0.0004749141028915217,
+            "standard_deviation": 0.024756672865883043,
+            "values": [
+              0.014497012163711662,
+              0.016901763178824473,
+              0.013702931063217008,
+              0.003081377199574069,
+              0.07337547952409312,
+              0.017307823865340424,
+              0.0004749141028915217,
+              0.04834693569283184,
+              0.05958232649198289,
+              0.020376213040477258
+            ]
+          },
+          "recall_at_1": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.0025499999999999997,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.0113
+            },
+            "maximum": 0.0225,
+            "mean": 0.006500000000000001,
+            "median": 0.0034999999999999996,
+            "minimum": 0.0,
+            "standard_deviation": 0.007520342781785652,
+            "values": [
+              0.0045,
+              0.002,
+              0.001,
+              0.001,
+              0.0165,
+              0.0025,
+              0.0,
+              0.0095,
+              0.0225,
+              0.0055
+            ]
+          },
+          "recall_at_10": {
+            "confidence_interval": {
+              "level": 0.95,
+              "lower": 0.02969875,
+              "method": "percentile bootstrap of the across-run mean",
+              "upper": 0.08835249999999997
+            },
+            "maximum": 0.157,
+            "mean": 0.05689999999999999,
+            "median": 0.0405,
+            "minimum": 0.0015,
+            "standard_deviation": 0.05024484495392979,
+            "values": [
+              0.031,
+              0.041,
+              0.0325,
+              0.007,
+              0.157,
+              0.04,
+              0.0015,
+              0.1025,
+              0.1125,
+              0.044
+            ]
+          }
+        }
+      }
+    },
+    "full_noi": {
+      "mild": {
+        "mean_reciprocal_rank": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.008079107142857148
+          },
+          "maximum": 0.019388095238095267,
+          "mean": 0.0033393055555555585,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0071533017591835675,
+          "values": [
+            0.019388095238095267,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.01400496031746032,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "ndcg_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.017988654233382147
+          },
+          "maximum": 0.04480736830152267,
+          "mean": 0.007489797021178138,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.01616640543859558,
+          "values": [
+            0.04480736830152267,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.030090601910258703,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_1": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.00030000000000000003
+          },
+          "maximum": 0.001,
+          "mean": 0.0001,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.00031622776601683794,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.001,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.054000000000000006
+          },
+          "maximum": 0.135,
+          "mean": 0.0222,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.04814976635457331,
+          "values": [
+            0.135,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.087,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "moderate": {
+        "mean_reciprocal_rank": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0007777380952380954
+          },
+          "maximum": 0.002271428571428572,
+          "mean": 0.000323452380952381,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0007483853556755166,
+          "values": [
+            0.0009630952380952383,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.002271428571428572,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "ndcg_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0021038148810305114
+          },
+          "maximum": 0.005366268319341684,
+          "mean": 0.0007941320335452641,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.00179880428475943,
+          "values": [
+            0.0025750520161109576,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.005366268319341684,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_1": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0066
+          },
+          "maximum": 0.0165,
+          "mean": 0.0025,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.005597618541248889,
+          "values": [
+            0.0085,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0165,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "severe": {
+        "mean_reciprocal_rank": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 3.0000000000000004e-05
+          },
+          "maximum": 0.0001,
+          "mean": 1e-05,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 3.1622776601683795e-05,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0001,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "ndcg_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 5.802792108518124e-05
+          },
+          "maximum": 0.0001934264036172708,
+          "mean": 1.934264036172708e-05,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 6.116679950456077e-05,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0001934264036172708,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_1": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.00015000000000000001
+          },
+          "maximum": 0.0005,
+          "mean": 5e-05,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.00015811388300841897,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0005,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "memory_only": {
+      "mild": {
+        "mean_reciprocal_rank": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "ndcg_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_1": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "moderate": {
+        "mean_reciprocal_rank": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "ndcg_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_1": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "severe": {
+        "mean_reciprocal_rank": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "ndcg_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_1": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "recall_at_10": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 0.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 0.0
+          },
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "standard_deviation": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "run_ids": [
+    "track-b-seed-01",
+    "track-b-seed-02",
+    "track-b-seed-03",
+    "track-b-seed-04",
+    "track-b-seed-05",
+    "track-b-seed-06",
+    "track-b-seed-07",
+    "track-b-seed-08",
+    "track-b-seed-09",
+    "track-b-seed-10"
+  ],
+  "schema_version": "1.0",
+  "selected_alpha_counts": {
+    "0.25": 8,
+    "0.5": 2
+  },
+  "selective_safety": {
+    "mild": {
+      "abstention_rate": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.9529500000000001,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.9698500000000001
+        },
+        "maximum": 0.9825,
+        "mean": 0.9614499999999999,
+        "median": 0.9655,
+        "minimum": 0.9445,
+        "standard_deviation": 0.014386432651788452,
+        "values": [
+          0.945,
+          0.968,
+          0.9795,
+          0.9825,
+          0.9465,
+          0.9485,
+          0.9685,
+          0.9445,
+          0.9685,
+          0.963
+        ]
+      },
+      "coverage": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.03025,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.046951249999999986
+        },
+        "maximum": 0.0555,
+        "mean": 0.03855,
+        "median": 0.0345,
+        "minimum": 0.0175,
+        "standard_deviation": 0.014386432651788435,
+        "values": [
+          0.055,
+          0.032,
+          0.0205,
+          0.0175,
+          0.0535,
+          0.0515,
+          0.0315,
+          0.0555,
+          0.0315,
+          0.037
+        ]
+      },
+      "criterion_met_all_runs": true,
+      "criterion_met_run_count": 10,
+      "false_support_rate": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.03,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.04695
+        },
+        "maximum": 0.0555,
+        "mean": 0.03855,
+        "median": 0.0345,
+        "minimum": 0.0175,
+        "standard_deviation": 0.014386432651788435,
+        "values": [
+          0.055,
+          0.032,
+          0.0205,
+          0.0175,
+          0.0535,
+          0.0515,
+          0.0315,
+          0.0555,
+          0.0315,
+          0.037
+        ]
+      },
+      "selective_error_rate": {
+        "defined_count": 10,
+        "summary": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 1.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 1.0
+          },
+          "maximum": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "minimum": 1.0,
+          "standard_deviation": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "undefined_count": 0,
+        "undefined_reason": "No supported events were available for a selective-error calculation."
+      }
+    },
+    "moderate": {
+      "abstention_rate": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.9917,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.9964500000000001
+        },
+        "maximum": 1.0,
+        "mean": 0.9942,
+        "median": 0.995,
+        "minimum": 0.9865,
+        "standard_deviation": 0.004077035960378846,
+        "values": [
+          0.989,
+          0.994,
+          0.9975,
+          1.0,
+          0.994,
+          0.992,
+          0.9965,
+          0.9865,
+          0.9965,
+          0.996
+        ]
+      },
+      "coverage": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.0035000000000000005,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.008299999999999998
+        },
+        "maximum": 0.0135,
+        "mean": 0.0058000000000000005,
+        "median": 0.005,
+        "minimum": 0.0,
+        "standard_deviation": 0.004077035960378841,
+        "values": [
+          0.011,
+          0.006,
+          0.0025,
+          0.0,
+          0.006,
+          0.008,
+          0.0035,
+          0.0135,
+          0.0035,
+          0.004
+        ]
+      },
+      "criterion_met_all_runs": true,
+      "criterion_met_run_count": 10,
+      "false_support_rate": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.0035000000000000005,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.0083
+        },
+        "maximum": 0.0135,
+        "mean": 0.0058000000000000005,
+        "median": 0.005,
+        "minimum": 0.0,
+        "standard_deviation": 0.004077035960378841,
+        "values": [
+          0.011,
+          0.006,
+          0.0025,
+          0.0,
+          0.006,
+          0.008,
+          0.0035,
+          0.0135,
+          0.0035,
+          0.004
+        ]
+      },
+      "selective_error_rate": {
+        "defined_count": 9,
+        "summary": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 1.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 1.0
+          },
+          "maximum": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "minimum": 1.0,
+          "standard_deviation": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "undefined_count": 1,
+        "undefined_reason": "No supported events were available for a selective-error calculation."
+      }
+    },
+    "severe": {
+      "abstention_rate": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.99855,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.9996499999999999
+        },
+        "maximum": 1.0,
+        "mean": 0.99915,
+        "median": 0.99925,
+        "minimum": 0.997,
+        "standard_deviation": 0.000914391114956348,
+        "values": [
+          0.9985,
+          0.999,
+          0.9995,
+          1.0,
+          0.999,
+          0.9995,
+          1.0,
+          0.997,
+          0.999,
+          1.0
+        ]
+      },
+      "coverage": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.00035,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.0014500000000000001
+        },
+        "maximum": 0.003,
+        "mean": 0.0008500000000000001,
+        "median": 0.00075,
+        "minimum": 0.0,
+        "standard_deviation": 0.0009143911149563468,
+        "values": [
+          0.0015,
+          0.001,
+          0.0005,
+          0.0,
+          0.001,
+          0.0005,
+          0.0,
+          0.003,
+          0.001,
+          0.0
+        ]
+      },
+      "criterion_met_all_runs": true,
+      "criterion_met_run_count": 10,
+      "false_support_rate": {
+        "confidence_interval": {
+          "level": 0.95,
+          "lower": 0.00035,
+          "method": "percentile bootstrap of the across-run mean",
+          "upper": 0.0014500000000000001
+        },
+        "maximum": 0.003,
+        "mean": 0.0008500000000000001,
+        "median": 0.00075,
+        "minimum": 0.0,
+        "standard_deviation": 0.0009143911149563468,
+        "values": [
+          0.0015,
+          0.001,
+          0.0005,
+          0.0,
+          0.001,
+          0.0005,
+          0.0,
+          0.003,
+          0.001,
+          0.0
+        ]
+      },
+      "selective_error_rate": {
+        "defined_count": 7,
+        "summary": {
+          "confidence_interval": {
+            "level": 0.95,
+            "lower": 1.0,
+            "method": "percentile bootstrap of the across-run mean",
+            "upper": 1.0
+          },
+          "maximum": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "minimum": 1.0,
+          "standard_deviation": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "undefined_count": 3,
+        "undefined_reason": "No supported events were available for a selective-error calculation."
+      }
+    }
+  },
+  "track": "Track B: Unseen-family generalization",
+  "version": "0.2.2"
+}
