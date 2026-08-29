@@ -495,3 +495,430 @@ def fuse_multisensory_view(
         config=config,
         method=method,
     )
+
+from src.evaluation.evidence_conflict import EvidenceAssessment
+
+
+@dataclass(frozen=True, slots=True)
+class LockedFusionConfig:
+    """Validation-locked metadata-blind fusion thresholds."""
+
+    reliability_threshold: float
+    conflict_threshold: float
+    generator_version: str
+
+    def __post_init__(self) -> None:
+        _validate_locked_probability(
+            "reliability_threshold",
+            self.reliability_threshold,
+        )
+        _validate_locked_probability(
+            "conflict_threshold",
+            self.conflict_threshold,
+        )
+
+        if (
+            not isinstance(self.generator_version, str)
+            or not self.generator_version.strip()
+        ):
+            raise FusionError(
+                "generator_version must be a nonempty string."
+            )
+
+
+@dataclass(frozen=True, slots=True)
+class LockedFusionTrace:
+    """Auditable trace with no condition or target-label inputs."""
+
+    event_id: str
+    odor_available: bool
+    touch_available: bool
+    odor_reliability: float
+    touch_reliability: float
+    reliability_threshold: float
+    conflict_available: bool
+    conflict_score: float
+    conflict_threshold: float
+    conflict_detected: bool
+    temporal_offset_steps: int
+    temporal_conflict_detected: bool
+    selected_action: FusionAction
+    odor_weight: float
+    touch_weight: float
+    reason: str
+    generator_version: str
+    condition_metadata_used: bool
+    target_labels_used: bool
+    final_test_labels_used: bool
+
+
+@dataclass(frozen=True, slots=True)
+class LockedFusionDecision:
+    """One validation-locked evidence-only fusion decision."""
+
+    event_id: str
+    action: FusionAction
+    odor_reliability: float
+    touch_reliability: float
+    odor_weight: float
+    touch_weight: float
+    conflict_score: float
+    conflict_detected: bool
+    temporal_conflict_detected: bool
+    abstained: bool
+    fused_vector: tuple[float, ...] | None
+    trace: LockedFusionTrace
+
+
+def _validate_locked_probability(
+    name: str,
+    value: object,
+) -> float:
+    """Require one finite locked probability in [0, 1]."""
+
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, Real)
+        or not math.isfinite(float(value))
+        or not 0.0 <= float(value) <= 1.0
+    ):
+        raise FusionError(
+            f"{name} must be finite and between 0 and 1."
+        )
+
+    return float(value)
+
+
+def _locked_vector(
+    vector: tuple[float, ...] | None,
+    *,
+    dimension: int,
+    weight: float,
+    label: str,
+) -> tuple[float, ...]:
+    """Return one validated weighted modality vector."""
+
+    if vector is None:
+        if weight != 0.0:
+            raise FusionError(
+                f"Unavailable {label} cannot receive nonzero weight."
+            )
+        return (0.0,) * dimension
+
+    if (
+        not isinstance(vector, tuple)
+        or len(vector) != dimension
+        or any(
+            isinstance(value, bool)
+            or not isinstance(value, Real)
+            or not math.isfinite(float(value))
+            for value in vector
+        )
+    ):
+        raise FusionError(
+            f"{label} must be a finite tuple with dimension "
+            f"{dimension}."
+        )
+
+    return tuple(
+        float(value) * weight
+        for value in vector
+    )
+
+
+def _make_locked_decision(
+    *,
+    event_id: str,
+    olfactory_vector: tuple[float, ...] | None,
+    tactile_vector: tuple[float, ...] | None,
+    temporal_offset_steps: int,
+    evidence: EvidenceAssessment,
+    config: LockedFusionConfig,
+    action: FusionAction,
+    odor_weight: float,
+    touch_weight: float,
+    conflict_detected: bool,
+    temporal_conflict_detected: bool,
+    reason: str,
+) -> LockedFusionDecision:
+    """Build one immutable metadata-blind locked decision."""
+
+    abstained = action is FusionAction.ABSTAIN
+
+    if abstained:
+        fused_vector = None
+    else:
+        odor_part = _locked_vector(
+            olfactory_vector,
+            dimension=16,
+            weight=odor_weight,
+            label="olfactory_vector",
+        )
+        touch_part = _locked_vector(
+            tactile_vector,
+            dimension=8,
+            weight=touch_weight,
+            label="tactile_vector",
+        )
+        fused_vector = odor_part + touch_part
+
+    trace = LockedFusionTrace(
+        event_id=event_id,
+        odor_available=evidence.odor_available,
+        touch_available=evidence.touch_available,
+        odor_reliability=float(
+            evidence.odor_reliability
+        ),
+        touch_reliability=float(
+            evidence.touch_reliability
+        ),
+        reliability_threshold=float(
+            config.reliability_threshold
+        ),
+        conflict_available=evidence.conflict_available,
+        conflict_score=float(evidence.conflict_score),
+        conflict_threshold=float(
+            config.conflict_threshold
+        ),
+        conflict_detected=conflict_detected,
+        temporal_offset_steps=temporal_offset_steps,
+        temporal_conflict_detected=(
+            temporal_conflict_detected
+        ),
+        selected_action=action,
+        odor_weight=odor_weight,
+        touch_weight=touch_weight,
+        reason=reason,
+        generator_version=config.generator_version,
+        condition_metadata_used=False,
+        target_labels_used=False,
+        final_test_labels_used=False,
+    )
+
+    return LockedFusionDecision(
+        event_id=event_id,
+        action=action,
+        odor_reliability=float(
+            evidence.odor_reliability
+        ),
+        touch_reliability=float(
+            evidence.touch_reliability
+        ),
+        odor_weight=odor_weight,
+        touch_weight=touch_weight,
+        conflict_score=float(evidence.conflict_score),
+        conflict_detected=conflict_detected,
+        temporal_conflict_detected=(
+            temporal_conflict_detected
+        ),
+        abstained=abstained,
+        fused_vector=fused_vector,
+        trace=trace,
+    )
+
+
+def fuse_locked_evidence(
+    *,
+    event_id: str,
+    olfactory_vector: tuple[float, ...] | None,
+    tactile_vector: tuple[float, ...] | None,
+    temporal_offset_steps: int,
+    evidence: EvidenceAssessment,
+    config: LockedFusionConfig,
+) -> LockedFusionDecision:
+    """Fuse evidence without condition metadata or target labels."""
+
+    if not isinstance(event_id, str) or not event_id.strip():
+        raise FusionError(
+            "event_id must be a nonempty string."
+        )
+
+    if (
+        isinstance(temporal_offset_steps, bool)
+        or not isinstance(temporal_offset_steps, int)
+    ):
+        raise FusionError(
+            "temporal_offset_steps must be an integer."
+        )
+
+    if not isinstance(evidence, EvidenceAssessment):
+        raise FusionError(
+            "evidence must be an EvidenceAssessment record."
+        )
+
+    if not isinstance(config, LockedFusionConfig):
+        raise FusionError(
+            "config must be a LockedFusionConfig record."
+        )
+
+    odor_available = olfactory_vector is not None
+    touch_available = tactile_vector is not None
+
+    if (
+        odor_available != evidence.odor_available
+        or touch_available != evidence.touch_available
+    ):
+        raise FusionError(
+            "Evidence availability must match supplied vectors."
+        )
+
+    if not odor_available and not touch_available:
+        raise FusionError(
+            "At least one modality must be available."
+        )
+
+    odor_reliability = _validate_locked_probability(
+        "odor_reliability",
+        evidence.odor_reliability,
+    )
+    touch_reliability = _validate_locked_probability(
+        "touch_reliability",
+        evidence.touch_reliability,
+    )
+    conflict_score = _validate_locked_probability(
+        "conflict_score",
+        evidence.conflict_score,
+    )
+
+    if not odor_available and odor_reliability != 0.0:
+        raise FusionError(
+            "Unavailable odor must have zero reliability."
+        )
+
+    if not touch_available and touch_reliability != 0.0:
+        raise FusionError(
+            "Unavailable touch must have zero reliability."
+        )
+
+    temporal_conflict = temporal_offset_steps != 0
+    conflict_detected = (
+        evidence.conflict_available
+        and conflict_score >= config.conflict_threshold
+    )
+
+    if temporal_conflict:
+        return _make_locked_decision(
+            event_id=event_id,
+            olfactory_vector=olfactory_vector,
+            tactile_vector=tactile_vector,
+            temporal_offset_steps=temporal_offset_steps,
+            evidence=evidence,
+            config=config,
+            action=FusionAction.ABSTAIN,
+            odor_weight=0.0,
+            touch_weight=0.0,
+            conflict_detected=conflict_detected,
+            temporal_conflict_detected=True,
+            reason=(
+                "Nonzero temporal offset requires safe abstention."
+            ),
+        )
+
+    if conflict_detected:
+        return _make_locked_decision(
+            event_id=event_id,
+            olfactory_vector=olfactory_vector,
+            tactile_vector=tactile_vector,
+            temporal_offset_steps=temporal_offset_steps,
+            evidence=evidence,
+            config=config,
+            action=FusionAction.ABSTAIN,
+            odor_weight=0.0,
+            touch_weight=0.0,
+            conflict_detected=True,
+            temporal_conflict_detected=False,
+            reason=(
+                "Evidence-derived conflict score meets the "
+                "validation-locked threshold."
+            ),
+        )
+
+    odor_reliable = (
+        odor_available
+        and odor_reliability
+        >= config.reliability_threshold
+    )
+    touch_reliable = (
+        touch_available
+        and touch_reliability
+        >= config.reliability_threshold
+    )
+
+    if odor_reliable and touch_reliable:
+        total = odor_reliability + touch_reliability
+        odor_weight = odor_reliability / total
+        touch_weight = touch_reliability / total
+
+        return _make_locked_decision(
+            event_id=event_id,
+            olfactory_vector=olfactory_vector,
+            tactile_vector=tactile_vector,
+            temporal_offset_steps=temporal_offset_steps,
+            evidence=evidence,
+            config=config,
+            action=FusionAction.FUSED,
+            odor_weight=odor_weight,
+            touch_weight=touch_weight,
+            conflict_detected=False,
+            temporal_conflict_detected=False,
+            reason=(
+                "Both modalities satisfy the validation-locked "
+                "reliability threshold."
+            ),
+        )
+
+    if odor_reliable:
+        return _make_locked_decision(
+            event_id=event_id,
+            olfactory_vector=olfactory_vector,
+            tactile_vector=tactile_vector,
+            temporal_offset_steps=temporal_offset_steps,
+            evidence=evidence,
+            config=config,
+            action=FusionAction.ODOR_ONLY,
+            odor_weight=1.0,
+            touch_weight=0.0,
+            conflict_detected=False,
+            temporal_conflict_detected=False,
+            reason=(
+                "Only olfactory evidence satisfies the "
+                "validation-locked reliability threshold."
+            ),
+        )
+
+    if touch_reliable:
+        return _make_locked_decision(
+            event_id=event_id,
+            olfactory_vector=olfactory_vector,
+            tactile_vector=tactile_vector,
+            temporal_offset_steps=temporal_offset_steps,
+            evidence=evidence,
+            config=config,
+            action=FusionAction.TOUCH_ONLY,
+            odor_weight=0.0,
+            touch_weight=1.0,
+            conflict_detected=False,
+            temporal_conflict_detected=False,
+            reason=(
+                "Only tactile evidence satisfies the "
+                "validation-locked reliability threshold."
+            ),
+        )
+
+    return _make_locked_decision(
+        event_id=event_id,
+        olfactory_vector=olfactory_vector,
+        tactile_vector=tactile_vector,
+        temporal_offset_steps=temporal_offset_steps,
+        evidence=evidence,
+        config=config,
+        action=FusionAction.ABSTAIN,
+        odor_weight=0.0,
+        touch_weight=0.0,
+        conflict_detected=False,
+        temporal_conflict_detected=False,
+        reason=(
+            "No modality satisfies the validation-locked "
+            "reliability threshold."
+        ),
+    )
