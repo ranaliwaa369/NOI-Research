@@ -17,6 +17,14 @@ from src.evaluation.multisensory_records import (
     MultisensorySplit,
     MultisensoryTarget,
 )
+from src.evaluation.reliability_fusion import (
+    FusionAction,
+    LockedFusionDecision,
+)
+from src.evaluation.support_gate import (
+    SupportDecision,
+    UncertaintyStatus,
+)
 
 
 FloatArray = NDArray[np.float64]
@@ -670,4 +678,476 @@ class NOIV03RidgeRetriever:
             odor_weight=0.0,
             touch_weight=1.0,
             top_k=top_k,
+        )
+
+class NOIV03System(str, Enum):
+    """Nine systems registered for v0.3 confirmatory execution."""
+
+    ODOR_ONLY_RIDGE = "odor_only_ridge"
+    ODOR_ONLY_COSINE = "odor_only_cosine"
+    TOUCH_ONLY_RIDGE = "touch_only_ridge"
+    TOUCH_ONLY_COSINE = "touch_only_cosine"
+    NAIVE_CONCATENATION = "naive_concatenation"
+    FIXED_WEIGHT_FUSION = "fixed_weight_fusion"
+    SUPPORT_GATE_ODOR_ONLY = "support_gate_odor_only"
+    RELIABILITY_GATED_OLFACTORY_TACTILE_FUSION = (
+        "reliability_gated_olfactory_tactile_fusion"
+    )
+    SUPPORT_GATE_RELIABILITY_FUSION_WITH_ABSTENTION = (
+        "support_gate_reliability_fusion_with_abstention"
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class NOIV03SystemResult:
+    """One named-system inference result."""
+
+    system: NOIV03System
+    retrieval: NOIV03RetrievalResult
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.system, NOIV03System):
+            raise NOIV03RetrievalError(
+                "system must be a NOIV03System value."
+            )
+
+        if not isinstance(
+            self.retrieval,
+            NOIV03RetrievalResult,
+        ):
+            raise NOIV03RetrievalError(
+                "retrieval must be a NOIV03RetrievalResult."
+            )
+
+
+class NOIV03SystemPolicy:
+    """Apply the nine preconfirmatory retrieval definitions."""
+
+    def __init__(
+        self,
+        *,
+        library: NOIV03RetrievalLibrary,
+        odor_ridge: NOIV03RidgeRetriever,
+        touch_ridge: NOIV03RidgeRetriever,
+    ) -> None:
+        if not isinstance(library, NOIV03RetrievalLibrary):
+            raise NOIV03RetrievalError(
+                "library must be a NOIV03RetrievalLibrary."
+            )
+
+        if (
+            not isinstance(odor_ridge, NOIV03RidgeRetriever)
+            or odor_ridge.modality is not NOIV03Modality.ODOR
+            or not odor_ridge.is_fitted
+        ):
+            raise NOIV03RetrievalError(
+                "odor_ridge must be a fitted odor ridge retriever."
+            )
+
+        if (
+            not isinstance(touch_ridge, NOIV03RidgeRetriever)
+            or touch_ridge.modality is not NOIV03Modality.TOUCH
+            or not touch_ridge.is_fitted
+        ):
+            raise NOIV03RetrievalError(
+                "touch_ridge must be a fitted touch ridge retriever."
+            )
+
+        if (
+            library.item_ids != odor_ridge.item_ids
+            or library.item_ids != touch_ridge.item_ids
+        ):
+            raise NOIV03RetrievalError(
+                "All retrieval systems must share one candidate library."
+            )
+
+        self._library = library
+        self._odor_ridge = odor_ridge
+        self._touch_ridge = touch_ridge
+
+    @classmethod
+    def fit(
+        cls,
+        *,
+        training_events: Sequence[LatentMultisensoryEvent],
+        targets: Sequence[MultisensoryTarget],
+        ridge_alpha: float = 1.0,
+    ) -> "NOIV03SystemPolicy":
+        """Fit all trainable components on training records only."""
+
+        library = NOIV03RetrievalLibrary.from_training_records(
+            training_events=training_events,
+            targets=targets,
+        )
+
+        odor_ridge = NOIV03RidgeRetriever(
+            modality=NOIV03Modality.ODOR,
+            alpha=ridge_alpha,
+        ).fit(
+            training_events=training_events,
+            targets=targets,
+        )
+
+        touch_ridge = NOIV03RidgeRetriever(
+            modality=NOIV03Modality.TOUCH,
+            alpha=ridge_alpha,
+        ).fit(
+            training_events=training_events,
+            targets=targets,
+        )
+
+        return cls(
+            library=library,
+            odor_ridge=odor_ridge,
+            touch_ridge=touch_ridge,
+        )
+
+    @property
+    def item_ids(self) -> tuple[str, ...]:
+        """Return the shared training-only candidates."""
+
+        return self._library.item_ids
+
+    @staticmethod
+    def _available_weights(
+        *,
+        olfactory_vector: Iterable[float] | None,
+        tactile_vector: Iterable[float] | None,
+    ) -> tuple[float, float]:
+        """Return equal renormalized weights for available modalities."""
+
+        odor_available = olfactory_vector is not None
+        touch_available = tactile_vector is not None
+
+        if odor_available and touch_available:
+            return 0.5, 0.5
+
+        if odor_available:
+            return 1.0, 0.0
+
+        if touch_available:
+            return 0.0, 1.0
+
+        raise NOIV03RetrievalError(
+            "At least one modality must be available."
+        )
+
+    @staticmethod
+    def _require_support_decision(
+        decision: SupportDecision | None,
+        *,
+        event_id: str,
+    ) -> SupportDecision:
+        """Return one event-aligned locked support decision."""
+
+        if not isinstance(decision, SupportDecision):
+            raise NOIV03RetrievalError(
+                "support_decision must be supplied for this system."
+            )
+
+        if decision.event_id != event_id:
+            raise NOIV03RetrievalError(
+                "support_decision event_id must match the query."
+            )
+
+        return decision
+
+    @staticmethod
+    def _require_fusion_decision(
+        decision: LockedFusionDecision | None,
+        *,
+        event_id: str,
+    ) -> LockedFusionDecision:
+        """Return one event-aligned locked fusion decision."""
+
+        if not isinstance(decision, LockedFusionDecision):
+            raise NOIV03RetrievalError(
+                "fusion_decision must be supplied for this system."
+            )
+
+        if decision.event_id != event_id:
+            raise NOIV03RetrievalError(
+                "fusion_decision event_id must match the query."
+            )
+
+        if (
+            decision.trace.condition_metadata_used
+            or decision.trace.target_labels_used
+            or decision.trace.final_test_labels_used
+        ):
+            raise NOIV03RetrievalError(
+                "fusion_decision must be metadata-blind."
+            )
+
+        return decision
+
+    def _wrap(
+        self,
+        *,
+        system: NOIV03System,
+        retrieval: NOIV03RetrievalResult,
+    ) -> NOIV03SystemResult:
+        """Attach the registered system identifier."""
+
+        return NOIV03SystemResult(
+            system=system,
+            retrieval=retrieval,
+        )
+
+    def _apply_fusion(
+        self,
+        *,
+        system: NOIV03System,
+        event_id: str,
+        olfactory_vector: Iterable[float] | None,
+        tactile_vector: Iterable[float] | None,
+        fusion_decision: LockedFusionDecision,
+        top_k: int,
+    ) -> NOIV03SystemResult:
+        """Apply one validated locked fusion action."""
+
+        decision = self._require_fusion_decision(
+            fusion_decision,
+            event_id=event_id,
+        )
+
+        if (
+            decision.action is FusionAction.ABSTAIN
+            or decision.abstained
+        ):
+            return self._wrap(
+                system=system,
+                retrieval=self._library.abstain(
+                    event_id=event_id,
+                    reason=(
+                        "The validation-locked fusion policy "
+                        "required abstention."
+                    ),
+                ),
+            )
+
+        return self._wrap(
+            system=system,
+            retrieval=self._library.rank(
+                event_id=event_id,
+                olfactory_vector=olfactory_vector,
+                tactile_vector=tactile_vector,
+                odor_weight=decision.odor_weight,
+                touch_weight=decision.touch_weight,
+                top_k=top_k,
+            ),
+        )
+
+    def evaluate(
+        self,
+        *,
+        system: NOIV03System,
+        event_id: str,
+        olfactory_vector: Iterable[float] | None,
+        tactile_vector: Iterable[float] | None,
+        support_decision: SupportDecision | None = None,
+        fusion_decision: LockedFusionDecision | None = None,
+        top_k: int = 10,
+    ) -> NOIV03SystemResult:
+        """Evaluate one system without ground-truth or condition inputs."""
+
+        if not isinstance(system, NOIV03System):
+            raise NOIV03RetrievalError(
+                "system must be a NOIV03System value."
+            )
+
+        if system is NOIV03System.ODOR_ONLY_RIDGE:
+            if olfactory_vector is None:
+                retrieval = self._library.abstain(
+                    event_id=event_id,
+                    reason="Odor is unavailable.",
+                )
+            else:
+                retrieval = self._odor_ridge.retrieve(
+                    event_id=event_id,
+                    query_vector=olfactory_vector,
+                    top_k=top_k,
+                )
+            return self._wrap(system=system, retrieval=retrieval)
+
+        if system is NOIV03System.TOUCH_ONLY_RIDGE:
+            if tactile_vector is None:
+                retrieval = self._library.abstain(
+                    event_id=event_id,
+                    reason="Touch is unavailable.",
+                )
+            else:
+                retrieval = self._touch_ridge.retrieve(
+                    event_id=event_id,
+                    query_vector=tactile_vector,
+                    top_k=top_k,
+                )
+            return self._wrap(system=system, retrieval=retrieval)
+
+        if system is NOIV03System.ODOR_ONLY_COSINE:
+            if olfactory_vector is None:
+                retrieval = self._library.abstain(
+                    event_id=event_id,
+                    reason="Odor is unavailable.",
+                )
+            else:
+                retrieval = self._library.rank(
+                    event_id=event_id,
+                    olfactory_vector=olfactory_vector,
+                    tactile_vector=None,
+                    odor_weight=1.0,
+                    touch_weight=0.0,
+                    top_k=top_k,
+                )
+            return self._wrap(system=system, retrieval=retrieval)
+
+        if system is NOIV03System.TOUCH_ONLY_COSINE:
+            if tactile_vector is None:
+                retrieval = self._library.abstain(
+                    event_id=event_id,
+                    reason="Touch is unavailable.",
+                )
+            else:
+                retrieval = self._library.rank(
+                    event_id=event_id,
+                    olfactory_vector=None,
+                    tactile_vector=tactile_vector,
+                    odor_weight=0.0,
+                    touch_weight=1.0,
+                    top_k=top_k,
+                )
+            return self._wrap(system=system, retrieval=retrieval)
+
+        if system in (
+            NOIV03System.NAIVE_CONCATENATION,
+            NOIV03System.FIXED_WEIGHT_FUSION,
+        ):
+            odor_weight, touch_weight = self._available_weights(
+                olfactory_vector=olfactory_vector,
+                tactile_vector=tactile_vector,
+            )
+            return self._wrap(
+                system=system,
+                retrieval=self._library.rank(
+                    event_id=event_id,
+                    olfactory_vector=olfactory_vector,
+                    tactile_vector=tactile_vector,
+                    odor_weight=odor_weight,
+                    touch_weight=touch_weight,
+                    top_k=top_k,
+                ),
+            )
+
+        if system is NOIV03System.SUPPORT_GATE_ODOR_ONLY:
+            decision = self._require_support_decision(
+                support_decision,
+                event_id=event_id,
+            )
+
+            if not decision.is_supported or olfactory_vector is None:
+                retrieval = self._library.abstain(
+                    event_id=event_id,
+                    reason=(
+                        "The validation-locked support gate "
+                        "rejected odor-only identity retrieval."
+                    ),
+                )
+            else:
+                retrieval = self._library.rank(
+                    event_id=event_id,
+                    olfactory_vector=olfactory_vector,
+                    tactile_vector=None,
+                    odor_weight=1.0,
+                    touch_weight=0.0,
+                    top_k=top_k,
+                )
+
+            return self._wrap(system=system, retrieval=retrieval)
+
+        if system is (
+            NOIV03System
+            .RELIABILITY_GATED_OLFACTORY_TACTILE_FUSION
+        ):
+            return self._apply_fusion(
+                system=system,
+                event_id=event_id,
+                olfactory_vector=olfactory_vector,
+                tactile_vector=tactile_vector,
+                fusion_decision=self._require_fusion_decision(
+                    fusion_decision,
+                    event_id=event_id,
+                ),
+                top_k=top_k,
+            )
+
+        decision = self._require_support_decision(
+            support_decision,
+            event_id=event_id,
+        )
+
+        if (
+            decision.uncertainty_status
+            is UncertaintyStatus.CERTAIN_UNSUPPORTED
+        ):
+            return self._wrap(
+                system=system,
+                retrieval=self._library.abstain(
+                    event_id=event_id,
+                    reason=(
+                        "The support gate classified the query "
+                        "as certainly unsupported."
+                    ),
+                ),
+            )
+
+        use_touch = decision.request_touch
+
+        if (
+            not use_touch
+            and fusion_decision is not None
+            and tactile_vector is not None
+        ):
+            checked_fusion = self._require_fusion_decision(
+                fusion_decision,
+                event_id=event_id,
+            )
+            use_touch = (
+                checked_fusion.odor_reliability
+                < checked_fusion.trace.reliability_threshold
+            )
+
+        if use_touch:
+            return self._apply_fusion(
+                system=system,
+                event_id=event_id,
+                olfactory_vector=olfactory_vector,
+                tactile_vector=tactile_vector,
+                fusion_decision=self._require_fusion_decision(
+                    fusion_decision,
+                    event_id=event_id,
+                ),
+                top_k=top_k,
+            )
+
+        if not decision.is_supported or olfactory_vector is None:
+            return self._wrap(
+                system=system,
+                retrieval=self._library.abstain(
+                    event_id=event_id,
+                    reason=(
+                        "Supported odor-only retrieval was unavailable."
+                    ),
+                ),
+            )
+
+        return self._wrap(
+            system=system,
+            retrieval=self._library.rank(
+                event_id=event_id,
+                olfactory_vector=olfactory_vector,
+                tactile_vector=None,
+                odor_weight=1.0,
+                touch_weight=0.0,
+                top_k=top_k,
+            ),
         )
