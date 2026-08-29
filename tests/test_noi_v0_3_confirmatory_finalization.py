@@ -222,4 +222,3 @@ def test_finalization_writes_and_hashes_all_outputs(
         match="already exists",
     ):
         finalize_confirmatory_results(tmp_path)
-

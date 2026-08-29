@@ -1,10 +1,12 @@
 execution_specification:
   id: "NOI-V0.3-CONFIRMATORY-EXECUTION-SPEC"
-  version: "0.3.1-preconfirmatory"
+  version: "0.3.1-execution-locked"
   date: "2026-08-29"
-  status: "preconfirmatory"
+  status: "execution_locked"
   parent_validation_lock_tag: "noi-v0.3-validation-lock"
   parent_validation_lock_commit: "fa63dbe"
+  implementation_commit: "6f12fcd77f18897c794a47fcdb98224d5c36727d"
+  execution_lock_tag: "noi-v0.3-confirmatory-execution-lock"
   purpose: >
     Define deterministic ranking mechanics for the already registered
     NOI v0.3 systems before confirmatory final-test execution.

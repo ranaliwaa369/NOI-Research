@@ -1,4 +1,4 @@
-"""Tests for the preconfirmatory NOI v0.3 execution specification."""
+"""Tests for the locked NOI v0.3 execution specification."""
 
 from pathlib import Path
 
@@ -31,17 +31,23 @@ def load_spec() -> dict:
     return payload
 
 
-def test_execution_spec_is_preconfirmatory() -> None:
-    """The specification must precede all final-test execution."""
+def test_execution_spec_is_execution_locked() -> None:
+    """Execution must be locked before final-test use."""
 
     specification = load_spec()[
         "execution_specification"
     ]
 
-    assert specification["status"] == "preconfirmatory"
+    assert specification["status"] == "execution_locked"
     assert specification[
         "parent_validation_lock_tag"
     ] == "noi-v0.3-validation-lock"
+    assert specification["implementation_commit"] == (
+        "6f12fcd77f18897c794a47fcdb98224d5c36727d"
+    )
+    assert specification["execution_lock_tag"] == (
+        "noi-v0.3-confirmatory-execution-lock"
+    )
     assert specification[
         "classification"
     ]["confirmatory_execution_started"] is False
@@ -327,3 +333,22 @@ def test_hypothesis_comparisons_are_fixed_before_results() -> None:
         "contradictory_modalities",
         "temporal_misalignment",
     ]
+
+def test_execution_specification_hash_is_current() -> None:
+    """The locked execution specification must match its SHA-256."""
+
+    import hashlib
+
+    source = Path("configs/noi_v0.3_execution_spec.yaml")
+    recorded = Path(
+        "configs/noi_v0.3_execution_spec.sha256"
+    )
+
+    expected = recorded.read_text(
+        encoding="utf-8"
+    ).split()[0]
+    observed = hashlib.sha256(
+        source.read_bytes()
+    ).hexdigest()
+
+    assert expected == observed
