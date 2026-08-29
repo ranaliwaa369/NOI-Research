@@ -335,3 +335,19 @@ def test_invalid_locked_values_are_rejected() -> None:
             top_k=10,
             false_confident_threshold=0.80,
         )
+
+def test_predicted_support_uses_each_system_decision() -> None:
+    """False-known analysis must use each system's own abstention."""
+
+    payload = build_confirmatory_seed_payload(
+        reduced_report()
+    )
+
+    for record in payload["view_results"]:
+        assert record["predicted_supported"] is (
+            not record["abstained"]
+        )
+        assert isinstance(
+            record["support_gate_predicted_supported"],
+            bool,
+        )

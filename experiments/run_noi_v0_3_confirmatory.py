@@ -513,6 +513,9 @@ def evaluate_confirmatory_seed(
                     "touch_requested": touch_requested,
                     "support_score": support_decision.support_score,
                     "predicted_supported": (
+                        not retrieval.abstained
+                    ),
+                    "support_gate_predicted_supported": (
                         support_decision.is_supported
                     ),
                     "true_supported": (
