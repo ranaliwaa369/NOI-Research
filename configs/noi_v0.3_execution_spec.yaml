@@ -1,0 +1,170 @@
+execution_specification:
+  id: "NOI-V0.3-CONFIRMATORY-EXECUTION-SPEC"
+  version: "0.3.1-preconfirmatory"
+  date: "2026-08-29"
+  status: "preconfirmatory"
+  parent_validation_lock_tag: "noi-v0.3-validation-lock"
+  parent_validation_lock_commit: "fa63dbe"
+  purpose: >
+    Define deterministic ranking mechanics for the already registered
+    NOI v0.3 systems before confirmatory final-test execution.
+  classification:
+    protocol_hypotheses_changed: false
+    registered_systems_changed: false
+    registered_seeds_changed: false
+    locked_thresholds_changed: false
+    final_test_events_inspected: false
+    final_test_labels_inspected: false
+    final_test_metrics_inspected: false
+    confirmatory_execution_started: false
+
+candidate_library:
+  source_split: "training_only"
+  included_items: >
+    Unique target items represented by training latent events.
+  excluded_items:
+    - "validation-only target items"
+    - "final-test-only target items"
+  deterministic_order: "ascending_item_id"
+  target_labels_used_at_inference: false
+
+normalization:
+  rule: "L2"
+  zero_vectors_allowed: false
+  numerical_dtype: "float64"
+  ranking_tie_break:
+    primary: "descending_similarity"
+    secondary: "ascending_item_id"
+
+systems:
+  odor_only_cosine:
+    fit_source: "training_only_candidate_library"
+    query: "available_16d_olfactory_vector"
+    target: "training_item_olfactory_prototype"
+    score: "cosine_similarity"
+    missing_odor_action: "abstain"
+
+  touch_only_cosine:
+    fit_source: "training_only_candidate_library"
+    query: "available_8d_tactile_vector"
+    target: "training_item_tactile_prototype"
+    score: "cosine_similarity"
+    missing_touch_action: "abstain"
+
+  odor_only_ridge:
+    fit_split: "training_only"
+    input: "16d_training_olfactory_vector"
+    regression_target: "16d_training_item_olfactory_prototype"
+    alpha: 1.0
+    intercept: true
+    ranking_score: "cosine_similarity_to_training_item_olfactory_prototype"
+    missing_odor_action: "abstain"
+
+  touch_only_ridge:
+    fit_split: "training_only"
+    input: "8d_training_tactile_vector"
+    regression_target: "8d_training_item_tactile_prototype"
+    alpha: 1.0
+    intercept: true
+    ranking_score: "cosine_similarity_to_training_item_tactile_prototype"
+    missing_touch_action: "abstain"
+
+  naive_concatenation:
+    query: "concatenate_available_odor_and_touch_blocks"
+    target: "concatenate_training_item_odor_and_touch_prototypes"
+    odor_block_weight: 1.0
+    touch_block_weight: 1.0
+    ranking_score: "cosine_similarity"
+    unavailable_block: "all_zero_block"
+    both_modalities_missing_action: "abstain"
+
+  fixed_weight_fusion:
+    query: "concatenate_weighted_odor_and_touch_blocks"
+    target: "concatenate_weighted_training_item_prototype_blocks"
+    odor_block_weight: 0.5
+    touch_block_weight: 0.5
+    ranking_score: "cosine_similarity"
+    unavailable_modality_weight: 0.0
+    available_weights_renormalized: true
+    both_modalities_missing_action: "abstain"
+
+  support_gate_odor_only:
+    support_score: "locked_mahalanobis_support_score"
+    supported_action: "odor_only_cosine_retrieval"
+    unsupported_action: "abstain"
+    missing_odor_action: "abstain"
+    threshold_source: "seedwise_validation_lock"
+
+  reliability_gated_olfactory_tactile_fusion:
+    evidence_source: "training_derived_modality_family_distributions"
+    action_source: "locked_evidence_fusion"
+    ranking:
+      odor_only: "odor_cosine_scores"
+      touch_only: "touch_cosine_scores"
+      fused: "weighted_sum_of_modality_cosine_scores"
+      abstain: "no_identity_ranking"
+    fused_score: >
+      odor_weight times odor cosine similarity plus touch_weight times
+      touch cosine similarity.
+    unavailable_modality_weight: 0.0
+    reliability_threshold_source: "seedwise_validation_lock"
+    conflict_threshold_source: "seedwise_validation_lock"
+
+  support_gate_reliability_fusion_with_abstention:
+    first_stage: "locked_support_gate"
+    touch_request_rule:
+      any:
+        - "support_status_is_uncertain"
+        - "odor_reliability_below_seedwise_locked_reliability_threshold"
+      requires: "touch_available"
+    certain_unsupported_action: "abstain"
+    certain_supported_and_no_touch_request_action: "odor_only_cosine_retrieval"
+    requested_touch_action: "locked_evidence_fusion"
+    final_ranking:
+      odor_only: "odor_cosine_scores"
+      touch_only: "touch_cosine_scores"
+      fused: "weighted_sum_of_modality_cosine_scores"
+      abstain: "no_identity_ranking"
+
+inference_integrity:
+  permitted_inputs:
+    - "view_id"
+    - "latent_event_id"
+    - "available_olfactory_vector"
+    - "available_tactile_vector"
+    - "temporal_offset_steps"
+    - "training-derived model state"
+    - "seedwise validation-locked thresholds"
+  prohibited_model_inputs:
+    - "condition label"
+    - "support regime"
+    - "modality_conflict flag"
+    - "olfactory quality metadata"
+    - "tactile quality metadata"
+    - "target item id"
+    - "target family id"
+    - "final-test correctness"
+  labels_permitted_for_posthoc_scoring_only:
+    - "target item id"
+    - "target family id"
+    - "support regime"
+    - "condition label"
+
+evaluation:
+  top_k: 10
+  statistical_unit: "latent_event_id"
+  paired_views_are_independent_samples: false
+  execute_each_registered_seed_exactly_once: true
+  bootstrap_seed: 4242
+  bootstrap_resamples: 10000
+  confidence_level: 0.95
+  secondary_comparison_correction: "Holm"
+
+locking:
+  separate_execution_lock_commit_required: true
+  separate_execution_lock_tag_required: true
+  configuration_hash_required: true
+  full_test_suite_required: true
+  implementation_committed_before_final_test: true
+  threshold_changes_allowed: false
+  final_test_tuning_allowed: false
