@@ -150,6 +150,63 @@ inference_integrity:
     - "support regime"
     - "condition label"
 
+confirmatory_comparisons:
+  H6:
+    proposed_system: "support_gate_odor_only"
+    comparator_candidates:
+      - "odor_only_ridge"
+      - "odor_only_cosine"
+      - "naive_concatenation"
+      - "fixed_weight_fusion"
+    comparator_selection:
+      metric: "seen_item_clean_mean_reciprocal_rank"
+      rule: "maximum"
+      deterministic_tie_break: "ascending_system_name"
+    primary_outcome: "unseen_family_false_known_rate_reduction"
+    noninferiority_outcome: "seen_item_clean_mean_reciprocal_rank_loss"
+    minimum_absolute_reduction: 0.05
+    maximum_mrr_loss: 0.02
+    paired_ci_must_exclude_zero: true
+
+  H7:
+    proposed_system: "reliability_gated_olfactory_tactile_fusion"
+    eligible_conditions:
+      - "degraded_odor"
+      - "missing_odor"
+    comparator_candidates:
+      - "odor_only_ridge"
+      - "odor_only_cosine"
+      - "touch_only_ridge"
+      - "touch_only_cosine"
+      - "fixed_weight_fusion"
+    comparator_selection:
+      metric: "pooled_eligible_condition_mean_reciprocal_rank"
+      rule: "maximum"
+      deterministic_tie_break: "ascending_system_name"
+    minimum_absolute_mrr_improvement: 0.05
+    minimum_relative_mrr_improvement: 0.10
+    improvement_rule: "absolute_or_relative"
+    paired_ci_must_exclude_zero: true
+
+  H8:
+    proposed_system: "support_gate_reliability_fusion_with_abstention"
+    eligible_conditions:
+      - "degraded_odor"
+      - "degraded_touch"
+      - "missing_touch"
+      - "missing_odor"
+      - "contradictory_modalities"
+      - "temporal_misalignment"
+    required_comparators:
+      - "naive_concatenation"
+      - "fixed_weight_fusion"
+    primary_outcome: "false_confident_rate_reduction"
+    minimum_absolute_reduction: 0.05
+    clean_noninferiority_outcome: "mean_reciprocal_rank_loss"
+    maximum_clean_mrr_loss: 0.02
+    paired_ci_must_exclude_zero: true
+    both_comparators_must_pass: true
+
 confidence_policy:
   source: "top_ranked_weighted_cosine_score"
   transformation: "clip((top_score + 1) / 2, 0, 1)"

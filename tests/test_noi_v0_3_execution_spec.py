@@ -289,3 +289,41 @@ def test_confidence_mapping_is_fixed_before_execution() -> None:
     assert confidence[
         "final_test_calibration_allowed"
     ] is False
+
+def test_hypothesis_comparisons_are_fixed_before_results() -> None:
+    """Comparator selection cannot be chosen after inspecting outcomes."""
+
+    comparisons = load_spec()["confirmatory_comparisons"]
+
+    assert set(comparisons) == {"H6", "H7", "H8"}
+
+    assert comparisons["H6"]["proposed_system"] == (
+        "support_gate_odor_only"
+    )
+    assert comparisons["H6"]["comparator_selection"] == {
+        "metric": "seen_item_clean_mean_reciprocal_rank",
+        "rule": "maximum",
+        "deterministic_tie_break": "ascending_system_name",
+    }
+
+    assert comparisons["H7"]["eligible_conditions"] == [
+        "degraded_odor",
+        "missing_odor",
+    ]
+    assert comparisons["H7"]["improvement_rule"] == (
+        "absolute_or_relative"
+    )
+
+    assert comparisons["H8"]["required_comparators"] == [
+        "naive_concatenation",
+        "fixed_weight_fusion",
+    ]
+    assert comparisons["H8"]["both_comparators_must_pass"] is True
+    assert comparisons["H8"]["eligible_conditions"] == [
+        "degraded_odor",
+        "degraded_touch",
+        "missing_touch",
+        "missing_odor",
+        "contradictory_modalities",
+        "temporal_misalignment",
+    ]
