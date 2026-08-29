@@ -365,3 +365,382 @@ class EvidenceConflictDetector:
             conflict_available=conflict_available,
             conflict_score=conflict_score,
         )
+
+@dataclass(frozen=True, slots=True)
+class ReliabilityCalibrationObservation:
+    """One validation-only reliability calibration target."""
+
+    source_split: MultisensorySplit
+    reliability: float
+    prediction_correct: bool
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.source_split, MultisensorySplit):
+            raise EvidenceConflictError(
+                "source_split must be a MultisensorySplit value."
+            )
+        _validate_probability(
+            "reliability",
+            self.reliability,
+        )
+        if not isinstance(self.prediction_correct, bool):
+            raise EvidenceConflictError(
+                "prediction_correct must be a boolean."
+            )
+
+
+@dataclass(frozen=True, slots=True)
+class ConflictCalibrationObservation:
+    """One validation-only modality-conflict calibration target."""
+
+    source_split: MultisensorySplit
+    conflict_score: float
+    conflict_present: bool
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.source_split, MultisensorySplit):
+            raise EvidenceConflictError(
+                "source_split must be a MultisensorySplit value."
+            )
+        _validate_probability(
+            "conflict_score",
+            self.conflict_score,
+        )
+        if not isinstance(self.conflict_present, bool):
+            raise EvidenceConflictError(
+                "conflict_present must be a boolean."
+            )
+
+
+@dataclass(frozen=True, slots=True)
+class ReliabilityCalibrationReport:
+    """Immutable validation-derived reliability threshold."""
+
+    source_split: MultisensorySplit
+    validation_observation_count: int
+    correct_count: int
+    incorrect_count: int
+    threshold: float
+    balanced_accuracy: float
+    final_test_labels_used: bool
+
+
+@dataclass(frozen=True, slots=True)
+class ConflictCalibrationReport:
+    """Immutable constrained validation conflict threshold."""
+
+    source_split: MultisensorySplit
+    validation_observation_count: int
+    conflict_count: int
+    nonconflict_count: int
+    threshold: float
+    maximum_false_conflict_rate: float
+    validation_false_conflict_rate: float
+    conflict_true_positive_rate: float
+    balanced_accuracy: float
+    final_test_labels_used: bool
+
+
+def _validate_probability(
+    name: str,
+    value: object,
+) -> float:
+    """Require one finite probability in the closed unit interval."""
+
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, Real)
+        or not math.isfinite(float(value))
+        or not 0.0 <= float(value) <= 1.0
+    ):
+        raise EvidenceConflictError(
+            f"{name} must be finite and between 0 and 1."
+        )
+
+    return float(value)
+
+
+def _threshold_candidates(
+    values: tuple[float, ...],
+) -> tuple[float, ...]:
+    """Return deterministic boundaries and adjacent midpoints."""
+
+    unique = tuple(sorted(set(values)))
+
+    if not unique:
+        raise EvidenceConflictError(
+            "Threshold calibration requires observations."
+        )
+
+    candidates: list[float] = [
+        float(np.nextafter(unique[0], -np.inf))
+    ]
+    candidates.extend(
+        (left + right) / 2.0
+        for left, right in zip(
+            unique,
+            unique[1:],
+        )
+    )
+    candidates.append(
+        float(np.nextafter(unique[-1], np.inf))
+    )
+
+    return tuple(candidates)
+
+
+def calibrate_reliability_threshold(
+    observations: tuple[
+        ReliabilityCalibrationObservation,
+        ...
+    ],
+) -> ReliabilityCalibrationReport:
+    """Select maximum-balanced-accuracy reliability threshold."""
+
+    if (
+        not isinstance(observations, tuple)
+        or not observations
+        or not all(
+            isinstance(
+                observation,
+                ReliabilityCalibrationObservation,
+            )
+            for observation in observations
+        )
+    ):
+        raise EvidenceConflictError(
+            "Reliability calibration requires a nonempty tuple "
+            "of observations."
+        )
+
+    if any(
+        observation.source_split
+        is not MultisensorySplit.VALIDATION
+        for observation in observations
+    ):
+        raise EvidenceConflictError(
+            "Reliability calibration permits validation "
+            "observations only."
+        )
+
+    correct_count = sum(
+        observation.prediction_correct
+        for observation in observations
+    )
+    incorrect_count = len(observations) - correct_count
+
+    if correct_count == 0 or incorrect_count == 0:
+        raise EvidenceConflictError(
+            "Reliability calibration requires correct and "
+            "incorrect validation predictions."
+        )
+
+    scores = tuple(
+        float(observation.reliability)
+        for observation in observations
+    )
+    candidates = _threshold_candidates(scores)
+
+    eligible: list[tuple[float, float]] = []
+
+    for candidate in candidates:
+        predicted_reliable = tuple(
+            score >= candidate
+            for score in scores
+        )
+        true_positive_rate = (
+            sum(
+                prediction
+                and observation.prediction_correct
+                for prediction, observation in zip(
+                    predicted_reliable,
+                    observations,
+                    strict=True,
+                )
+            )
+            / correct_count
+        )
+        true_negative_rate = (
+            sum(
+                (not prediction)
+                and (not observation.prediction_correct)
+                for prediction, observation in zip(
+                    predicted_reliable,
+                    observations,
+                    strict=True,
+                )
+            )
+            / incorrect_count
+        )
+        balanced_accuracy = (
+            true_positive_rate + true_negative_rate
+        ) / 2.0
+        eligible.append(
+            (
+                balanced_accuracy,
+                candidate,
+            )
+        )
+
+    balanced_accuracy, threshold = max(
+        eligible,
+        key=lambda item: (
+            item[0],
+            item[1],
+        ),
+    )
+
+    return ReliabilityCalibrationReport(
+        source_split=MultisensorySplit.VALIDATION,
+        validation_observation_count=len(observations),
+        correct_count=correct_count,
+        incorrect_count=incorrect_count,
+        threshold=float(threshold),
+        balanced_accuracy=float(balanced_accuracy),
+        final_test_labels_used=False,
+    )
+
+
+def calibrate_conflict_threshold(
+    observations: tuple[
+        ConflictCalibrationObservation,
+        ...
+    ],
+    *,
+    maximum_false_conflict_rate: float,
+) -> ConflictCalibrationReport:
+    """Select constrained validation-only modality-conflict threshold."""
+
+    maximum_rate = _validate_probability(
+        "maximum false-conflict rate",
+        maximum_false_conflict_rate,
+    )
+
+    if (
+        not isinstance(observations, tuple)
+        or not observations
+        or not all(
+            isinstance(
+                observation,
+                ConflictCalibrationObservation,
+            )
+            for observation in observations
+        )
+    ):
+        raise EvidenceConflictError(
+            "Conflict calibration requires a nonempty tuple "
+            "of observations."
+        )
+
+    if any(
+        observation.source_split
+        is not MultisensorySplit.VALIDATION
+        for observation in observations
+    ):
+        raise EvidenceConflictError(
+            "Conflict calibration permits validation "
+            "observations only."
+        )
+
+    conflict_count = sum(
+        observation.conflict_present
+        for observation in observations
+    )
+    nonconflict_count = len(observations) - conflict_count
+
+    if conflict_count == 0 or nonconflict_count == 0:
+        raise EvidenceConflictError(
+            "Conflict calibration requires conflict and "
+            "nonconflict validation observations."
+        )
+
+    scores = tuple(
+        float(observation.conflict_score)
+        for observation in observations
+    )
+    candidates = _threshold_candidates(scores)
+    eligible: list[
+        tuple[float, float, float, float]
+    ] = []
+
+    for candidate in candidates:
+        predicted_conflict = tuple(
+            score >= candidate
+            for score in scores
+        )
+        true_positive_rate = (
+            sum(
+                prediction
+                and observation.conflict_present
+                for prediction, observation in zip(
+                    predicted_conflict,
+                    observations,
+                    strict=True,
+                )
+            )
+            / conflict_count
+        )
+        false_conflict_rate = (
+            sum(
+                prediction
+                and (not observation.conflict_present)
+                for prediction, observation in zip(
+                    predicted_conflict,
+                    observations,
+                    strict=True,
+                )
+            )
+            / nonconflict_count
+        )
+        true_negative_rate = 1.0 - false_conflict_rate
+        balanced_accuracy = (
+            true_positive_rate + true_negative_rate
+        ) / 2.0
+
+        if false_conflict_rate <= maximum_rate:
+            eligible.append(
+                (
+                    true_positive_rate,
+                    balanced_accuracy,
+                    -candidate,
+                    false_conflict_rate,
+                )
+            )
+
+    if not eligible:
+        raise EvidenceConflictError(
+            "No threshold satisfies the registered "
+            "false-conflict constraint."
+        )
+
+    (
+        true_positive_rate,
+        balanced_accuracy,
+        negative_threshold,
+        false_conflict_rate,
+    ) = max(
+        eligible,
+        key=lambda item: (
+            item[0],
+            item[1],
+            item[2],
+        ),
+    )
+    threshold = -negative_threshold
+
+    return ConflictCalibrationReport(
+        source_split=MultisensorySplit.VALIDATION,
+        validation_observation_count=len(observations),
+        conflict_count=conflict_count,
+        nonconflict_count=nonconflict_count,
+        threshold=float(threshold),
+        maximum_false_conflict_rate=maximum_rate,
+        validation_false_conflict_rate=float(
+            false_conflict_rate
+        ),
+        conflict_true_positive_rate=float(
+            true_positive_rate
+        ),
+        balanced_accuracy=float(balanced_accuracy),
+        final_test_labels_used=False,
+    )
