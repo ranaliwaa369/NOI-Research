@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import Enum
 import math
 from numbers import Real
 from typing import Iterable, Sequence
 
 import numpy as np
 from numpy.typing import NDArray
+from sklearn.linear_model import Ridge
 
 from src.evaluation.multisensory_records import (
     LatentMultisensoryEvent,
@@ -440,4 +442,232 @@ class NOIV03RetrievalLibrary:
                 "Ranked the training-only candidate library "
                 "using locked weighted modality cosine scores."
             ),
+        )
+
+class NOIV03Modality(str, Enum):
+    """Registered independent modality spaces."""
+
+    ODOR = "odor"
+    TOUCH = "touch"
+
+
+class NOIV03RidgeRetriever:
+    """Training-only ridge mapping in one registered modality space."""
+
+    def __init__(
+        self,
+        *,
+        modality: NOIV03Modality,
+        alpha: float = 1.0,
+    ) -> None:
+        if not isinstance(modality, NOIV03Modality):
+            raise NOIV03RetrievalError(
+                "modality must be a NOIV03Modality value."
+            )
+
+        if (
+            isinstance(alpha, bool)
+            or not isinstance(alpha, Real)
+            or not math.isfinite(float(alpha))
+            or float(alpha) <= 0.0
+        ):
+            raise NOIV03RetrievalError(
+                "alpha must be a finite positive number."
+            )
+
+        self._modality = modality
+        self._alpha = float(alpha)
+        self._model: Ridge | None = None
+        self._library: NOIV03RetrievalLibrary | None = None
+        self._training_event_count = 0
+
+    @property
+    def modality(self) -> NOIV03Modality:
+        """Return the registered modality."""
+
+        return self._modality
+
+    @property
+    def alpha(self) -> float:
+        """Return the fixed ridge penalty."""
+
+        return self._alpha
+
+    @property
+    def is_fitted(self) -> bool:
+        """Return whether training-only fitting completed."""
+
+        return self._model is not None and self._library is not None
+
+    @property
+    def training_event_count(self) -> int:
+        """Return the number of training records used."""
+
+        return self._training_event_count
+
+    @property
+    def item_ids(self) -> tuple[str, ...]:
+        """Return the represented training candidate identifiers."""
+
+        if self._library is None:
+            return ()
+
+        return self._library.item_ids
+
+    def fit(
+        self,
+        *,
+        training_events: Sequence[LatentMultisensoryEvent],
+        targets: Sequence[MultisensoryTarget],
+    ) -> "NOIV03RidgeRetriever":
+        """Fit one modality mapping using training records only."""
+
+        library = NOIV03RetrievalLibrary.from_training_records(
+            training_events=training_events,
+            targets=targets,
+        )
+
+        target_map = {
+            item.item_id: item
+            for item in targets
+        }
+
+        ordered_events = tuple(
+            sorted(
+                training_events,
+                key=lambda event: event.latent_event_id,
+            )
+        )
+
+        if self._modality is NOIV03Modality.ODOR:
+            expected_dimension = 16
+            input_vectors = tuple(
+                event.olfactory_vector
+                for event in ordered_events
+            )
+            target_vectors = tuple(
+                target_map[event.target_item_id]
+                .olfactory_prototype
+                for event in ordered_events
+            )
+            input_label = "training olfactory vector"
+            target_label = "target olfactory prototype"
+        else:
+            expected_dimension = 8
+            input_vectors = tuple(
+                event.tactile_vector
+                for event in ordered_events
+            )
+            target_vectors = tuple(
+                target_map[event.target_item_id]
+                .tactile_prototype
+                for event in ordered_events
+            )
+            input_label = "training tactile vector"
+            target_label = "target tactile prototype"
+
+        input_matrix = np.stack(
+            [
+                _normalized_vector(
+                    vector,
+                    expected_dimension=expected_dimension,
+                    label=input_label,
+                )
+                for vector in input_vectors
+            ],
+            axis=0,
+        )
+
+        target_matrix = np.stack(
+            [
+                _normalized_vector(
+                    vector,
+                    expected_dimension=expected_dimension,
+                    label=target_label,
+                )
+                for vector in target_vectors
+            ],
+            axis=0,
+        )
+
+        model = Ridge(
+            alpha=self._alpha,
+            fit_intercept=True,
+        )
+        model.fit(
+            input_matrix,
+            target_matrix,
+        )
+
+        self._model = model
+        self._library = library
+        self._training_event_count = len(ordered_events)
+
+        return self
+
+    def retrieve(
+        self,
+        *,
+        event_id: str,
+        query_vector: Iterable[float],
+        top_k: int = 10,
+    ) -> NOIV03RetrievalResult:
+        """Predict one modality prototype and rank training memory."""
+
+        if self._model is None or self._library is None:
+            raise NOIV03RetrievalError(
+                "NOIV03RidgeRetriever must be fitted before retrieval."
+            )
+
+        expected_dimension = (
+            16
+            if self._modality is NOIV03Modality.ODOR
+            else 8
+        )
+
+        normalized_query = _normalized_vector(
+            query_vector,
+            expected_dimension=expected_dimension,
+            label=f"{self._modality.value} query_vector",
+        )
+
+        predicted = np.asarray(
+            self._model.predict(
+                normalized_query.reshape(1, -1)
+            )[0],
+            dtype=np.float64,
+        )
+
+        if (
+            predicted.ndim != 1
+            or predicted.shape[0] != expected_dimension
+            or not np.all(np.isfinite(predicted))
+        ):
+            raise NOIV03RetrievalError(
+                "Ridge prediction must be one finite modality vector."
+            )
+
+        if self._modality is NOIV03Modality.ODOR:
+            return self._library.rank(
+                event_id=event_id,
+                olfactory_vector=tuple(
+                    float(value)
+                    for value in predicted
+                ),
+                tactile_vector=None,
+                odor_weight=1.0,
+                touch_weight=0.0,
+                top_k=top_k,
+            )
+
+        return self._library.rank(
+            event_id=event_id,
+            olfactory_vector=None,
+            tactile_vector=tuple(
+                float(value)
+                for value in predicted
+            ),
+            odor_weight=0.0,
+            touch_weight=1.0,
+            top_k=top_k,
         )
