@@ -2,21 +2,31 @@
 
 from __future__ import annotations
 
+import argparse
 from dataclasses import asdict, dataclass
+import hashlib
 import json
 import math
 from numbers import Real
 from pathlib import Path
 from typing import Any, Mapping
 
+import yaml
+
 from src.evaluation.evidence_conflict import (
     EvidenceConflictDetector,
 )
 from src.evaluation.multisensory_conditions import (
+    ConditionGenerationConfig,
     ConditionGenerationResult,
+    generate_multisensory_condition_views,
 )
 from src.evaluation.multisensory_records import (
     MultisensorySplit,
+)
+from src.evaluation.noi_v0_3_generator import (
+    NOIV03GenerationConfig,
+    generate_noi_v0_3_events,
 )
 from src.evaluation.noi_v0_3_retrieval import (
     NOIV03System,
@@ -698,3 +708,261 @@ def export_confirmatory_seed_payload(
         serialized,
         encoding="utf-8",
     )
+
+REGISTERED_SEEDS = tuple(range(1301, 1311))
+
+_VALIDATION_LOCK_PATH = Path(
+    "configs/noi_v0.3_validation_lock.yaml"
+)
+
+
+def _registered_seed(seed: int) -> int:
+    """Return one exact preregistered generator seed."""
+
+    if (
+        isinstance(seed, bool)
+        or not isinstance(seed, int)
+        or seed not in REGISTERED_SEEDS
+    ):
+        raise ConfirmatoryExecutionError(
+            "seed must be one of the registered seeds 1301 through 1310."
+        )
+
+    return seed
+
+
+def generation_config_for_seed(
+    seed: int,
+) -> NOIV03GenerationConfig:
+    """Return the full locked confirmatory allocation."""
+
+    registered = _registered_seed(seed)
+
+    return NOIV03GenerationConfig(
+        seed=registered,
+        train_event_count=7000,
+        validation_event_count=1000,
+        final_test_event_count=2000,
+        validation_seen_item_count=400,
+        validation_known_family_unseen_item_count=300,
+        validation_unseen_family_count=300,
+        final_seen_item_count=800,
+        final_known_family_unseen_item_count=600,
+        final_unseen_family_count=600,
+        known_family_count=4,
+        training_items_per_family=4,
+        withheld_items_per_known_family=2,
+        validation_unknown_family_count=2,
+        final_unknown_family_count=2,
+        items_per_unknown_family=3,
+        generator_version="0.3.1-confirmatory",
+        feasibility_only=False,
+    )
+
+
+def condition_config_for_seed(
+    seed: int,
+) -> ConditionGenerationConfig:
+    """Return the locked seven-condition controls."""
+
+    registered = _registered_seed(seed)
+
+    return ConditionGenerationConfig(
+        seed=registered,
+        odor_noise_scale=0.10,
+        tactile_noise_scale=0.10,
+        degraded_quality=0.40,
+        locked_temporal_offset_steps=3,
+        generator_version="0.3.1-confirmatory",
+    )
+
+
+def load_seed_locked_values(
+    seed: int,
+) -> dict[str, float]:
+    """Load exactly one seed's five frozen validation values."""
+
+    registered = _registered_seed(seed)
+
+    try:
+        payload = yaml.safe_load(
+            _VALIDATION_LOCK_PATH.read_text(
+                encoding="utf-8"
+            )
+        )
+    except (OSError, yaml.YAMLError) as error:
+        raise ConfirmatoryExecutionError(
+            "Unable to load the validation-lock artifact."
+        ) from error
+
+    try:
+        lock = payload["validation_lock"]
+        integrity = payload["integrity"]
+        raw_values = payload["values_by_seed"][
+            str(registered)
+        ]
+    except (KeyError, TypeError) as error:
+        raise ConfirmatoryExecutionError(
+            "The validation-lock artifact has an invalid schema."
+        ) from error
+
+    if lock.get("status") != "validation_locked":
+        raise ConfirmatoryExecutionError(
+            "The protocol must remain validation_locked."
+        )
+
+    if lock.get("confirmatory_evaluation_executed") is not False:
+        raise ConfirmatoryExecutionError(
+            "The validation lock already records confirmatory execution."
+        )
+
+    if (
+        integrity.get("final_test_events_used") != 0
+        or integrity.get("final_test_labels_used") is not False
+    ):
+        raise ConfirmatoryExecutionError(
+            "The validation lock fails final-test integrity."
+        )
+
+    return _locked_values(raw_values)
+
+
+def run_registered_confirmatory_seed(
+    *,
+    seed: int,
+    output_path: Path,
+) -> dict[str, Any]:
+    """Execute one registered seed exactly once and hash its result."""
+
+    registered = _registered_seed(seed)
+
+    if not isinstance(output_path, Path):
+        raise ConfirmatoryExecutionError(
+            "output_path must be a Path."
+        )
+
+    hash_path = Path(f"{output_path}.sha256")
+
+    if output_path.exists():
+        raise ConfirmatoryExecutionError(
+            f"Output already exists: {output_path}"
+        )
+
+    if hash_path.exists():
+        raise ConfirmatoryExecutionError(
+            f"Hash output already exists: {hash_path}"
+        )
+
+    locked_values = load_seed_locked_values(
+        registered
+    )
+    generation_config = generation_config_for_seed(
+        registered
+    )
+    condition_config = condition_config_for_seed(
+        registered
+    )
+
+    generated = generate_noi_v0_3_events(
+        generation_config
+    )
+
+    final_events = tuple(
+        event
+        for event in generated.latent_events
+        if event.split is MultisensorySplit.FINAL_TEST
+    )
+
+    condition_result = generate_multisensory_condition_views(
+        latent_events=final_events,
+        targets=generated.targets,
+        config=condition_config,
+    )
+
+    report = evaluate_confirmatory_seed(
+        generated=generated,
+        condition_result=condition_result,
+        locked_values=locked_values,
+        top_k=10,
+        false_confident_threshold=0.80,
+    )
+
+    payload = build_confirmatory_seed_payload(
+        report
+    )
+
+    export_confirmatory_seed_payload(
+        payload,
+        output_path,
+        overwrite=False,
+    )
+
+    digest = hashlib.sha256(
+        output_path.read_bytes()
+    ).hexdigest()
+
+    hash_path.write_text(
+        f"{digest}  {output_path.name}\n",
+        encoding="utf-8",
+    )
+
+    return payload
+
+
+def main() -> None:
+    """Run one explicitly selected registered seed."""
+
+    parser = argparse.ArgumentParser(
+        description=(
+            "Execute one locked NOI v0.3 confirmatory seed "
+            "exactly once."
+        )
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        required=True,
+        choices=REGISTERED_SEEDS,
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=None,
+    )
+
+    arguments = parser.parse_args()
+
+    output = (
+        arguments.output
+        if arguments.output is not None
+        else Path(
+            "results/v0.3-confirmatory/"
+            f"seed-{arguments.seed}.json"
+        )
+    )
+
+    payload = run_registered_confirmatory_seed(
+        seed=arguments.seed,
+        output_path=output,
+    )
+
+    print("CONFIRMATORY SEED: COMPLETE")
+    print("SEED:", payload["seed"])
+    print(
+        "FINAL LATENT EVENTS:",
+        payload["final_latent_event_count"],
+    )
+    print(
+        "CONDITION VIEWS:",
+        payload["condition_view_count"],
+    )
+    print(
+        "SYSTEM EVALUATIONS:",
+        payload["system_evaluation_count"],
+    )
+    print("WROTE:", output)
+    print("SHA256:", Path(f"{output}.sha256"))
+
+
+if __name__ == "__main__":
+    main()
