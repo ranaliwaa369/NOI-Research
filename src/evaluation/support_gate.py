@@ -62,6 +62,28 @@ class SupportCalibrationReport:
 
 
 @dataclass(frozen=True, slots=True)
+class SupportLockCalibrationReport:
+    """Immutable validation-lock threshold and bootstrap interval."""
+
+    method: SupportMethod
+    source_split: MultisensorySplit
+    validation_event_count: int
+    supported_count: int
+    unsupported_count: int
+    threshold: float
+    uncertainty_lower: float
+    uncertainty_upper: float
+    maximum_false_known_rate: float
+    validation_false_known_rate: float
+    supported_true_positive_rate: float
+    balanced_accuracy: float
+    bootstrap_seed: int
+    bootstrap_resamples: int
+    confidence_level: float
+    final_test_labels_used: bool
+
+
+@dataclass(frozen=True, slots=True)
 class SupportDecision:
     """One support score and its uncertainty-aware operational decision."""
 
@@ -208,7 +230,12 @@ class SupportGate:
         self._training_event_count = 0
         self._threshold: float | None = None
         self._uncertainty_width: float | None = None
+        self._uncertainty_lower: float | None = None
+        self._uncertainty_upper: float | None = None
         self._calibration_report: SupportCalibrationReport | None = None
+        self._lock_calibration_report: (
+            SupportLockCalibrationReport | None
+        ) = None
 
     @property
     def method(self) -> SupportMethod:
@@ -365,7 +392,10 @@ class SupportGate:
 
         self._threshold = None
         self._uncertainty_width = None
+        self._uncertainty_lower = None
+        self._uncertainty_upper = None
         self._calibration_report = None
+        self._lock_calibration_report = None
 
         return self
 
@@ -572,7 +602,293 @@ class SupportGate:
 
         self._threshold = best_threshold
         self._uncertainty_width = width
+        self._uncertainty_lower = None
+        self._uncertainty_upper = None
         self._calibration_report = report
+        self._lock_calibration_report = None
+
+        return report
+
+    def calibrate_for_lock(
+        self,
+        events: tuple[LatentMultisensoryEvent, ...],
+        *,
+        maximum_false_known_rate: float,
+        bootstrap_seed: int,
+        bootstrap_resamples: int,
+        confidence_level: float,
+    ) -> SupportLockCalibrationReport:
+        """Derive the registered threshold and interval from validation."""
+
+        if not self.is_fitted:
+            raise SupportGateError(
+                "SupportGate must be fitted before lock calibration."
+            )
+
+        checked = _validate_event_tuple(
+            events,
+            label="lock calibration events",
+        )
+
+        if any(
+            event.split is not MultisensorySplit.VALIDATION
+            for event in checked
+        ):
+            raise SupportGateError(
+                "Lock calibration permits validation data only."
+            )
+
+        if (
+            isinstance(maximum_false_known_rate, bool)
+            or not isinstance(maximum_false_known_rate, Real)
+            or not math.isfinite(float(maximum_false_known_rate))
+            or not 0.0 <= float(maximum_false_known_rate) <= 1.0
+        ):
+            raise SupportGateError(
+                "maximum false-known rate must be finite and "
+                "between 0 and 1."
+            )
+
+        if (
+            isinstance(bootstrap_seed, bool)
+            or not isinstance(bootstrap_seed, int)
+            or bootstrap_seed < 0
+        ):
+            raise SupportGateError(
+                "bootstrap_seed must be a nonnegative integer."
+            )
+
+        if (
+            isinstance(bootstrap_resamples, bool)
+            or not isinstance(bootstrap_resamples, int)
+            or bootstrap_resamples <= 0
+        ):
+            raise SupportGateError(
+                "bootstrap_resamples must be a positive integer."
+            )
+
+        if (
+            isinstance(confidence_level, bool)
+            or not isinstance(confidence_level, Real)
+            or not math.isfinite(float(confidence_level))
+            or not 0.0 < float(confidence_level) < 1.0
+        ):
+            raise SupportGateError(
+                "confidence_level must be finite and strictly "
+                "between 0 and 1."
+            )
+
+        scores = np.asarray(
+            tuple(
+                self.score(event.olfactory_vector)
+                for event in checked
+            ),
+            dtype=np.float64,
+        )
+        labels = np.asarray(
+            tuple(
+                event.support_regime
+                in {
+                    SupportRegime.SEEN_ITEM,
+                    SupportRegime.KNOWN_FAMILY_UNSEEN_ITEM,
+                }
+                for event in checked
+            ),
+            dtype=np.bool_,
+        )
+
+        supported_count = int(np.sum(labels))
+        unsupported_count = int(labels.size - supported_count)
+
+        if supported_count == 0 or unsupported_count == 0:
+            raise SupportGateError(
+                "Validation lock calibration requires supported "
+                "and unsupported examples."
+            )
+
+        maximum_rate = float(maximum_false_known_rate)
+
+        def select_threshold(
+            sample_scores: np.ndarray,
+            sample_labels: np.ndarray,
+        ) -> tuple[float, float, float, float]:
+            unique_scores = np.unique(sample_scores)
+            candidates: list[float] = [
+                float(
+                    np.nextafter(
+                        unique_scores[0],
+                        -np.inf,
+                    )
+                )
+            ]
+            candidates.extend(
+                float((left + right) / 2.0)
+                for left, right in zip(
+                    unique_scores,
+                    unique_scores[1:],
+                )
+            )
+            candidates.append(
+                float(
+                    np.nextafter(
+                        unique_scores[-1],
+                        np.inf,
+                    )
+                )
+            )
+
+            positive_count = int(np.sum(sample_labels))
+            negative_count = int(
+                sample_labels.size - positive_count
+            )
+
+            if positive_count == 0 or negative_count == 0:
+                raise SupportGateError(
+                    "Each lock-calibration sample requires "
+                    "supported and unsupported examples."
+                )
+
+            eligible: list[
+                tuple[float, float, float, float]
+            ] = []
+
+            for candidate in candidates:
+                predictions = sample_scores >= candidate
+                true_positive_rate = float(
+                    np.sum(predictions & sample_labels)
+                    / positive_count
+                )
+                false_known_rate = float(
+                    np.sum(predictions & ~sample_labels)
+                    / negative_count
+                )
+                true_negative_rate = 1.0 - false_known_rate
+                balanced_accuracy = (
+                    true_positive_rate + true_negative_rate
+                ) / 2.0
+
+                if false_known_rate <= maximum_rate:
+                    eligible.append(
+                        (
+                            true_positive_rate,
+                            balanced_accuracy,
+                            candidate,
+                            false_known_rate,
+                        )
+                    )
+
+            if not eligible:
+                raise SupportGateError(
+                    "No threshold satisfies the registered "
+                    "false-known constraint."
+                )
+
+            (
+                true_positive_rate,
+                balanced_accuracy,
+                threshold,
+                false_known_rate,
+            ) = max(
+                eligible,
+                key=lambda item: (
+                    item[0],
+                    item[1],
+                    item[2],
+                ),
+            )
+
+            return (
+                threshold,
+                false_known_rate,
+                true_positive_rate,
+                balanced_accuracy,
+            )
+
+        (
+            threshold,
+            false_known_rate,
+            true_positive_rate,
+            balanced_accuracy,
+        ) = select_threshold(scores, labels)
+
+        generator = np.random.default_rng(bootstrap_seed)
+        bootstrap_thresholds: list[float] = []
+        event_count = int(scores.size)
+
+        for _ in range(bootstrap_resamples):
+            indices = generator.integers(
+                0,
+                event_count,
+                size=event_count,
+            )
+            sampled_scores = scores[indices]
+            sampled_labels = labels[indices]
+
+            if (
+                not np.any(sampled_labels)
+                or np.all(sampled_labels)
+            ):
+                bootstrap_thresholds.append(threshold)
+                continue
+
+            sampled_threshold, _, _, _ = select_threshold(
+                sampled_scores,
+                sampled_labels,
+            )
+            bootstrap_thresholds.append(sampled_threshold)
+
+        alpha = 1.0 - float(confidence_level)
+        lower = float(
+            np.quantile(
+                bootstrap_thresholds,
+                alpha / 2.0,
+            )
+        )
+        upper = float(
+            np.quantile(
+                bootstrap_thresholds,
+                1.0 - alpha / 2.0,
+            )
+        )
+
+        lower = min(lower, threshold)
+        upper = max(upper, threshold)
+
+        if (
+            not math.isfinite(lower)
+            or not math.isfinite(upper)
+            or lower > threshold
+            or threshold > upper
+        ):
+            raise SupportGateError(
+                "Bootstrap threshold interval is invalid."
+            )
+
+        report = SupportLockCalibrationReport(
+            method=self._method,
+            source_split=MultisensorySplit.VALIDATION,
+            validation_event_count=len(checked),
+            supported_count=supported_count,
+            unsupported_count=unsupported_count,
+            threshold=threshold,
+            uncertainty_lower=lower,
+            uncertainty_upper=upper,
+            maximum_false_known_rate=maximum_rate,
+            validation_false_known_rate=false_known_rate,
+            supported_true_positive_rate=true_positive_rate,
+            balanced_accuracy=balanced_accuracy,
+            bootstrap_seed=bootstrap_seed,
+            bootstrap_resamples=bootstrap_resamples,
+            confidence_level=float(confidence_level),
+            final_test_labels_used=False,
+        )
+
+        self._threshold = threshold
+        self._uncertainty_width = None
+        self._uncertainty_lower = lower
+        self._uncertainty_upper = upper
+        self._calibration_report = None
+        self._lock_calibration_report = report
 
         return report
 
@@ -599,10 +915,18 @@ class SupportGate:
     ) -> SupportDecision:
         """Apply the locked threshold to an already computed score."""
 
-        if (
-            self._threshold is None
-            or self._uncertainty_width is None
-            or self._calibration_report is None
+        legacy_ready = (
+            self._uncertainty_width is not None
+            and self._calibration_report is not None
+        )
+        lock_ready = (
+            self._uncertainty_lower is not None
+            and self._uncertainty_upper is not None
+            and self._lock_calibration_report is not None
+        )
+
+        if self._threshold is None or not (
+            legacy_ready or lock_ready
         ):
             raise SupportGateError(
                 "SupportGate must be calibrated before decisions."
@@ -623,8 +947,15 @@ class SupportGate:
             )
 
         score = float(support_score)
-        lower = self._threshold - self._uncertainty_width
-        upper = self._threshold + self._uncertainty_width
+        if lock_ready:
+            assert self._uncertainty_lower is not None
+            assert self._uncertainty_upper is not None
+            lower = self._uncertainty_lower
+            upper = self._uncertainty_upper
+        else:
+            assert self._uncertainty_width is not None
+            lower = self._threshold - self._uncertainty_width
+            upper = self._threshold + self._uncertainty_width
 
         if score < lower:
             uncertainty_status = (
