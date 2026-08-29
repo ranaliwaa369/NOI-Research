@@ -1,348 +1,347 @@
 protocol:
-  id: "NOI-PROTOCOL-0.3"
-  version: "0.3.0-preimplementation"
-  status: "preimplementation"
-  date: "2026-08-29"
+  id: NOI-PROTOCOL-0.3
+  version: 0.3.1-validation-locked
+  status: validation_locked
+  date: '2026-08-29'
+  title: 'Support-Aware Reliability-Gated Olfactory-Tactile Retrieval Under Open-Set
+    Distribution Shift
 
-  title: >
-    Support-Aware Reliability-Gated Olfactory-Tactile Retrieval
-    Under Open-Set Distribution Shift
-
-  project: "Neuro-Olfactive Intelligence"
-  owner: "GuardianX LLC"
-
+    '
+  project: Neuro-Olfactive Intelligence
+  owner: GuardianX LLC
   authors:
-    - "Rana Al-Dahlake"
-    - "Jalal Alazirji"
-
+  - Rana Al-Dahlake
+  - Jalal Alazirji
 parent_release:
-  version: "0.2.0"
-  tag: "v0.2.0"
-  commit: "942c0274a1513f781cd75327f493249fd6aa74af"
-  final_results_document: "docs/noi_v0.2_final_results.md"
-
+  version: 0.2.0
+  tag: v0.2.0
+  commit: 942c0274a1513f781cd75327f493249fd6aa74af
+  final_results_document: docs/noi_v0.2_final_results.md
 scope:
-  evidence_type: "deterministic synthetic computational simulation"
+  evidence_type: deterministic synthetic computational simulation
   physical_tactile_sensor_validated: false
   physical_olfactory_sensor_validated: false
   clinical_claims_allowed: false
   biological_equivalence_claims_allowed: false
   deployment_claims_allowed: false
+primary_question: 'Can a support-aware NOI system identify unsupported queries, request
+  simulated tactile evidence when olfactory evidence is insufficient, and reduce false
+  confident retrieval under novelty or modality conflict?
 
-primary_question: >
-  Can a support-aware NOI system identify unsupported queries, request
-  simulated tactile evidence when olfactory evidence is insufficient,
-  and reduce false confident retrieval under novelty or modality
-  conflict?
-
+  '
 support_regimes:
   seen_item:
     item_in_training_memory: true
     family_in_training: true
-
   known_family_unseen_item:
     item_in_training_memory: false
     family_in_training: true
-
   unseen_family:
     item_in_training_memory: false
     family_in_training: false
-
 hypotheses:
   H6:
-    role: "primary"
-    name: "support_aware_open_set_gate"
-    statement: >
-      A support-aware gate reduces false-known decisions for
-      unseen-family queries while preserving seen-item retrieval.
+    role: primary
+    name: support_aware_open_set_gate
+    statement: 'A support-aware gate reduces false-known decisions for unseen-family
+      queries while preserving seen-item retrieval.
 
+      '
     success:
       minimum_absolute_false_known_reduction: 0.05
       paired_ci_must_exclude_zero: true
       maximum_seen_item_mrr_loss: 0.02
-      threshold_source: "validation_only"
-
+      threshold_source: validation_only
   H7:
-    role: "secondary"
-    name: "conditional_tactile_utility"
-    statement: >
-      Reliability-gated olfactory-tactile fusion improves retrieval
-      under prespecified olfactory ambiguity or degradation.
+    role: secondary
+    name: conditional_tactile_utility
+    statement: 'Reliability-gated olfactory-tactile fusion improves retrieval under
+      prespecified olfactory ambiguity or degradation.
 
+      '
     success:
       minimum_absolute_mrr_improvement: 0.05
-      minimum_relative_mrr_improvement: 0.10
-      improvement_rule: "absolute_or_relative"
+      minimum_relative_mrr_improvement: 0.1
+      improvement_rule: absolute_or_relative
       paired_ci_must_exclude_zero: true
       final_test_tuning_allowed: false
-
   H8:
-    role: "secondary"
-    name: "conflict_aware_safe_fusion"
-    statement: >
-      Reliability-gated fusion reduces false confident decisions when
-      modalities are missing, degraded, or contradictory.
+    role: secondary
+    name: conflict_aware_safe_fusion
+    statement: 'Reliability-gated fusion reduces false confident decisions when modalities
+      are missing, degraded, or contradictory.
 
+      '
     success:
       minimum_absolute_false_confident_reduction: 0.05
       paired_ci_must_exclude_zero: true
       maximum_clean_mrr_loss: 0.02
-
 synthetic_dataset:
-  generator_version: "v0.3-preimplementation"
-  numerical_dtype: "float64"
+  generator_version: v0.3-preimplementation
+  numerical_dtype: float64
   deterministic: true
-
   independent_seeds:
-    - 1301
-    - 1302
-    - 1303
-    - 1304
-    - 1305
-    - 1306
-    - 1307
-    - 1308
-    - 1309
-    - 1310
-
+  - 1301
+  - 1302
+  - 1303
+  - 1304
+  - 1305
+  - 1306
+  - 1307
+  - 1308
+  - 1309
+  - 1310
   events_per_seed:
     total_base_events: 10000
     training_events: 7000
     validation_events: 1000
     final_test_latent_events: 2000
-
   final_test_support_allocation:
     seen_item_events: 800
     known_family_unseen_item_events: 600
     unseen_family_events: 600
-
   split_controls:
     exact_event_overlap_allowed: false
     latent_event_overlap_allowed: false
     template_leakage_allowed: false
     unseen_family_test_leakage_allowed: false
     validation_unknown_families_distinct_from_test: true
-
 modalities:
   olfactory:
     representation_dimension: 16
     existing_v0_2_representation_preserved: true
-
   tactile:
     representation_dimension: 8
     physical_sensor_claim: false
-
     components:
       surface_roughness: 1
       stiffness_or_compliance: 1
       friction: 1
       contact_geometry: 2
       pressure_response_dynamics: 3
-
     prohibited_inputs:
-      - "target_label"
-      - "split_membership"
-      - "evaluation_outcome"
-      - "support_regime_label"
-
+    - target_label
+    - split_membership
+    - evaluation_outcome
+    - support_regime_label
   metadata:
     required_fields:
-      - "latent_event_id"
-      - "target_item"
-      - "target_family"
-      - "support_regime"
-      - "olfactory_available"
-      - "olfactory_quality"
-      - "tactile_available"
-      - "tactile_quality"
-      - "modality_conflict"
-      - "temporal_offset"
-
+    - latent_event_id
+    - target_item
+    - target_family
+    - support_regime
+    - olfactory_available
+    - olfactory_quality
+    - tactile_available
+    - tactile_quality
+    - modality_conflict
+    - temporal_offset
 paired_conditions:
   views_per_applicable_latent_event: 7
-
   conditions:
     clean:
-      olfactory_state: "clean"
-      tactile_state: "clean"
+      olfactory_state: clean
+      tactile_state: clean
       temporal_offset_steps: 0
-
     degraded_odor:
-      olfactory_state: "gaussian_noise"
-      olfactory_noise_standard_deviation: 0.10
-      tactile_state: "clean"
+      olfactory_state: gaussian_noise
+      olfactory_noise_standard_deviation: 0.1
+      tactile_state: clean
       temporal_offset_steps: 0
-
     degraded_touch:
-      olfactory_state: "clean"
-      tactile_state: "gaussian_noise"
-      tactile_noise_standard_deviation: 0.10
+      olfactory_state: clean
+      tactile_state: gaussian_noise
+      tactile_noise_standard_deviation: 0.1
       temporal_offset_steps: 0
-
     missing_touch:
-      olfactory_state: "clean"
-      tactile_state: "missing"
+      olfactory_state: clean
+      tactile_state: missing
       temporal_offset_steps: 0
-
     missing_odor:
-      olfactory_state: "missing"
-      tactile_state: "clean"
+      olfactory_state: missing
+      tactile_state: clean
       temporal_offset_steps: 0
-
     contradictory_modalities:
-      olfactory_state: "clean"
-      tactile_state: "deterministic_mismatched_target"
-      mismatch_rule: "different_target_and_different_family"
+      olfactory_state: clean
+      tactile_state: deterministic_mismatched_target
+      mismatch_rule: different_target_and_different_family
       temporal_offset_steps: 0
-
     temporal_misalignment:
-      olfactory_state: "clean"
-      tactile_state: "clean"
+      olfactory_state: clean
+      tactile_state: clean
       temporal_offset_steps: 3
-
-  statistical_unit: "latent_event_id"
+  statistical_unit: latent_event_id
   condition_views_are_independent_samples: false
-
 systems:
   deployable_baselines:
-    - "odor_only_ridge"
-    - "odor_only_cosine"
-    - "touch_only_ridge"
-    - "touch_only_cosine"
-    - "naive_concatenation"
-    - "fixed_weight_fusion"
-    - "support_gate_odor_only"
-
+  - odor_only_ridge
+  - odor_only_cosine
+  - touch_only_ridge
+  - touch_only_cosine
+  - naive_concatenation
+  - fixed_weight_fusion
+  - support_gate_odor_only
   proposed_systems:
-    - "reliability_gated_olfactory_tactile_fusion"
-    - "support_gate_reliability_fusion_with_abstention"
-
+  - reliability_gated_olfactory_tactile_fusion
+  - support_gate_reliability_fusion_with_abstention
   oracle_policy:
-    classification: "diagnostic_only"
+    classification: diagnostic_only
     allowed_to_compete: false
     allowed_to_support_confirmatory_claims: false
     allowed_to_tune_deployable_systems: false
-
 support_gate:
-  embedding_normalization: "L2"
-  primary_score: "class_conditional_mahalanobis_distance"
+  embedding_normalization: L2
+  primary_score: class_conditional_mahalanobis_distance
   comparison_scores:
-    - "cosine_margin"
-    - "nearest_prototype_distance"
-
+  - cosine_margin
+  - nearest_prototype_distance
   threshold:
-    value: null
-    status: "to_be_derived_and_locked"
-    source: "validation_only"
+    values_by_seed:
+      '1301': -22.13686595194035
+      '1302': -16.792569229494415
+      '1303': -19.767824636514515
+      '1304': -17.707435394013974
+      '1305': -17.216567779919217
+      '1306': -18.008945078380545
+      '1307': -16.368076346303692
+      '1308': -21.186501800228324
+      '1309': -19.83530439270452
+      '1310': -23.471716425215597
+    status: validation_locked
+    source: validation_only
     target_validation_false_known_rate: 0.05
-
   uncertainty_band:
-    lower: null
-    upper: null
-    status: "to_be_derived_and_locked"
-    source: "validation_only"
-
+    lower_by_seed:
+      '1301': -22.13686595194035
+      '1302': -16.792569229494415
+      '1303': -19.767824636514515
+      '1304': -17.707435394013974
+      '1305': -17.216567779919217
+      '1306': -18.008945078380545
+      '1307': -16.368076346303692
+      '1308': -21.186501800228324
+      '1309': -19.83530439270452
+      '1310': -23.471716425215597
+    upper_by_seed:
+      '1301': -22.13686595194035
+      '1302': -16.792569229494415
+      '1303': -19.767824636514515
+      '1304': -17.707435394013974
+      '1305': -17.216567779919217
+      '1306': -18.008945078380545
+      '1307': -16.368076346303692
+      '1308': -21.186501800228324
+      '1309': -19.83530439270452
+      '1310': -23.471716425215597
+    status: validation_locked
+    source: validation_only
+    bootstrap_seed: 4242
+    bootstrap_resamples: 10000
+    confidence_level: 0.95
 touch_request_policy:
   request_when:
-    - "olfactory_support_is_uncertain"
-    - "olfactory_confidence_below_locked_threshold"
-    - "touch_is_available"
-
+  - olfactory_support_is_uncertain
+  - olfactory_confidence_below_locked_threshold
+  - touch_is_available
   never_request_when:
-    - "olfactory_support_and_confidence_are_sufficient"
-    - "touch_is_unavailable"
-
+  - olfactory_support_and_confidence_are_sufficient
+  - touch_is_unavailable
 fusion_policy:
-  type: "reliability_and_conflict_gated"
-  fixed_weight_baseline_odor_weight: 0.50
-  fixed_weight_baseline_touch_weight: 0.50
-
+  type: reliability_and_conflict_gated
+  fixed_weight_baseline_odor_weight: 0.5
+  fixed_weight_baseline_touch_weight: 0.5
   reliability_threshold:
-    value: null
-    status: "to_be_derived_and_locked"
-    source: "validation_only"
-
+    values_by_seed:
+      '1301': 0.177222364642993
+      '1302': 0.12965204930947383
+      '1303': 0.17310731481454966
+      '1304': 0.14570299074844667
+      '1305': 0.09373819188788206
+      '1306': 0.12274462474063283
+      '1307': 0.11495760430580845
+      '1308': 0.10534816902523113
+      '1309': 0.08914286930715856
+      '1310': 0.17333791610145197
+    status: validation_locked
+    source: validation_only
   conflict_threshold:
-    value: null
-    status: "to_be_derived_and_locked"
-    source: "validation_only"
-
+    values_by_seed:
+      '1301': 0.15928212004382586
+      '1302': 0.18657810103096165
+      '1303': 0.17710910235955146
+      '1304': 0.2143275490837582
+      '1305': 0.2924600963765901
+      '1306': 0.21133521788426418
+      '1307': 0.13331144728105265
+      '1308': 0.227499366956653
+      '1309': 0.23368803738531263
+      '1310': 0.13565395618190185
+    status: validation_locked
+    source: validation_only
+    maximum_validation_false_conflict_rate: 0.05
   permitted_actions:
-    - "odor_only_retrieval"
-    - "touch_only_retrieval"
-    - "multimodal_fusion"
-    - "abstain"
-
+  - odor_only_retrieval
+  - touch_only_retrieval
+  - multimodal_fusion
+  - abstain
 metrics:
   retrieval:
-    - "recall_at_1"
-    - "recall_at_10"
-    - "mean_reciprocal_rank"
-    - "ndcg_at_10"
-
+  - recall_at_1
+  - recall_at_10
+  - mean_reciprocal_rank
+  - ndcg_at_10
   open_set:
-    - "auroc"
-    - "aupr"
-    - "fpr_at_95_tpr"
-    - "false_known_rate"
-    - "unknown_detection_rate"
-
+  - auroc
+  - aupr
+  - fpr_at_95_tpr
+  - false_known_rate
+  - unknown_detection_rate
   selective_and_calibration:
-    - "coverage"
-    - "selective_error"
-    - "risk_coverage_curve"
-    - "expected_calibration_error"
-    - "brier_score"
-    - "false_confident_decision_rate"
-
+  - coverage
+  - selective_error
+  - risk_coverage_curve
+  - expected_calibration_error
+  - brier_score
+  - false_confident_decision_rate
   tactile_contribution:
-    - "touch_synergy"
-    - "touch_request_rate"
-    - "useful_touch_rate"
-    - "harmful_fusion_rate"
-
+  - touch_synergy
+  - touch_request_rate
+  - useful_touch_rate
+  - harmful_fusion_rate
 statistical_controls:
   confidence_level: 0.95
   bootstrap_seed: 4242
   bootstrap_resamples: 10000
-
   paired_bootstrap:
     enabled: true
-    resampling_unit: "latent_event_id"
-
+    resampling_unit: latent_event_id
   multiple_comparison_correction:
-    method: "Holm"
-    applies_to: "confirmatory_secondary_comparisons"
-
+    method: Holm
+    applies_to: confirmatory_secondary_comparisons
   reporting:
     retain_every_seed: true
     report_negative_results: true
     report_null_results: true
     report_effect_sizes: true
     report_confidence_intervals: true
-
 development_stages:
   feasibility:
     confirmatory_claims_allowed: false
-
   pilot:
     separate_events_required: true
     separate_seeds_required: true
     reusable_as_confirmatory_evidence: false
-
   protocol_lock:
     required_before_final_evaluation: true
     required_items:
-      - "all_thresholds_filled"
-      - "all_seeds_listed"
-      - "protocol_hash_created"
-      - "configuration_hash_created"
-      - "preimplementation_tag_created"
-
+    - all_thresholds_filled
+    - all_seeds_listed
+    - protocol_hash_created
+    - configuration_hash_created
+    - preimplementation_tag_created
   confirmatory:
     execution_count: 1
     final_test_tuning_allowed: false
-
 integrity_controls:
   hash_configs: true
   hash_manifests: true
@@ -353,9 +352,29 @@ integrity_controls:
   silent_seed_removal_allowed: false
   silent_condition_removal_allowed: false
   pooled_unstratified_support_reporting_allowed: false
-
 planned_artifacts:
-  protocol_document: "docs/noi_v0.3_research_protocol.md"
-  protocol_config: "configs/noi_v0.3_protocol.yaml"
-  implementation_plan: "docs/noi_v0.3_implementation_plan.md"
-  final_results: "docs/noi_v0.3_final_results.md"
+  protocol_document: docs/noi_v0.3_research_protocol.md
+  protocol_config: configs/noi_v0.3_protocol.yaml
+  implementation_plan: docs/noi_v0.3_implementation_plan.md
+  final_results: docs/noi_v0.3_final_results.md
+validation_lock:
+  artifact: configs/noi_v0.3_validation_lock.yaml
+  status: validation_locked
+  registered_seeds:
+  - 1301
+  - 1302
+  - 1303
+  - 1304
+  - 1305
+  - 1306
+  - 1307
+  - 1308
+  - 1309
+  - 1310
+  threshold_storage: values_by_seed
+  cross_seed_pooling_used: false
+  final_test_events_used: 0
+  final_test_labels_used: false
+  confirmatory_evaluation_executed: false
+  source_result_sha256: 45c3c9aea3904e3f7961ad97cb00afcbb1ff906ab6379de44eb194458ffee0ae
+  implementation_commit: 23a4e6e9402e5bfd45a04386b6f61bb19a3c88af

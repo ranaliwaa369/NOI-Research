@@ -347,7 +347,7 @@ def test_unlocked_support_threshold_is_rejected(
 
     with pytest.raises(
         NOIProtocolConfigurationError,
-        match="must remain null",
+        match="obsolete unlocked value field",
     ):
         load_noi_v0_3_protocol(path)
 
@@ -377,7 +377,7 @@ def test_unlocked_fusion_threshold_is_rejected(
 
     with pytest.raises(
         NOIProtocolConfigurationError,
-        match="must remain null",
+        match="obsolete unlocked value field",
     ):
         load_noi_v0_3_protocol(path)
 

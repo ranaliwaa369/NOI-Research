@@ -57,11 +57,15 @@ def test_parent_protocol_hash_matches() -> None:
     """The amendment must identify the exact parent protocol bytes."""
 
     data = load_amendment()
-    observed = hashlib.sha256(
-        PROTOCOL_PATH.read_bytes()
-    ).hexdigest()
+    lock = yaml.safe_load(
+        Path(
+            "configs/noi_v0.3_validation_lock.yaml"
+        ).read_text(encoding="utf-8")
+    )
 
-    assert data["parent_protocol"]["sha256"] == observed
+    assert data["parent_protocol"]["sha256"] == (
+        lock["provenance"]["protocol_sha256_before_lock"]
+    )
 
 
 def test_support_threshold_uses_registered_constraint() -> None:
@@ -275,25 +279,38 @@ def test_original_confirmatory_allocation_is_unchanged() -> None:
     }
 
 
-def test_parent_protocol_remains_unlocked() -> None:
-    """The amendment itself must not silently fill lock values."""
+def test_parent_protocol_is_now_validation_locked() -> None:
+    """The documented lock step must fill every seedwise value."""
 
     protocol = load_protocol()
+    expected = {str(seed) for seed in range(1301, 1311)}
 
-    assert protocol["protocol"]["status"] == "preimplementation"
-    assert protocol["support_gate"]["threshold"]["value"] is None
-    assert protocol["support_gate"]["uncertainty_band"][
-        "lower"
-    ] is None
-    assert protocol["support_gate"]["uncertainty_band"][
-        "upper"
-    ] is None
-    assert protocol["fusion_policy"][
-        "reliability_threshold"
-    ]["value"] is None
-    assert protocol["fusion_policy"][
-        "conflict_threshold"
-    ]["value"] is None
+    assert protocol["protocol"]["status"] == "validation_locked"
+    assert set(
+        protocol["support_gate"]["threshold"][
+            "values_by_seed"
+        ]
+    ) == expected
+    assert set(
+        protocol["support_gate"]["uncertainty_band"][
+            "lower_by_seed"
+        ]
+    ) == expected
+    assert set(
+        protocol["support_gate"]["uncertainty_band"][
+            "upper_by_seed"
+        ]
+    ) == expected
+    assert set(
+        protocol["fusion_policy"][
+            "reliability_threshold"
+        ]["values_by_seed"]
+    ) == expected
+    assert set(
+        protocol["fusion_policy"][
+            "conflict_threshold"
+        ]["values_by_seed"]
+    ) == expected
 
 
 def test_post_lock_threshold_changes_are_prohibited() -> None:

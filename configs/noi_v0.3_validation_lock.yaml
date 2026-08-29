@@ -1,0 +1,182 @@
+validation_lock:
+  id: NOI-V0.3-VALIDATION-LOCK
+  version: 0.3.1-validation-locked
+  status: validation_locked
+  date: '2026-08-29'
+  study_phase: validation_lock
+  confirmatory_evaluation_executed: false
+  registered_seeds:
+  - 1301
+  - 1302
+  - 1303
+  - 1304
+  - 1305
+  - 1306
+  - 1307
+  - 1308
+  - 1309
+  - 1310
+  completed_seeds:
+  - 1301
+  - 1302
+  - 1303
+  - 1304
+  - 1305
+  - 1306
+  - 1307
+  - 1308
+  - 1309
+  - 1310
+  threshold_storage: values_by_seed
+  cross_seed_pooling_used: false
+controls:
+  confidence_level: 0.95
+  cross_seed_pooling_used: false
+  maximum_false_conflict_rate: 0.05
+  maximum_false_known_rate: 0.05
+  support_bootstrap_resamples: 10000
+  support_bootstrap_seed: 4242
+  support_method: mahalanobis
+  threshold_storage: values_by_seed
+allocation_per_seed:
+  final_test_events_generated_but_not_exposed: 2000
+  training_events: 7000
+  validation_events: 1000
+  validation_known_family_unseen_item: 300
+  validation_seen_item: 400
+  validation_unseen_family: 300
+values_by_seed:
+  '1301':
+    support_threshold: -22.13686595194035
+    support_uncertainty_lower: -22.13686595194035
+    support_uncertainty_upper: -22.13686595194035
+    reliability_threshold: 0.177222364642993
+    conflict_threshold: 0.15928212004382586
+  '1302':
+    support_threshold: -16.792569229494415
+    support_uncertainty_lower: -16.792569229494415
+    support_uncertainty_upper: -16.792569229494415
+    reliability_threshold: 0.12965204930947383
+    conflict_threshold: 0.18657810103096165
+  '1303':
+    support_threshold: -19.767824636514515
+    support_uncertainty_lower: -19.767824636514515
+    support_uncertainty_upper: -19.767824636514515
+    reliability_threshold: 0.17310731481454966
+    conflict_threshold: 0.17710910235955146
+  '1304':
+    support_threshold: -17.707435394013974
+    support_uncertainty_lower: -17.707435394013974
+    support_uncertainty_upper: -17.707435394013974
+    reliability_threshold: 0.14570299074844667
+    conflict_threshold: 0.2143275490837582
+  '1305':
+    support_threshold: -17.216567779919217
+    support_uncertainty_lower: -17.216567779919217
+    support_uncertainty_upper: -17.216567779919217
+    reliability_threshold: 0.09373819188788206
+    conflict_threshold: 0.2924600963765901
+  '1306':
+    support_threshold: -18.008945078380545
+    support_uncertainty_lower: -18.008945078380545
+    support_uncertainty_upper: -18.008945078380545
+    reliability_threshold: 0.12274462474063283
+    conflict_threshold: 0.21133521788426418
+  '1307':
+    support_threshold: -16.368076346303692
+    support_uncertainty_lower: -16.368076346303692
+    support_uncertainty_upper: -16.368076346303692
+    reliability_threshold: 0.11495760430580845
+    conflict_threshold: 0.13331144728105265
+  '1308':
+    support_threshold: -21.186501800228324
+    support_uncertainty_lower: -21.186501800228324
+    support_uncertainty_upper: -21.186501800228324
+    reliability_threshold: 0.10534816902523113
+    conflict_threshold: 0.227499366956653
+  '1309':
+    support_threshold: -19.83530439270452
+    support_uncertainty_lower: -19.83530439270452
+    support_uncertainty_upper: -19.83530439270452
+    reliability_threshold: 0.08914286930715856
+    conflict_threshold: 0.23368803738531263
+  '1310':
+    support_threshold: -23.471716425215597
+    support_uncertainty_lower: -23.471716425215597
+    support_uncertainty_upper: -23.471716425215597
+    reliability_threshold: 0.17333791610145197
+    conflict_threshold: 0.13565395618190185
+validation_audit_by_seed:
+  '1301':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.01375
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1302':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.05
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1303':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.036
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1304':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.0495
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1305':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.0475
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1306':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.048
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1307':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.0185
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1308':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.0485
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1309':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.0495
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+  '1310':
+    validation_false_known_rate: 0.0
+    validation_false_conflict_rate: 0.05
+    support_validation_event_count: 1000
+    reliability_validation_observation_count: 12000
+    conflict_validation_observation_count: 5000
+integrity:
+  condition_metadata_used_as_model_input: false
+  final_test_events_used: 0
+  final_test_labels_used: false
+  final_test_threshold_feedback_used: false
+  quality_metadata_used_as_model_input: false
+  target_labels_used_as_inference_input: false
+provenance:
+  source_result_path: results/v0.3-validation-lock/validation_lock.json
+  source_result_sha256: 45c3c9aea3904e3f7961ad97cb00afcbb1ff906ab6379de44eb194458ffee0ae
+  protocol_sha256_before_lock: 3c2dfa93929462ce28856ea8a16a41d5a2c4fccef3eb0fe5694fe4a6536ab965
+  amendment_sha256_at_execution: ced2b79c3aa4965af80f08fff0ed3dcd9d837dc30ba4dfec52440d96dcd95f44
+  implementation_commit: 23a4e6e9402e5bfd45a04386b6f61bb19a3c88af

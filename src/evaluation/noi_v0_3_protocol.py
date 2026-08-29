@@ -1,10 +1,12 @@
-"""Validation for the NOI v0.3 preimplementation protocol."""
+"""Validation for the NOI v0.3 validation-locked protocol."""
 
 from __future__ import annotations
 
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
+import math
+from numbers import Real
 
 import yaml
 
@@ -58,7 +60,7 @@ class NOIProtocolConfigurationError(ValueError):
 def load_noi_v0_3_protocol(
     protocol_path: str | Path,
 ) -> dict[str, Any]:
-    """Load and validate the v0.3 preimplementation protocol."""
+    """Load and validate the v0.3 validation-locked protocol."""
 
     path = Path(protocol_path)
 
@@ -142,13 +144,13 @@ def _validate_identity(
     _require_equal(
         protocol,
         "version",
-        "0.3.0-preimplementation",
+        "0.3.1-validation-locked",
         context="protocol",
     )
     _require_equal(
         protocol,
         "status",
-        "preimplementation",
+        "validation_locked",
         context="protocol",
     )
     _require_equal(
@@ -474,7 +476,12 @@ def _validate_conditions(
 def _validate_threshold_state(
     configuration: Mapping[str, Any],
 ) -> None:
-    """Require validation-derived thresholds to remain unlocked."""
+    """Require complete seedwise validation-locked thresholds."""
+
+    expected_seeds = tuple(
+        str(seed)
+        for seed in range(1301, 1311)
+    )
 
     support_gate = _mapping(configuration, "support_gate")
     support_threshold = _mapping(
@@ -494,8 +501,31 @@ def _validate_threshold_state(
         fusion,
         "conflict_threshold",
     )
+    validation_lock = _mapping(
+        configuration,
+        "validation_lock",
+    )
 
-    threshold_fields = (
+    for name, mapping in (
+        ("support threshold", support_threshold),
+        ("uncertainty band", uncertainty_band),
+        ("reliability threshold", reliability),
+        ("conflict threshold", conflict),
+    ):
+        _require_equal(
+            mapping,
+            "status",
+            "validation_locked",
+            context=name,
+        )
+        _require_equal(
+            mapping,
+            "source",
+            "validation_only",
+            context=name,
+        )
+
+    legacy_fields = (
         ("support threshold", support_threshold, ("value",)),
         (
             "uncertainty band",
@@ -506,26 +536,157 @@ def _validate_threshold_state(
         ("conflict threshold", conflict, ("value",)),
     )
 
-    for name, threshold, value_fields in threshold_fields:
-        for field in value_fields:
-            if threshold.get(field) is not None:
-                raise NOIProtocolConfigurationError(
-                    f"{name} must remain null before protocol lock."
-                )
+    for name, mapping, fields in legacy_fields:
+        if any(field in mapping for field in fields):
+            raise NOIProtocolConfigurationError(
+                f"{name} contains an obsolete unlocked value field."
+            )
 
-        _require_equal(
-            threshold,
-            "status",
-            "to_be_derived_and_locked",
-            context=name,
-        )
-        _require_equal(
-            threshold,
-            "source",
-            "validation_only",
-            context=name,
+    support_values = _locked_seed_values(
+        support_threshold,
+        "values_by_seed",
+        expected_seeds=expected_seeds,
+        context="support threshold",
+        unit_interval=False,
+    )
+    lower_values = _locked_seed_values(
+        uncertainty_band,
+        "lower_by_seed",
+        expected_seeds=expected_seeds,
+        context="uncertainty band lower",
+        unit_interval=False,
+    )
+    upper_values = _locked_seed_values(
+        uncertainty_band,
+        "upper_by_seed",
+        expected_seeds=expected_seeds,
+        context="uncertainty band upper",
+        unit_interval=False,
+    )
+    _locked_seed_values(
+        reliability,
+        "values_by_seed",
+        expected_seeds=expected_seeds,
+        context="reliability threshold",
+        unit_interval=True,
+    )
+    _locked_seed_values(
+        conflict,
+        "values_by_seed",
+        expected_seeds=expected_seeds,
+        context="conflict threshold",
+        unit_interval=True,
+    )
+
+    for seed in expected_seeds:
+        if not (
+            lower_values[seed]
+            <= support_values[seed]
+            <= upper_values[seed]
+        ):
+            raise NOIProtocolConfigurationError(
+                "uncertainty band must contain the support "
+                f"threshold for seed {seed}."
+            )
+
+    _require_equal(
+        validation_lock,
+        "status",
+        "validation_locked",
+        context="validation_lock",
+    )
+    _require_equal(
+        validation_lock,
+        "registered_seeds",
+        list(range(1301, 1311)),
+        context="validation_lock",
+    )
+    _require_equal(
+        validation_lock,
+        "threshold_storage",
+        "values_by_seed",
+        context="validation_lock",
+    )
+    _require_equal(
+        validation_lock,
+        "cross_seed_pooling_used",
+        False,
+        context="validation_lock",
+    )
+    _require_equal(
+        validation_lock,
+        "final_test_events_used",
+        0,
+        context="validation_lock",
+    )
+    _require_equal(
+        validation_lock,
+        "final_test_labels_used",
+        False,
+        context="validation_lock",
+    )
+    _require_equal(
+        validation_lock,
+        "confirmatory_evaluation_executed",
+        False,
+        context="validation_lock",
+    )
+    _require_equal(
+        validation_lock,
+        "artifact",
+        "configs/noi_v0.3_validation_lock.yaml",
+        context="validation_lock",
+    )
+
+
+def _locked_seed_values(
+    mapping: Mapping[str, Any],
+    key: str,
+    *,
+    expected_seeds: tuple[str, ...],
+    context: str,
+    unit_interval: bool,
+) -> dict[str, float]:
+    """Validate one complete finite seedwise threshold mapping."""
+
+    raw = mapping.get(key)
+
+    if not isinstance(raw, Mapping):
+        raise NOIProtocolConfigurationError(
+            f"{context}.{key} must be a mapping."
         )
 
+    if tuple(raw.keys()) != expected_seeds:
+        raise NOIProtocolConfigurationError(
+            f"{context}.{key} must contain exactly seeds "
+            "1301 through 1310 in order."
+        )
+
+    checked: dict[str, float] = {}
+
+    for seed in expected_seeds:
+        value = raw[seed]
+
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, Real)
+            or not math.isfinite(float(value))
+        ):
+            raise NOIProtocolConfigurationError(
+                f"{context} for seed {seed} must be finite."
+            )
+
+        converted = float(value)
+
+        if unit_interval and not 0.0 <= converted <= 1.0:
+            raise NOIProtocolConfigurationError(
+                f"{context} for seed {seed} must be "
+                "between 0 and 1."
+            )
+
+        checked[seed] = converted
+
+    return checked
 
 def _validate_statistics(
     configuration: Mapping[str, Any],
