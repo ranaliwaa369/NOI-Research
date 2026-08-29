@@ -130,6 +130,31 @@ locked_corrections:
     temporal_misalignment_action: "abstain"
     condition_metadata_available_to_model: false
 
+confirmatory_generation_lock:
+  validation_support_allocation_per_seed:
+    seen_item: 400
+    known_family_unseen_item: 300
+    unseen_family: 300
+  target_topology:
+    known_family_count: 4
+    training_items_per_family: 4
+    withheld_items_per_known_family: 2
+    validation_unknown_family_count: 2
+    final_unknown_family_count: 2
+    items_per_unknown_family: 3
+  rationale: >
+    The validation allocation preserves the registered 40/30/30
+    support-regime ratio used by the final-test allocation. The target
+    topology preserves the pre-lock feasibility generator structure.
+  condition_controls:
+    odor_noise_scale: 0.10
+    tactile_noise_scale: 0.10
+    locked_temporal_offset_steps: 3
+    degraded_quality_metadata: 0.40
+    degraded_quality_metadata_used_as_model_input: false
+  validation_unknown_and_final_unknown_families_disjoint: true
+  locked_before_validation_execution: true
+
 seedwise_validation_lock:
   rationale: >
     Independent generator seeds produce different modality prototype

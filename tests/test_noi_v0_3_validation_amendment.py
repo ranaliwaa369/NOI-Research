@@ -166,6 +166,42 @@ def test_conflict_threshold_selection_is_prespecified() -> None:
     assert correction["final_test_labels_allowed"] is False
 
 
+def test_confirmatory_generation_values_are_locked() -> None:
+    """Full validation generation cannot depend on observed outcomes."""
+
+    lock = load_amendment()["confirmatory_generation_lock"]
+
+    assert lock["validation_support_allocation_per_seed"] == {
+        "seen_item": 400,
+        "known_family_unseen_item": 300,
+        "unseen_family": 300,
+    }
+    assert lock["target_topology"] == {
+        "known_family_count": 4,
+        "training_items_per_family": 4,
+        "withheld_items_per_known_family": 2,
+        "validation_unknown_family_count": 2,
+        "final_unknown_family_count": 2,
+        "items_per_unknown_family": 3,
+    }
+    assert lock["condition_controls"][
+        "odor_noise_scale"
+    ] == 0.10
+    assert lock["condition_controls"][
+        "tactile_noise_scale"
+    ] == 0.10
+    assert lock["condition_controls"][
+        "locked_temporal_offset_steps"
+    ] == 3
+    assert lock["condition_controls"][
+        "degraded_quality_metadata_used_as_model_input"
+    ] is False
+    assert lock[
+        "validation_unknown_and_final_unknown_families_disjoint"
+    ] is True
+    assert lock["locked_before_validation_execution"] is True
+
+
 def test_validation_lock_is_seed_specific() -> None:
     """Independent seeds cannot share fitted models or applied thresholds."""
 
