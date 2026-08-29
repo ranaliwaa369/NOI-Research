@@ -166,6 +166,39 @@ def test_conflict_threshold_selection_is_prespecified() -> None:
     assert correction["final_test_labels_allowed"] is False
 
 
+def test_validation_lock_is_seed_specific() -> None:
+    """Independent seeds cannot share fitted models or applied thresholds."""
+
+    policy = load_amendment()["seedwise_validation_lock"]
+
+    assert policy["unit"] == "generator_seed"
+    assert policy["cross_seed_training_pooling_allowed"] is False
+    assert policy["cross_seed_validation_pooling_allowed"] is False
+    assert policy[
+        "cross_seed_threshold_substitution_allowed"
+    ] is False
+    assert policy["storage_rule"] == "values_by_seed"
+    assert policy["aggregate_thresholds_may_be_applied"] is False
+    assert policy["all_registered_seeds_required"] is True
+    assert policy["silent_seed_exclusion_allowed"] is False
+
+
+def test_each_seed_locks_all_five_values() -> None:
+    """Every independent seed must provide the complete policy lock."""
+
+    required = load_amendment()["seedwise_validation_lock"][
+        "required_locked_values_per_seed"
+    ]
+
+    assert required == [
+        "support_threshold",
+        "support_uncertainty_lower",
+        "support_uncertainty_upper",
+        "reliability_threshold",
+        "conflict_threshold",
+    ]
+
+
 def test_only_training_and_validation_are_permitted_before_lock() -> None:
     """Final-test records must remain inaccessible during derivation."""
 
