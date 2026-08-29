@@ -85,6 +85,14 @@ locked_corrections:
       - "validation-calibrated retrieval margins"
     reliability_range: "[0, 1]"
     threshold_source: "validation_only"
+    calibration_target: >
+      Whether the independently retrieved modality-family prediction
+      is correct on validation.
+    threshold_selection:
+      primary: "maximum_balanced_accuracy"
+      deterministic_tie_break: "largest_threshold"
+    validation_targets_are_model_inputs: false
+    final_test_labels_allowed: false
 
   conflict_detection:
     output: "numeric_conflict_score"
@@ -103,6 +111,16 @@ locked_corrections:
       olfactory-family and tactile-family evidence distributions.
     score_range: "[0, 1]"
     threshold_source: "validation_only"
+    calibration_target: >
+      Validation-only ground truth indicating whether paired modality
+      evidence comes from different target families.
+    threshold_selection:
+      maximum_validation_false_conflict_rate: 0.05
+      primary: "maximum_conflict_true_positive_rate"
+      secondary: "maximum_balanced_accuracy"
+      deterministic_tie_break: "smallest_threshold"
+    validation_targets_are_model_inputs: false
+    final_test_labels_allowed: false
 
   fusion_policy:
     reliability_threshold_source: "validation_only"

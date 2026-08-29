@@ -119,6 +119,53 @@ def test_direct_condition_metadata_is_prohibited() -> None:
     assert "final-test labels" in conflict_prohibited
 
 
+def test_reliability_threshold_selection_is_prespecified() -> None:
+    """Reliability calibration must have a deterministic objective."""
+
+    correction = load_amendment()[
+        "locked_corrections"
+    ]["reliability_estimation"]
+
+    assert correction["threshold_source"] == "validation_only"
+    assert correction["threshold_selection"]["primary"] == (
+        "maximum_balanced_accuracy"
+    )
+    assert correction["threshold_selection"][
+        "deterministic_tie_break"
+    ] == "largest_threshold"
+    assert correction[
+        "validation_targets_are_model_inputs"
+    ] is False
+    assert correction["final_test_labels_allowed"] is False
+
+
+def test_conflict_threshold_selection_is_prespecified() -> None:
+    """Conflict calibration must enforce its safety constraint."""
+
+    correction = load_amendment()[
+        "locked_corrections"
+    ]["conflict_detection"]
+
+    selection = correction["threshold_selection"]
+
+    assert selection[
+        "maximum_validation_false_conflict_rate"
+    ] == 0.05
+    assert selection["primary"] == (
+        "maximum_conflict_true_positive_rate"
+    )
+    assert selection["secondary"] == (
+        "maximum_balanced_accuracy"
+    )
+    assert selection["deterministic_tie_break"] == (
+        "smallest_threshold"
+    )
+    assert correction[
+        "validation_targets_are_model_inputs"
+    ] is False
+    assert correction["final_test_labels_allowed"] is False
+
+
 def test_only_training_and_validation_are_permitted_before_lock() -> None:
     """Final-test records must remain inaccessible during derivation."""
 
