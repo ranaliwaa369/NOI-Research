@@ -980,3 +980,75 @@ class SupportGate:
                 is UncertaintyStatus.UNCERTAIN
             ),
         )
+
+def apply_locked_support_threshold(
+    *,
+    event_id: str,
+    method: SupportMethod,
+    support_score: float,
+    threshold: float,
+    uncertainty_lower: float,
+    uncertainty_upper: float,
+) -> SupportDecision:
+    """Apply frozen support values without labels or recalibration."""
+
+    if not isinstance(event_id, str) or not event_id.strip():
+        raise SupportGateError(
+            "event_id must be a nonempty string."
+        )
+
+    if not isinstance(method, SupportMethod):
+        raise SupportGateError(
+            "method must be a SupportMethod value."
+        )
+
+    values = {
+        "support_score": support_score,
+        "threshold": threshold,
+        "uncertainty_lower": uncertainty_lower,
+        "uncertainty_upper": uncertainty_upper,
+    }
+
+    converted: dict[str, float] = {}
+
+    for name, value in values.items():
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, Real)
+            or not math.isfinite(float(value))
+        ):
+            raise SupportGateError(
+                f"{name} must be finite."
+            )
+
+        converted[name] = float(value)
+
+    score = converted["support_score"]
+    locked_threshold = converted["threshold"]
+    lower = converted["uncertainty_lower"]
+    upper = converted["uncertainty_upper"]
+
+    if not lower <= locked_threshold <= upper:
+        raise SupportGateError(
+            "The locked values must satisfy "
+            "uncertainty_lower <= threshold <= uncertainty_upper."
+        )
+
+    if score < lower:
+        status = UncertaintyStatus.CERTAIN_UNSUPPORTED
+    elif score > upper:
+        status = UncertaintyStatus.CERTAIN_SUPPORTED
+    else:
+        status = UncertaintyStatus.UNCERTAIN
+
+    return SupportDecision(
+        event_id=event_id,
+        method=method,
+        support_score=score,
+        threshold=locked_threshold,
+        is_supported=score >= locked_threshold,
+        uncertainty_status=status,
+        request_touch=(
+            status is UncertaintyStatus.UNCERTAIN
+        ),
+    )
