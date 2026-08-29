@@ -150,6 +150,14 @@ inference_integrity:
     - "support regime"
     - "condition label"
 
+confidence_policy:
+  source: "top_ranked_weighted_cosine_score"
+  transformation: "clip((top_score + 1) / 2, 0, 1)"
+  abstention_confidence: 0.0
+  false_confident_threshold: 0.80
+  calibration_status: "evaluated_not_refit_on_final_test"
+  final_test_calibration_allowed: false
+
 evaluation:
   top_k: 10
   statistical_unit: "latent_event_id"

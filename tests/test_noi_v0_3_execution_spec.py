@@ -269,3 +269,23 @@ def test_execution_requires_a_separate_lock() -> None:
     ] is True
     assert locking["threshold_changes_allowed"] is False
     assert locking["final_test_tuning_allowed"] is False
+
+def test_confidence_mapping_is_fixed_before_execution() -> None:
+    """Final scores cannot select or recalibrate confidence rules."""
+
+    confidence = load_spec()["confidence_policy"]
+
+    assert confidence["source"] == (
+        "top_ranked_weighted_cosine_score"
+    )
+    assert confidence["transformation"] == (
+        "clip((top_score + 1) / 2, 0, 1)"
+    )
+    assert confidence["abstention_confidence"] == 0.0
+    assert confidence["false_confident_threshold"] == 0.80
+    assert confidence["calibration_status"] == (
+        "evaluated_not_refit_on_final_test"
+    )
+    assert confidence[
+        "final_test_calibration_allowed"
+    ] is False
