@@ -1,0 +1,23 @@
+{
+  "final_test_tuning_used": false,
+  "machine": "arm64",
+  "numpy_version": "2.4.6",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python_implementation": "CPython",
+  "python_version": "3.11.14",
+  "pyyaml_version": "6.0.3",
+  "registered_seeds": [
+    1301,
+    1302,
+    1303,
+    1304,
+    1305,
+    1306,
+    1307,
+    1308,
+    1309,
+    1310
+  ],
+  "schema_version": "noi-v0.3-environment-manifest-v1",
+  "study_phase": "confirmatory"
+}

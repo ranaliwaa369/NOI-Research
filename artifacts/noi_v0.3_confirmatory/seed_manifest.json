@@ -1,0 +1,113 @@
+{
+  "all_seed_hashes_verified": true,
+  "execution_lock_commit": "f10ecc235b22273c07d1ab2ae00b39c10acb83c6",
+  "raw_seed_files_committed_to_git": false,
+  "raw_seed_storage_note": "Raw seed JSON files are retained in the local execution record and may be archived separately because their combined size is approximately 1.9 GB.",
+  "registered_seeds": [
+    1301,
+    1302,
+    1303,
+    1304,
+    1305,
+    1306,
+    1307,
+    1308,
+    1309,
+    1310
+  ],
+  "schema_version": "noi-v0.3-confirmatory-seed-manifest-v1",
+  "seed_count": 10,
+  "seeds": [
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1301.json",
+      "final_latent_event_count": 2000,
+      "seed": 1301,
+      "sha256": "f8e19953691a62ef917d76cad639bc497811d47990e7f137e87ff1b417ac27ac",
+      "size_bytes": 199593450,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1302.json",
+      "final_latent_event_count": 2000,
+      "seed": 1302,
+      "sha256": "7728279a6f760445a6e4038eadb1d437d1f8f7355aeeeea85b64dc043b545d90",
+      "size_bytes": 199907494,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1303.json",
+      "final_latent_event_count": 2000,
+      "seed": 1303,
+      "sha256": "f597058f3880529f5538db3ec669e7fabcb8f33895e6acbc37aa0241165c33bf",
+      "size_bytes": 199314826,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1304.json",
+      "final_latent_event_count": 2000,
+      "seed": 1304,
+      "sha256": "6bf9ab1586d173f7134680db9c5e0b9c06147cbdca84ec334ebe557f75a41017",
+      "size_bytes": 200541105,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1305.json",
+      "final_latent_event_count": 2000,
+      "seed": 1305,
+      "sha256": "3643f46760e7d27bd63cf97de855627324ce38b3f8ae3f06828a3703c578999b",
+      "size_bytes": 202792114,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1306.json",
+      "final_latent_event_count": 2000,
+      "seed": 1306,
+      "sha256": "b3c0ae2f13e5d5c10a94dc89cb0923ecc430de254e956f39d03b596772199b47",
+      "size_bytes": 200198243,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1307.json",
+      "final_latent_event_count": 2000,
+      "seed": 1307,
+      "sha256": "e0adc9a4d36d18d087fb3929d4afd32f79ebac9cc7f7e13d4a2620375ba5fae4",
+      "size_bytes": 200007227,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1308.json",
+      "final_latent_event_count": 2000,
+      "seed": 1308,
+      "sha256": "18b3e33b24bc26179c965543f5a9ecc8ea3e723a4cdbe920b54b04060f80f2bd",
+      "size_bytes": 200563933,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1309.json",
+      "final_latent_event_count": 2000,
+      "seed": 1309,
+      "sha256": "86182ffbccc0c080d199d097561e5d6e98cca81d64905b2838f165e4ee57a9f8",
+      "size_bytes": 201546947,
+      "system_evaluation_count": 126000
+    },
+    {
+      "condition_view_count": 14000,
+      "filename": "seed-1310.json",
+      "final_latent_event_count": 2000,
+      "seed": 1310,
+      "sha256": "af45317667d569acab5511457415713fde93d3e91e9ce1272d024aa3a9704df5",
+      "size_bytes": 199834799,
+      "system_evaluation_count": 126000
+    }
+  ],
+  "study_phase": "confirmatory"
+}
