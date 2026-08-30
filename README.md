@@ -1,6 +1,6 @@
 # Neuro-Olfactive Intelligence (NOI)
 
-[![v0.2 archive DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22139127.svg)](https://doi.org/10.5281/zenodo.22139127)
+[![v0.3 archive DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22180610.svg)](https://doi.org/10.5281/zenodo.22180610)
 
 ## Overview
 
@@ -206,6 +206,17 @@ Run the complete test suite:
 
     python -m pytest -q
 
+Recorded release-candidate verification:
+
+- Command: `python -m pytest -q`
+- Git commit: `b56427f`
+- Execution date: August 30, 2026
+- Result: `1309 passed in 50.24s`
+- Exit code: `0`
+
+This is a historical execution record tied to the stated commit, not a
+continuously updating test count.
+
 Experiment entry points:
 
 - `experiments/run_baseline_pilot.py`
@@ -226,11 +237,13 @@ rerunning an experiment or interpreting its outputs.
 
 Citation metadata are provided in `CITATION.cff`.
 
+Version 0.3 archival DOI:
+
+https://doi.org/10.5281/zenodo.22180610
+
 Version 0.2 archival DOI:
 
 https://doi.org/10.5281/zenodo.22139127
-
-The version 0.3 archival DOI will be added before final publication.
 
 ## Authors
 

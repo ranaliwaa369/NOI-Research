@@ -304,7 +304,12 @@ Final execution environment:
 - Execution-lock tag:
   `noi-v0.3-confirmatory-execution-lock`
 - Verification suite before execution: `1295 passed`
-- Failed tests: `0`
+- Failed tests before execution: `0`
+- Release-candidate verification command: `python -m pytest -q`
+- Release-candidate verification commit: `b56427f`
+- Release-candidate verification date: August 30, 2026
+- Release-candidate verification result: `1309 passed in 50.24s`
+- Release-candidate verification exit code: `0`
 - Dependency-lock SHA-256:
   `c14f5d344875a9afe640418589a1fe13e5412efb7bd21b963a4ed3d50116ce5e`
 
@@ -342,9 +347,13 @@ Tracked release artifacts:
 - `artifacts/noi_v0.3_confirmatory/seed_manifest.json`
 - adjacent SHA-256 files for each artifact.
 
-The ten raw seed JSON files and adjacent hashes are retained in the
-local execution record. Their combined size is approximately `1.9 GB`,
-so they are not committed directly to the ordinary Git repository.
+The ten raw seed JSON files and adjacent SHA-256 sidecars have a
+combined size of approximately `1.9 GB`, so they are not committed
+directly to ordinary Git history. They are distributed in
+`NOI-Research-v0.3.0-confirmatory-raw-artifacts.tar.gz` through the
+version-specific archival record at https://doi.org/10.5281/zenodo.22180610. The archive has an
+adjacent SHA-256 file, and individual raw-file hashes are listed in
+`artifacts/noi_v0.3_confirmatory/seed_manifest.json`.
 
 ## Post-hoc exploratory sensitivity analysis
 

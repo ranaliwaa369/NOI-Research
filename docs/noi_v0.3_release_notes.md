@@ -84,7 +84,10 @@ clinical effectiveness, chemical safety, or deployment readiness.
 
 ## DOI
 
-The v0.3 archival DOI will be added before final publication. The prior
-v0.2 archival record remains available at:
+Version 0.3 archival DOI:
+
+https://doi.org/10.5281/zenodo.22180610
+
+The prior v0.2 archival record remains available at:
 
 https://doi.org/10.5281/zenodo.22139127

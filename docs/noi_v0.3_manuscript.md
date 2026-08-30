@@ -16,7 +16,7 @@ Conceptual AI Systems Paper and Reproducible Evaluation Protocol
 
 **Research Framework Version**
 
-NOI v0.3.0 Release Candidate
+NOI v0.3.0
 
 **Manuscript Public Release**
 
@@ -28,7 +28,7 @@ August 2026
 
 **Digital Object Identifier**
 
-[ZENODO DOI TO BE RESERVED BEFORE PUBLICATION]
+10.5281/zenodo.22180610
 
 ## Abstract
 
@@ -587,6 +587,12 @@ from missing-input abstention rather than score-based family separation.
 Full supplementary results are provided in
 `docs/noi_v0.3_posthoc_sensitivity.md`.
 
+A release-candidate repository verification was executed on August 30,
+2026, at Git commit `b56427f`. The command
+`python -m pytest -q` completed with exit code `0` and reported
+`1309 passed in 50.24s`. This is a recorded execution result tied to that
+commit, not a continuously updating test count.
+
 ## 7. Limitations
 
 The study has important limitations.
@@ -677,11 +683,17 @@ metadata, seed hashes, and documentation are available at:
 
 https://github.com/ranaliwaa369/NOI-Research
 
-The raw per-seed JSON artifacts total approximately 1.9 GB and are
-retained separately from the ordinary Git history. Their SHA-256 values
-are listed in the public seed manifest.
+The version-specific archival record is available at:
 
-A versioned archival DOI will be added before publication.
+https://doi.org/10.5281/zenodo.22180610
+
+The ten raw per-seed JSON artifacts and their adjacent SHA-256 sidecars
+total approximately 1.9 GB and are retained outside ordinary Git history.
+They are distributed through the version-specific Zenodo record in
+`NOI-Research-v0.3.0-confirmatory-raw-artifacts.tar.gz`, with an adjacent
+archive SHA-256 file. Individual raw-file SHA-256 values are listed in
+`artifacts/noi_v0.3_confirmatory/seed_manifest.json`. These raw artifacts
+support computational inspection only; all evaluated data are synthetic.
 
 ## Author contributions
 
