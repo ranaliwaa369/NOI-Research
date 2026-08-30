@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use or discuss this research framework, please cite it using the metadata below."
 title: "Neuro-Olfactive Intelligence (NOI): Reproducible Research Framework"
 type: software
-version: 0.2.0
-date-released: 2026-08-28
+version: 0.3.0
+date-released: 2026-08-30
 authors:
   - family-names: "Al-Dahlake"
     given-names: "Rana"
@@ -15,10 +15,10 @@ authors:
     affiliation: "GuardianX LLC"
 abstract: >-
   A proprietary, publicly inspectable research framework for reproducible
-  simulation and evaluation of neuro-olfactive artificial intelligence,
-  contextual olfactory memory, multimodal odor representation, corrective
-  associative memory, graded out-of-distribution behavior, and deterministic
-  policy conformance.
+  simulation and evaluation of support-aware neuro-olfactive artificial
+  intelligence, contextual olfactory memory, open-set recognition,
+  reliability-gated multimodal retrieval, selective prediction, and
+  transparent negative-result reporting.
 keywords:
   - artificial olfaction
   - neuro-olfactive artificial intelligence
@@ -26,6 +26,9 @@ keywords:
   - multimodal learning
   - associative memory
   - odor representation
+  - open-set recognition
+  - selective prediction
+  - reliability-gated fusion
   - safety-aware AI
   - reproducible simulation
 contact:
@@ -35,4 +38,3 @@ contact:
     orcid: "https://orcid.org/0009-0001-8919-8177"
 
 repository-code: "https://github.com/ranaliwaa369/NOI-Research"
-doi: "10.5281/zenodo.22139127"

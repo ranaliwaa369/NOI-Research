@@ -31,8 +31,9 @@ secondary results. The three hypotheses must be interpreted separately.
    threshold.
 
 The primary contribution is therefore support-aware rejection of
-unsupported queries. The evaluation does not support a claim of tactile
-synergy or a practically sufficient conflict-aware safety improvement.
+registered synthetic unseen-family queries. The evaluation does not
+support a claim of tactile synergy or a practically sufficient
+conflict-aware safety improvement.
 
 ## Evaluation scope
 
@@ -270,6 +271,24 @@ The audit reproduced:
 All recomputed values matched the locked aggregate to an absolute
 tolerance of `1e-12`.
 
+## Post-confirmatory trace audit
+
+A post-hoc read-only trace audit verified all ten raw seed hashes and all
+`1,260,000` system-evaluation records. Seedwise validation-lock values,
+locked support decisions, scoring calculations, paired-condition
+structure, system alignment, and aggregate linkage were reproduced.
+
+No violation was detected across the registered and testable leakage
+boundaries. This finding is evidence of implemented conformance, not proof
+that no conceivable leakage channel exists.
+
+The trace confirmed that H6 is limited to `unseen_family` queries. It does
+not establish rejection or successful identity retrieval for
+`known_family_unseen_item` queries.
+
+See `docs/noi_v0.3_trace_audit.md` and
+`artifacts/noi_v0.3_confirmatory/trace_audit.json`.
+
 ## Reproducibility record
 
 Final execution environment:
@@ -326,6 +345,40 @@ Tracked release artifacts:
 The ten raw seed JSON files and adjacent hashes are retained in the
 local execution record. Their combined size is approximately `1.9 GB`,
 so they are not committed directly to the ordinary Git repository.
+
+## Post-hoc exploratory sensitivity analysis
+
+After confirmatory finalization, a separately labeled exploratory
+analysis reported per-seed effects and applied a hierarchical bootstrap
+that resampled seed first and latent event second.
+
+The post-hoc analysis reproduced every locked point estimate to absolute
+tolerance `1e-12`. H6 remained `1.000000` in every seed, with a
+hierarchical 95% interval of `[1.000000, 1.000000]`. H7 had a
+hierarchical interval of `[-0.005725, 0.000000]`. H8 had intervals of
+`[-0.002700, 0.010600]` against fixed-weight fusion and
+`[-0.002592, 0.010742]` against naive concatenation.
+
+The clean seen-item and unseen-family support-score ranges were fully
+disjoint, with a gap of `25.409009`. This diagnostic shows that the
+perfect H6 result may reflect strong separability in the registered
+synthetic family geometry.
+
+Across the six conditions with olfactory input, unseen-family support
+margins remained below the locked thresholds. Under `missing_odor`, the
+score was set equal to the threshold, but the odor-only policy abstained
+because no olfactory vector was available. The H6 reduction for that
+condition therefore reflects missing-input abstention rather than
+score-based family separation.
+
+H6 applies to `unseen_family` queries only. It does not establish
+rejection of `known_family_unseen_item` queries or general open-world
+recognition.
+
+This post-hoc analysis does not modify the confirmatory protocol,
+results, confidence intervals, p-values, or hypothesis statuses. See
+`docs/noi_v0.3_posthoc_sensitivity.md` and the corresponding JSON
+artifact for complete results.
 
 ## Limitations
 

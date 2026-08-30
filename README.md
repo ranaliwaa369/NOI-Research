@@ -1,6 +1,6 @@
 # Neuro-Olfactive Intelligence (NOI)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22139127.svg)](https://doi.org/10.5281/zenodo.22139127)
+[![v0.2 archive DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22139127.svg)](https://doi.org/10.5281/zenodo.22139127)
 
 ## Overview
 
@@ -22,13 +22,14 @@ temporal-displacement, correction, and policy-conformance conditions.
 
 ## Release Status
 
-The current public research-software release is version 0.2.0.
+The current release candidate is version 0.3.0.
 
-This release contains repeated seen-item evaluation, unseen-family
-evaluation, selective memory-support abstention, final missing-modality
-and temporal-displacement robustness evaluation, machine-readable
-results, provenance records, locked configurations, verification
-functions, and automated tests.
+Version 0.3 adds a locked confirmatory evaluation of support-aware,
+reliability-gated synthetic olfactory-tactile retrieval. It includes ten
+prespecified seeds, seven paired conditions, nine systems, 1,260,000
+system evaluations, paired bootstrap analysis, Holm correction,
+machine-readable aggregate artifacts, SHA-256 verification, and a
+complete research manuscript.
 
 The evidence is synthetic computational evidence. It is not evidence of
 real-world odor sensing, human or animal olfactory equivalence, clinical
@@ -46,11 +47,50 @@ effectiveness, chemical safety, or deployment readiness.
 - Selective memory-support abstention evaluation
 - Missing-modality robustness evaluation
 - Temporal-displacement robustness evaluation
+- Support-aware open-set gating evaluation
+- Conditional simulated-tactile utility evaluation
+- Conflict-aware reliability-gated fusion evaluation
+- Ten-seed NOI v0.3 confirmatory analysis
+- Independent raw-record result audit
 
 Versioned configurations are in `configs/`.
 Experiment implementations are in `experiments/`.
 Provenance records are in `docs/`.
 Machine-readable outputs are in `results/`.
+
+## Version 0.3 Confirmatory Findings
+
+The locked v0.3 confirmatory evaluation completed all ten registered
+seeds, covering 20,000 final-test latent events, 140,000 paired condition
+views, nine systems, and 1,260,000 system evaluations.
+
+The primary hypothesis H6 was supported. The validation-locked support
+gate reduced unseen-family false-known decisions by `1.000000`, with a
+95% paired bootstrap interval of `[1.000000, 1.000000]`, while producing
+`0.000000` clean seen-item MRR loss.
+
+The secondary hypothesis H7 was not supported. Reliability-gated
+olfactory-tactile fusion was slightly worse than fixed-weight fusion in
+the eligible degraded-odor and missing-odor conditions. The absolute MRR
+difference was `-0.002212500`, with a 95% interval of
+`[-0.002662500, -0.001750000]`.
+
+The secondary hypothesis H8 was not supported. The false-confident
+reduction was `0.004008333` against both fixed-weight fusion and naive
+concatenation. Although statistically detectable, this effect remained
+below the prespecified practical requirement of `0.05`.
+
+These findings support validation-locked rejection of registered
+synthetic unseen-family queries. They do not establish
+tactile synergy, physical-sensor performance, biological equivalence,
+clinical validity, chemical safety, or deployment readiness.
+
+See `docs/noi_v0.3_final_results.md` for the complete results,
+`docs/noi_v0.3_manuscript.md` for the research manuscript, and
+`docs/noi_v0.3_posthoc_sensitivity.md` for the separately labeled
+exploratory seed-level and hierarchical sensitivity analysis, and
+`docs/noi_v0.3_trace_audit.md` for the read-only leakage and integrity
+trace.
 
 ## Version 0.2 Findings
 
@@ -149,11 +189,11 @@ locked evaluation cases, documented synthetic-data generation, baseline
 and ablation comparisons, negative results, run manifests, dependency
 records, and automated tests.
 
-The principal protocol is `configs/research_protocol.yaml`.
+The v0.3 protocol is `configs/noi_v0.3_protocol.yaml`, with its locked amendment, validation lock, and execution specification retained in `configs/`.
 
 ## Environment and Testing
 
-Version 0.2.0 uses Python 3.11.
+Version 0.3.0 uses Python 3.11.
 
 Create an environment and install the locked dependencies:
 
@@ -173,6 +213,11 @@ Experiment entry points:
 - `experiments/run_noi_ablation_pilot.py`
 - `experiments/run_corrective_memory_pilot.py`
 - `experiments/run_policy_conformance_pilot.py`
+- `experiments/run_noi_v0_3_confirmatory.py`
+- `experiments/analyze_noi_v0_3_confirmatory.py`
+- `experiments/finalize_noi_v0_3_confirmatory.py`
+- `experiments/analyze_noi_v0_3_posthoc_sensitivity.py`
+- `experiments/audit_noi_v0_3_confirmatory_trace.py`
 
 Consult the corresponding configuration and provenance record before
 rerunning an experiment or interpreting its outputs.
@@ -181,9 +226,11 @@ rerunning an experiment or interpreting its outputs.
 
 Citation metadata are provided in `CITATION.cff`.
 
-Software release DOI:
+Version 0.2 archival DOI:
 
 https://doi.org/10.5281/zenodo.22139127
+
+The version 0.3 archival DOI will be added before final publication.
 
 ## Authors
 

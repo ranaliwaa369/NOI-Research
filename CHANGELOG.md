@@ -3,6 +3,54 @@
 All notable public-release changes to the NOI Research Framework are
 documented in this file.
 
+## [0.3.0] - 2026-08-30
+
+### Added
+
+- Locked support-aware and reliability-gated multisensory architecture.
+- Simulated 8-dimensional tactile representations paired with
+  16-dimensional olfactory representations.
+- Nine prespecified deployable systems and seven paired conditions.
+- Ten-seed confirmatory execution with 1,260,000 system evaluations.
+- Latent-event paired bootstrap analysis with 10,000 resamples.
+- Holm correction for the three secondary comparisons.
+- Deterministic finalization, environment manifest, aggregate findings,
+  seed manifest, and SHA-256 sidecars.
+- Final v0.3 results report and research manuscript.
+- Post-hoc exploratory per-seed and hierarchical seed-event sensitivity
+  analysis.
+- Synthetic support-score separability diagnostic with explicit H6 scope
+  limitations.
+- Read-only ten-seed trace audit linking raw hashes, validation locks,
+  inference decisions, scoring, paired views, and aggregate results.
+- Deliberate rejection tests for modified hashes, integrity declarations,
+  and locked values.
+
+### Research findings
+
+- H6 was supported: unseen-family false-known reduction was `1.000000`
+  with a 95% interval of `[1.000000, 1.000000]`, and clean seen-item
+  MRR loss was `0.000000`.
+- H7 was not supported: the proposed fusion system had an absolute MRR
+  difference of `-0.002212500` relative to fixed-weight fusion.
+- H8 was not supported: false-confident reduction was `0.004008333`
+  against both required comparators, below the registered `0.05`
+  practical threshold.
+- All ten registered seeds and all negative and null findings were
+  retained.
+- An independent read-only audit reproduced the aggregate point
+  estimates from all raw records.
+
+### Governance and limitations
+
+- Protocol, amendment, validation thresholds, and execution mechanics
+  were locked and hashed before confirmatory execution.
+- No final-test training, calibration, tuning, or seed removal was used.
+- Final-test labels were used for scoring only.
+- The evidence is fully synthetic and does not establish physical
+  sensing, biological equivalence, clinical validity, chemical safety,
+  tactile synergy, or deployment readiness.
+
 ## [0.2.0] - 2026-08-28
 
 ### Added

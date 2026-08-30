@@ -14,7 +14,11 @@ Email: info@researchguardianx.com
 
 Conceptual AI Systems Paper and Reproducible Evaluation Protocol
 
-**Public Release**
+**Research Framework Version**
+
+NOI v0.3.0 Release Candidate
+
+**Manuscript Public Release**
 
 Version 1.0
 
@@ -51,8 +55,9 @@ H8 was also not supported: the false-confident reduction was
 0.0040083 against both naive and fixed-weight fusion, which was
 statistically detectable but below the prespecified practical
 threshold of 0.05. These results support validation-locked rejection
-of unsupported synthetic queries, but do not support tactile synergy
-or a practically sufficient conflict-aware safety improvement. The
+of registered synthetic unseen-family queries, but do not support
+tactile synergy or a practically sufficient conflict-aware safety
+improvement. The
 study uses simulated vectors only and does not establish physical
 sensor performance, biological equivalence, clinical validity,
 chemical safety, or deployment readiness.
@@ -303,11 +308,11 @@ then committed and tagged before final-test execution.
 
 The confidence policy was fixed before execution:
 
-\[
+$$
 c = \operatorname{clip}\left(
-rac{s_{\max}+1}{2},0,1
-ight),
-\]
+\frac{s_{\max}+1}{2}, 0, 1
+\right)
+$$
 
 where \(s_{\max}\) is the top-ranked weighted cosine score. Abstention
 confidence was 0.0. A false-confident decision used the locked confidence
@@ -454,6 +459,28 @@ It reproduced:
 All values matched the locked aggregate to absolute tolerance
 \(10^{-12}\). No parameter or result was changed after this audit.
 
+### 5.6 Post-confirmatory trace audit
+
+A separately labeled read-only trace audit verified all ten raw seed
+artifacts and all 1,260,000 system-evaluation records. It connected the
+verified raw hashes to the seedwise validation locks, reproduced support
+decisions with the original locked function, reproduced scoring, verified
+paired-condition and system alignment, and linked the raw records to the
+aggregate point estimates.
+
+No violation was detected across the registered and testable leakage
+boundaries. This is not a mathematical proof that no conceivable leakage
+channel exists.
+
+The trace also confirmed an important scope boundary. A representative
+known-family unseen item was classified as supported but retrieved
+incorrectly, whereas an unseen-family query was classified as unsupported
+and produced abstention. H6 therefore applies to registered unseen-family
+queries and does not establish rejection of known-family unseen items.
+
+Complete trace results are provided in
+`docs/noi_v0.3_trace_audit.md`.
+
 ## 6. Discussion
 
 ### 6.1 Support-aware routing was the supported contribution
@@ -462,8 +489,8 @@ The primary result shows that a validation-locked support decision can
 prevent forced retrieval when the target family is unsupported. This
 directly addresses the open-set failure observed in v0.2.
 
-The result should be interpreted as rejection of an unsupported query,
-not recognition of the unseen target. The gate did not identify a new
+The result should be interpreted as rejection of a registered
+synthetic unseen-family query, not recognition of the unseen target. The gate did not identify a new
 family or retrieve an unreachable identity.
 
 The effect was perfect in this synthetic design. This is useful for
@@ -523,6 +550,42 @@ interpretation differed:
 This illustrates why confirmatory evaluation should report effect size,
 direction, uncertainty, and practical thresholds rather than p-values
 alone.
+
+### 6.6 Post-hoc seed-level sensitivity
+
+After completion of the confirmatory analysis, we conducted a separately
+labeled exploratory sensitivity analysis. It reported every seed-level
+effect and used a two-level bootstrap that resampled seed first and latent
+event second.
+
+H6 produced a false-known reduction of 1.000000 for every registered
+seed. Its hierarchical 95% interval remained [1.000000, 1.000000].
+However, clean seen-item and unseen-family support-score ranges were
+fully disjoint, with the seen minimum exceeding the unseen-family
+maximum by 25.409009. The perfect H6 result may therefore reflect the
+strong separability of the registered synthetic family geometry.
+
+The hierarchical H7 interval was [-0.005725, 0.000000], with an
+exploratory two-sided p-value of 0.094991. The H8 interval was
+[-0.002700, 0.010600] against fixed-weight fusion and
+[-0.002592, 0.010742] against naive concatenation. H8 effects varied in
+direction across seeds.
+
+These exploratory findings do not replace the registered confirmatory
+analysis or change any hypothesis status. They reinforce the conclusion
+that H7 and H8 were not supported and narrow H6 to unsupported
+unseen-family queries under the registered synthetic geometry. H6 does
+not establish rejection of known-family unseen items.
+
+Across the six registered conditions with olfactory input, unseen-family
+support margins remained below the seedwise locked thresholds. Under
+`missing_odor`, the support score was set equal to the locked threshold,
+but the odor-only policy abstained because no olfactory vector was
+available. The H6 false-known reduction in that condition therefore arose
+from missing-input abstention rather than score-based family separation.
+
+Full supplementary results are provided in
+`docs/noi_v0.3_posthoc_sensitivity.md`.
 
 ## 7. Limitations
 
@@ -594,8 +657,8 @@ and regulatory review.
 ## 10. Conclusion
 
 NOI v0.3 supports validation-locked, support-aware rejection of
-unsupported queries in a synthetic open-set retrieval setting. It does
-not support the registered claims of tactile retrieval synergy or a
+registered unseen-family queries in the synthetic open-set retrieval
+setting. It does not support the registered claims of tactile retrieval synergy or a
 practically sufficient conflict-aware reduction in false-confident
 decisions.
 
