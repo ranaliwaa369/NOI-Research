@@ -1,0 +1,15 @@
+{
+  "audit": {
+    "cross_split_content_duplicates": [],
+    "duplicate_recording_ids": [],
+    "family_count": 5,
+    "ingredient_count": 50,
+    "passed": true,
+    "recording_count": 300,
+    "testing_count": 50,
+    "training_count": 250
+  },
+  "claim_boundary": "Passing this audit establishes ingestion integrity only; it does not establish recognition, robotic, neural, safety, or deployment performance.",
+  "schema": "noi-v0.4-smellnet-integrity-audit-v1",
+  "stage": "ingestion_and_integrity_audit"
+}
