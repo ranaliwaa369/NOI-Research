@@ -9,9 +9,10 @@ intelligence research framework for contextual odor association,
 temporally structured retrieval, corrective memory updating, graded
 out-of-distribution evaluation, and policy-constrained output.
 
-The current implementation operates on synthetic multimodal records and
-simulated odor-library or cartridge identifiers. It does not physically
-sense, generate, or emit odor.
+The published v0.3 implementation operates on synthetic multimodal records
+and simulated odor-library or cartridge identifiers. The v0.4 development
+track adds claim-bounded ingestion of external physical gas-sensor time
+series. NOI does not physically generate or emit odor.
 
 ## Research Objective
 
@@ -34,6 +35,24 @@ complete research manuscript.
 The evidence is synthetic computational evidence. It is not evidence of
 real-world odor sensing, human or animal olfactory equivalence, clinical
 effectiveness, chemical safety, or deployment readiness.
+
+### Version 0.4 Development Track
+
+Version 0.4 is an unvalidated development track for sensor-grounded
+neuro-olfactive intelligence. It targets a missing reliability layer between
+physical odor sensing and AI action: temporal representation, associative
+evidence memory, open-set support estimation, drift assessment, and a bounded
+choice among recognition, repeat sensing, or abstention.
+
+The current v0.4 milestone provides a deterministic SmellNet-Base adapter,
+SHA-256 provenance, label/feature separation, cross-split duplicate checks,
+an executable integrity audit, and a draft protocol for the proposed H9-H11
+evaluations. It contains no confirmatory sensor-performance result yet and
+does not establish robotic smell, direct neural interfacing, biological
+equivalence, or deployment readiness.
+
+See `docs/noi_v0.4_sensor_grounding_plan.md` and
+`configs/noi_v0.4_sensor_protocol_draft.yaml`.
 
 ## Implemented Evaluations
 

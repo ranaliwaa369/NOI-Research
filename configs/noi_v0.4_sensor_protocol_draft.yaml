@@ -1,0 +1,183 @@
+protocol:
+  id: NOI-PROTOCOL-0.4-SENSOR-GROUNDING
+  version: 0.4.0-preimplementation-draft
+  status: draft_not_validation_locked
+  date: '2026-09-17'
+  title: >-
+    Sensor-Grounded Neuro-Olfactive Intelligence: Open-Set Recognition,
+    Reliability-Aware Memory, and Safe Abstention for Machine Smell
+  project: Neuro-Olfactive Intelligence
+  owner: GuardianX LLC
+  authors:
+    - Rana Al-Dahlake
+    - Jalal Alazirji
+
+parent_release:
+  version: 0.3.0
+  branch: development-v0.3
+  commit: be0a316bf31941cb66da558fb41b167151351f66
+  doi: 10.5281/zenodo.22180610
+  supported_result: >-
+    Validation-locked support gating rejected registered synthetic
+    unseen-family queries without clean seen-item MRR loss.
+  unsupported_results:
+    - conditional tactile synergy
+    - practically sufficient conflict-aware improvement
+
+research_gap: >-
+  Existing machine-olfaction benchmarks emphasize closed-set substance
+  recognition or mixture prediction. They do not jointly test whether an AI
+  system can determine that a physical-sensor query is unsupported, preserve
+  useful temporal evidence in associative memory, distinguish novelty from
+  degradation, and choose among recognition, repeat sensing, or abstention.
+  NOI v0.4 evaluates this missing sensor-to-decision reliability layer.
+
+problem_significance: >-
+  Embodied AI systems can act on noisy physical evidence. A forced known-class
+  prediction can therefore be more harmful than an explicit unknown or
+  insufficient-evidence decision. A reusable support and reliability layer is
+  relevant not only to machine olfaction but to AI systems that must reason
+  over drifting, incomplete, or previously unseen sensor inputs.
+
+architectural_contribution:
+  name: sensor_to_context_epistemic_bridge
+  stages:
+    - physical_sensor_time_series
+    - temporal_olfactory_representation
+    - associative_evidence_memory
+    - open_set_support_estimation
+    - reliability_and_drift_assessment
+    - recognize_repeat_sense_or_abstain_policy
+  intended_reuse:
+    - robotic_olfaction
+    - embodied_ai
+    - environmental_monitoring
+    - industrial_inspection
+    - food_and_allergen_research
+  prohibited_interpretations:
+    - direct_olfactory_nerve_interface
+    - brain_signal_decoding
+    - human_neural_equivalence
+    - clinical_diagnosis
+
+primary_question: >-
+  Can a validation-locked, memory- and reliability-aware policy transform
+  physical odor-sensor time series into bounded decisions that reduce
+  false-known recognition under novelty or drift while preserving useful
+  recognition of represented substances?
+
+draft_hypotheses:
+  H9:
+    role: primary
+    name: sensor_grounded_open_set_support
+    statement: >-
+      A validation-locked support gate reduces false-known decisions for
+      held-out physical-sensor odor families without materially reducing
+      supported-substance retrieval.
+    status: draft_requires_development_pilot_and_prespecified_effect_size
+  H10:
+    role: secondary
+    name: temporal_repeat_sensing_utility
+    statement: >-
+      Accumulating an additional nonoverlapping sensor window improves
+      decisions for ambiguous queries relative to forced prediction from a
+      single window, without increasing false-known decisions.
+    status: draft_requires_development_pilot_and_prespecified_effect_size
+  H11:
+    role: secondary
+    name: reliability_aware_associative_memory
+    statement: >-
+      Reliability-aware retrieval from prior represented recordings improves
+      session-shift robustness relative to the strongest non-memory baseline
+      without unacceptable clean-condition loss.
+    status: draft_requires_development_pilot_and_prespecified_effect_size
+
+scope:
+  evidence_type: external physical gas-sensor time series
+  source_dataset: SmellNet-Base
+  physical_sensor_signal_used: true
+  robot_hardware_integrated: false
+  odor_source_localization_tested: false
+  scent_emission_tested: false
+  tactile_sensor_validated: false
+  human_perceptual_validity_tested: false
+  clinical_claims_allowed: false
+  biological_equivalence_claims_allowed: false
+  deployment_claims_allowed: false
+  claim_if_all_registered_hypotheses_succeed: >-
+    Reproducible sensor-grounded evidence for a neural-inspired computational
+    pathway from physical odor signals to support-aware memory and bounded AI
+    decisions. This is not evidence of a direct neural interface.
+
+dataset:
+  name: SmellNet
+  paper: https://arxiv.org/abs/2506.00239
+  code: https://github.com/MIT-MI/SmellNet
+  data: https://huggingface.co/datasets/DeweiFeng/SmellNet
+  raw_data_committed_to_noi_repository: false
+  redistribution_rights_must_be_verified_before_release: true
+  official_splits_preserved_during_ingestion:
+    - training
+    - testing
+  sensor_columns:
+    - NO2
+    - C2H5OH
+    - VOC
+    - CO
+    - Alcohol
+    - LPG
+  scoring_metadata_prohibited_from_model_features:
+    - ingredient
+    - family
+    - official_split
+    - source_path
+    - evaluation_outcome
+    - support_regime
+
+development_stages:
+  stage_0:
+    name: ingestion_and_integrity_audit
+    status: in_progress
+    final_test_metrics_allowed: false
+  stage_1:
+    name: grouped_split_and_open_set_protocol
+    status: pending
+    requirements:
+      - recording-level grouping
+      - validation-unknown and final-test-unknown separation
+      - no window overlap across partitions
+      - family-level open-set holdout
+      - session-level separation where recording metadata permit it
+  stage_2:
+    name: temporal_representation_memory_and_baseline_selection
+    status: pending
+    final_test_tuning_allowed: false
+    required_baseline_families:
+      - closed_set_sensor_classifier
+      - distance_or_energy_open_set_detector
+      - non_memory_temporal_retriever
+      - support_aware_policy
+      - support_and_memory_policy
+  stage_3:
+    name: validation_lock
+    status: pending
+    required_before_confirmatory_execution: true
+  stage_4:
+    name: confirmatory_sensor_grounded_evaluation
+    status: pending
+
+integrity_controls:
+  deterministic_file_order: true
+  source_file_sha256_required: true
+  duplicate_recording_ids_allowed: false
+  byte_identical_files_across_official_splits_allowed: false
+  labels_appended_to_sensor_features: false
+  final_test_threshold_selection_allowed: false
+  failed_and_negative_results_must_be_retained: true
+
+claim_boundary: >-
+  Passing the v0.4 ingestion audit establishes only that external
+  physical-sensor files can be read and traced safely. It does not
+  establish recognition performance, embodied robotic smell, environmental
+  robustness, direct neural interfacing, biological equivalence, chemical
+  safety, or deployment readiness.
