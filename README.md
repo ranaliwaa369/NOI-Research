@@ -334,3 +334,21 @@ See `LICENSE` and `COPYRIGHT.md`.
 Official source repository:
 
 https://github.com/ranaliwaa369/NOI-Research
+
+### NOI v0.5 locked final-test runner
+
+After committing the validation lock and this runner, perform the read-only
+preflight first. It verifies the lock digest, pinned development artifacts,
+implementation ancestry, clean tracked worktree, and absence of a prior final
+execution marker without scoring official test recordings:
+
+```bash
+python -m experiments.run_noi_v0_5_locked_final \
+  ~/Datasets/SmellNet/base_data
+```
+
+The official final evaluation requires a separate explicit confirmation. It
+creates an exclusive marker before opening the final partition, executes each
+locked family fold once, scores H10--H12, and emits JSON, CSV, and SHA-256
+artifacts. Do not execute it until the runner itself is committed and its
+preflight reports `"status": "ready"`.
