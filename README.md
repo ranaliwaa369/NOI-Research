@@ -54,6 +54,20 @@ equivalence, or deployment readiness.
 See `docs/noi_v0.4_sensor_grounding_plan.md` and
 `configs/noi_v0.4_sensor_protocol_draft.yaml`.
 
+### Version 0.5 Novel-Odor Development Track
+
+Version 0.5 builds on the completed v0.4 ingestion audit and targets
+previously unrepresented odor families. Its draft H10-H12 program evaluates
+novel-family false-known reduction, the utility of a second nonoverlapping
+sensor window, and reliability-aware associative memory under shift.
+
+The initial implementation locks five nested family rotations, recording-
+grouped development and final roles, nonoverlapping temporal windows, and
+disjoint repeat-sensing pairs. It does not contain final H10-H12 results.
+
+See `docs/noi_v0.5_novel_odor_plan.md` and
+`configs/noi_v0.5_novel_odor_protocol_draft.yaml`.
+
 ## Implemented Evaluations
 
 - Baseline retrieval pilot

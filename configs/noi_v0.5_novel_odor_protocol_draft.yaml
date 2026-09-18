@@ -1,0 +1,135 @@
+protocol:
+  id: NOI-PROTOCOL-0.5-NOVEL-ODOR
+  version: 0.5.0-development-draft
+  status: draft_no_final_test_access
+  date: '2026-09-17'
+  title: >-
+    Novel-Odor Intelligence: Reliability-Aware Memory, Repeat Sensing, and
+    Safe Abstention from Physical Olfactory Time Series
+  parent_milestone:
+    version: 0.4.0
+    branch: development-v0.4-sensor-grounding
+    commit: dca0fae
+    completed_stage: real_sensor_ingestion_and_integrity_audit
+
+research_problem: >-
+  A closed-set odor classifier must return a known label even when a physical
+  sensor query comes from a previously unrepresented odor family, is degraded,
+  or contains insufficient evidence. In embodied AI this can turn uncertainty
+  into a false-confident action.
+
+research_gap: >-
+  Prior machine-olfaction work studies temporal classification, sensor-drift
+  compensation, open-set rejection, or probabilistic recognition. NOI v0.5
+  tests their missing joint decision layer: associative evidence memory,
+  family-level novelty support, reliability assessment, additional temporal
+  sensing, and a bounded recognize-repeat-sense-abstain policy under one
+  validation-locked physical-sensor protocol.
+
+primary_contribution:
+  name: novel_odor_bounded_decision_layer
+  actions:
+    - recognize
+    - repeat_sense
+    - abstain_unknown
+    - abstain_insufficient_evidence
+  components:
+    - temporal_sensor_representation
+    - associative_evidence_memory
+    - family_level_support_estimation
+    - reliability_and_drift_estimation
+    - validation_locked_action_policy
+
+hypotheses:
+  H10:
+    role: primary
+    name: novel_family_false_known_reduction
+    statement: >-
+      Relative to the strongest eligible closed-set or confidence-threshold
+      baseline, the locked NOI policy reduces false-known decisions for an
+      unseen physical-sensor odor family without exceeding the prespecified
+      supported-odor performance-loss margin.
+    final_status: not_run
+  H11:
+    role: secondary
+    name: repeat_sensing_decision_utility
+    statement: >-
+      For validation-defined ambiguous queries, one additional nonoverlapping
+      temporal window improves bounded decision utility relative to forced
+      prediction from the initial window without increasing false-known risk.
+    final_status: not_run
+  H12:
+    role: secondary
+    name: reliability_aware_memory_under_shift
+    statement: >-
+      Reliability-aware retrieval from training-only sensor memories improves
+      session-shift robustness relative to the strongest non-memory baseline
+      without exceeding the prespecified clean-condition loss margin.
+    final_status: not_run
+
+family_holdout:
+  strategy: five_outer_nested_family_rotations
+  locked_order:
+    - fruits
+    - herbs
+    - nuts
+    - spices
+    - vegetables
+  per_outer_fold:
+    final_unknown: current_family
+    validation_unknown: next_family_in_locked_cycle
+    known_families: remaining_three_families
+  official_training_use:
+    known_families: model_train_and_validation_known
+    validation_unknown_family: threshold_selection_only
+    final_unknown_family: prohibited
+  official_testing_use:
+    known_families: final_known_only
+    validation_unknown_family: unused
+    final_unknown_family: final_unknown_only
+
+temporal_evidence:
+  windows_nonoverlapping: true
+  partial_tail_dropped: true
+  repeat_pairs_disjoint: true
+  window_size: development_parameter_not_locked
+  window_size_must_be_locked_before_final_execution: true
+
+integrity_rules:
+  recording_identity_may_cross_roles: false
+  source_file_may_cross_roles: false
+  labels_may_enter_model_features: false
+  official_test_may_tune_models_or_thresholds: false
+  final_unknown_family_may_enter_fold_development: false
+  final_metrics_may_be_viewed_before_lock: false
+  negative_results_must_be_retained: true
+
+required_baselines:
+  - closed_set_temporal_classifier
+  - maximum_softmax_or_confidence_threshold
+  - distance_or_energy_open_set_detector
+  - non_memory_temporal_retriever
+  - support_without_memory_policy
+  - complete_support_memory_repeat_sensing_policy
+
+primary_metrics:
+  novelty:
+    - false_known_rate
+    - unknown_detection_auroc
+    - unknown_detection_aupr
+  supported_behavior:
+    - top_1_accuracy
+    - mean_reciprocal_rank
+  selective_behavior:
+    - risk_coverage_auc
+    - abstention_rate
+    - decision_utility
+  calibration:
+    - expected_calibration_error
+    - brier_score
+
+claim_boundary: >-
+  Passing H10-H12 would support a reproducible sensor-grounded computational
+  pathway for novel-odor handling. It would not establish a direct olfactory
+  nerve interface, brain decoding, human-equivalent smell, chemical safety,
+  clinical validity, odor-source localization, or deployment readiness.
