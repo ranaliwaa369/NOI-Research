@@ -61,9 +61,31 @@ previously unrepresented odor families. Its draft H10-H12 program evaluates
 novel-family false-known reduction, the utility of a second nonoverlapping
 sensor window, and reliability-aware associative memory under shift.
 
-The initial implementation locks five nested family rotations, recording-
-grouped development and final roles, nonoverlapping temporal windows, and
-disjoint repeat-sensing pairs. It does not contain final H10-H12 results.
+The executable development implementation now combines 66-dimensional
+temporal sensor signatures, a family classifier, training-only associative
+memory, validation-calibrated novelty support, and an adaptive second-window
+controller. It emits traceable `recognize`, `repeat_sense`, and
+`abstain_unknown` decisions plus machine-readable fold metrics and per-window
+evidence. It does not contain locked final H10-H12 results.
+
+Run the physical-sensor development pilot without accessing final-test
+performance:
+
+```bash
+python -m experiments.run_smellnet_novel_odor_pilot \
+  ~/Datasets/SmellNet/base_data \
+  --output-dir results/noi_v0.5_pilot \
+  --window-size 128
+```
+
+The command writes `noi_v0.5_development_pilot.json` and
+`noi_v0.5_development_evidence.csv`. These are development artifacts used to
+lock the eventual final experiment, not confirmatory findings.
+
+The v0.5.1 development controller also evaluates asymmetric repeat sensing:
+a second window may veto an initial recognition when evidence weakens, but it
+may never promote an initial abstention into recognition. Mean-fusion repeat
+sensing is retained as a baseline rather than silently replaced.
 
 See `docs/noi_v0.5_novel_odor_plan.md` and
 `configs/noi_v0.5_novel_odor_protocol_draft.yaml`.
