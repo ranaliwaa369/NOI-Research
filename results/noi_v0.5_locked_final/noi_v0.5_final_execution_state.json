@@ -1,0 +1,12 @@
+{
+  "artifact_sha256": {
+    "results/noi_v0.5_locked_final/noi_v0.5_locked_final.json": "40224148b75f50d33faf5167af2c2f6ebaaed09c8b58fd5f97a38d6435c1a57d",
+    "results/noi_v0.5_locked_final/noi_v0.5_locked_final_evidence.csv": "abd14aa02b95c73ce9c9eee6541910fb1b347a1b483957b03c885f682f83c498"
+  },
+  "completed_utc": "2026-09-18T14:55:21.688039+00:00",
+  "head_commit": "994b4a7ded3c6d79ae941b019aa532506967b1a1",
+  "schema": "noi-v0.5-final-execution-state-v1",
+  "started_utc": "2026-09-18T14:55:19.547353+00:00",
+  "status": "completed",
+  "validation_lock_sha256": "768c658183307c3ce649559a50f8234cb8766c8039307034614b2847a8a4b82e"
+}

@@ -1,0 +1,562 @@
+{
+  "aggregate_final_evidence": {
+    "asymmetric_veto_false_known_rate": 0.5033333333333333,
+    "asymmetric_veto_known_acceptance_rate": 0.7228415300546448,
+    "asymmetric_veto_utility_change": -0.00432098765432099,
+    "closed_set_false_known_rate": 1.0,
+    "confidence_baseline_false_known_rate": 0.8020573697431327,
+    "memory_top1_change": 0.08393905061631261,
+    "pair_initial_false_known_rate": 0.5033333333333333,
+    "pair_initial_known_acceptance_rate": 0.7327322404371585,
+    "sentinel_false_known_rate": 0.5722808794533129,
+    "sentinel_known_acceptance_rate": 0.7600190925780226,
+    "sentinel_unknown_auroc": 0.6822351014353402
+  },
+  "claim_boundary": "Passing the locked hypotheses would support a reproducible physical-sensor computational pathway for bounded novel-odor decisions. It would not establish chemical identity, chemical safety, direct olfactory-nerve or brain interfacing, human-equivalent smell, clinical validity, odor-source localization, robotic deployment readiness, or patentability.",
+  "created_utc": "2026-09-18T14:55:21.665061+00:00",
+  "dataset": {
+    "fold_count": 5,
+    "name": "SmellNet-Base",
+    "recording_count": 300,
+    "window_size": 128
+  },
+  "folds": [
+    {
+      "calibration": {
+        "achieved_known_acceptance": 0.8064516129032258,
+        "achieved_unknown_rejection": 0.4634146341463415,
+        "memory_distance_scale": 1.4249109647921627,
+        "repeat_margin": 0.06,
+        "required_known_acceptance": 0.8,
+        "support_threshold": 0.34787764612045946
+      },
+      "confidence_baseline_threshold": 0.7329911637172308,
+      "final_unknown_family": "fruits",
+      "fold_id": "outer-1-fruits",
+      "known_families": [
+        "nuts",
+        "spices",
+        "vegetables"
+      ],
+      "memory_diagnostic": {
+        "classifier_known_top1": 0.856,
+        "difference_memory_minus_classifier": 0.04800000000000004,
+        "nearest_memory_known_top1": 0.904
+      },
+      "metrics": {
+        "closed_set": {
+          "decision_utility": 0.04216867469879518,
+          "false_known_rate": 1.0,
+          "known_acceptance_rate": 1.0,
+          "known_count": 125,
+          "known_top1_accuracy": 0.856,
+          "sample_count": 166,
+          "selective_known_accuracy": 0.856,
+          "unknown_aupr": 0.44917235821346624,
+          "unknown_auroc": 0.696,
+          "unknown_count": 41,
+          "unknown_rejection_rate": 0.0
+        },
+        "confidence_threshold": {
+          "decision_utility": 0.23795180722891565,
+          "false_known_rate": 0.6829268292682927,
+          "known_acceptance_rate": 0.792,
+          "known_count": 125,
+          "known_top1_accuracy": 0.856,
+          "sample_count": 166,
+          "selective_known_accuracy": 0.9494949494949495,
+          "unknown_aupr": 0.28119032970173663,
+          "unknown_auroc": 0.4942439024390244,
+          "unknown_count": 41,
+          "unknown_rejection_rate": 0.3170731707317073
+        },
+        "sentinel_asymmetric_repeat_veto": {
+          "decision_utility": 0.33641975308641975,
+          "false_known_rate": 0.45,
+          "known_acceptance_rate": 0.7540983606557377,
+          "known_count": 61,
+          "known_top1_accuracy": 0.8524590163934426,
+          "sample_count": 81,
+          "selective_known_accuracy": 0.9130434782608695,
+          "unknown_aupr": 0.46868319230077665,
+          "unknown_auroc": 0.7295081967213115,
+          "unknown_count": 20,
+          "unknown_rejection_rate": 0.55
+        },
+        "sentinel_initial": {
+          "decision_utility": 0.30120481927710846,
+          "false_known_rate": 0.5121951219512195,
+          "known_acceptance_rate": 0.776,
+          "known_count": 125,
+          "known_top1_accuracy": 0.856,
+          "sample_count": 166,
+          "selective_known_accuracy": 0.9072164948453608,
+          "unknown_aupr": 0.44917235821346624,
+          "unknown_auroc": 0.696,
+          "unknown_count": 41,
+          "unknown_rejection_rate": 0.4878048780487805
+        },
+        "sentinel_pair_initial": {
+          "decision_utility": 0.33641975308641975,
+          "false_known_rate": 0.45,
+          "known_acceptance_rate": 0.7540983606557377,
+          "known_count": 61,
+          "known_top1_accuracy": 0.8524590163934426,
+          "sample_count": 81,
+          "selective_known_accuracy": 0.9130434782608695,
+          "unknown_aupr": 0.46868319230077665,
+          "unknown_auroc": 0.7295081967213115,
+          "unknown_count": 20,
+          "unknown_rejection_rate": 0.55
+        }
+      },
+      "repeat_diagnostic": {
+        "asymmetric_veto_utility_change": 0.0,
+        "available_pairs": 81
+      },
+      "validation_unknown_family": "herbs",
+      "window_counts": {
+        "final_known": 125,
+        "final_unknown": 41,
+        "training": 498,
+        "validation_known": 124,
+        "validation_unknown": 205
+      }
+    },
+    {
+      "calibration": {
+        "achieved_known_acceptance": 0.8048780487804879,
+        "achieved_unknown_rejection": 0.3333333333333333,
+        "memory_distance_scale": 1.1858264611191922,
+        "repeat_margin": 0.06,
+        "required_known_acceptance": 0.8,
+        "support_threshold": 0.28762283031271707
+      },
+      "confidence_baseline_threshold": 0.6228402350464757,
+      "final_unknown_family": "herbs",
+      "fold_id": "outer-2-herbs",
+      "known_families": [
+        "fruits",
+        "spices",
+        "vegetables"
+      ],
+      "memory_diagnostic": {
+        "classifier_known_top1": 0.7560975609756098,
+        "difference_memory_minus_classifier": 0.1382113821138211,
+        "nearest_memory_known_top1": 0.8943089430894309
+      },
+      "metrics": {
+        "closed_set": {
+          "decision_utility": -0.11585365853658537,
+          "false_known_rate": 1.0,
+          "known_acceptance_rate": 1.0,
+          "known_count": 123,
+          "known_top1_accuracy": 0.7560975609756098,
+          "sample_count": 164,
+          "selective_known_accuracy": 0.7560975609756098,
+          "unknown_aupr": 0.34767327594531705,
+          "unknown_auroc": 0.6906603212373588,
+          "unknown_count": 41,
+          "unknown_rejection_rate": 0.0
+        },
+        "confidence_threshold": {
+          "decision_utility": 0.09298780487804878,
+          "false_known_rate": 0.7560975609756098,
+          "known_acceptance_rate": 0.7804878048780488,
+          "known_count": 123,
+          "known_top1_accuracy": 0.7560975609756098,
+          "sample_count": 164,
+          "selective_known_accuracy": 0.8854166666666666,
+          "unknown_aupr": 0.28656089475595903,
+          "unknown_auroc": 0.561173904421971,
+          "unknown_count": 41,
+          "unknown_rejection_rate": 0.24390243902439024
+        },
+        "sentinel_asymmetric_repeat_veto": {
+          "decision_utility": 0.021875,
+          "false_known_rate": 0.55,
+          "known_acceptance_rate": 0.7166666666666667,
+          "known_count": 60,
+          "known_top1_accuracy": 0.7833333333333333,
+          "sample_count": 80,
+          "selective_known_accuracy": 0.7209302325581395,
+          "unknown_aupr": 0.3640043035700665,
+          "unknown_auroc": 0.6875,
+          "unknown_count": 20,
+          "unknown_rejection_rate": 0.45
+        },
+        "sentinel_initial": {
+          "decision_utility": 0.03048780487804878,
+          "false_known_rate": 0.5609756097560976,
+          "known_acceptance_rate": 0.7398373983739838,
+          "known_count": 123,
+          "known_top1_accuracy": 0.7560975609756098,
+          "sample_count": 164,
+          "selective_known_accuracy": 0.7252747252747253,
+          "unknown_aupr": 0.34767327594531705,
+          "unknown_auroc": 0.6906603212373588,
+          "unknown_count": 41,
+          "unknown_rejection_rate": 0.43902439024390244
+        },
+        "sentinel_pair_initial": {
+          "decision_utility": 0.021875,
+          "false_known_rate": 0.55,
+          "known_acceptance_rate": 0.7166666666666667,
+          "known_count": 60,
+          "known_top1_accuracy": 0.7833333333333333,
+          "sample_count": 80,
+          "selective_known_accuracy": 0.7209302325581395,
+          "unknown_aupr": 0.3640043035700665,
+          "unknown_auroc": 0.6875,
+          "unknown_count": 20,
+          "unknown_rejection_rate": 0.45
+        }
+      },
+      "repeat_diagnostic": {
+        "asymmetric_veto_utility_change": 0.0,
+        "available_pairs": 80
+      },
+      "validation_unknown_family": "nuts",
+      "window_counts": {
+        "final_known": 123,
+        "final_unknown": 41,
+        "training": 496,
+        "validation_known": 123,
+        "validation_unknown": 213
+      }
+    },
+    {
+      "calibration": {
+        "achieved_known_acceptance": 0.8870967741935484,
+        "achieved_unknown_rejection": 0.5467980295566502,
+        "memory_distance_scale": 1.1800851897074844,
+        "repeat_margin": 0.06,
+        "required_known_acceptance": 0.8,
+        "support_threshold": 0.23966285208182211
+      },
+      "confidence_baseline_threshold": 0.4755479791956615,
+      "final_unknown_family": "nuts",
+      "fold_id": "outer-3-nuts",
+      "known_families": [
+        "fruits",
+        "herbs",
+        "vegetables"
+      ],
+      "memory_diagnostic": {
+        "classifier_known_top1": 0.6774193548387096,
+        "difference_memory_minus_classifier": 0.08064516129032262,
+        "nearest_memory_known_top1": 0.7580645161290323
+      },
+      "metrics": {
+        "closed_set": {
+          "decision_utility": -0.25149700598802394,
+          "false_known_rate": 1.0,
+          "known_acceptance_rate": 1.0,
+          "known_count": 124,
+          "known_top1_accuracy": 0.6774193548387096,
+          "sample_count": 167,
+          "selective_known_accuracy": 0.6774193548387096,
+          "unknown_aupr": 0.32798461013801106,
+          "unknown_auroc": 0.6616654163540885,
+          "unknown_count": 43,
+          "unknown_rejection_rate": 0.0
+        },
+        "confidence_threshold": {
+          "decision_utility": -0.22305389221556887,
+          "false_known_rate": 0.9069767441860465,
+          "known_acceptance_rate": 0.8629032258064516,
+          "known_count": 124,
+          "known_top1_accuracy": 0.6774193548387096,
+          "sample_count": 167,
+          "selective_known_accuracy": 0.6915887850467289,
+          "unknown_aupr": 0.31926100801516416,
+          "unknown_auroc": 0.5536384096024006,
+          "unknown_count": 43,
+          "unknown_rejection_rate": 0.09302325581395349
+        },
+        "sentinel_asymmetric_repeat_veto": {
+          "decision_utility": -0.19444444444444445,
+          "false_known_rate": 0.6666666666666666,
+          "known_acceptance_rate": 0.75,
+          "known_count": 60,
+          "known_top1_accuracy": 0.65,
+          "sample_count": 81,
+          "selective_known_accuracy": 0.6,
+          "unknown_aupr": 0.31584430638019634,
+          "unknown_auroc": 0.611111111111111,
+          "unknown_count": 21,
+          "unknown_rejection_rate": 0.3333333333333333
+        },
+        "sentinel_initial": {
+          "decision_utility": -0.1721556886227545,
+          "false_known_rate": 0.7441860465116279,
+          "known_acceptance_rate": 0.782258064516129,
+          "known_count": 124,
+          "known_top1_accuracy": 0.6774193548387096,
+          "sample_count": 167,
+          "selective_known_accuracy": 0.6597938144329897,
+          "unknown_aupr": 0.32798461013801106,
+          "unknown_auroc": 0.6616654163540885,
+          "unknown_count": 43,
+          "unknown_rejection_rate": 0.2558139534883721
+        },
+        "sentinel_pair_initial": {
+          "decision_utility": -0.17901234567901234,
+          "false_known_rate": 0.6666666666666666,
+          "known_acceptance_rate": 0.7666666666666667,
+          "known_count": 60,
+          "known_top1_accuracy": 0.65,
+          "sample_count": 81,
+          "selective_known_accuracy": 0.6086956521739131,
+          "unknown_aupr": 0.318393292481814,
+          "unknown_auroc": 0.6134920634920635,
+          "unknown_count": 21,
+          "unknown_rejection_rate": 0.3333333333333333
+        }
+      },
+      "repeat_diagnostic": {
+        "asymmetric_veto_utility_change": -0.015432098765432112,
+        "available_pairs": 81
+      },
+      "validation_unknown_family": "spices",
+      "window_counts": {
+        "final_known": 124,
+        "final_unknown": 43,
+        "training": 497,
+        "validation_known": 124,
+        "validation_unknown": 203
+      }
+    },
+    {
+      "calibration": {
+        "achieved_known_acceptance": 0.8064516129032258,
+        "achieved_unknown_rejection": 0.4563106796116505,
+        "memory_distance_scale": 1.1089747128124217,
+        "repeat_margin": 0.06,
+        "required_known_acceptance": 0.8,
+        "support_threshold": 0.29809557440355
+      },
+      "confidence_baseline_threshold": 0.52855582958596,
+      "final_unknown_family": "spices",
+      "fold_id": "outer-4-spices",
+      "known_families": [
+        "fruits",
+        "herbs",
+        "nuts"
+      ],
+      "memory_diagnostic": {
+        "classifier_known_top1": 0.792,
+        "difference_memory_minus_classifier": 0.04799999999999993,
+        "nearest_memory_known_top1": 0.84
+      },
+      "metrics": {
+        "closed_set": {
+          "decision_utility": -0.04242424242424243,
+          "false_known_rate": 1.0,
+          "known_acceptance_rate": 1.0,
+          "known_count": 125,
+          "known_top1_accuracy": 0.792,
+          "sample_count": 165,
+          "selective_known_accuracy": 0.792,
+          "unknown_aupr": 0.46146451256446713,
+          "unknown_auroc": 0.7102,
+          "unknown_count": 40,
+          "unknown_rejection_rate": 0.0
+        },
+        "confidence_threshold": {
+          "decision_utility": -0.07121212121212121,
+          "false_known_rate": 0.95,
+          "known_acceptance_rate": 0.88,
+          "known_count": 125,
+          "known_top1_accuracy": 0.792,
+          "sample_count": 165,
+          "selective_known_accuracy": 0.8,
+          "unknown_aupr": 0.2424896484690806,
+          "unknown_auroc": 0.5052,
+          "unknown_count": 40,
+          "unknown_rejection_rate": 0.05
+        },
+        "sentinel_asymmetric_repeat_veto": {
+          "decision_utility": 0.1388888888888889,
+          "false_known_rate": 0.4,
+          "known_acceptance_rate": 0.6885245901639344,
+          "known_count": 61,
+          "known_top1_accuracy": 0.7540983606557377,
+          "sample_count": 81,
+          "selective_known_accuracy": 0.7380952380952381,
+          "unknown_aupr": 0.4603167690010509,
+          "unknown_auroc": 0.6811475409836065,
+          "unknown_count": 20,
+          "unknown_rejection_rate": 0.6
+        },
+        "sentinel_initial": {
+          "decision_utility": 0.22575757575757577,
+          "false_known_rate": 0.425,
+          "known_acceptance_rate": 0.752,
+          "known_count": 125,
+          "known_top1_accuracy": 0.792,
+          "sample_count": 165,
+          "selective_known_accuracy": 0.7978723404255319,
+          "unknown_aupr": 0.46146451256446713,
+          "unknown_auroc": 0.7102,
+          "unknown_count": 40,
+          "unknown_rejection_rate": 0.575
+        },
+        "sentinel_pair_initial": {
+          "decision_utility": 0.14506172839506173,
+          "false_known_rate": 0.4,
+          "known_acceptance_rate": 0.7213114754098361,
+          "known_count": 61,
+          "known_top1_accuracy": 0.7540983606557377,
+          "sample_count": 81,
+          "selective_known_accuracy": 0.7272727272727273,
+          "unknown_aupr": 0.4626335021446229,
+          "unknown_auroc": 0.6844262295081966,
+          "unknown_count": 20,
+          "unknown_rejection_rate": 0.6
+        }
+      },
+      "repeat_diagnostic": {
+        "asymmetric_veto_utility_change": -0.006172839506172839,
+        "available_pairs": 81
+      },
+      "validation_unknown_family": "vegetables",
+      "window_counts": {
+        "final_known": 125,
+        "final_unknown": 40,
+        "training": 504,
+        "validation_known": 124,
+        "validation_unknown": 206
+      }
+    },
+    {
+      "calibration": {
+        "achieved_known_acceptance": 0.8048780487804879,
+        "achieved_unknown_rejection": 0.5095238095238095,
+        "memory_distance_scale": 1.3989624144479227,
+        "repeat_margin": 0.06,
+        "required_known_acceptance": 0.8,
+        "support_threshold": 0.3099707704570586
+      },
+      "confidence_baseline_threshold": 0.6327022380032098,
+      "final_unknown_family": "vegetables",
+      "fold_id": "outer-5-vegetables",
+      "known_families": [
+        "herbs",
+        "nuts",
+        "spices"
+      ],
+      "memory_diagnostic": {
+        "classifier_known_top1": 0.7903225806451613,
+        "difference_memory_minus_classifier": 0.10483870967741937,
+        "nearest_memory_known_top1": 0.8951612903225806
+      },
+      "metrics": {
+        "closed_set": {
+          "decision_utility": -0.07228915662650602,
+          "false_known_rate": 1.0,
+          "known_acceptance_rate": 1.0,
+          "known_count": 124,
+          "known_top1_accuracy": 0.7903225806451613,
+          "sample_count": 166,
+          "selective_known_accuracy": 0.7903225806451613,
+          "unknown_aupr": 0.40353846532693255,
+          "unknown_auroc": 0.6526497695852534,
+          "unknown_count": 42,
+          "unknown_rejection_rate": 0.0
+        },
+        "confidence_threshold": {
+          "decision_utility": 0.08433734939759036,
+          "false_known_rate": 0.7142857142857143,
+          "known_acceptance_rate": 0.8064516129032258,
+          "known_count": 124,
+          "known_top1_accuracy": 0.7903225806451613,
+          "sample_count": 166,
+          "selective_known_accuracy": 0.84,
+          "unknown_aupr": 0.31060574065271,
+          "unknown_auroc": 0.5266897081413211,
+          "unknown_count": 42,
+          "unknown_rejection_rate": 0.2857142857142857
+        },
+        "sentinel_asymmetric_repeat_veto": {
+          "decision_utility": 0.21604938271604937,
+          "false_known_rate": 0.45,
+          "known_acceptance_rate": 0.7049180327868853,
+          "known_count": 61,
+          "known_top1_accuracy": 0.7868852459016393,
+          "sample_count": 81,
+          "selective_known_accuracy": 0.8372093023255814,
+          "unknown_aupr": 0.40336582236817525,
+          "unknown_auroc": 0.6655737704918032,
+          "unknown_count": 20,
+          "unknown_rejection_rate": 0.55
+        },
+        "sentinel_initial": {
+          "decision_utility": 0.1280120481927711,
+          "false_known_rate": 0.6190476190476191,
+          "known_acceptance_rate": 0.75,
+          "known_count": 124,
+          "known_top1_accuracy": 0.7903225806451613,
+          "sample_count": 166,
+          "selective_known_accuracy": 0.8494623655913979,
+          "unknown_aupr": 0.40353846532693255,
+          "unknown_auroc": 0.6526497695852534,
+          "unknown_count": 42,
+          "unknown_rejection_rate": 0.38095238095238093
+        },
+        "sentinel_pair_initial": {
+          "decision_utility": 0.21604938271604937,
+          "false_known_rate": 0.45,
+          "known_acceptance_rate": 0.7049180327868853,
+          "known_count": 61,
+          "known_top1_accuracy": 0.7868852459016393,
+          "sample_count": 81,
+          "selective_known_accuracy": 0.8372093023255814,
+          "unknown_aupr": 0.40336582236817525,
+          "unknown_auroc": 0.6655737704918032,
+          "unknown_count": 20,
+          "unknown_rejection_rate": 0.55
+        }
+      },
+      "repeat_diagnostic": {
+        "asymmetric_veto_utility_change": 0.0,
+        "available_pairs": 81
+      },
+      "validation_unknown_family": "fruits",
+      "window_counts": {
+        "final_known": 124,
+        "final_unknown": 42,
+        "training": 498,
+        "validation_known": 123,
+        "validation_unknown": 210
+      }
+    }
+  ],
+  "hypothesis_results": {
+    "H10": {
+      "checks": {
+        "false_known_below_strongest_baseline": true,
+        "known_acceptance_at_least_required": false
+      },
+      "passed": false
+    },
+    "H11": {
+      "checks": {
+        "known_acceptance_loss_within_limit": true,
+        "veto_false_known_not_higher": true,
+        "veto_utility_strictly_higher": false
+      },
+      "passed": false
+    },
+    "H12": {
+      "checks": {
+        "memory_sentinel_false_known_not_higher": true,
+        "memory_top1_strictly_higher": true
+      },
+      "passed": true
+    }
+  },
+  "schema": "noi-v0.5-smellnet-locked-final-v1",
+  "software_commit": "994b4a7ded3c6d79ae941b019aa532506967b1a1",
+  "stage": "locked_final_test_completed"
+}
