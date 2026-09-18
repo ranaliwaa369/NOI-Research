@@ -87,6 +87,11 @@ a second window may veto an initial recognition when evidence weakens, but it
 may never promote an initial abstention into recognition. Mean-fusion repeat
 sensing is retained as a baseline rather than silently replaced.
 
+The selected v0.5.1 implementation, development artifacts, operating point,
+utility function, hypothesis criteria, and final-test boundaries are pinned in
+`configs/noi_v0.5_validation_lock.yaml`. Its SHA-256 sidecar must validate
+before any official-test performance is accessed.
+
 See `docs/noi_v0.5_novel_odor_plan.md` and
 `configs/noi_v0.5_novel_odor_protocol_draft.yaml`.
 

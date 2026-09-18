@@ -1,0 +1,169 @@
+validation_lock:
+  id: NOI-V0.5-NOVEL-ODOR-VALIDATION-LOCK
+  version: 0.5.1-validation-locked
+  status: validation_locked
+  date: '2026-09-18'
+  study_phase: validation_lock
+  final_test_executed: false
+  post_lock_model_or_threshold_changes_permitted: false
+
+provenance:
+  implementation_commit: 528cb537300d5359718090ae6bb81997123ca717
+  parent_branch: development-v0.5-novel-odor
+  dataset_integrity_artifact: results/noi_v0.4_smellnet_integrity_audit.json
+  dataset_integrity_sha256: bbd88075f33a0c289be9d3ff14c9f7897de91c2f32f775e14a99ec9db6d704a7
+  development_summary_artifact: results/noi_v0.5_1_pilot/noi_v0.5_development_pilot.json
+  development_summary_sha256: efd3eaf9f755b18f98ecd18d50fc705133606c71bf6ccb322e8229f4b73a6480
+  development_evidence_artifact: results/noi_v0.5_1_pilot/noi_v0.5_development_evidence.csv
+  development_evidence_sha256: 0051d696a618f643783eafec9c52644eb11f3c22585445a126fdf0d93b1e4817
+
+data_boundary:
+  dataset: SmellNet-Base
+  recording_count: 300
+  official_training_count: 250
+  official_testing_count: 50
+  family_count: 5
+  ingredient_count: 50
+  development_source: official_training_only
+  final_source: official_testing_only
+  official_test_used_for_development: false
+  official_test_labels_viewed_for_model_selection: false
+  labels_used_as_model_features: false
+
+locked_family_rotation:
+  order:
+    - fruits
+    - herbs
+    - nuts
+    - spices
+    - vegetables
+  outer_fold_count: 5
+  final_unknown_role: current_family
+  validation_unknown_role: next_family_in_locked_cycle
+  known_role: remaining_three_families
+  final_unknown_absent_from_development: true
+
+locked_representation:
+  sensor_channels:
+    - NO2
+    - C2H5OH
+    - VOC
+    - CO
+    - Alcohol
+    - LPG
+  window_size: 128
+  windows_nonoverlapping: true
+  partial_tail_dropped: true
+  feature_dimension: 66
+  per_channel_statistics:
+    - mean
+    - standard_deviation
+    - median
+    - lower_quartile
+    - upper_quartile
+    - minimum
+    - maximum
+    - endpoint_delta
+    - mean_absolute_temporal_difference
+    - temporal_difference_standard_deviation
+    - normalized_linear_slope
+  scaler: standard_scaler_fit_on_model_training_only
+
+locked_model:
+  family_classifier: logistic_regression
+  maximum_iterations: 2000
+  class_weight: balanced
+  random_state_base: 1729
+  associative_memory: nearest_training_window
+  memory_distance: standardized_euclidean_l2
+  memory_distance_scale: median_training_leave_one_out_nearest_distance
+  combined_support: geometric_mean_classifier_confidence_and_memory_support
+  classifier_memory_disagreement_factor: 0.72
+
+locked_calibration:
+  source: validation_known_and_validation_unknown_only
+  required_known_acceptance: 0.80
+  repeat_margin: 0.06
+  threshold_objective: maximize_balanced_known_acceptance_and_unknown_rejection
+  threshold_may_use_official_test: false
+
+locked_actions:
+  - recognize
+  - repeat_sense
+  - abstain_unknown
+  - abstain_conflict
+
+locked_repeat_controller:
+  primary: asymmetric_safety_veto
+  baseline: arithmetic_mean_feature_fusion
+  repeat_request_rule: absolute_support_distance_from_threshold_at_most_repeat_margin
+  initial_abstention_may_be_promoted_to_recognition: false
+  initial_recognition_may_be_vetoed: true
+  veto_condition: fused_repeat_evidence_falls_below_support_threshold
+  repeated_evidence_may_update_memory: false
+
+locked_utility:
+  correct_known_recognition: 1.0
+  incorrect_known_recognition: -1.0
+  known_abstention: -0.25
+  correct_unknown_abstention: 1.0
+  false_known_recognition: -2.0
+
+development_evidence:
+  closed_set_false_known_rate: 1.0
+  confidence_baseline_false_known_rate: 0.7726601569564474
+  sentinel_false_known_rate: 0.538123902765643
+  sentinel_known_acceptance_rate: 0.8219512195121951
+  sentinel_unknown_auroc: 0.7381954430941409
+  mean_fusion_repeat_utility_change: -0.050387264205199005
+  asymmetric_veto_utility_change: 0.03737024097078444
+  asymmetric_veto_false_known_rate: 0.4905808580858086
+  asymmetric_veto_known_acceptance_rate: 0.79
+  memory_top1_change: 0.1521243115656963
+  interpretation: development_only_not_confirmatory
+
+hypotheses:
+  H10:
+    role: primary
+    name: novel_family_false_known_reduction
+    primary_comparator: strongest_locked_eligible_baseline
+    success_requires:
+      - sentinel_false_known_rate_below_primary_comparator
+      - sentinel_known_acceptance_rate_at_least_0.80
+    final_status: not_run
+  H11:
+    role: secondary
+    name: asymmetric_repeat_sensing_decision_utility
+    comparator: same_pair_initial_window_terminal_decision
+    success_requires:
+      - asymmetric_veto_decision_utility_strictly_higher
+      - asymmetric_veto_false_known_rate_not_higher
+      - known_acceptance_loss_not_above_0.02
+    maximum_known_acceptance_loss: 0.02
+    final_status: not_run
+  H12:
+    role: secondary
+    name: reliability_aware_memory_under_session_shift
+    comparator: locked_non_memory_classifier
+    success_requires:
+      - nearest_memory_known_top1_strictly_higher
+      - false_known_rate_not_higher_than_locked_sentinel_without_memory
+    final_status: not_run
+
+final_execution_rules:
+  execute_each_outer_fold_once: true
+  preserve_negative_results: true
+  no_model_reselection_after_final_access: true
+  no_threshold_recalibration_after_final_access: true
+  no_family_specific_posthoc_exclusions: true
+  report_macro_fold_metrics: true
+  report_each_fold: true
+  retain_per_window_evidence: true
+  record_software_commit_and_artifact_hashes: true
+
+claim_boundary: >-
+  Passing the locked hypotheses would support a reproducible physical-sensor
+  computational pathway for bounded novel-odor decisions. It would not
+  establish chemical identity, chemical safety, direct olfactory-nerve or
+  brain interfacing, human-equivalent smell, clinical validity, odor-source
+  localization, robotic deployment readiness, or patentability.
